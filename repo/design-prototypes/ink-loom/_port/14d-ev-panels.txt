@@ -1,0 +1,100 @@
+@@@ INSERT_BEFORE
+const TOOLS = [['影', '影核广场', 'TEMPLATES', 'plaza'],
+@@@ TEXT
+function bindPanels() {
+  /* 经折：创意主题（防抖 400ms + 失焦提交）· AI 润色 · 参数页 */
+  const ta = $('#foTopic');
+  ta.addEventListener('input', () => { BRIEF.editedAt = performance.now(); clearTimeout(BRIEF.timer); BRIEF.timer = setTimeout(sendTopic, 400); syncCapsuleDraft(); });
+  ta.addEventListener('change', sendTopic);
+  ta.addEventListener('blur', sendTopic);
+  $('#foPolish').onclick = () => { sendTopic(); act('polishTopic', { topic: String(DIR.topic || '') }); };
+  $$('[data-fclose]').forEach((b) => (b.onclick = closeFolio));
+  $('#foRun').onclick = () => { sendTopic(); closeFolio(); runAction(); };
+  $('#foPages').addEventListener('click', (e) => {
+    const tg = e.target.closest('.tag-s'); if (tg) { const g = tg.closest('.tags'); if (g && g.dataset.k && !g.classList.contains('dis')) setParam(g.dataset.k, tg.dataset.v); return; }
+    const sl = e.target.closest('.seal-tg[data-k]'); if (sl) { setParam(sl.dataset.k); return; }
+    if (e.target.closest('#lowTg')) { act('setLowSpec', { on: !LOWSPEC }); return; }
+    const sb = e.target.closest('.sel-btn'); if (sb) { const s = sb.closest('.sel'), was = s.classList.contains('open'); closeMenus(); s.classList.toggle('open', !was); sb.setAttribute('aria-expanded', !was ? 'true' : 'false'); if (!was && s.classList.contains('vsel')) openVoiceMenu(s); e.stopPropagation(); return; }
+    const mi = e.target.closest('.sel .menu button[data-v]'); if (mi) { const s = mi.closest('.sel'); setParam(s.dataset.k, mi.dataset.v); s.classList.remove('open'); e.stopPropagation(); }
+  });
+  $('#foPages').addEventListener('keydown', (e) => {
+    const sl = e.target.closest('.seal-tg'); if (sl && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); e.stopPropagation(); if (sl.id === 'lowTg') act('setLowSpec', { on: !LOWSPEC }); else setParam(sl.dataset.k); return; }
+    const sk = e.target.closest('.silk'); if (sk && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); e.stopPropagation(); const k = sk.dataset.k, stp = +sk.dataset.step, mn = +sk.dataset.min, mx = +sk.dataset.max; setParam(k, clamp((+DIR[k] || mn) + (e.key === 'ArrowRight' ? stp : -stp), mn, mx)); }
+  });
+  $('#foPages').addEventListener('pointerdown', (e) => {
+    const s = e.target.closest('.silk'); if (!s || s.classList.contains('dis')) return;
+    const k = s.dataset.k, mn = +s.dataset.min, mx = +s.dataset.max, stp = +s.dataset.step;
+    let v = DIR[k];
+    const set = (ev) => { const r = s.getBoundingClientRect(), u = clamp((ev.clientX - r.left) / Math.max(1, r.width), 0, 1); v = Math.round((mn + u * (mx - mn)) / stp) * stp; DIR[k] = v; PENDING[k] = { v, until: performance.now() + 2600 }; syncFolio(); };
+    set(e); try { s.setPointerCapture(e.pointerId); } catch (x) { /* ignore */ }
+    s.onpointermove = (ev) => { if (ev.buttons) set(ev); };
+    s.onpointerup = () => { s.onpointermove = null; s.onpointerup = null; act('setDirector', { patch: { [k]: v } }); };
+  });
+  /* 任务中心 */
+  $('.tc-ctrl').onclick = (e) => {
+    const b = e.target.closest('[data-act]'); if (!b || b.classList.contains('dis')) return;
+    const a = b.dataset.act;
+    if (a === 'start') runAction();
+    else if (a === 'pause') act(Pipe.status === 'paused' ? 'resume' : 'pause', {});
+    else if (a === 'stop') act('stop', {});
+    else if (a === 'retry') act(Pipe.status === 'completed' ? 'run' : 'retry', Pipe.status === 'completed' && DIR.topic ? { topic: DIR.topic } : {});
+  };
+  const lg = $('#logList');
+  lg.addEventListener('scroll', () => { LOGV.stick = lg.scrollTop + lg.clientHeight >= lg.scrollHeight - 24; });
+  /* 素材仓 */
+  $('#vTabs').onclick = (e) => { const b = e.target.closest('button'); if (!b) return; VAULT.filter = b.dataset.f; applyVaultFilter(); };
+  const vl = $('#vList');
+  vl.addEventListener('scroll', () => { VAULT.touched = SIM.real; }, { passive: true });
+  vl.addEventListener('click', (e) => {
+    VAULT.touched = SIM.real;
+    const card = e.target.closest('.stage-card');
+    if (card) {
+      const k = card.dataset.asset;
+      if (e.target.closest('[data-ok]')) { confirmStaged(k); return; }
+      if (e.target.closest('[data-discard]')) { discardStaged(k); return; }
+      if (e.target.closest('[data-prev]')) { openModal('lightbox', k); return; }
+      return;
+    }
+    const del = e.target.closest('[data-del]');
+    if (del) {
+      if (!del.classList.contains('arm')) { $$('#vList .it-del.arm').forEach((x) => x.classList.remove('arm')); del.classList.add('arm'); del.title = '再次点击确认删除'; setTimeout(() => { del.classList.remove('arm'); del.title = '删除素材'; }, 2800); return; }
+      removeAsset(del.dataset.del); return;
+    }
+    const it = e.target.closest('.item'); if (!it) return;
+    openModal('lightbox', it.dataset.asset);
+  });
+  vl.addEventListener('keydown', (e) => { const it = e.target.closest('.item'); if (it && e.target === it && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); e.stopPropagation(); openModal('lightbox', it.dataset.asset); } });
+  const dz = $('#vault');
+  let dragN = 0;
+  dz.addEventListener('dragenter', (e) => { e.preventDefault(); dragN++; dz.classList.add('drag'); });
+  dz.addEventListener('dragover', (e) => { e.preventDefault(); if (e.dataTransfer) e.dataTransfer.dropEffect = 'copy'; });
+  dz.addEventListener('dragleave', () => { dragN = Math.max(0, dragN - 1); if (!dragN) dz.classList.remove('drag'); });
+  dz.addEventListener('drop', (e) => { e.preventDefault(); dragN = 0; dz.classList.remove('drag'); importFiles(e.dataTransfer && e.dataTransfer.files); });
+  $('#fileIn').onchange = (e) => { importFiles(e.target.files); e.target.value = ''; };
+  $('#btnImport').onclick = () => $('#fileIn').click();
+  $('#dropZone').addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('#fileIn').click(); } });
+  /* 浮层 */
+  $('#scrim').onclick = () => { closeModal(); closeFolio(); };
+  $('#modal').addEventListener('click', (e) => { if (e.target.closest('[data-mclose]')) closeModal(); });
+  $('#tasks').addEventListener('click', (e) => { if (e.target.closest('#tcMore')) act('openPanel', { panel: 'tasks' }); });
+}
+function syncCapsuleDraft() { const ta = $('#foTopic'), t = ta ? ta.value.trim() : ''; const cap = $('#capTxt'); cap.textContent = t || '写下创意主题 · 点此展开经折'; cap.classList.toggle('ph', !t); }
+function bindKeys() {
+  document.addEventListener('keydown', (e) => {
+    const k = e.key;
+    if (k === 'Escape') { escape(); return; }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+    if (k === ' ' && e.target.closest && e.target.closest('button, [role="button"], [role="switch"], [role="slider"]')) return;
+    if (k === '1' || k === '2' || k === '3') setCam(['overview', 'follow', 'close'][+k - 1]);
+    else if (k === ' ') { e.preventDefault(); toggleFilm(); }
+    else if (k === 'p' || k === 'P') (FOLIO_OPEN ? closeFolio() : openFolio());
+    else if (k === 't' || k === 'T') $('#btnTheme').click();
+    else if (k === 'r' || k === 'R') runAction();
+    else if (k === '+' || k === '=') tlZoom(1.5, PH.t);
+    else if (k === '-' || k === '_') tlZoom(1 / 1.5, PH.t);
+    else if (k === 'f' || k === 'F') tlFit();
+    else if (k === '?') openModal('help');
+  });
+}
+@@@ END

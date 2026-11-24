@@ -1,0 +1,8 @@
+{
+  "name": "@dsh-video/tool-local-tts",
+  "version": "0.1.0",
+  "description": "DSH Cordis plugin for Local TTS (IndexTTS-2.5 / IndexTTS-2 & GPTvoice-tts) + Voice Pack Import & AI Voice Matching",
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.js"
+}

@@ -1,0 +1,13 @@
+@@@ REPLACE
+    AGENTS.forEach((a) => { const tg = levelOf(a), v = LV[a.id]; LV[a.id] = tg < v - 1e-4 ? tg : v + (tg - v) * (1 - Math.exp(-dt * 3.2)); });
+@@@ WITH
+    AGENTS.forEach((a) => { const tg = levelOf(a), v = LV[a.id]; const nv = tg < v - 1e-4 ? tg : v + (tg - v) * (1 - Math.exp(-dt * 3.2)); LV[a.id] = Math.abs(tg - nv) < 0.004 ? tg : nv; });
+@@@ END
+@@@ REPLACE
+.st-nm{max-width:100%;overflow:hidden}
+.st-nm b{overflow:hidden;text-overflow:ellipsis}
+@@@ WITH
+.st-nm{max-width:100%;min-width:0;overflow:hidden}
+.st-nm b{flex:none}
+.st-nm i{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+@@@ END

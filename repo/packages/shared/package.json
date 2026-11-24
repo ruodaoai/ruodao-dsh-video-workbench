@@ -1,0 +1,8 @@
+{
+  "name": "@dsh-video/shared",
+  "version": "0.1.0",
+  "description": "Shared environment loader, file-redirected FFmpeg/FFprobe runner, and script.json protocol utilities",
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.js"
+}

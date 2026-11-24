@@ -1,0 +1,58 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-11-14T00:00:00.000Z",
+  "voices": [
+    {
+      "id": "builtin-female-anchor",
+      "name": "知性女主播",
+      "engine": "indextts2",
+      "gender": "female",
+      "language": "zh-CN",
+      "tags": ["女主播", "新闻", "科普", "商业", "清晰", "科技", "产品发布"],
+      "emotions": ["平静", "高兴"],
+      "roles": ["narrator", "host", "anchor", "female"],
+      "promptText": "欢迎来到本期深度科技解析，今天我们一起探索多模态视频工作流的全新架构。",
+      "refPath": "${INDEXTTS_ROOT}/voices/女主播.pt",
+      "source": "builtin-template"
+    },
+    {
+      "id": "builtin-clean-studio",
+      "name": "纯净无底噪旁白",
+      "engine": "indextts2",
+      "gender": "neutral",
+      "language": "zh-CN",
+      "tags": ["无底噪", "通用", "教程", "旁白", "演示", "纯净", "客观"],
+      "emotions": ["平静"],
+      "roles": ["narrator", "instructor", "system"],
+      "promptText": "在工程化视频管线中，精确到帧的声画同步是保障成片品质的核心基础。",
+      "refPath": "${INDEXTTS_ROOT}/voices/无底噪.pt",
+      "source": "builtin-template"
+    },
+    {
+      "id": "builtin-suyao-warm",
+      "name": "苏瑶（温婉叙事女声）",
+      "engine": "indextts2",
+      "gender": "female",
+      "language": "zh-CN",
+      "tags": ["苏瑶", "温婉", "故事", "情感", "人文", "治愈", "动漫"],
+      "emotions": ["平静", "高兴", "伤心", "害怕"],
+      "roles": ["female", "heroine", "storyteller", "narrator"],
+      "promptText": "在没有路的山上，微光穿过云层，映照出远方清晰的轮廓。",
+      "refPath": "${INDEXTTS_ROOT}/voices/苏瑶.pt",
+      "source": "builtin-template"
+    },
+    {
+      "id": "builtin-storyteller-pingshu",
+      "name": "传统评书（激昂悬疑）",
+      "engine": "indextts2",
+      "gender": "male",
+      "language": "zh-CN",
+      "tags": ["评书", "历史", "悬疑", "故事", "激昂", "国风", "传奇"],
+      "emotions": ["高兴", "生气", "害怕", "平静"],
+      "roles": ["storyteller", "male", "elder", "historian"],
+      "promptText": "话说天下大势，分久必合，合久必分，且看这一幕风云际会！",
+      "refPath": "${INDEXTTS_ROOT}/voices/评书.pt",
+      "source": "builtin-template"
+    }
+  ]
+}

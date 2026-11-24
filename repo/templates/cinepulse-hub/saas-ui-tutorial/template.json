@@ -1,0 +1,90 @@
+{
+  "id": "saas-ui-tutorial",
+  "order": 3,
+  "name": "SaaS / 软件实操教程 · 像素级光标聚焦演示",
+  "category": "ui-tutorial",
+  "genre": "ui-tutorial",
+  "genreLabel": "亮色界面软件全流程实操教程",
+  "style": "tech",
+  "engine": "remotion",
+  "narrationMode": "tts",
+  "pacingMode": "balanced",
+  "subtitleStyle": "pill",
+  "aspectRatio": "16:9",
+  "fps": 30,
+  "shotCount": 24,
+  "durationSec": 196.7,
+  "avgShotSec": 8.19,
+  "bpm": 118,
+  "description": "24 镜亮色清爽交互式教程模板：零晃动清晰界面、像素级光标点击锚点、清脆键鼠/提示音效与深度人声闪避混音（-15.0 LUFS），适合软件上手教程与产品功能拆解。",
+  "tags": [
+    "软件教程",
+    "亮色清爽 UI",
+    "光标锚点",
+    "清晰人声",
+    "零晃动"
+  ],
+  "colorPalette": {
+    "background": "#F8FAFC",
+    "primary": "#2563EB",
+    "accent": "#F59E0B",
+    "highlight": "#FFF7DF"
+  },
+  "vfxSignature": [],
+  "transitionSignature": [
+    "cut",
+    "light-wipe"
+  ],
+  "replicationPrompt": "",
+  "audioProfile": {
+    "genreKey": "ui-tutorial",
+    "profileName": "软件实操清晰键鼠声场",
+    "beatCutIntensity": "gentle",
+    "blitzAllowed": false,
+    "minBeatMultiple": 2,
+    "cameraBeatIntensity": 0,
+    "targetLufs": -15,
+    "bgmDuckRatio": 3.4,
+    "sfxBoostVoice": 0.84,
+    "sfxBoostMv": 1.05,
+    "bgmVolVoice": 0.3,
+    "bgmVolMv": 0.68,
+    "sfxPalette": {
+      "opener": [
+        "chime",
+        "pop_soft"
+      ],
+      "drop": [
+        "card",
+        "chime"
+      ],
+      "action": [
+        "click",
+        "pop_soft"
+      ],
+      "data": [
+        "typing",
+        "tick"
+      ],
+      "neutral": [
+        "click",
+        "card"
+      ],
+      "internal": [
+        "click",
+        "typing",
+        "pop_soft"
+      ],
+      "preCut": [
+        "swoosh",
+        "flip"
+      ]
+    }
+  },
+  "author": "Merziller",
+  "plaza": "影核广场 · CinePulse Hub",
+  "coverFile": "cover.png",
+  "updatedAt": "2026-11-19T19:13:21.064Z",
+  "previewFile": "preview.mp4",
+  "previewDurationSec": 14.37
+}

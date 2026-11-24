@@ -1,0 +1,8 @@
+{
+  "name": "@dsh-video/tool-avatar",
+  "version": "0.1.0",
+  "description": "Pluggable AI & Cloned Digital Human Avatar generator with yuva420p transparent WebM output for DSH Video Workbench",
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.js"
+}

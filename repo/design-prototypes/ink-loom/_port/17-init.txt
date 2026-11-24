@@ -1,0 +1,37 @@
+@@@ RANGE
+/* ══════════════ 28. 启动 ══════════════ */
+@@@ TO
+init();
+@@@ WITH
+/* ══════════════ 28. 启动：先画空织机，再握手 dsh-vw/ready，等宿主推送真实状态 ══════════════ */
+function init() {
+  if (SOFT) document.body.classList.add('soft');
+  let th = 'ink'; try { const v = localStorage.getItem('dshvw.ink-loom.theme'); if (v && THEMES[v]) th = v; } catch (e) { /* ignore */ }
+  fitTopbar();
+  computeLayout();
+  applyTheme(th);
+  buildStations(); buildTlLabels(); buildTasksStatic(); buildTiles(); buildThemeCards();
+  applyLayout(); computeSW(); sizeCanvases(); layoutEdges();
+  buildSeal(); buildShadow(); buildGrain(); TEX.art = {}; buildAtlas(); buildBack();
+  buildVault(true); buildFolio();
+  VAULT.lastW = L.leftW;
+  shInit(); camReset();
+  resetReveal();
+  bindUI();
+  uiRunState();
+  onImgReady = () => { VAULT.imgTick = (VAULT.imgTick || 0) + 1; };
+  try { const m = localStorage.getItem('dshvw.ink-loom.muted'); videoEl().muted = m !== '0'; } catch (e) { videoEl().muted = true; }
+  RAF = requestAnimationFrame((t) => { LAST = t; frame(t); });
+  const hello = () => post({ type: 'dsh-vw/ready', skin: SKIN_ID });
+  if (window.parent && window.parent !== window) {
+    hello();
+    /* 宿主若尚未挂载监听（极少见），2.5 s 内未收到状态则补发一次握手 */
+    setTimeout(() => { if (!STATE) hello(); }, 2500);
+    setTimeout(() => { if (!STATE) showWaiting(true); }, 6000);
+  } else showWaiting(true);
+  addEventListener('load', () => { fitTopbar(); onResize(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fitTopbar(); onResize(); });
+  window.__ink = { get state() { return STATE; }, Pipe, CAM, SW, L, DIR, OPTV, ASSETS, SCENES, setCam, openFolio, closeFolio, openModal, closeModal, applyState, act, focus: focusAgent, theme: applyTheme };
+}
+init();
+@@@ END

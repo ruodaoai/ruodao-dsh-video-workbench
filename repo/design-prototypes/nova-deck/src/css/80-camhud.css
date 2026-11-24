@@ -1,0 +1,22 @@
+/* =====================================================================
+   Camera HUD (screen-space; #hud is pinned over the stage rect by JS),
+   depth of field + vignette (inside the stage only), minimap
+   ===================================================================== */
+#dof{position:absolute;left:0;right:0;bottom:0;top:var(--strip-px);z-index:2;pointer-events:none;opacity:0;backdrop-filter:blur(3px) saturate(.85);-webkit-mask-image:radial-gradient(ellipse 58% 62% at 50% 50%,transparent 46%,#000 100%);mask-image:radial-gradient(ellipse 58% 62% at 50% 50%,transparent 46%,#000 100%);transition:opacity .6s var(--ez)}
+#dof.on{opacity:1}
+body.lite #dof{display:none}
+#vign{position:absolute;left:0;right:0;bottom:0;top:var(--strip-px);z-index:2;pointer-events:none;background:radial-gradient(ellipse 75% 70% at 50% 50%,transparent 55%,rgba(2,3,10,.55) 100%);opacity:0;transition:opacity .6s var(--ez)}
+#vign.on{opacity:1}
+#flash{position:fixed;inset:0;z-index:5;pointer-events:none;background:radial-gradient(circle at var(--fx,50%) var(--fy,50%),rgba(255,255,255,.95),rgba(var(--acc-rgb),.55) 30%,rgba(var(--acc-rgb),0) 70%);opacity:0}
+.ch-c{position:absolute;width:26px;height:26px;border:2px solid rgba(var(--acc-rgb),.75);opacity:0;transition:opacity .5s var(--ez),transform .5s var(--ez)}
+.ch-c.tl{left:6px;top:calc(var(--strip-px) + 4px);border-right:0;border-bottom:0;transform:translate(10px,10px)}
+.ch-c.tr{right:6px;top:calc(var(--strip-px) + 4px);border-left:0;border-bottom:0;transform:translate(-10px,10px)}
+.ch-c.bl{left:6px;bottom:6px;border-right:0;border-top:0;transform:translate(10px,-10px)}
+.ch-c.br{right:6px;bottom:6px;border-left:0;border-top:0;transform:translate(-10px,-10px)}
+#hud.on .ch-c{opacity:1;transform:none}
+.ch-mini{position:absolute;right:14px;bottom:14px;width:212px;padding:6px 6px 4px;border-radius:10px;background:rgba(3,5,14,.84);border:1px solid var(--hair2);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .5s var(--ez),transform .5s var(--ez),visibility .5s;pointer-events:auto;cursor:pointer}
+#hud.on .ch-mini{opacity:1;visibility:visible;transform:none}
+#hud.nomini .ch-mini{display:none}
+.ch-mini canvas{display:block;width:200px;height:113px;border-radius:6px}
+.ch-mini .mu{display:flex;justify-content:space-between;gap:6px;margin-top:5px;font-size:8.5px;color:var(--ink3)}
+.ch-mini .mu span{overflow:hidden;text-overflow:ellipsis}

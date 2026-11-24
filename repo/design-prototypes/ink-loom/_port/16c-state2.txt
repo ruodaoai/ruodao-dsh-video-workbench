@@ -1,0 +1,112 @@
+@@@ INSERT_BEFORE
+/* ══════════════ 28. 启动 ══════════════ */
+@@@ TEXT
+/* 运行 / 八位工匠：状态快照 → 视觉状态；只在"转变"时触发编舞 */
+function applyRun(S) {
+  const r = S.run && typeof S.run === 'object' ? S.run : null;
+  const prevStatus = Pipe.status, prevActive = Pipe.active, prevRun = Pipe.runId;
+  const status = r ? (['queued', 'running', 'paused', 'completed', 'failed', 'stopped'].includes(r.status) ? r.status : 'queued') : 'none';
+  const runId = r ? String(r.id || '') : '';
+  Pipe.status = status; Pipe.runId = runId;
+  Pipe.pv = r ? clamp(num(r.progress), 0, 100) : 0;
+  Pipe.msg = r ? String(r.message || '') : ''; Pipe.error = r ? String(r.error || '') : '';
+  Pipe.elapsed = r ? Math.max(0, num(r.elapsedSec)) : 0; Pipe.elapsedAt = Date.now();
+  const active = r && AG[r.activeAgentId] ? r.activeAgentId : null;
+  const byId = {}; arr(S.agents).forEach((a) => { if (a && AG[a.id]) byId[a.id] = a; });
+  const prevSt = {}; AGENTS.forEach((a) => (prevSt[a.id] = a.status));
+  AGENTS.forEach((a) => {
+    const h = byId[a.id] || {};
+    const st = ST_OF[h.status] || 'idle';
+    const msg = String(h.message || '').trim() || (st === 'idle' ? '待命' : st === 'queued' ? '等待调度' : st === 'skip' ? '本次未参与' : ST_CN[st]);
+    agent(a.id, st, msg, clamp(num(h.progress) / 100, 0, 1));
+  });
+  if (runId !== prevRun) {
+    resetReveal(); cancelFlights(); FILM.user = false; STAMP.t0 = -1; FIN.t0 = -1;
+    AGENTS.forEach((a) => (a.woven = ''));
+    ASSETS.forEach((A) => (A.woven = ''));
+    syncUsedBadges(true);
+  }
+  Pipe.active = active;
+  const live = Pipe.live(), wasLive = prevStatus === 'queued' || prevStatus === 'running' || prevStatus === 'paused';
+  SIM.frozen = status === 'paused';
+  if (live && (!wasLive || runId !== prevRun)) {
+    if (CAM.mode === 'overview' && !CAM.userOverview) setCam('follow', true);
+    if (status !== 'queued') BEAM.sweep = 1;
+  }
+  if (!live && wasLive && CAM.auto && status !== 'completed') setCam('overview');
+  if (active && active !== prevActive && live) {
+    if (prevActive && AG[prevActive]) pulse(prevActive, active);
+    AG[active].flash = 1;
+    if (CAM.auto && CAM.focus && CAM.focus !== active) { CAM.focus = null; syncFocusCls(); }
+  }
+  AGENTS.forEach((a) => {
+    const was = prevSt[a.id], now = a.status;
+    if (was === now || runId !== prevRun) return;
+    if (now === 'done' && was !== 'done' && live) { const p = L.ag[a.id]; burstS(p.x, L.beamY, 10, { sp: 70, life: 0.8, sz: 2.4, col: a.glaze }); a.flash = 1; }
+    if (now === 'err') { CAM.shake = Math.max(CAM.shake, 0.32); const p = L.ag[a.id]; burstS(p.x, L.beamY, 14, { col: P.cinna, sp: 90, life: 0.9, sz: 2.6 }); }
+    if (now === 'run' && a.id === 'editor') FLY.planned = false;
+  });
+  if (status === 'completed' && prevStatus !== 'completed' && prevStatus !== 'none' && runId === prevRun) {
+    finale();
+    later(1.6, () => { if (Pipe.status === 'completed' && vidOK()) { FILM.user = false; seekPreview(0); toggleFilmOn(); } });
+    if (CAM.auto) setCam('follow', true);
+  }
+  if ((status === 'failed' || status === 'stopped') && wasLive) { cancelFlights(); FILM.playing = false; }
+  if (runId !== prevRun || status !== prevStatus) uiRunState();
+}
+function toggleFilmOn() { if (!FILM.playing) toggleFilm(); }
+function applyPreview(S) {
+  const pv = S.preview || {};
+  PREVIEW.url = String(pv.mp4Url || ''); PREVIEW.poster = String(pv.posterUrl || ''); PREVIEW.hasMp4 = !!pv.hasMp4 && !!PREVIEW.url; PREVIEW.dur = num(pv.durationSec);
+  setVideoSrc(PREVIEW.hasMp4 ? PREVIEW.url : '');
+  if (PREVIEW.poster) imgOf(PREVIEW.poster);
+}
+const AGENT_CN = { system: '系统' };
+function renderLogs(S) {
+  const logs = arr(S.logs).slice(-60);
+  const sig = logs.length + '|' + (logs.length ? logs[logs.length - 1].ts + logs[logs.length - 1].text : '') + '|' + (logs.length ? logs[0].ts + logs[0].text : '');
+  if (sig === LOGV.sig) return;
+  const box = $('#logList');
+  const prevN = LOGV.sig ? box.children.length : 0;
+  LOGV.sig = sig;
+  const stick = LOGV.stick || box.scrollTop + box.clientHeight >= box.scrollHeight - 24;
+  const frag = document.createDocumentFragment();
+  logs.forEach((l, i) => {
+    const a = AG[l.agentId], p = mk('p', l.level === 'error' ? 'err' : l.level === 'warn' ? 'warn' : !a ? 'sys' : '');
+    if (i < prevN - 0 && prevN === logs.length) p.style.animation = 'none';
+    const tm = mk('time'); const d = new Date(l.ts); tm.textContent = Number.isFinite(d.getTime()) ? d.toTimeString().slice(0, 8) : String(l.ts || '').slice(11, 19) || '--:--:--';
+    const u = mk('u'); u.textContent = a ? a.name : AGENT_CN[l.agentId] || '系统'; if (a) u.style.setProperty('--ag', a.glaze);
+    const sp = mk('span'); sp.textContent = String(l.text || '');
+    p.appendChild(tm); p.appendChild(u); p.appendChild(sp); frag.appendChild(p);
+  });
+  box.innerHTML = ''; box.appendChild(frag);
+  if (stick) box.scrollTop = box.scrollHeight;
+}
+/* 宿主每次推送完整快照：先重建数据，再刷新视图，最后按"前后差异"编舞 */
+function applyState(S) {
+  if (!S || typeof S !== 'object') return;
+  const first = !STATE;
+  PREV = STATE; STATE = S;
+  const p = S.project && typeof S.project === 'object' ? S.project : null;
+  const projChanged = !PREV || !PREV.project !== !p || (p && PREV.project && PREV.project.dir !== p.dir);
+  Object.assign(PROJECT, p ? { dir: String(p.dir || ''), title: String(p.title || '未命名工程'), genre: String(p.genreLabel || ''), style: String(p.style || ''), engine: p.engine === 'html' ? 'html' : 'remotion', quality: String(p.quality || '1080p'), aspect: String(p.aspectRatio || '16:9'), w: Math.max(16, num(p.width, 1920) || 1920), h: Math.max(16, num(p.height, 1080) || 1080), fps: num(p.fps, 30) || 30, narration: String(p.narrationMode || '') } : { dir: '', title: '', genre: '', style: '', w: 1920, h: 1080, fps: 30, narration: '' });
+  const tl = S.timeline || {}; PROJECT.bpm = num(tl.bpm) > 0 ? Math.round(num(tl.bpm)) : null;
+  if (projChanged) { TL.sig = ''; TL.asig = ''; FILM.t = 0; FILM.playing = false; FILM.user = false; if (VID.el) try { VID.el.pause(); } catch (e) { /* ignore */ } }
+  const lowWas = LOWSPEC; LOWSPEC = !!S.lowSpec; document.body.classList.toggle('low', LOWSPEC);
+  if (lowWas !== LOWSPEC) { PARTS.length = Math.min(PARTS.length, 60); }
+  const tlChanged = rebuildTimeline(S);
+  const asChanged = rebuildAssets(S);
+  if (tlChanged && !asChanged) relinkSceneAssets();
+  if (asChanged || tlChanged || projChanged) buildVault(projChanged);
+  applyDirector(S.director || {});
+  applyOptions(S.options || {});
+  applyPreview(S);
+  applyRun(S);
+  syncUsedBadges();
+  renderLogs(S);
+  syncChrome(S);
+  folioMaybeRebuild();
+  uiRunState();
+  if (first) { showWaiting(false); onResize(); }
+}
+@@@ END

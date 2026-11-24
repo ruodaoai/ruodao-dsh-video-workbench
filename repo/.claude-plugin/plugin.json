@@ -1,0 +1,29 @@
+{
+  "name": "dsh-video-workbench",
+  "version": "0.6.0",
+  "description": "Universal Multi-Agent Dual-Engine AI Video Studio (Remotion 4.x + Three.js 3D & HyperFrames HTML5) with CinePulse Hub (影核广场) MOTION.md Template Plaza, Cross-Genre Adaptive Beat-Sync & 48kHz SFX Mastering, Reference vs Remake Split Sync Compare, Visual Multi-Track Timeline, Optional BYOK Cloud Media (Seedream/Seedance/Kling/Flux/Suno/MiniMax + Custom HTTP), and Optional Local TTS Cloning.",
+  "author": {
+    "name": "Merziller",
+    "email": "k26789228@gmail.com",
+    "url": "https://github.com/Merziller/dsh-video-workbench"
+  },
+  "contact": {
+    "qq": "1411574209",
+    "wechat": "Merziller",
+    "email": "k26789228@gmail.com"
+  },
+  "repository": "https://github.com/Merziller/dsh-video-workbench",
+  "license": "MIT",
+  "keywords": [
+    "video",
+    "remotion",
+    "threejs",
+    "motion-graphics",
+    "beat-sync",
+    "reference-remake",
+    "tts",
+    "mcp"
+  ],
+  "skills": "./",
+  "mcpServers": "./.mcp.json"
+}

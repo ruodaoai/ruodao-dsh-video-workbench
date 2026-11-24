@@ -1,0 +1,14 @@
+@@@ REPLACE
+  c.textAlign = 'left'; c.textBaseline = 'bottom'; c.font = `${Math.max(9, Math.round(9.5 * k))}px Consolas, "Microsoft YaHei UI", monospace`; c.fillStyle = 'rgba(244,235,218,.75)';
+  const seg = VOICE_SEGS.filter((g) => g.t0 <= ht).length, sfxN = SFX_ALL.filter((f) => f.t <= ht).length;
+  c.fillText(fitText(c, mv ? `纯音乐字幕 MV · 音效 ${sfxN}/${SFX_ALL.length}` : `旁白 ${seg}/${VOICE_SEGS.length} 段 · 音效 ${sfxN}/${SFX_ALL.length}`, w - 90 * k), 14 * k, h - 30 * k);
+}
+@@@ WITH
+  /* 混音读数放在左上（场景标题下方），绝不与底部字幕同带 */
+  const fs = Math.max(9, Math.round(9.5 * k)), y0 = 10 * k + Math.max(8, Math.round(h * 0.036)) * 1.35 + Math.round(Math.max(8, Math.round(h * 0.036)) * 1.25) + 8 * k;
+  c.textAlign = 'left'; c.textBaseline = 'top'; c.font = `${fs}px Consolas, "Microsoft YaHei UI", monospace`;
+  const seg = VOICE_SEGS.filter((g) => g.t0 <= ht).length, sfxN = SFX_ALL.filter((f) => f.t <= ht).length;
+  const txt = fitText(c, mv ? `纯音乐字幕 MV · 音效 ${sfxN}/${SFX_ALL.length}` : `旁白 ${seg}/${VOICE_SEGS.length} 段 · 音效 ${sfxN}/${SFX_ALL.length}`, w - 90 * k);
+  if (y0 + fs * 1.4 < h * 0.78) { const tw = c.measureText(txt).width; c.fillStyle = 'rgba(0,0,0,.45)'; c.fillRect(10 * k, y0 - 2, tw + 8 * k, fs * 1.3 + 4); c.fillStyle = 'rgba(244,235,218,.82)'; c.fillText(txt, 14 * k, y0); }
+}
+@@@ END

@@ -1,0 +1,15 @@
+@@@ REPLACE
+  const tight = () => body.scrollHeight > body.clientHeight + 1 || lg.clientHeight < 56;
+@@@ WITH
+  const tight = () => body.scrollHeight > body.clientHeight + 1 || lg.clientHeight < 78;
+@@@ END
+@@@ REPLACE
+    const sp = mk('span'); sp.textContent = String(l.text || '');
+@@@ WITH
+    const sp = mk('span'); sp.textContent = String(l.text || ''); p.title = String(l.text || '');
+@@@ END
+@@@ INSERT_BEFORE
+/* 隐藏的浮层一律 visibility:hidden（不止 opacity），保证屏幕阅读器与重叠检查都看不到它们 */
+@@@ TEXT
+.log p span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+@@@ END

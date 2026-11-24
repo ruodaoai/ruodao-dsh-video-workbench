@@ -1,0 +1,135 @@
+@@@ RANGE
+/* ══════════════ 22. 参数折子（经折装） ══════════════ */
+@@@ TO
+/* ══════════════ 23. 弹窗：影核广场 / 复刻对比 / 提词器 / 数字人 / 音色 / 云端 / 体检 … ══════════════ */
+@@@ WITH
+/* ══════════════ 22. 参数折子（经折装：创意主题 + 六页参数；读写宿主 director / options） ══════════════ */
+const LOCAL_OPTS = {
+  fpsOpts: [{ value: 24, label: '24 fps' }, { value: 30, label: '30 fps' }, { value: 60, label: '60 fps' }],
+  durModes: [{ value: 'auto', label: 'AI 智能时长' }, { value: 'custom', label: '自定义' }],
+};
+const STYLE_SW = { tech: '#5FB3C8', cinematic: '#C8361D', documentary: '#B9B4A8', energetic: '#D45FA0', warm: '#D9A066', emerald: '#3F8F75' };
+const FOLIO = [
+  { ch: '画', cn: '画面', en: 'PICTURE', g: [['engine', '渲染引擎', 'ENGINE', 'w', 'engines'], ['aspectRatio', '画幅', 'ASPECT', '', 'aspectRatios'], ['quality', '画质', 'QUALITY', '', 'qualities'], ['fps', '帧率', 'FRAME RATE', '', 'fpsOpts']] },
+  { ch: '律', cn: '节奏', en: 'RHYTHM', g: [['durationMode', '时长', 'DURATION', '', 'durModes'], ['targetDurationSec', '目标时长', 'TARGET', 'slider', 15, 600, 5], ['pacingMode', '节奏', 'PACE', '', 'pacingModes']], x: 'bgprev' },
+  { ch: '声', cn: '声音', en: 'SOUND', g: [['narrationMode', '旁白模式', 'NARRATION', 'w', 'narrationModes'], ['bgmMode', '配乐', 'MUSIC', '', 'bgmModes'], ['voiceId', '主讲音色', 'VOICE', 'voice', 'voices']], x: 'voices' },
+  { ch: '像', cn: '数字人', en: 'AVATAR', g: [['avatarEnabled', '数字人主播', 'PRESENTER', 'seal'], ['avatarLayout', '画中位置', 'LAYOUT', '', 'avatarLayouts']], x: 'avprev' },
+  { ch: '风', cn: '风格', en: 'STYLE', g: [['creationMode', '创作模式', 'MODE', 'w', 'creationModes'], ['style', '风格', 'LOOK', 'sw', 'styles']] },
+  { ch: '引', cn: '引擎', en: 'ENGINES', g: [], x: 'engines' },
+];
+let FOLIO_OPEN = false, FOLIO_SIG = '', FOLIO_WARNED = false;
+const PENDING = {};
+const BRIEF = { editedAt: -1e9, timer: 0 };
+const optsFor = (src) => LOCAL_OPTS[src] || OPTV[src] || [];
+function groupHTML([k, cn, en, kind, a, b, st]) {
+  const src = kind === 'slider' || kind === 'seal' ? '' : a;
+  const lab = `<label>${cn}<em>${en}</em>${kind === 'slider' ? `<output data-o="${k}"></output>` : ''}</label>`;
+  if (kind === 'slider') return `<div class="pg">${lab}<div class="silk" data-k="${k}" data-min="${a}" data-max="${b}" data-step="${st}" role="slider" tabindex="0" aria-label="${cn}" aria-valuemin="${a}" aria-valuemax="${b}"><i></i><b></b></div></div>`;
+  if (kind === 'seal') return `<div class="pg">${lab}<div class="seal-tg" data-k="${k}" role="switch" tabindex="0" aria-label="${cn}"><span class="box"><b>启</b></span><span class="tx"><span class="tx-a">成片叠加数字人主播</span><small>口型同步 · 透明画中画</small></span></div></div>`;
+  if (kind === 'voice') return `<div class="pg">${lab}<div class="sel vsel" data-k="${k}"><button class="sel-btn" aria-haspopup="listbox" aria-label="${cn}"><span></span><svg><use href="#i-caret"/></svg></button><div class="menu" role="listbox"><input class="vq" type="search" placeholder="搜索音色" aria-label="搜索音色"><div class="vlist"></div></div></div></div>`;
+  const items = optsFor(src).map((o) => `<button class="tag-s${kind === 'w' ? ' w' : ''}" data-v="${esc(o.value)}" title="${esc(o.label)}">${kind === 'sw' ? `<i class="sw" style="background:${STYLE_SW[o.value] || 'var(--gold)'}"></i>` : ''}<span>${esc(o.label)}</span></button>`).join('');
+  return `<div class="pg">${lab}<div class="tags" data-k="${k}" role="group" aria-label="${cn}">${items || '<span class="lf-note">（宿主未提供选项）</span>'}</div></div>`;
+}
+function extraHTML(x) {
+  if (x === 'bgprev') return '<div class="bgprev" id="bgPrev"></div><p class="lf-note" id="bgNote"></p>';
+  if (x === 'voices') return `<button class="btn xs" data-panel="voices" aria-label="打开配音中心"><svg><use href="#i-spool"/></svg>配音中心 · 试听与克隆</button>`;
+  if (x === 'avprev') return '<div class="avprev" id="avPrev"><i></i><span id="avNote">安全区预览</span></div><button class="btn xs" data-panel="avatar" style="margin-top:8px" aria-label="打开数字人工作台"><svg><use href="#i-follow"/></svg>数字人工作台</button>';
+  if (x === 'engines') return `<div class="eng" id="engList"></div><div class="pg" style="margin-top:12px"><label>低配保护<em>LOW-SPEC</em></label><div class="seal-tg" id="lowTg" role="switch" tabindex="0" aria-label="低配保护"><span class="box"><b>护</b></span><span class="tx"><span class="tx-a">限制 30 帧 · 减少光效</span><small>宿主同步切换硬件安全模式</small></span></div></div><div class="eng-btns"><button class="btn xs" data-panel="cloud">云端媒体</button><button class="btn xs" data-panel="teleprompter">提词器</button><button class="btn xs" data-panel="export">发布导出</button></div>`;
+  return '';
+}
+function buildFolio() {
+  FOLIO_SIG = JSON.stringify(Object.keys(OPTV).map((k) => (OPTV[k] || []).length + ':' + (OPTV[k] || []).slice(0, 40).map((o) => o.value + '=' + o.label).join('|')));
+  $('#foPages').innerHTML = FOLIO.map((p, i) => `<section class="leaf" style="--i:${i}"><div class="lf-h"><span>${p.ch}</span><b>${p.cn}</b><i>${p.en}</i></div>${p.g.map(groupHTML).join('')}${p.x ? extraHTML(p.x) : ''}</section>`).join('');
+  syncFolio();
+}
+function folioMaybeRebuild() {
+  const sig = JSON.stringify(Object.keys(OPTV).map((k) => (OPTV[k] || []).length + ':' + (OPTV[k] || []).slice(0, 40).map((o) => o.value + '=' + o.label).join('|')));
+  if (sig !== FOLIO_SIG && !(FOLIO_OPEN && document.activeElement && $('#folio').contains(document.activeElement))) buildFolio(); else syncFolio();
+}
+function syncFolio() {
+  $$('#foPages .tags').forEach((g) => { const k = g.dataset.k; $$('.tag-s', g).forEach((b) => { const on = String(DIR[k]) === b.dataset.v; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }); });
+  $$('#foPages .vsel').forEach((s) => { s.querySelector('.sel-btn span').textContent = optLbl(OPTV.voices, DIR.voiceId); s.querySelector('.sel-btn span').title = optLbl(OPTV.voices, DIR.voiceId); });
+  $$('#foPages .silk').forEach((s) => { const k = s.dataset.k, mn = +s.dataset.min, mx = +s.dataset.max, v = clamp(+DIR[k] || mn, mn, mx), u = (v - mn) / (mx - mn); s.querySelector('i').style.width = u * 100 + '%'; s.querySelector('b').style.left = u * 100 + '%'; s.setAttribute('aria-valuenow', String(v)); const o = $(`output[data-o="${k}"]`); if (o) o.textContent = fmtMS(v); s.classList.toggle('dis', k === 'targetDurationSec' && DIR.durationMode !== 'custom'); });
+  $$('#foPages .seal-tg[data-k]').forEach((s) => { const on = !!DIR[s.dataset.k]; s.classList.toggle('on', on); s.setAttribute('aria-checked', on ? 'true' : 'false'); });
+  const lt = $('#lowTg'); if (lt) { lt.classList.toggle('on', LOWSPEC); lt.setAttribute('aria-checked', LOWSPEC ? 'true' : 'false'); }
+  const ap = $('.tags[data-k="avatarLayout"]'); if (ap) ap.classList.toggle('dis', !DIR.avatarEnabled);
+  const av = $('#avPrev'); if (av) { av.dataset.pos = !DIR.avatarEnabled ? 'off' : DIR.avatarLayout === 'fullscreen' ? 'full' : DIR.avatarLayout === 'pip-bl' ? 'bl' : 'br'; }
+  const an = $('#avNote'); if (an) an.textContent = `${DIR.aspectRatio === 'auto' ? 'AI 画幅' : DIR.aspectRatio} · ${DIR.avatarEnabled ? optLbl(OPTV.avatarLayouts, DIR.avatarLayout) : '未启用'}`;
+  const bp = $('#bgPrev');
+  if (bp) {
+    const n = 24, bins = new Array(n).fill(0), strong = new Array(n).fill(false), drop = new Array(n).fill(false);
+    BEATS.forEach(([t, s]) => { const i = Math.min(n - 1, Math.floor((t / DUR) * n)); bins[i]++; if (s) strong[i] = true; });
+    DROPS.forEach((t) => { drop[Math.min(n - 1, Math.floor((t / DUR) * n))] = true; });
+    const mx = Math.max(1, ...bins);
+    const sig = bins.join(',') + strong.join('') + drop.join('');
+    if (bp.dataset.sig !== sig) { bp.dataset.sig = sig; bp.innerHTML = bins.map((v, i) => `<i class="${drop[i] ? 'd' : strong[i] ? 's' : ''}" style="height:${BEATS.length ? Math.round(18 + (v / mx) * 82) : 30}%"></i>`).join(''); }
+    const note = BEATS.length ? `${PROJECT.bpm ? PROJECT.bpm + ' BPM · ' : ''}${BEATS.length} 拍 · ${DROPS.length} 处高潮突降` : '尚未分析配乐节拍';
+    $('#bgNote').textContent = note + (DIR.durationMode === 'auto' && MUSIC.length ? ` · 智能时长≈配乐 ${fmtMS(MUSIC[0].t1 - MUSIC[0].t0)}` : '');
+  }
+  renderEngList();
+  const txt = capsuleText(); $('#foSum').textContent = txt; $('#foSum').title = txt;
+  syncCapsule();
+  const ta = $('#foTopic');
+  if (ta && document.activeElement !== ta && performance.now() - BRIEF.editedAt > 800 && ta.value !== DIR.topic) ta.value = DIR.topic || '';
+}
+function syncCapsule() {
+  const t = String(DIR.topic || '').trim();
+  const cap = $('#capTxt'); cap.textContent = t || '写下创意主题 · 点此展开经折'; cap.classList.toggle('ph', !t);
+  $('#capsule').title = (t ? '创意主题：' + t + '\n' : '') + '出片参数：' + capsuleText() + '\n（P 展开经折）';
+}
+function renderEngList() {
+  const box = $('#engList'); if (!box || !STATE) return;
+  const s = STATE.status || {};
+  const rows = [['llm', 'LLM 大模型', s.llm && s.llm.configured, s.llm && s.llm.label], ['tts', '配音引擎', s.tts && s.tts.ready, s.tts && s.tts.label], ['hardware', 'GPU 算力', true, s.gpu && s.gpu.label], ['avatar', '口型引擎', s.lipsync && s.lipsync.ready, s.lipsync && s.lipsync.label]];
+  const sig = JSON.stringify(rows);
+  if (box.dataset.sig === sig) return; box.dataset.sig = sig;
+  box.innerHTML = rows.map(([p, n, ok, lb]) => `<button class="eng-r${ok ? '' : ' bad'}" data-panel="${p}" title="${esc(n)} · ${esc(lb || '—')} · 点击打开设置"><i></i><b>${esc(n)}</b><em>${esc(lb || '—')}</em></button>`).join('');
+}
+function setParam(k, v) {
+  if (k === 'fps' || k === 'targetDurationSec') v = Number(v);
+  if (k === 'avatarEnabled') v = !DIR.avatarEnabled;
+  if (String(DIR[k]) === String(v)) return;
+  DIR[k] = v; PENDING[k] = { v, until: performance.now() + 2600 };
+  syncFolio();
+  const cap = $('#capsule'); cap.classList.remove('flash'); void cap.offsetWidth; cap.classList.add('flash');
+  act('setDirector', { patch: { [k]: v } });
+  if (Pipe.live() && !FOLIO_WARNED) { FOLIO_WARNED = true; toast('参数已同步 · 运行中的这一卷不受影响，下次出片生效', '折'); }
+}
+function sendTopic() {
+  clearTimeout(BRIEF.timer); BRIEF.timer = 0;
+  const ta = $('#foTopic'); if (!ta) return;
+  const v = ta.value.slice(0, 8000);
+  if (v === DIR.topic) return;
+  DIR.topic = v; PENDING.topic = { v, until: performance.now() + 3000 };
+  syncCapsule();
+  act('setDirector', { patch: { topic: v } });
+}
+function openVoiceMenu(s) {
+  const q = s.querySelector('.vq'), list = s.querySelector('.vlist');
+  const fill = () => {
+    const needle = q.value.trim().toLowerCase(), opts = OPTV.voices || [];
+    const hit = needle ? opts.filter((o) => String(o.label).toLowerCase().includes(needle) || String(o.value).toLowerCase().includes(needle)) : opts;
+    list.innerHTML = hit.slice(0, 400).map((o) => `<button role="option" data-v="${esc(o.value)}" class="${String(o.value) === String(DIR.voiceId) ? 'on' : ''}" title="${esc(o.label)}"><span class="mt">${esc(o.label)}</span></button>`).join('') || '<p class="lf-note" style="padding:6px 8px">没有匹配的音色</p>';
+  };
+  q.placeholder = `搜索音色（共 ${(OPTV.voices || []).length} 个）`;
+  q.oninput = fill; q.value = ''; fill();
+  setTimeout(() => { try { q.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }, 30);
+}
+function openFolio(focusTopic) {
+  if (FOLIO_OPEN) return;
+  closeMenus(); if (MODAL.open) closeModal();
+  const f = $('#folio'); f.classList.remove('closing'); void f.offsetWidth; f.classList.add('open'); f.setAttribute('aria-hidden', 'false');
+  $('#scrim').classList.add('on'); FOLIO_OPEN = true;
+  syncFolio();
+  if (focusTopic) setTimeout(() => { const ta = $('#foTopic'); if (ta) try { ta.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }, 380);
+}
+function closeFolio() {
+  if (!FOLIO_OPEN) return;
+  sendTopic();
+  const f = $('#folio'); f.classList.remove('open'); f.classList.add('closing'); f.setAttribute('aria-hidden', 'true'); FOLIO_OPEN = false;
+  if (!MODAL.open) $('#scrim').classList.remove('on');
+  setTimeout(() => { if (!FOLIO_OPEN) f.classList.remove('closing'); }, 700);
+}
+
+/* ══════════════ 23. 弹窗：影核广场 / 复刻对比 / 提词器 / 数字人 / 音色 / 云端 / 体检 … ══════════════ */
+@@@ END

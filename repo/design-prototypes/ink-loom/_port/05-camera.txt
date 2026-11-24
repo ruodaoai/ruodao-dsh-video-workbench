@@ -1,0 +1,90 @@
+@@@ RANGE
+/* ══════════════ 10. 画布与镜头 ══════════════ */
+@@@ TO
+const xT = (x) => TLV.v0 + ((x - L.tlc.x) / L.tlc.w) * (TLV.v1 - TLV.v0);
+@@@ WITH
+/* ══════════════ 10. 画布与镜头（镜头只作用于中央织机舞台窗口 SW；库房 / 长卷 / 任务中心永不被推走或遮挡） ══════════════ */
+const CV_W = $('#cvWorld'), CV_F = $('#cvFx'), PLANE = $('#plane');
+const CW = spriteText(CV_W.getContext('2d', CTX2D)), CF = spriteText(CV_F.getContext('2d', CTX2D));
+const SIM = { t: 0, real: 0 };
+const CAM = { x: 0, y: 0, s: 1, vx: 0, vy: 0, vs: 0, tx: 0, ty: 0, ts: 1, mode: 'overview', focus: null, shake: 0, ox: 0, oy: 0, px: 0, py: 0, css: '' };
+/* 舞台窗口（平面坐标）：库房右缘 → 任务中心左缘，顶栏下 → 长卷上缘 */
+const SW = { x: 0, y: 0, w: 1, h: 1, cx: 0, cy: 0 };
+function computeSW() {
+  const x0 = L.vault.x + L.vault.w + Math.round(L.pad * 0.5), x1 = L.tasks.x - Math.round(L.pad * 0.5);
+  Object.assign(SW, { x: x0, y: 0, w: Math.max(40, x1 - x0), h: Math.max(40, L.tl.y - Math.round(L.pad * 0.5)) });
+  SW.cx = SW.x + SW.w / 2; SW.cy = SW.y + SW.h / 2;
+}
+function sizeCanvases() {
+  for (const cv of [CV_W, CV_F]) { cv.width = Math.max(1, Math.round(L.pw * DPR)); cv.height = Math.max(1, Math.round(L.ph * DPR)); cv.style.width = L.pw + 'px'; cv.style.height = L.ph + 'px'; }
+  TEX.vig = null;
+}
+function camReset() { CAM.x = CAM.tx = SW.cx; CAM.y = CAM.ty = SW.cy; CAM.s = CAM.ts = 1; CAM.vx = CAM.vy = CAM.vs = 0; CAM.px = CAM.py = 0; CAM.css = ''; }
+function camAim() {
+  let x = SW.cx, y = SW.cy, s = 1;
+  if (CAM.mode !== 'overview') {
+    const f = focusPoint();
+    x = f.x; y = f.y; s = f.s;
+    if (CAM.mode === 'close') s = Math.max(s * 1.4, 2.15);
+  }
+  s = clamp(s, 1, 2.9);
+  const hw = SW.w / (2 * s), hh = SW.h / (2 * s);
+  CAM.tx = clamp(x, SW.x + hw, SW.x + SW.w - hw); CAM.ty = clamp(y, SW.y + hh, SW.y + SW.h - hh); CAM.ts = s;
+}
+function camStep(dt) {
+  const k = 6.5, d = 2 * Math.sqrt(k), ks = 4.6, ds = 2 * Math.sqrt(ks);
+  CAM.vx += (k * (CAM.tx - CAM.x) - d * CAM.vx) * dt; CAM.x += CAM.vx * dt;
+  CAM.vy += (k * (CAM.ty - CAM.y) - d * CAM.vy) * dt; CAM.y += CAM.vy * dt;
+  CAM.vs += (ks * (CAM.ts - CAM.s) - ds * CAM.vs) * dt; CAM.s = Math.max(1, CAM.s + CAM.vs * dt);
+  /* 窗口约束：放大后的视野永远落在舞台窗口内 */
+  const hw = SW.w / (2 * CAM.s), hh = SW.h / (2 * CAM.s);
+  CAM.x = clamp(CAM.x, SW.x + hw, SW.x + SW.w - hw); CAM.y = clamp(CAM.y, SW.y + hh, SW.y + SW.h - hh);
+  CAM.shake = Math.max(0, CAM.shake - dt * 1.7);
+  const a = LOWSPEC ? 0 : CAM.shake * CAM.shake * 10;
+  CAM.ox = (Math.random() * 2 - 1) * a; CAM.oy = (Math.random() * 2 - 1) * a;
+  CAM.px = SW.cx - CAM.x * CAM.s + CAM.ox; CAM.py = SW.cy - CAM.y * CAM.s + CAM.oy;
+  const css = `translate(${CAM.px.toFixed(2)}px,${CAM.py.toFixed(2)}px) scale(${CAM.s.toFixed(4)})`;
+  if (css !== CAM.css) { PLANE.style.transform = css; CAM.css = css; }
+  /* 景深：只在舞台窗口内、对焦点之外虚化 */
+  if (CAM.mode !== 'overview') {
+    const f = toScreen(CAM.tx, CAM.ty);
+    const R = document.documentElement.style;
+    R.setProperty('--dofx', (f.x - SW.x).toFixed(0) + 'px'); R.setProperty('--dofy', (f.y - SW.y).toFixed(0) + 'px');
+    R.setProperty('--dofr', Math.round(SW.w * (CAM.mode === 'close' ? 0.5 : 0.66)) + 'px');
+    R.setProperty('--dofb', (CAM.mode === 'close' ? 3.2 : 2.2) + 'px');
+  }
+}
+/* 舞台平面 → 甲板（未变换的平面坐标）；toDeck：客户端坐标 → 甲板坐标 */
+const toScreen = (x, y) => ({ x: x * CAM.s + CAM.px, y: y * CAM.s + CAM.py });
+const toStage = (x, y) => ({ x: (x - CAM.px) / CAM.s, y: (y - CAM.py) / CAM.s });
+const toDeck = (cx, cy) => ({ x: cx, y: cy - L.topH });
+function camApply(c, f = 1) {
+  const s = lerp(1, CAM.s, f), x = lerp(SW.cx, CAM.x, f), y = lerp(SW.cy, CAM.y, f);
+  c.setTransform(s * DPR, 0, 0, s * DPR, (SW.cx - x * s + CAM.ox * f) * DPR, (SW.cy - y * s + CAM.oy * f) * DPR);
+}
+const deckApply = (c) => c.setTransform(DPR, 0, 0, DPR, 0, 0);
+function elDeckRect(e) { const r = e.getBoundingClientRect(), a = toDeck(r.left, r.top), b = toDeck(r.right, r.bottom); return { x: a.x, y: a.y, w: b.x - a.x, h: b.y - a.y, cx: (a.x + b.x) / 2, cy: (a.y + b.y) / 2 }; }
+
+/* ══════════════ 11. 长卷视窗（展开手卷） ══════════════ */
+const TLV = { v0: -0.6, v1: 30.6, a0: -0.6, a1: 30.6, manual: false, unroll: -1 };
+function tlAim() {
+  if (TLV.manual) return;
+  const h = Pipe.live() ? Pipe.focusT : null;
+  if (CAM.mode === 'overview' || h == null) { TLV.a0 = -0.6; TLV.a1 = DUR + 0.6; return; }
+  const span = Math.min(DUR + 1.2, CAM.mode === 'close' ? 24 : 40);
+  const a0 = clamp(h - span * 0.5, -0.6, DUR + 0.6 - span);
+  TLV.a0 = a0; TLV.a1 = a0 + span;
+}
+function tlStep(dt) { const k = 1 - Math.exp(-dt * 3); TLV.v0 += (TLV.a0 - TLV.v0) * k; TLV.v1 += (TLV.a1 - TLV.v1) * k; if (!(TLV.v1 - TLV.v0 > 0.5)) { TLV.v0 = TLV.a0; TLV.v1 = Math.max(TLV.a0 + 1, TLV.a1); } }
+const tX = (t) => L.tlc.x + ((t - TLV.v0) / (TLV.v1 - TLV.v0)) * L.tlc.w;
+const xT = (x) => TLV.v0 + ((x - L.tlc.x) / L.tlc.w) * (TLV.v1 - TLV.v0);
+@@@ END
+@@@ REPLACE
+function backStep() {
+  const f = 0.42, s = lerp(1, CAM.s, f), x = lerp(L.pw / 2, CAM.x, f), y = lerp(L.ph / 2, CAM.y, f);
+  const tx = L.pw / 2 - x * s + CAM.ox * f - BACK.M * s, ty = L.ph / 2 - y * s + CAM.oy * f - BACK.M * s;
+@@@ WITH
+function backStep() {
+  const f = 0.42, s = lerp(1, CAM.s, f), x = lerp(SW.cx, CAM.x, f), y = lerp(SW.cy, CAM.y, f);
+  const tx = SW.cx - x * s + CAM.ox * f - BACK.M * s, ty = SW.cy - y * s + CAM.oy * f - BACK.M * s;
+@@@ END

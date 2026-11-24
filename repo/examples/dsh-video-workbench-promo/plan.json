@@ -1,0 +1,1018 @@
+{
+  "version": "promo-plan/1",
+  "mode": "narrative-mv",
+  "beatSync": true,
+  "title": "DSH Video Workbench：双引擎全链路，开源即开拍",
+  "style": "tech",
+  "targetPlatform": "universal",
+  "bpm": 126,
+  "shots": [
+    {
+      "id": "scene-01",
+      "title": "别再把时间耗在拼工具",
+      "narration": "从脚本到成片，别再来回拼凑工具了！",
+      "subChunks": [
+        "从脚本到成片",
+        "别再来回拼凑工具"
+      ],
+      "accentWords": [
+        "脚本到成片",
+        "开源工作台"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！竖屏中央散落脚本、配音、渲染、发布节点，首个重拍磁吸聚合成 DSH Video Workbench 铭牌；青蓝粒子贯穿全链路，底部副标明确面向 DeepSeek Harness。所有关键文字置于抖音防遮挡安全区。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！竖屏中央散落脚本、配音、渲染、发布节点，首个重拍磁吸聚合成 DSH Video Workbench 铭牌；青蓝粒子贯穿全链路，底部副标明确面向 DeepSeek Harness。所有关键文字置于抖音防遮挡安全区。",
+      "emotion": "激昂",
+      "recipe": "impact",
+      "layout": "card-fan-opener",
+      "kenBurns": "zoom-in",
+      "fromScale": 1.15,
+      "toScale": 1,
+      "transition": "cut",
+      "highlights": [
+        "面向 DeepSeek Harness",
+        "AI 双引擎全链路"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.6,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.12
+        }
+      ],
+      "windowTitle": "DSH Video Workbench",
+      "durationSec": 2.38,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-02",
+      "title": "四位智能体，全流程协同",
+      "narration": "四位智能体接力，策划混音到质检出片！",
+      "subChunks": [
+        "四位智能体接力",
+        "策划混音到质检出片"
+      ],
+      "accentWords": [
+        "四位智能体",
+        "接力出片"
+      ],
+      "visualBlueprint": "AppWindow 完整展示作战大屏截图，等比适配、四边始终可见，不裁切真实界面。截图外围依次亮起策划导演→素材剪辑→配音混音→动效质检导出标签；独立放大框聚焦实时声轨，不遮住主窗口，末拍弹出1080P一键出片。",
+      "motionNotes": "AppWindow 完整展示作战大屏截图，等比适配、四边始终可见，不裁切真实界面。截图外围依次亮起策划导演→素材剪辑→配音混音→动效质检导出标签；独立放大框聚焦实时声轨，不遮住主窗口，末拍弹出1080P一键出片。",
+      "emotion": "平静",
+      "recipe": "hold",
+      "layout": "app-focus-shot",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "slash-wipe",
+      "highlights": [
+        "4-Agent 自动协同",
+        "实时声轨",
+        "1080P 一键出片"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.75,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "AI 作战大屏",
+      "durationSec": 2.857,
+      "assetRefs": [
+        "assets/images/image-ui-01-warroom-052c.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-03",
+      "title": "二十三个工具组成制作网络",
+      "narration": "二十三个工具，把视频制作串成完整链路！",
+      "subChunks": [
+        "二十三个工具",
+        "串起视频制作完整链路"
+      ],
+      "accentWords": [
+        "23 个 Cordis 工具",
+        "Preset"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！DeepSeek Harness 核心节点向外点亮23个可计数工具节点，按策划、素材、声音、渲染、质检分组连线；视频制作模式 Preset 卡片插入核心，数据光束沿全链路奔流，避免伪造软件界面。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！DeepSeek Harness 核心节点向外点亮23个可计数工具节点，按策划、素材、声音、渲染、质检分组连线；视频制作模式 Preset 卡片插入核心，数据光束沿全链路奔流，避免伪造软件界面。",
+      "emotion": "平静",
+      "recipe": "pull_out",
+      "layout": "radial-climax",
+      "kenBurns": "zoom-out",
+      "fromScale": 1.24,
+      "toScale": 1,
+      "transition": "block-wipe",
+      "highlights": [
+        "23 个 Cordis 工具插件",
+        "视频制作模式 Preset"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.14
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "Cordis 工具拓扑",
+      "durationSec": 2.38,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-04",
+      "title": "四大协议，一次接入",
+      "narration": "四大模型协议接入，客户端配置一键同步！",
+      "subChunks": [
+        "四大模型协议接入",
+        "客户端配置一键同步"
+      ],
+      "accentWords": [
+        "四大协议",
+        "一键同步"
+      ],
+      "visualBlueprint": "AppWindow 等比完整展示模型接入中心截图，主窗口始终完整。外围四张小型协议卡逐拍点亮 OpenAI Chat、OpenAI Responses、Anthropic Messages、Gemini Native；独立局部放大框提示同步 DSH 客户端配置，禁止以重绘界面替代截图。",
+      "motionNotes": "AppWindow 等比完整展示模型接入中心截图，主窗口始终完整。外围四张小型协议卡逐拍点亮 OpenAI Chat、OpenAI Responses、Anthropic Messages、Gemini Native；独立局部放大框提示同步 DSH 客户端配置，禁止以重绘界面替代截图。",
+      "emotion": "平静",
+      "recipe": "hold",
+      "layout": "app-focus-shot",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "glitch-cut",
+      "highlights": [
+        "OpenAI Chat / Responses",
+        "Anthropic Messages",
+        "Gemini Native"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.7,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "AI 大模型接入中心",
+      "durationSec": 2.857,
+      "assetRefs": [
+        "assets/images/image-ui-02-llm-modal-208a.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-05",
+      "title": "生成之后，还要编译修错",
+      "narration": "代码先过严格编译，最多三轮自动修错！",
+      "subChunks": [
+        "先过严格编译",
+        "最多三轮自动修错"
+      ],
+      "accentWords": [
+        "tsc --noEmit",
+        "最多三轮"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！真实命令文字 tsc --noEmit 占据中央，示意诊断流依次经过编译、沙箱、修复回路，最多三枚轮次指示灯顺序亮起；标注编译修复机制示意，不捏造实际成功日志或通过率。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！真实命令文字 tsc --noEmit 占据中央，示意诊断流依次经过编译、沙箱、修复回路，最多三枚轮次指示灯顺序亮起；标注编译修复机制示意，不捏造实际成功日志或通过率。",
+      "emotion": "平静",
+      "recipe": "push_in",
+      "layout": "workflow-steps",
+      "kenBurns": "zoom-in",
+      "fromScale": 1,
+      "toScale": 1.22,
+      "transition": "cut",
+      "highlights": [
+        "tsc --noEmit",
+        "编译与沙箱检查",
+        "最多 3 轮自动修复"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.48,
+          "z": 1.1
+        }
+      ],
+      "windowTitle": "编译与沙箱自动修复",
+      "durationSec": 2.38,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-06",
+      "title": "素材、提词、自拍一次就位",
+      "narration": "素材批量入库，提词自拍也在同一工作台！",
+      "subChunks": [
+        "素材批量入库",
+        "提词自拍同台完成"
+      ],
+      "accentWords": [
+        "批量入库",
+        "提词自拍"
+      ],
+      "visualBlueprint": "完整展示素材库截图，AppWindow 全程保持截图全部边界；外围步骤带依次标注本地目录扫描、百兆视频直传、提词自拍、隔离式 .motion 模板导入。以两个独立放大框轮流指向素材区与录播区，补充可调速、防镜像标签，不覆盖主界面。",
+      "motionNotes": "完整展示素材库截图，AppWindow 全程保持截图全部边界；外围步骤带依次标注本地目录扫描、百兆视频直传、提词自拍、隔离式 .motion 模板导入。以两个独立放大框轮流指向素材区与录播区，补充可调速、防镜像标签，不覆盖主界面。",
+      "emotion": "平静",
+      "recipe": "hold",
+      "layout": "workflow-steps",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "light-wipe",
+      "highlights": [
+        "本地批量扫描 / 百兆直传",
+        "可调速防镜像提词录播",
+        "隔离式 .motion 导入"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "统一素材库与提词自拍棚",
+      "durationSec": 2.857,
+      "assetRefs": [
+        "assets/images/image-ui-03-studio-assets-7b34.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-07",
+      "title": "双引擎，不是双份录像",
+      "narration": "双引擎真正逐帧渲染，动画不靠录屏！",
+      "subChunks": [
+        "双引擎真正逐帧渲染",
+        "动画不靠录屏"
+      ],
+      "accentWords": [
+        "双引擎",
+        "逐帧渲染"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！左右双引擎剖面对照：Remotion 4.x React TSX 与 HTML5 / GSAP / Canvas；中央帧号栅格同步前进，同一矢量图形在两侧按帧更新，底部汇入统一视频输出，不展示未经提供的性能对比。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！左右双引擎剖面对照：Remotion 4.x React TSX 与 HTML5 / GSAP / Canvas；中央帧号栅格同步前进，同一矢量图形在两侧按帧更新，底部汇入统一视频输出，不展示未经提供的性能对比。",
+      "emotion": "平静",
+      "recipe": "impact",
+      "layout": "compare-dual",
+      "kenBurns": "zoom-in",
+      "fromScale": 1.15,
+      "toScale": 1,
+      "transition": "slash-wipe",
+      "highlights": [
+        "Remotion 4.x / React TSX",
+        "HTML5 / GSAP / Canvas",
+        "非录屏逐帧输出"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.65,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.08
+        }
+      ],
+      "windowTitle": "双引擎逐帧渲染",
+      "durationSec": 2.38,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-08",
+      "title": "逐镜手写，不是套壳模板",
+      "narration": "模型分批逐镜写代码，让动效跟着内容走！",
+      "subChunks": [
+        "模型分批逐镜写代码",
+        "让动效跟着内容走"
+      ],
+      "accentWords": [
+        "分批生成",
+        "逐镜手写"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！批次队列逐张派发 scene TSX 卡片，React TSX 代码行转化成 SVG 曲线、UI 卡片与粒子动画；三段小预览依次亮起，明确标注大模型按批次逐镜手写 SVG/UI 动画，代码仅为机制示意。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！批次队列逐张派发 scene TSX 卡片，React TSX 代码行转化成 SVG 曲线、UI 卡片与粒子动画；三段小预览依次亮起，明确标注大模型按批次逐镜手写 SVG/UI 动画，代码仅为机制示意。",
+      "emotion": "平静",
+      "recipe": "pan_across",
+      "layout": "workflow-steps",
+      "kenBurns": "pan-right",
+      "fromScale": 1.1,
+      "toScale": 1.12,
+      "transition": "glitch-cut",
+      "highlights": [
+        "按批次调用大模型",
+        "逐镜手写 Remotion TSX",
+        "SVG / UI 动画"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.44,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.56,
+          "fy": 0.5,
+          "z": 1.06
+        }
+      ],
+      "windowTitle": "Remotion 分批生成链路",
+      "durationSec": 2.857,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-09",
+      "title": "浏览器引擎，同样逐帧可控",
+      "narration": "浏览器逐帧抓取，分段缓存接住渲染链路！",
+      "subChunks": [
+        "浏览器逐帧抓取",
+        "分段缓存接住渲染链路"
+      ],
+      "accentWords": [
+        "CDP WebSocket",
+        "分段缓存"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！Chromium 容器内 HTML5、GSAP、Canvas 图层逐帧推进，CDP WebSocket 光束逐个送出帧卡，再装入分段缓存队列并合成输出；镜头沿数据路径快速平移，标注架构示意而非实测监控。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！Chromium 容器内 HTML5、GSAP、Canvas 图层逐帧推进，CDP WebSocket 光束逐个送出帧卡，再装入分段缓存队列并合成输出；镜头沿数据路径快速平移，标注架构示意而非实测监控。",
+      "emotion": "平静",
+      "recipe": "pan_across",
+      "layout": "narrative-diorama",
+      "kenBurns": "pan-right",
+      "fromScale": 1.1,
+      "toScale": 1.12,
+      "transition": "zoom-punch",
+      "highlights": [
+        "Chromium CDP WebSocket",
+        "逐帧抓取",
+        "分段缓存"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.42,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.58,
+          "fy": 0.5,
+          "z": 1.05
+        }
+      ],
+      "windowTitle": "HTML5 CDP 渲染链路",
+      "durationSec": 2.38,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-10",
+      "title": "配乐与风格，不止一个选项",
+      "narration": "三种配乐六套配色，配音卡点自由切换！",
+      "subChunks": [
+        "三种配乐六套配色",
+        "配音卡点自由切换"
+      ],
+      "accentWords": [
+        "三种配乐",
+        "六套配色"
+      ],
+      "visualBlueprint": "完整展示设置页截图，AppWindow 等比缩放且四边始终可见。窗口外按拍切换三组说明：AI代码48kHz作曲／上传音乐真实节拍解析／TTS氛围音景；下方三模式标签为标准配音、配音踩拍、纯音乐卡点MV，六枚色签展示电影配色选择。",
+      "motionNotes": "完整展示设置页截图，AppWindow 等比缩放且四边始终可见。窗口外按拍切换三组说明：AI代码48kHz作曲／上传音乐真实节拍解析／TTS氛围音景；下方三模式标签为标准配音、配音踩拍、纯音乐卡点MV，六枚色签展示电影配色选择。",
+      "emotion": "平静",
+      "recipe": "hold",
+      "layout": "app-focus-shot",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "flash-cut",
+      "highlights": [
+        "3 种配乐引擎 / 6 套配色",
+        "AI 代码 48kHz 作曲",
+        "配音 / 踩拍 / 纯音乐 MV"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "配乐、视觉与制作模式",
+      "durationSec": 3.095,
+      "assetRefs": [
+        "assets/images/image-ui-04-studio-settings-b1ef.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-11",
+      "title": "半拍闪切，鼓点就是剪辑线",
+      "narration": "实测鼓点定位高潮，半拍闪切精准踩点！",
+      "subChunks": [
+        "实测鼓点定位高潮",
+        "半拍闪切精准踩点"
+      ],
+      "accentWords": [
+        "90—140 BPM",
+        "0.5 拍"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！FFmpeg 节拍分析机制示意波形标出90—140 BPM适配范围与drops高潮定位；本片126 BPM网格中每0.5拍触发一次装饰切片和粒子重击，镜头总时长保持完整；七枚转场叠层卡围绕节拍轴展开，不展示虚构测量数值。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！FFmpeg 节拍分析机制示意波形标出90—140 BPM适配范围与drops高潮定位；本片126 BPM网格中每0.5拍触发一次装饰切片和粒子重击，镜头总时长保持完整；七枚转场叠层卡围绕节拍轴展开，不展示虚构测量数值。",
+      "emotion": "平静",
+      "recipe": "impact",
+      "layout": "metric-dashboard",
+      "kenBurns": "zoom-in",
+      "fromScale": 1.15,
+      "toScale": 1,
+      "transition": "block-wipe",
+      "highlights": [
+        "90—140 BPM 鼓点分析",
+        "0.5 拍极速闪切",
+        "7 种矢量转场叠层"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.65,
+          "fx": 0.5,
+          "fy": 0.48,
+          "z": 1.12
+        }
+      ],
+      "windowTitle": "鼓点与高潮同步",
+      "durationSec": 2.38,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-12",
+      "title": "本地音色，直接开选",
+      "narration": "两百多种本地音色，常驻显存快速配音！",
+      "subChunks": [
+        "两百多种本地音色",
+        "常驻显存快速配音"
+      ],
+      "accentWords": [
+        "IndexTTS-2.5",
+        "204+ 音色"
+      ],
+      "visualBlueprint": "AppWindow 完整展示音色库截图，保持原始比例与全部边界；独立浮动放大框聚焦音色目录，外侧204+数字随重拍弹入。标注 IndexTTS-2.5、常驻显存、支持 GPT-SoVITS 切换，不虚构生成耗时或试听结果。",
+      "motionNotes": "AppWindow 完整展示音色库截图，保持原始比例与全部边界；独立浮动放大框聚焦音色目录，外侧204+数字随重拍弹入。标注 IndexTTS-2.5、常驻显存、支持 GPT-SoVITS 切换，不虚构生成耗时或试听结果。",
+      "emotion": "平静",
+      "recipe": "hold",
+      "layout": "app-focus-shot",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "iris-circle",
+      "highlights": [
+        "204+ 本地音色",
+        "常驻显存生成",
+        "支持 GPT-SoVITS 切换"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "IndexTTS-2.5 本地音色库",
+      "durationSec": 2.857,
+      "assetRefs": [
+        "assets/images/image-ui-06-voice-catalog-e920.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-13",
+      "title": "个人声音，三步进入制作",
+      "narration": "录制上传再试听，三步建立个人声音分身！",
+      "subChunks": [
+        "录制上传再试听",
+        "三步建立个人声音分身"
+      ],
+      "accentWords": [
+        "三步克隆",
+        "个人声音"
+      ],
+      "visualBlueprint": "沿用音色库实机截图并完整展示，主窗口不裁切；外围原生矢量步骤带按录制或上传→声音克隆→试听确认依次点亮，独立放大框指向克隆功能区域。底部清楚提示仅使用本人或已获授权声音，禁止伪造身份。",
+      "motionNotes": "沿用音色库实机截图并完整展示，主窗口不裁切；外围原生矢量步骤带按录制或上传→声音克隆→试听确认依次点亮，独立放大框指向克隆功能区域。底部清楚提示仅使用本人或已获授权声音，禁止伪造身份。",
+      "emotion": "平静",
+      "recipe": "hold",
+      "layout": "workflow-steps",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "light-wipe",
+      "highlights": [
+        "录制或上传",
+        "克隆与试听",
+        "仅限本人或已授权声音"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.75,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "三步声音克隆工坊",
+      "durationSec": 2.857,
+      "assetRefs": [
+        "assets/images/image-ui-06-voice-catalog-e920.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-14",
+      "title": "透明数字人，进入你的画面",
+      "narration": "透明通道数字人，让分身直接融入画面！",
+      "subChunks": [
+        "透明通道数字人",
+        "让分身直接融入画面"
+      ],
+      "accentWords": [
+        "Alpha 透明通道",
+        "WebM"
+      ],
+      "visualBlueprint": "完整展示设置页截图，AppWindow 全部边界持续可见；旁侧独立SVG棋盘格演示区用抽象人物轮廓说明Alpha透明叠加，明确标注透明合成原理示意，不伪造数字人实拍素材；放大框仅辅助指向透明WebM数字人设置。",
+      "motionNotes": "完整展示设置页截图，AppWindow 全部边界持续可见；旁侧独立SVG棋盘格演示区用抽象人物轮廓说明Alpha透明叠加，明确标注透明合成原理示意，不伪造数字人实拍素材；放大框仅辅助指向透明WebM数字人设置。",
+      "emotion": "平静",
+      "recipe": "hold",
+      "layout": "split-wipe-compare",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "slash-wipe",
+      "highlights": [
+        "Alpha 透明通道",
+        "透明 WebM 数字人",
+        "人物叠加合成"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "透明数字人与克隆分身",
+      "durationSec": 2.38,
+      "assetRefs": [
+        "assets/images/image-ui-04-studio-settings-b1ef.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-15",
+      "title": "先测声音，再填画面帧数",
+      "narration": "逐句实测配音时长，再把帧数准确回填！",
+      "subChunks": [
+        "逐句实测配音时长",
+        "再把帧数准确回填"
+      ],
+      "accentWords": [
+        "ffprobe 实测",
+        "帧数回填"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！IndexTTS-2.5逐句音频片段进入ffprobe测时模块，结果沿箭头回填对应镜头帧格；音频尾沿与画面尾沿对齐锁定，以公式和对齐线解释同步机制，不编造绝对零误差实测报告。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！IndexTTS-2.5逐句音频片段进入ffprobe测时模块，结果沿箭头回填对应镜头帧格；音频尾沿与画面尾沿对齐锁定，以公式和对齐线解释同步机制，不编造绝对零误差实测报告。",
+      "emotion": "平静",
+      "recipe": "push_in",
+      "layout": "workflow-steps",
+      "kenBurns": "zoom-in",
+      "fromScale": 1,
+      "toScale": 1.22,
+      "transition": "cut",
+      "highlights": [
+        "逐句生成配音",
+        "ffprobe 实测时长",
+        "按时长回填帧数"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.52,
+          "z": 1.1
+        }
+      ],
+      "windowTitle": "逐句时长与画面同步",
+      "durationSec": 2.38,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-16",
+      "title": "人声出现，音乐自动让位",
+      "narration": "人声一出音乐让位，重击音效照样有力！",
+      "subChunks": [
+        "人声一出音乐让位",
+        "重击音效照样有力"
+      ],
+      "accentWords": [
+        "FFmpeg",
+        "sidechaincompress"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！上方人声波形进入侧链检测，下方BGM包络随人声自动下压、停顿后恢复；独立音效轨显示刀光与重击瞬态，青色信号线解释FFmpeg sidechaincompress，明确为混音原理示意，不放软件截图。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！上方人声波形进入侧链检测，下方BGM包络随人声自动下压、停顿后恢复；独立音效轨显示刀光与重击瞬态，青色信号线解释FFmpeg sidechaincompress，明确为混音原理示意，不放软件截图。",
+      "emotion": "激昂",
+      "recipe": "push_in",
+      "layout": "metric-dashboard",
+      "kenBurns": "zoom-in",
+      "fromScale": 1,
+      "toScale": 1.22,
+      "transition": "zoom-punch",
+      "highlights": [
+        "sidechaincompress",
+        "BGM 自动让位人声",
+        "刀光与重击音效"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.75,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.08
+        }
+      ],
+      "windowTitle": "FFmpeg 侧链闪避混音",
+      "durationSec": 2.857,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-17",
+      "title": "不满意哪一幕，就改哪一幕",
+      "narration": "哪幕不满意直接说，重写重配不用全片重来！",
+      "subChunks": [
+        "哪幕不满意直接说",
+        "重写重配不用全片重来"
+      ],
+      "accentWords": [
+        "对 AI 说",
+        "单幕重修"
+      ],
+      "visualBlueprint": "AppWindow 完整展示时间线截图，全部界面边界保留；外围标注V1分镜、A1混音双轨。独立放大框逐拍强调单幕选择、对AI说、重修入口，旁侧代码标签显示ai_refine_scene，并补充单幕重配与AI声学修音，不伪造操作后结果。",
+      "motionNotes": "AppWindow 完整展示时间线截图，全部界面边界保留；外围标注V1分镜、A1混音双轨。独立放大框逐拍强调单幕选择、对AI说、重修入口，旁侧代码标签显示ai_refine_scene，并补充单幕重配与AI声学修音，不伪造操作后结果。",
+      "emotion": "平静",
+      "recipe": "hold",
+      "layout": "app-focus-shot",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "block-wipe",
+      "highlights": [
+        "V1 分镜 + A1 混音",
+        "ai_refine_scene",
+        "单幕重配 / AI 声学修音"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "分步监看与单幕修改",
+      "durationSec": 3.095,
+      "assetRefs": [
+        "assets/images/image-ui-05-studio-timeline-9f84.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-18",
+      "title": "任务可控，出错有路可退",
+      "narration": "暂停恢复强停重试，任务日志全程可追！",
+      "subChunks": [
+        "暂停恢复强停重试",
+        "任务日志全程可追"
+      ],
+      "accentWords": [
+        "断点重试",
+        "子进程调度"
+      ],
+      "visualBlueprint": "AppWindow 等比完整展示任务监控截图，主窗口不裁切；外围四个控制标签依拍亮起暂停、恢复、强停子进程、断点单步重试，独立放大框强调日志区；不添加虚构任务状态或未经素材支持的成功记录。",
+      "motionNotes": "AppWindow 等比完整展示任务监控截图，主窗口不裁切；外围四个控制标签依拍亮起暂停、恢复、强停子进程、断点单步重试，独立放大框强调日志区；不添加虚构任务状态或未经素材支持的成功记录。",
+      "emotion": "平静",
+      "recipe": "hold",
+      "layout": "app-focus-shot",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "glitch-cut",
+      "highlights": [
+        "暂停 / 恢复",
+        "一键强停子进程",
+        "断点单步重试 / 实时日志"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "4-Agent 任务与子进程监控",
+      "durationSec": 2.857,
+      "assetRefs": [
+        "assets/images/image-ui-07-task-monitor-a10a.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-19",
+      "title": "响度、黑屏、遮挡提前查",
+      "narration": "响度黑屏遮挡先预检，发布之前少踩坑！",
+      "subChunks": [
+        "响度黑屏遮挡先预检",
+        "发布之前少踩坑"
+      ],
+      "accentWords": [
+        "EBU R128",
+        "安全区预检"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！三张检测卡依次出现EBU R128广播响度、零黑屏检测、平台防遮挡安全区；竖屏框展示抖音、小红书、B站安全区轮廓切换。QA 7/7仅作产品质检项目标识，明确不是本片已运行通过的报告。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！三张检测卡依次出现EBU R128广播响度、零黑屏检测、平台防遮挡安全区；竖屏框展示抖音、小红书、B站安全区轮廓切换。QA 7/7仅作产品质检项目标识，明确不是本片已运行通过的报告。",
+      "emotion": "平静",
+      "recipe": "impact",
+      "layout": "metric-dashboard",
+      "kenBurns": "zoom-in",
+      "fromScale": 1.15,
+      "toScale": 1,
+      "transition": "light-wipe",
+      "highlights": [
+        "EBU R128 广播响度",
+        "零黑屏检测 / QA 7/7",
+        "抖音 / 小红书 / B站安全区"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.06
+        }
+      ],
+      "windowTitle": "发布前质量预检",
+      "durationSec": 3.095,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-20",
+      "title": "代码免费商用，配置本地隔离",
+      "narration": "代码采用宽松开源协议，个人商用都免费！",
+      "subChunks": [
+        "代码采用宽松开源协议",
+        "个人商用都免费"
+      ],
+      "accentWords": [
+        "MIT License",
+        "免费可商用"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！MIT License开源铭牌居中，第一拍呈现个人与商业免费；第二拍三张字体卡标注SIL OFL：Noto Sans SC、思源宋体、JetBrains Mono；第三拍显示零硬编码路径、零私有密钥、.env隔离本地路径。底部保留素材、声音及外部服务另须遵守各自授权提示，不暗示全部第三方资源均属MIT。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！MIT License开源铭牌居中，第一拍呈现个人与商业免费；第二拍三张字体卡标注SIL OFL：Noto Sans SC、思源宋体、JetBrains Mono；第三拍显示零硬编码路径、零私有密钥、.env隔离本地路径。底部保留素材、声音及外部服务另须遵守各自授权提示，不暗示全部第三方资源均属MIT。",
+      "emotion": "平静",
+      "recipe": "pull_out",
+      "layout": "card-fan-opener",
+      "kenBurns": "zoom-out",
+      "fromScale": 1.24,
+      "toScale": 1,
+      "transition": "iris-circle",
+      "highlights": [
+        "MIT License / 免费可商用",
+        "SIL OFL 开源商用字体",
+        ".env 本地路径隔离"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "开源许可与本地配置",
+      "durationSec": 3.095,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-21",
+      "title": "最后一步，把发布资料带走",
+      "narration": "一键导出发布包，成片封面清单一起带走！",
+      "subChunks": [
+        "一键导出发布包",
+        "成片封面清单一起带走"
+      ],
+      "accentWords": [
+        "Publish Pack",
+        "一键导出"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！全流程节点高速收束到Publish Pack，原生矢量文件卡依次弹出成片、封面、发布清单；卡片组成发布交付栈，最后一拍翻转为开源仓库卡，先行完整显示https://github.com/Merziller/dsh-video-workbench，不制作虚假导出实机界面。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！全流程节点高速收束到Publish Pack，原生矢量文件卡依次弹出成片、封面、发布清单；卡片组成发布交付栈，最后一拍翻转为开源仓库卡，先行完整显示https://github.com/Merziller/dsh-video-workbench，不制作虚假导出实机界面。",
+      "emotion": "平静",
+      "recipe": "pull_out",
+      "layout": "workflow-steps",
+      "kenBurns": "zoom-out",
+      "fromScale": 1.24,
+      "toScale": 1,
+      "transition": "flash-cut",
+      "highlights": [
+        "一键 Publish Pack",
+        "成片 / 封面 / 发布清单",
+        "https://github.com/Merziller/dsh-video-workbench"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.08
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "Publish Pack 发布交付",
+      "durationSec": 2.857,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-22",
+      "title": "开源仓库，立即点亮 Star",
+      "narration": "GitHub 开源仓库 Merziller 斜杠 dsh-video-workbench，点亮 Star 立即免费上手！",
+      "subChunks": [
+        "GitHub 开源仓库 Merziller 斜杠 dsh-video-workbench",
+        "点亮 Star 立即免费上手！"
+      ],
+      "accentWords": [
+        "GitHub 开源仓库",
+        "Star",
+        "免费上手"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！禁止截图。首帧即完整呈现DSH Video Workbench与MIT开源铭牌，中央最高对比大字持续高亮完整地址https://github.com/Merziller/dsh-video-workbench，按竖屏可用宽度自动适配字号、不省略、不截断；下方完整显示git clone https://github.com/Merziller/dsh-video-workbench.git。Star矢量星标重拍点亮，粒子向仓库铭牌汇聚。旁白保持同一句连续音频，不拆成两次调用；承接上一镜持续可见的仓库卡。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！禁止截图。首帧即完整呈现DSH Video Workbench与MIT开源铭牌，中央最高对比大字持续高亮完整地址https://github.com/Merziller/dsh-video-workbench，按竖屏可用宽度自动适配字号、不省略、不截断；下方完整显示git clone https://github.com/Merziller/dsh-video-workbench.git。Star矢量星标重拍点亮，粒子向仓库铭牌汇聚。旁白保持同一句连续音频，不拆成两次调用；承接上一镜持续可见的仓库卡。",
+      "emotion": "激昂",
+      "recipe": "freeze_end",
+      "layout": "kinetic-impact",
+      "kenBurns": "zoom-out",
+      "fromScale": 1.16,
+      "toScale": 1,
+      "transition": "cut",
+      "highlights": [
+        "https://github.com/Merziller/dsh-video-workbench",
+        "MIT License",
+        "点亮 Star · 立即免费上手"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.85,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "GitHub · Merziller/dsh-video-workbench",
+      "durationSec": 3.095,
+      "assetRefs": [],
+      "_mediaDimMap": {}
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+@@@ REPLACE
+  window.__ink = { get state() { return STATE; }, Pipe, CAM, SW, L, DIR, OPTV, ASSETS, SCENES, setCam, openFolio, closeFolio, openModal, closeModal, applyState, act, focus: focusAgent, theme: applyTheme };
+@@@ WITH
+  window.__ink = { get state() { return STATE; }, get SCENES() { return SCENES; }, get ASSETS() { return ASSETS; }, get DIR() { return DIR; }, get OPTV() { return OPTV; }, get MON() { return MON; }, get CLIP() { return CLIP; }, Pipe, CAM, SW, L, AG, setCam, openFolio, closeFolio, openModal, closeModal, applyState, act, focus: focusAgent, theme: applyTheme };
+@@@ END
+@@@ REPLACE
+  const prog = Pipe.prog(), tx = P.text;
+  c.save();
+  c.lineCap = 'butt';
+@@@ WITH
+  const prog = Pipe.prog(), tx = P.text, band = L.lblY + L.lblH + 8;
+  c.save();
+  c.lineCap = 'butt';
+@@@ END
+@@@ REPLACE
+    c.fillText(p.ch, x, y + 1);
+    const b = a0 + span * (j / 5);
+@@@ WITH
+    if (y > band) c.fillText(p.ch, x, y + 1);
+    const b = a0 + span * (j / 5);
+@@@ END
+@@@ REPLACE
+  const ft = clamp(filmT() / DUR, 0, 1), an = a0 + span * ft, pr1 = R1 - 2 * k;
+  c.fillStyle = P.cinna;
+@@@ WITH
+  const ft = clamp(filmT() / DUR, 0, 1), an = a0 + span * ft, pr1 = R1 - 2 * k;
+  c.fillStyle = cy + Math.sin(an) * pr1 > band ? P.cinna : 'rgba(0,0,0,0)';
+@@@ END
+@@@ REPLACE
+  dialTicks().forEach((s) => { const a = a0 + span * (s / DUR), r = R1 + 19 * k; c.fillText(fmtMS(s), cx + Math.cos(a) * r, cy + Math.sin(a) * r); });
+@@@ WITH
+  dialTicks().forEach((s) => { const a = a0 + span * (s / DUR), r = R1 + 19 * k, y = cy + Math.sin(a) * r; if (y > band) c.fillText(fmtMS(s), cx + Math.cos(a) * r, y); });
+@@@ END
+@@@ REPLACE
+    a.el.dataset.st = a.status; a.elSt.textContent = ST_CN[a.status] || '待命'; a.elTask.textContent = '· ' + (a.task || '—'); a.elBar.style.width = Math.round(clamp(a.prog, 0, 1) * 100) + '%';
+@@@ WITH
+    const same = !a.task || a.task === ST_CN[a.status] || /^(待命|等待调度|本次未参与)$/.test(a.task);
+    a.el.dataset.st = a.status; a.elSt.textContent = ST_CN[a.status] || '待命'; a.elTask.textContent = same ? '' : '· ' + a.task; a.elBar.style.width = Math.round(clamp(a.prog, 0, 1) * 100) + '%';
+@@@ END
+@@@ REPLACE
+.h-row{display:flex;align-items:flex-end;gap:10px}
+@@@ WITH
+.h-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:2px 10px}
+.h-row .h-cn{white-space:nowrap}
+.h-en{display:flex;flex-direction:column}
+.st-st span:empty{display:none}
+@@@ END

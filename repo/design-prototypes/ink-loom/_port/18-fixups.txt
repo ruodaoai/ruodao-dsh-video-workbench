@@ -1,0 +1,103 @@
+@@@ REPLACE
+  if (kind === 'voice') return `<div class="pg">${lab}<div class="sel vsel" data-k="${k}"><button class="sel-btn" aria-haspopup="listbox" aria-label="${cn}"><span></span><svg><use href="#i-caret"/></svg></button><div class="menu" role="listbox"><input class="vq" type="search" placeholder="搜索音色" aria-label="搜索音色"><div class="vlist"></div></div></div></div>`;
+@@@ WITH
+  if (kind === 'voice') return `<div class="pg">${lab}<div class="sel vsel" data-k="${k}"><button class="sel-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="${cn}"><span></span><svg><use href="#i-caret"/></svg></button></div></div>`;
+@@@ END
+@@@ RANGE
+function openVoiceMenu(s) {
+@@@ TO
+function openFolio(focusTopic) {
+@@@ WITH
+/* 音色选择：浮动可搜索列表（200+ 音色不撑开经折），fixed 定位、自动翻转、限高滚动 */
+function openVoiceMenu(s) {
+  const vp = $('#vpick'), q = $('#vpQ'), list = $('#vpList'), btn = s.querySelector('.sel-btn');
+  const fill = () => {
+    const needle = q.value.trim().toLowerCase(), opts = OPTV.voices || [];
+    const hit = needle ? opts.filter((o) => String(o.label).toLowerCase().includes(needle) || String(o.value).toLowerCase().includes(needle)) : opts;
+    list.innerHTML = hit.slice(0, 400).map((o) => `<button role="option" data-v="${esc(o.value)}" class="${String(o.value) === String(DIR.voiceId) ? 'on' : ''}" aria-selected="${String(o.value) === String(DIR.voiceId)}" title="${esc(o.label)}"><span class="mt">${esc(o.label)}</span></button>`).join('') || '<p class="lf-note" style="padding:6px 8px">没有匹配的音色</p>';
+    $('#vpN').textContent = needle ? `匹配 ${hit.length} / ${opts.length}` : `共 ${opts.length} 个音色`;
+  };
+  q.placeholder = `搜索音色（共 ${(OPTV.voices || []).length} 个）`;
+  q.oninput = fill; q.value = ''; fill();
+  const r = btn.getBoundingClientRect(), w = Math.max(240, Math.min(360, r.width + 120)), roomBelow = innerHeight - r.bottom - 12, roomAbove = r.top - 12;
+  const h = Math.min(360, Math.max(roomBelow, roomAbove));
+  vp.style.width = w + 'px'; vp.style.maxHeight = h + 'px';
+  vp.style.left = clamp(r.left, 8, innerWidth - w - 8) + 'px';
+  if (roomBelow >= Math.min(260, roomAbove)) { vp.style.top = r.bottom + 4 + 'px'; vp.style.bottom = 'auto'; } else { vp.style.bottom = innerHeight - r.top + 4 + 'px'; vp.style.top = 'auto'; }
+  vp.classList.add('on'); vp.dataset.k = s.dataset.k;
+  setTimeout(() => { try { q.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }, 30);
+}
+function openFolio(focusTopic) {
+@@@ END
+@@@ REPLACE
+function closeMenus() { $$('.dd.open, .sel.open').forEach((e) => e.classList.remove('open')); $$('#toolsMenu, #themePop').forEach((e) => e.classList.remove('on')); $$('.dd-btn[aria-expanded]').forEach((b) => b.setAttribute('aria-expanded', 'false')); }
+@@@ WITH
+function closeMenus() { $$('.dd.open, .sel.open').forEach((e) => e.classList.remove('open')); $$('#toolsMenu, #themePop, #vpick').forEach((e) => e.classList.remove('on')); $$('.dd-btn[aria-expanded], .sel-btn[aria-expanded]').forEach((b) => b.setAttribute('aria-expanded', 'false')); }
+@@@ END
+@@@ REPLACE
+  if ($('.dd.open, .sel.open, #toolsMenu.on, #themePop.on, #skinDD.open')) { closeMenus(); return; }
+@@@ WITH
+  if ($('.dd.open, .sel.open, #toolsMenu.on, #themePop.on, #vpick.on')) { closeMenus(); return; }
+@@@ END
+@@@ REPLACE
+  document.addEventListener('click', (e) => { if (!e.target.closest('.dd, .sel, #toolsMenu, #themePop, #btnTools, #btnTheme')) closeMenus(); });
+}
+@@@ WITH
+  document.addEventListener('click', (e) => { if (!e.target.closest('.dd, .sel, #toolsMenu, #themePop, #btnTools, #btnTheme, #vpick')) closeMenus(); });
+  $('#vpick').addEventListener('click', (e) => { const b = e.target.closest('button[data-v]'); if (!b) return; e.stopPropagation(); setParam($('#vpick').dataset.k || 'voiceId', b.dataset.v); closeMenus(); });
+}
+@@@ END
+@@@ REPLACE
+    const mi = e.target.closest('.sel .menu button[data-v]'); if (mi) { const s = mi.closest('.sel'); setParam(s.dataset.k, mi.dataset.v); s.classList.remove('open'); e.stopPropagation(); }
+@@@ WITH
+@@@ END
+@@@ REPLACE
+  setTxt('mmMode', CAM.focus ? AG[CAM.focus].name : CAM.mode === 'close' ? '近景' : '跟随');
+  cullStage();
+}
+@@@ WITH
+  setTxt('mmMode', CAM.focus ? AG[CAM.focus].name : CAM.mode === 'close' ? '近景' : '跟随');
+  if (AGENTS.some((a) => a.dirty8)) renderAgents8();
+  const ss = [SCENES.length ? SCENES.length + ' 幕' : '', PROJECT.bpm ? PROJECT.bpm + ' BPM' : '', DROPS.length ? DROPS.length + ' 处高潮突降' : '', SFX_ALL.length ? SFX_ALL.length + ' 音效' : '', hasP ? fmtT(DUR) : ''].filter(Boolean).join(' · ');
+  setTxt('tlStat', ss); setTitle('tlStat', ss);
+  cullStage();
+}
+/* 任务中心「八工」：八位 Agent 的真实状态（含 queued / skipped / stopped），一行一位，文字超长省略 + title */
+function renderAgents8() {
+  const box = $('#ag8'); if (!box) return;
+  if (!box.children.length) box.innerHTML = AGENTS.map((a) => `<li data-ag="${a.id}" style="--ag:${a.glaze}"><i class="ag-dot"></i><b>${a.name}</b><span class="ag-t"></span><em class="ag-p"></em></li>`).join('');
+  AGENTS.forEach((a) => {
+    if (!a.dirty8) return; a.dirty8 = false;
+    const li = box.querySelector(`[data-ag="${a.id}"]`); if (!li) return;
+    li.dataset.st = a.status;
+    const t = li.querySelector('.ag-t'), p = li.querySelector('.ag-p'), pr = Math.round(clamp(a.prog, 0, 1) * 100);
+    const txt = a.status === 'run' || a.status === 'pause' ? a.task : ST_CN[a.status] + (a.task && a.task !== ST_CN[a.status] && !/^(待命|等待调度|本次未参与)$/.test(a.task) ? ' · ' + a.task : '');
+    t.textContent = txt; li.title = `${a.name} · ${ST_CN[a.status]}${a.task ? '\n' + a.task : ''}`;
+    p.textContent = a.status === 'run' || a.status === 'pause' || a.status === 'err' ? pr + '%' : a.status === 'done' ? '✓' : '';
+  });
+}
+@@@ END
+@@@ REPLACE
+function agent(id, st, task, prog) { const a = AG[id]; if (!a) return; if (st) { if (st === 'run' && a.status !== 'run') a.flash = 1; a.status = st; } if (task != null) a.task = task; if (prog != null) a.prog = prog; a.dirty = true; }
+@@@ WITH
+function agent(id, st, task, prog) { const a = AG[id]; if (!a) return; if (st) { if (st === 'run' && a.status !== 'run') a.flash = 1; a.status = st; } if (task != null) a.task = task; if (prog != null) a.prog = prog; a.dirty = true; a.dirty8 = true; }
+@@@ END
+@@@ REPLACE
+  const sw = $('#stageWin'); sw.style.left = L.stage.x + 'px'; sw.style.top = L.topH + L.stage.y + 'px'; sw.style.width = L.stage.w + 'px'; sw.style.height = L.stage.h + 'px';
+  const dof = $('#dof'); dof.style.left = L.stage.x + 'px'; dof.style.top = L.topH + L.stage.y + 'px'; dof.style.width = L.stage.w + 'px'; dof.style.height = L.stage.h + 'px';
+  PLANE.style.left = -L.stage.x + 'px'; PLANE.style.top = -L.stage.y + 'px'; PLANE.style.width = L.pw + 'px'; PLANE.style.height = L.ph + 'px';
+@@@ WITH
+  computeSW();
+  const sw = $('#stageWin'); sw.style.left = SW.x + 'px'; sw.style.top = L.topH + SW.y + 'px'; sw.style.width = SW.w + 'px'; sw.style.height = SW.h + 'px';
+  const dof = $('#dof'); dof.style.left = SW.x + 'px'; dof.style.top = L.topH + SW.y + 'px'; dof.style.width = SW.w + 'px'; dof.style.height = SW.h + 'px';
+  PLANE.style.left = -SW.x + 'px'; PLANE.style.top = -SW.y + 'px'; PLANE.style.width = L.pw + 'px'; PLANE.style.height = L.ph + 'px';
+  CAM.css = ''; PLANE.style.transform = `translate(${(CAM.px || 0).toFixed(2)}px,${(CAM.py || 0).toFixed(2)}px) scale(${(CAM.s || 1).toFixed(4)})`;
+@@@ END
+@@@ REPLACE
+  const mm = $('#minimap'), mmH = L.tiny ? 98 : 126; mm.style.left = L.stage.x + 8 + 'px'; mm.style.top = L.topH + L.stage.y + L.stage.h - mmH - 6 + 'px';
+  const ts = $('#toasts'); ts.style.left = L.stage.cx + 'px'; ts.style.bottom = Math.round(L.vh - (L.topH + L.tl.y) + 10) + 'px'; ts.style.maxWidth = Math.max(240, L.stage.w - 24) + 'px';
+@@@ WITH
+  const mm = $('#minimap'), mmH = L.tiny ? 98 : 126; mm.style.left = SW.x + 8 + 'px'; mm.style.top = L.topH + SW.y + SW.h - mmH - 8 + 'px';
+  const ts = $('#toasts'); ts.style.right = Math.round(L.vw - SW.x - SW.w + 10) + 'px'; ts.style.left = 'auto'; ts.style.bottom = Math.round(L.vh - (L.topH + L.tl.y) + 10) + 'px'; ts.style.maxWidth = Math.max(240, Math.min(440, SW.w * 0.46)) + 'px';
+  const pz = $('#pauseInk'); pz.style.left = SW.x + SW.w / 2 + 'px'; pz.style.top = L.topH + L.mon.y + 14 + 'px';
+@@@ END

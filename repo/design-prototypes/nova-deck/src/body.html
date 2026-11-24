@@ -1,0 +1,189 @@
+<canvas id="cv-bg" aria-hidden="true"></canvas>
+
+<div id="deck">
+ <div id="layout">
+  <!-- ============ 01 CARGO BAY ============ -->
+  <aside id="cargo" class="panel" aria-label="素材仓">
+   <div class="ph"><b class="idx">01</b><span class="en">Cargo Bay</span><span class="cn">素材仓 · 货运机库</span><span class="meta" id="cg-meta">0 件在舱</span></div>
+   <div class="cg-actions">
+    <button class="btn" id="btn-import" aria-label="导入素材" title="导入图片 / 视频 / 音乐 / 配音 / 笔记"><i data-ico="upload"></i><span class="bl">导入素材</span></button>
+    <button class="btn" id="btn-cloudgen" aria-label="云端生成" title="打开云端媒体中心（宿主）"><i data-ico="cloud"></i><span class="bl">云端生成</span></button>
+    <input type="file" id="file-in" multiple hidden accept="image/*,video/*,audio/*,.txt,.md">
+   </div>
+   <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="拖拽或点击导入素材"><i data-ico="drop" data-s="22"></i><div class="dz-t"><b>拖拽文件到机库</b><span>图片 · 视频 · BGM · 配音样本 · 笔记</span></div></div>
+   <div class="cg-filter" id="cg-filter" role="toolbar" aria-label="素材筛选"></div>
+   <div class="caps" id="caps" role="group" aria-label="在舱素材"></div>
+   <section class="staging" id="staging" aria-label="云端生成 · 待确认">
+    <button class="stg-h" id="stg-h" aria-expanded="true" aria-controls="stg-list" title="云端生成 · 待确认入库"><i class="led warn"></i><span class="en">Cloud Staging</span><span class="cn">云端待确认</span><span class="n" id="stg-n">0 件</span><i class="chev" aria-hidden="true"></i></button>
+    <div class="stg-list" id="stg-list" role="list"></div>
+   </section>
+  </aside>
+
+  <!-- ============ 02 STAGE / BRIDGE VIEWPORT ============ -->
+  <section id="stage" aria-label="舰桥舷窗">
+   <canvas id="cv-world" aria-hidden="true"></canvas>
+   <div id="camclip">
+    <div id="cam">
+     <div id="monitor">
+      <video id="mon-video" playsinline preload="metadata"></video>
+      <canvas id="cv-mon" aria-hidden="true"></canvas>
+      <div class="mon-top" id="mon-top"><span class="tag" id="mon-tag">PVW</span><span class="mm" id="mon-mode">STANDBY · 待命</span><span class="sp"></span><span class="tc" id="mon-tc">00:00:00:00</span><span class="tag gh" id="mon-res">1080p30</span></div>
+      <div class="mon-state" id="mon-state" role="status"></div>
+      <div class="ready" id="ready" role="status"></div>
+      <div class="mon-bot" id="mon-bot">
+       <button class="mb" id="mon-play" aria-label="播放 / 暂停预览" title="播放 / 暂停预览（空格）"><i data-ico="play" data-s="14"></i></button>
+       <div class="mon-bar" id="mon-bar" role="slider" tabindex="0" aria-label="预览进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="tr"></div><div class="fl"></div><div class="kn"></div></div>
+       <span class="mon-time" id="mon-time">00:00 / 00:00</span>
+       <button class="mb txt" id="mon-grid" aria-label="分镜速览" title="分镜速览"><i data-ico="grid" data-s="12"></i><span>分镜</span></button>
+       <button class="mb" id="mon-exp" aria-label="全屏观看成片" title="全屏观看成片（F）"><i data-ico="expand" data-s="14"></i></button>
+      </div>
+      <i class="mon-c tl"></i><i class="mon-c tr"></i><i class="mon-c bl"></i><i class="mon-c br"></i>
+     </div>
+     <div id="docklabels"></div>
+    </div>
+   </div>
+   <div id="dof"></div>
+   <div id="vign"></div>
+   <div class="st-strip" id="st-strip">
+    <div class="st-title"><span class="st-en">NOVA <b>DECK</b></span><span class="st-cn">星舰剪辑甲板</span></div>
+    <div class="st-proj" id="st-proj"><b id="st-proj-t">未打开工程</b><span id="st-proj-m">Bridge Viewport</span></div>
+    <div class="st-cam" id="st-cam"></div>
+    <button class="summary" id="summary" aria-label="打开飞控面板" title="打开飞控面板（P）"><span class="sum-text" id="sum-text"></span><span class="cta"><i data-ico="sliders" data-s="13"></i><span>飞控</span></span></button>
+   </div>
+   <div class="onboard" id="onboard" role="dialog" aria-label="开始使用"></div>
+   <div class="st-corner st-phase" id="st-phase">
+    <div class="ph-n"><span class="ph-big" id="ph-big">00</span><span class="ph-of" id="ph-of">/ 05 · STANDBY</span></div>
+    <div class="ph-name"><span class="ph-nm" id="ph-name">舰桥待命</span><span class="mu ph-en" id="ph-en">Awaiting Orders</span></div>
+    <div class="ph-task" id="ph-task">8 架无人机已停靠 · 等待「一键出片」指令</div>
+   </div>
+   <div class="st-corner st-tele" id="st-tele">
+    <div class="row net" id="tele-net"></div>
+    <div class="row r2"><span class="mu">Handoffs</span><canvas class="spark" id="cv-spark" width="240" height="40"></canvas><b id="tele-ho">0 次交接</b></div>
+    <div class="row cam" id="tele-cam"></div>
+   </div>
+  </section>
+
+  <!-- ============ 03 MISSION CONTROL ============ -->
+  <aside id="mission" class="panel" aria-label="任务中心">
+   <div class="ph"><b class="idx">03</b><span class="en">Mission Control</span><span class="cn">任务中心</span><span class="meta"><span class="stc" id="run-chip">待命</span></span></div>
+   <div class="mc-hero">
+    <div class="mc-pct"><span id="pct">0</span><i>%</i></div>
+    <div class="mc-meta">
+     <div class="mc-phase" id="mc-phase">待命 · 等待出片指令</div>
+     <div class="mc-times"><span>已用 <b id="t-el">00:00</b></span><span class="t-eta">剩余 <b id="t-eta">--:--</b></span></div>
+     <div class="mc-stats" id="mc-stats">镜头 0 · 节拍 0 · 音效 0</div>
+    </div>
+   </div>
+   <div class="segbar" id="segbar"></div>
+   <div class="mc-brief" id="mc-brief" role="group" aria-label="创意需求 · 导演指令">
+    <div class="bf-h">
+     <i data-ico="prompt" data-s="13"></i><span class="bf-t">创意需求</span><span class="mu bf-en">Brief</span>
+     <span class="bf-n" id="brief-n"></span>
+     <button class="btn sm ico" id="btn-polish" aria-label="AI 一键润色创意需求" title="AI 一键润色（把一句话扩写成专业导演指令）"><i data-ico="wand" data-s="13"></i></button>
+     <button class="btn sm bf-x" id="brief-x" aria-label="展开编辑创意需求" title="展开编辑 · 大号编辑器（模板 / AI 润色 / 一键出片）"><i data-ico="expand" data-s="12"></i><span class="bl">展开编辑</span></button>
+    </div>
+    <button class="brief-prev" id="brief" aria-label="创意需求，点击放大编辑"><span class="bf-txt" id="brief-txt"></span></button>
+   </div>
+   <div class="mc-tr">
+    <button class="btn pri run idle" id="btn-run" aria-label="一键出片" title="一键出片（R）"><i data-ico="rocket" data-s="15"></i><span class="rt" id="run-txt">一键出片</span><span class="mu">Run</span></button>
+    <button class="btn ico" id="btn-pause" aria-label="暂停" title="暂停 / 继续"><i data-ico="pause" data-s="15"></i></button>
+    <button class="btn ico" id="btn-stop" aria-label="停止" title="停止任务"><i data-ico="stop" data-s="14"></i></button>
+    <button class="btn ico" id="btn-retry" aria-label="重试" title="重试失败 / 已停止的任务"><i data-ico="retry" data-s="15"></i></button>
+   </div>
+   <div class="mc-opt"><span class="ol">镜头自动跟随</span><button class="tog on" id="tog-follow" role="switch" aria-checked="true" aria-label="镜头自动跟随"><i></i></button><span class="sp"></span><span class="kbd"><kbd>R</kbd> 出片 <kbd>␣</kbd> 预览</span></div>
+   <div class="rail" id="rail"><div class="rf" id="rail-f"></div></div>
+   <div class="mc-tabs" id="mc-tabs" role="tablist">
+    <button role="tab" data-tab="roster" class="on" aria-selected="true"><span class="cn">无人机编队</span><em id="ro-n2">8</em></button>
+    <button role="tab" data-tab="log" aria-selected="false"><span class="cn">实时日志</span><em id="log-n2">0</em></button>
+   </div>
+   <div class="mc-split" id="mc-split">
+    <div class="mc-sec sec-roster">
+     <div class="sub-h"><span class="en">Agent Roster</span><span class="cn">无人机编队</span><span class="n" id="ro-n">8 架停靠</span></div>
+     <div class="roster" id="roster" role="group" aria-label="无人机编队"></div>
+    </div>
+    <div class="mc-sec sec-log">
+     <div class="sub-h"><span class="en">Live Log</span><span class="cn">实时日志</span><span class="n" id="log-n">舰桥频道</span></div>
+     <div class="log" id="log" role="log" aria-live="off"></div>
+    </div>
+   </div>
+  </aside>
+
+  <!-- ============ 04 RUNWAY / TIMELINE ============ -->
+  <section id="runway" class="panel" aria-label="降落跑道 · 多轨时间轴">
+   <div class="ph">
+    <b class="idx">04</b><span class="en">Runway</span><span class="cn">降落跑道 · 多轨时间轴</span>
+    <span class="tl-tc" id="tl-tc">00:00.00 <span>/ 00:00.00</span></span>
+    <span class="tl-bpm" id="tl-bpm"><i class="met" id="met"></i><span id="tl-bpm-t">— BPM</span><span class="bx" id="tl-bpm-x"></span></span>
+    <div class="tl-legend" id="tl-legend"></div>
+    <div class="tl-zoom"><button class="btn sm ico" id="tz-out" aria-label="时间轴缩小" title="缩小（[）"><i data-ico="minus" data-s="12"></i></button><div class="tsl" id="tz" role="slider" aria-label="时间轴缩放"></div><button class="btn sm ico" id="tz-in" aria-label="时间轴放大" title="放大（]）"><i data-ico="plus" data-s="12"></i></button><button class="btn sm" id="tz-fit" aria-label="适配全片" title="适配全片（0）">适配</button></div>
+   </div>
+   <div class="tl-body">
+    <div class="tl-heads" id="tl-heads"></div>
+    <div class="tl-wrap" id="tl-wrap"><canvas id="cv-tl" aria-label="多轨时间轴"></canvas></div>
+   </div>
+  </section>
+ </div>
+</div>
+
+<canvas id="cv-fx" aria-hidden="true"></canvas>
+<div id="flash"></div>
+
+<!-- ============ STAGE HUD (screen-space, laid over the stage rect) ============ -->
+<div id="hud">
+ <i class="ch-c tl"></i><i class="ch-c tr"></i><i class="ch-c bl"></i><i class="ch-c br"></i>
+ <div class="ch-mini" id="ch-mini" role="button" tabindex="0" aria-label="战术地图 · 点击回到全景" title="战术地图 · 点击回到全景"><canvas id="cv-mini" width="400" height="226"></canvas><div class="mu"><span>战术地图</span><span id="mini-z">×1.00</span></div></div>
+ <div class="agentcard" id="agentcard" role="dialog" aria-label="Agent 详情"></div>
+</div>
+
+<!-- ============ TOP BAR ============ -->
+<header id="topbar">
+ <div class="tb-brand" title="DSH Video Workbench">
+  <svg class="tb-logo" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 2l5 9 9 5-9 5-5 9-5-9-9-5 9-5z" stroke="var(--acc)" stroke-width="1.4"/><path d="M16 9l2.4 4.6L23 16l-4.6 2.4L16 23l-2.4-4.6L9 16l4.6-2.4z" fill="var(--acc)" opacity=".9"/><circle cx="16" cy="16" r="1.6" fill="#fff"/></svg>
+  <div class="tb-bt"><b>DSH</b><span>VIDEO WORKBENCH</span></div>
+ </div>
+ <button class="btn ico tb-back" id="tb-back" hidden aria-label="返回 DSH 对话" title="返回 DSH 对话"><i data-ico="back" data-s="15"></i></button>
+ <button class="proj" id="proj-btn" aria-label="切换工程" title="切换工程"><i class="pd"></i><span class="pn" id="proj-name">未打开工程</span><span class="caret">▼</span></button>
+ <nav class="modes" id="modes" aria-label="视图切换">
+  <button class="on" data-mode="deck" aria-current="page" title="作战大屏 · 关闭所有面板回到舰桥">作战大屏</button>
+  <button data-mode="studio" title="分步精修 · 素材 → 导演参数 → 分镜精修 → 交付">分步精修</button>
+  <button data-mode="tasks" title="任务中心 · 出片队列与历史任务">任务中心</button>
+  <button data-mode="plaza" title="影核广场 · 模板样片">影核广场<em id="plaza-n"></em></button>
+ </nav>
+ <div class="tb-busy" id="tb-busy" role="status" aria-live="polite" hidden><i class="spin" aria-hidden="true"></i><span class="bt" id="tb-busy-t"></span></div>
+ <div class="tb-sp"></div>
+ <div class="sls" id="sls">
+  <button class="sl" data-sl="llm" aria-label="大模型状态"><i class="led" id="led-llm"></i><span class="k">LLM</span><span class="v" id="sl-llm">—</span></button>
+  <button class="sl" data-sl="tts" aria-label="配音引擎状态"><i class="led" id="led-tts"></i><span class="k">TTS</span><span class="v" id="sl-tts">—</span></button>
+  <button class="sl" data-sl="gpu" aria-label="算力状态"><i class="led" id="led-gpu"></i><span class="k">GPU</span><span class="v" id="sl-gpu">—</span></button>
+  <button class="sl" data-sl="lipsync" aria-label="口型引擎状态"><i class="led" id="led-lip"></i><span class="k">口型</span><span class="v" id="sl-lip">—</span></button>
+ </div>
+ <button class="sl-all" id="sl-all" aria-label="引擎状态" title="引擎状态"><i class="led" id="led-a1"></i><i class="led" id="led-a2"></i><i class="led" id="led-a3"></i><i class="led" id="led-a4"></i></button>
+ <div class="seg cam-seg" id="cam-seg" role="group" aria-label="镜头模式（1 / 2 / 3）">
+  <button class="on" data-cam="overview" aria-label="全景" title="全景（1）"><i data-ico="overview" data-s="14"></i><span class="cl">全景</span></button>
+  <button data-cam="follow" aria-label="跟随" title="跟随（2）"><i data-ico="follow" data-s="14"></i><span class="cl">跟随</span></button>
+  <button data-cam="close" aria-label="近景" title="近景（3）"><i data-ico="close" data-s="14"></i><span class="cl">近景</span></button>
+ </div>
+ <button class="skinbtn" id="skin-btn" aria-label="切换作战大屏皮肤" title="切换皮肤"><b>A</b><span class="sn">星舰甲板</span><span class="caret">▼</span></button>
+ <div class="tb-ic">
+  <button class="btn ico tb-theme" id="btn-theme" aria-label="舰桥涂装 · 主题切换" title="舰桥涂装 · 主题切换（T）"><i data-ico="palette" data-s="15"></i></button>
+  <button class="btn ico" id="btn-tools" aria-label="设置与工具" title="设置与工具：算力体检 · 配音中心 · 云端媒体 · 数字人 · 密钥…"><i data-ico="gear" data-s="15"></i></button>
+  <button class="btn ico" id="btn-help" aria-label="使用帮助与快捷键" title="使用帮助 · 快捷键（?）"><i data-ico="help" data-s="15"></i></button>
+ </div>
+</header>
+
+<div id="scrim"></div>
+<aside id="drawer" aria-hidden="true" aria-label="飞控面板">
+ <div class="dr-h">
+  <svg class="dr-gauge" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" stroke="var(--hair2)" stroke-width="1" fill="none"/><circle cx="22" cy="22" r="19" stroke="var(--acc)" stroke-width="2" fill="none" stroke-dasharray="30 90" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 22 22" to="360 22 22" dur="6s" repeatCount="indefinite"/></circle><path d="M22 10v8M22 26v8M10 22h8M26 22h8" stroke="var(--acc)" stroke-width="1.2" opacity=".7"/><circle cx="22" cy="22" r="3" fill="var(--acc)"/></svg>
+  <div class="dr-ht"><div class="mu">Flight Control<span class="mu-cn">出片参数</span></div><div class="dr-t">飞控面板</div></div>
+  <button class="btn ico" id="dr-close" aria-label="关闭飞控面板" title="关闭（Esc）"><i data-ico="x" data-s="14"></i></button>
+ </div>
+ <div class="dr-sum"><span class="mu">Summary</span><span class="dr-sv" id="dr-sum"></span></div>
+ <div class="dr-b" id="dr-b"></div>
+ <div class="dr-f"><button class="btn ghost" id="dr-studio"><i data-ico="steps" data-s="13"></i>分步精修</button><span class="sp"></span><span class="dr-hint">参数实时同步至宿主</span><button class="btn pri" id="dr-apply"><i data-ico="check" data-s="14"></i>完成</button></div>
+</aside>
+<div id="modal-root"></div>
+<div id="pop-root"></div>
+<div id="toasts" aria-live="polite"></div>
+<div id="tl-tip" role="tooltip"></div>
+<div id="dragcover"><div>释放以装入货运机库</div></div>

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "dsh-video-workbench": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["REPO_ROOT/bin/dsh-video-mcp.mjs"],
+      "cwd": ".",
+      "startup_timeout_sec": 120,
+      "tool_timeout_sec": 3600
+    }
+  }
+}

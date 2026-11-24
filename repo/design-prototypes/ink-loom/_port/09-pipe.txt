@@ -1,0 +1,269 @@
+@@@ RANGE
+/* ══════════════ 17. 一键出片流水线（脚本化 · 可暂停 / 停止 / 重试 / 循环） ══════════════ */
+@@@ TO
+/* ══════════════ 18. 监视器模式 ══════════════ */
+@@@ WITH
+/* ══════════════ 17. 织造编排：画面只跟随宿主 run / agents 状态（BRIDGE §3 编舞表），从不伪造进度 ══════════════ */
+const PULSES = [];
+function pulse(a, b, col) { const e = edgeOf(a, b); if (!e) return; PULSES.push({ e, rev: e.a !== a, t0: SIM.t, dur: 1.05, col: col || P.gold2, hit: 0 }); e.heat = 1; }
+const MOT = { batch: 0, err: false, errText: '', chars: 0, lit: 0 };
+const QA = { frames: 0 };
+const FILM = { t: 0, playing: false, user: false, userAt: 0 };
+const PREVIEW = { url: '', poster: '', hasMp4: false, dur: 0 };
+const FLIGHTS = [];
+const FLY = { queue: [], run: '', planned: false, speed: 1, k: 0, n: 0, fetched: '', listened: {} };
+const LV = {};
+AGENTS.forEach((a) => (LV[a.id] = 0));
+const LATER = [];
+const later = (sec, fn) => LATER.push({ at: SIM.real + sec, fn });
+const Pipe = {
+  status: 'none', runId: '', active: null, pv: 0, focusT: null, boardN: 0, doneAt: -99, msg: '', error: '', elapsed: 0, elapsedAt: 0,
+  live() { return this.status === 'queued' || this.status === 'running' || this.status === 'paused'; },
+  running() { return this.status === 'running'; },
+  prog() { if (this.status === 'completed') return 1; if (this.status === 'none') return PREVIEW.hasMp4 ? 1 : 0; return clamp(this.pv / 100, 0, 1); },
+  phaseState(j) {
+    const a = AG[PHASES[j].key];
+    if (this.status === 'none') return PREVIEW.hasMp4 ? 'done' : 'idle';
+    return a.status === 'run' ? 'run' : a.status === 'done' ? 'done' : a.status === 'err' ? 'err' : a.status === 'pause' ? 'pause' : 'idle';
+  },
+  beatIdx() {
+    if (FILM.playing || this.status === 'completed') { if (!BEATS.length) return -1; const t = filmT(); if (t < BEATS[0][0]) return -1; let lo = 0, hi = BEATS.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (BEATS[m][0] <= t) lo = m; else hi = m - 1; } return lo; }
+    if (this.running()) return Math.floor(SIM.t * 1.5);
+    return -1;
+  },
+  update(dt) {
+    for (let i = LATER.length - 1; i >= 0; i--) if (SIM.real >= LATER[i].at) { const f = LATER[i].fn; LATER.splice(i, 1); try { f(); } catch (e) { /* 单个特效失败不影响主循环 */ } }
+    AGENTS.forEach((a) => { const tg = levelOf(a), v = LV[a.id]; LV[a.id] = tg < v - 1e-4 ? tg : v + (tg - v) * (1 - Math.exp(-dt * 3.2)); });
+    syncReveal();
+    flyTick(dt);
+    const h = workHead();
+    this.focusT = h == null ? null : clamp(h, 0, DUR);
+  },
+};
+function levelOf(a) { const st = a.status; if (st === 'done') return 1; if (st === 'run' || st === 'pause' || st === 'err' || st === 'stop') return clamp(a.prog, 0, 1); return 0; }
+function agent(id, st, task, prog) { const a = AG[id]; if (!a) return; if (st) { if (st === 'run' && a.status !== 'run') a.flash = 1; a.status = st; } if (task != null) a.task = task; if (prog != null) a.prog = prog; a.dirty = true; }
+/* 长卷织入进度：live / 失败 / 停止 时由各 Agent 进度推出；无运行或已完成时整卷展开 */
+function syncReveal() {
+  const N = SCENES.length, st = Pipe.status;
+  if (st === 'none' || st === 'completed') { fullReveal(st === 'completed'); return; }
+  const D = LV.director, Ed = LV.editor, Au = LV.audio, Mo = LV.motion, Qa = LV.qa, term = st === 'failed' || st === 'stopped';
+  TLS.voiceRealOnly = term;
+  TLS.beatRev = BEATS.length ? Math.max(term ? 1 : 0, clamp(D / 0.45, 0, 1)) : 0;
+  for (let i = 0; i < DROPS.length; i++) if (TLS.dropMark[i] < -1 && DROPS[i] <= TLS.beatRev * DUR + 1e-6) { TLS.dropMark[i] = term ? -1 : SIM.t; if (!term) burst(tX(DROPS[i]), L.rows.ruler.y + 4, 9, { col: P.cinna, sp: 70, life: 0.8, sz: 2.4 }); }
+  const boardN = term ? N : Math.floor(clamp((D - 0.3) / 0.7, 0, 1) * N + 1e-6);
+  Pipe.boardN = boardN;
+  const nb = MOT_NB(), lit = Math.floor(Mo * N + 1e-6), rend = Math.floor(Qa * N + 1e-6);
+  for (let i = 0; i < N; i++) {
+    const q = CLIP[i];
+    if (i < boardN && q.st < 1) { q.st = 1; q.fx = SIM.t; }
+    if (q.st < 2 && SCENE_ASSET[i] && (Ed >= 1 || (term && Ed > 0)) && !flightPendingFor(i)) { q.st = 2; q.fx = term ? -9 : SIM.t; }
+    if (i < lit && q.st < 3) { q.st = 3; q.fx = SIM.t + (i % 4) * 0.06; }
+    if (i < rend && q.st < 4) { q.st = 4; q.fx = SIM.t; }
+  }
+  MOT.lit = lit;
+  MOT.batch = clamp(Math.floor(Mo * nb), 0, nb - 1);
+  if (Mo >= 1) MOT.chars = 1e9; else { const f = clamp(Mo * nb - MOT.batch, 0, 1), lines = codeLines(MOT.batch, nb), tot = lines.reduce((s, l) => s + l.length + 1, 0); MOT.chars = Math.floor(f * tot * 1.08); }
+  MOT.err = AG.motion.status === 'err'; MOT.errText = MOT.err ? Pipe.error || AG.motion.task : '';
+  QA.frames = Math.round(Qa * totalFrames());
+  TLS.bgmPlaced = MUSIC.length > 0 && (Au > 0 || Ed >= 1 || TLS.bgmLanded === Pipe.runId);
+  TLS.bgmRev = clamp(Au / 0.8, 0, 1);
+  TLS.voiceRev = clamp((Au - 0.15) / 0.75, 0, 1);
+  TLS.beatLock = clamp((Au - 0.1) / 0.8, 0, 1);
+  const lim = clamp((Au - 0.25) / 0.7, 0, 1) * DUR;
+  if (Au > 0.25) for (let i = 0; i < SFX_ALL.length; i++) { if (TLS.sfxDrop[i] >= -1) continue; if (SFX_ALL[i].t > lim) break; TLS.sfxDrop[i] = term ? -1 : SIM.t; if (!term && i % 9 === 0) burst(tX(SFX_ALL[i].t), L.rows.sfx.c, 4, { sp: 40, life: 0.5, sz: 2, col: sfxK(SFX_ALL[i].type).c }); }
+}
+function fullReveal(done) {
+  const N = SCENES.length;
+  TLS.beatRev = 1; TLS.beatLock = 1; TLS.bgmPlaced = MUSIC.length > 0; TLS.bgmRev = 1; TLS.voiceRev = 1; TLS.voiceRealOnly = true;
+  for (let i = 0; i < DROPS.length; i++) if (TLS.dropMark[i] < -1) TLS.dropMark[i] = -1;
+  for (let i = 0; i < SFX_ALL.length; i++) if (TLS.sfxDrop[i] < -1) TLS.sfxDrop[i] = -1;
+  const target = (i) => (done || PREVIEW.hasMp4 || (SCENES[i] && SCENES[i].thumb) ? 4 : 3);
+  for (let i = 0; i < N; i++) { const q = CLIP[i], tg = target(i); if (q.st !== tg && !(done && q.st > tg)) { q.st = tg; if (q.fx < SIM.t - 2) q.fx = -9; } }
+  Pipe.boardN = N; MOT.lit = N; MOT.chars = 1e9; MOT.err = false;
+  QA.frames = done || PREVIEW.hasMp4 ? totalFrames() : 0;
+}
+function resetReveal() {
+  CLIP.forEach((q) => { q.st = 0; q.fx = -9; q.landed = false; });
+  Object.assign(TLS, { beatRev: 0, beatLock: 0, voiceRev: 0, bgmRev: 0, bgmPlaced: false, bgmLanded: '', pulse: 0, voiceRealOnly: false });
+  TLS.sfxDrop.fill(-2); TLS.dropMark = DROPS.map(() => -2);
+  TLSTITCH.length = 0;
+  Object.assign(MOT, { batch: 0, err: false, errText: '', chars: 0, lit: 0 });
+  QA.frames = 0; Pipe.boardN = 0;
+  AGENTS.forEach((a) => (LV[a.id] = levelOf(a)));
+}
+/* 时间轴上的"织造针"：跟随当前 Agent 的工作位置 */
+function workHead() {
+  if (!Pipe.live()) return null;
+  const id = Pipe.active;
+  if (id === 'director' || id === 'reference') { if (TLS.beatRev < 1 && BEATS.length) return TLS.beatRev * DUR; const n = Pipe.boardN; return n > 0 && SCENES[n - 1] ? SCENES[n - 1].t1 : 0; }
+  if (id === 'editor') { const f = curFlight(); if (f && f.target) { if (f.target.track === 'bgm') return f.te > f.T.dive1 ? lerp(f.target.t0, f.target.t1, clamp((f.te - f.T.dive1) / f.sw, 0, 1)) : f.target.t0; return (f.target.t0 + f.target.t1) / 2; } return LV.editor * DUR; }
+  if (id === 'audio') return Math.max(TLS.bgmRev, TLS.voiceRev) * DUR;
+  if (id === 'motion') return MOT.lit > 0 && SCENES[MOT.lit - 1] ? SCENES[MOT.lit - 1].t1 : 0;
+  if (id === 'qa') return QA.frames / (PROJECT.fps || 30);
+  return Pipe.focusT;
+}
+/* 素材剪辑 running：库房里被分镜引用的素材，被梭子逐一钩起，沿书法弧线织进 V1（首个引用它的镜头） */
+function planFlights() {
+  FLY.queue = []; FLY.k = 0;
+  const seen = new Set();
+  ASSETS.forEach((a) => {
+    if (a.staged || !/^(image|video|host_video)$/.test(a.kind) || !a.used.length || seen.has(a.key)) return;
+    let best = -1; a.used.forEach((sid) => { const i = SCENE_IX[sid]; if (i != null && (best < 0 || i < best)) best = i; });
+    if (best >= 0) { seen.add(a.key); FLY.queue.push({ asset: a.key, track: 'shot', sc: best }); }
+  });
+  FLY.queue.sort((x, y) => x.sc - y.sc);
+  if (FLY.queue.length > 8) { const q = FLY.queue, out = []; for (let j = 0; j < 8; j++) out.push(q[Math.floor((j * q.length) / 8)]); FLY.queue = out; }
+  const mus = ASSETS.find((a) => !a.staged && a.kind === 'music');
+  if (mus && MUSIC.length) FLY.queue.push({ asset: mus.key, track: 'bgm' });
+  FLY.n = FLY.queue.length;
+}
+const flightPendingFor = (i) => FLY.queue.some((q) => q.sc === i) || FLIGHTS.some((f) => f.kind === 'weave' && f.target && f.target.sc === i && !f.ev.land);
+function flyTick(dt) {
+  if (!Pipe.live()) { if (FLIGHTS.length || FLY.queue.length) cancelFlights(); return; }
+  if (FLY.run !== Pipe.runId) { FLY.run = Pipe.runId; FLY.planned = false; FLY.queue = []; FLY.fetched = ''; FLY.listened = {}; }
+  const ed = AG.editor;
+  FLY.speed = ed.status === 'run' || ed.status === 'pause' ? 1 : 2.4;
+  if (ed.status === 'run' && !FLY.planned) { FLY.planned = true; planFlights(); }
+  const s = SH.editor;
+  if (FLY.queue.length && (ed.status === 'run' || ed.status === 'done') && dt > 0) {
+    const cur = s.fl;
+    if (!cur || cur.kind === 'return' || (cur.kind === 'weave' && cur.te >= cur.T.end - 0.05)) startFlight('editor', FLY.queue.shift(), FLY.k++, FLY.n);
+  }
+  const au = AG.audio;
+  if (au.status === 'run' && FLY.fetched !== Pipe.runId && dt > 0) {
+    FLY.fetched = Pipe.runId;
+    const v = ASSETS.find((a) => !a.staged && a.kind === 'voice') || ASSETS.find((a) => !a.staged && a.kind === 'music');
+    if (v && !SH.audio.fl) startFetch('audio', v.key);
+  }
+  if (AG.director.status === 'run' && !FLY.listened.director) { FLY.listened.director = 1; const n = ASSETS.find((a) => !a.staged && (a.kind === 'note' || a.kind === 'other')) || ASSETS.find((a) => !a.staged && a.kind === 'music'); if (n) listen('director', n.key); }
+  if (AG.reference.status === 'run' && !FLY.listened.reference) { FLY.listened.reference = 1; const v = ASSETS.find((a) => !a.staged && a.kind === 'video'); if (v) listen('reference', v.key); }
+  AGENTS.forEach((a) => { const sh = SH[a.id]; if (sh.hook && sh.hook.listen && (SIM.t - sh.hook.t0 > 4.5 || a.status !== 'run')) sh.hook = null; });
+}
+function cancelFlights() {
+  FLY.queue.forEach((q) => { if (q.sc != null && CLIP[q.sc] && CLIP[q.sc].st < 2) CLIP[q.sc].st = 2; });
+  FLY.queue = [];
+  FLIGHTS.forEach((f) => { if (f.kind === 'weave' && f.target && f.target.sc != null && CLIP[f.target.sc] && CLIP[f.target.sc].st < 2) CLIP[f.target.sc].st = 2; });
+  FLIGHTS.length = 0;
+  AGENTS.forEach((a) => { const s = SH[a.id]; if (s.fl) { const p = toStage(s.dx, s.dy); s.x = p.x; s.y = p.y; s.vx = s.vy = 0; } s.fl = null; s.tok = null; s.hook = null; s.trail.length = 0; });
+}
+function finale() {
+  STAMP.t0 = SIM.t + 0.12;
+  later(0.42, () => { CAM.shake = Math.max(CAM.shake, 0.55); const m = L.mon; burstS(m.cx, m.cy, 46, { col: P.cinna, sp: 260, life: 1.3, sz: 3.6, g: 220 }); burstS(m.cx, m.cy, 30, { sp: 200, life: 1.5, sz: 3 }); });
+  FIN.t0 = SIM.t;
+  TLV.unroll = SIM.t + 0.5;
+  CLIP.forEach((q, i) => { if (q.st < 4) q.st = 4; q.fx = SIM.t + 0.5 + i * 0.012; });
+}
+const FIN = { t0: -1 };
+function flashItem(A) { if (A && A.el) { A.el.classList.remove('hooked'); void A.el.offsetWidth; A.el.classList.add('hooked'); } }
+function listen(id, key) { SH[id].hook = { listen: true, key, t0: SIM.t }; const A = AS[key]; if (A && A.el) { ensureVisible(A.el); flashItem(A); } }
+function ensureVisible(el) {
+  if (!el || SIM.real - VAULT.touched < 4) return;
+  if (el.closest('.shelf.hide')) { VAULT.filter = 'all'; applyVaultFilter(); }
+  const list = $('#vList'), r = el.getBoundingClientRect(), lr = list.getBoundingClientRect();
+  if (r.top < lr.top + 4 || r.bottom > lr.bottom - 4) { const off = el.offsetTop - list.offsetTop - list.clientHeight / 2 + el.offsetHeight / 2; list.scrollTo({ top: Math.max(0, off), behavior: LOWSPEC ? 'auto' : 'smooth' }); }
+}
+
+/* ── 飞行：钩取 → 书法弧线携带 → 穿梭织入（全部在甲板坐标） ── */
+function assetAnchor(key) {
+  const A = AS[key], e = A && A.el, lr = elDeckRect($('#vList'));
+  if (!e || !e.isConnected || !e.offsetParent) return { x: L.vault.x + L.vault.w / 2, y: clamp(lr.y + 60, lr.y, lr.y + Math.max(0, lr.h)) };
+  const r = elDeckRect(e.querySelector('canvas, img') || e);
+  return { x: r.cx, y: clamp(r.cy, lr.y + 6, lr.y + Math.max(6, lr.h - 6)) };
+}
+const hoverPt = (S) => ({ x: L.vault.x + L.vault.w + (L.tiny ? 28 : 44), y: clamp(S.y - 24, 50, L.tl.y - 70) });
+function targetPts(fl) {
+  const R = L.rows[fl.target.track], r = L.tlc;
+  const x0 = clamp(tX(fl.target.t0), r.x + 2, r.x + r.w - 8), x1 = clamp(tX(fl.target.t1), x0 + 6, r.x + r.w - 2);
+  return { x0, x1, y: R.c, cx: (x0 + x1) / 2, top: { x: (x0 + x1) / 2, y: L.tl.y - (L.tiny ? 34 : 48) } };
+}
+function callig(H, T, u) {
+  const dx = T.x - H.x, adx = Math.abs(dx), sg = dx >= 0 ? 1 : -1;
+  const p1 = { x: H.x + adx * 0.26 + 80, y: Math.max(40, H.y - 150) }, p2 = { x: T.x - sg * (adx * 0.12 + 60), y: Math.max(60, T.y - 230) };
+  const p = cp(H, p1, p2, T, u), q = cp(H, p1, p2, T, Math.min(1, u + 0.01));
+  const tx = q.x - p.x, ty = q.y - p.y, l = Math.hypot(tx, ty) || 1, off = Math.sin(u * Math.PI) * Math.sin(u * TAU) * 24;
+  return { x: p.x - (ty / l) * off, y: p.y + (tx / l) * off };
+}
+function takeOff(s, fl) { const P0 = shDeck(s); fl.A = { x: P0.x, y: P0.y }; fl.s0 = P0.sc; if (s.fl) { const i = FLIGHTS.indexOf(s.fl); if (i >= 0) FLIGHTS.splice(i, 1); } s.fl = fl; s.dx = P0.x; s.dy = P0.y; s.sc = P0.sc; FLIGHTS.push(fl); }
+function startFlight(id, spec, k, n) {
+  const s = SH[id], A = AS[spec.asset]; if (!A) return;
+  const sc = spec.sc != null ? SCENES[spec.sc] : null, mu = MUSIC[0];
+  const target = spec.track === 'shot' && sc ? { track: 'shot', t0: sc.t0, t1: sc.t1, sc: spec.sc } : { track: 'bgm', t0: mu ? mu.t0 : 0, t1: mu ? mu.t1 : DUR, sc: null };
+  const fl = { kind: 'weave', agent: id, key: spec.asset, te: 0, target, k, n, ev: {} };
+  const tg = targetPts(fl);
+  fl.sw = clamp((tg.x1 - tg.x0) / 2300, 0.2, 0.8);
+  fl.T = { app: 0.62, castA: 0.18, castB: 0.7, hook: 0.72, carry0: 1.0, carry1: 2.42, dive1: 2.6 };
+  fl.T.sweep1 = fl.T.dive1 + fl.sw; fl.T.land = fl.T.dive1 + fl.sw * 0.55; fl.T.end = fl.T.sweep1 + 0.36;
+  takeOff(s, fl);
+  if (A.el) ensureVisible(A.el);
+}
+function startFetch(id, key) {
+  const fl = { kind: 'fetch', agent: id, key, te: 0, ev: {}, T: { app: 0.62, castA: 0.18, castB: 0.7, hook: 0.72, carry0: 1.0, carry1: 2.2, end: 2.45 } };
+  takeOff(SH[id], fl);
+  const A = AS[key]; if (A && A.el) ensureVisible(A.el);
+}
+function startReturn(id, dur) { takeOff(SH[id], { kind: 'return', agent: id, te: 0, dur, T: { end: dur }, ev: {} }); }
+function flightPose(fl) {
+  const te = fl.te, T = fl.T;
+  if (fl.kind === 'return') { const H = homeDeck(fl.agent), u = E.io(clamp(te / fl.dur, 0, 1)); const p = cp(fl.A, { x: lerp(fl.A.x, H.x, 0.25), y: fl.A.y - 150 }, { x: H.x, y: H.y - 160 }, H, u); return { x: p.x, y: p.y, sc: lerp(fl.s0, CAM.s, u) }; }
+  const S = assetAnchor(fl.key), H = hoverPt(S), sc = lerp(fl.s0, 1, E.out(clamp(te / 0.6, 0, 1)));
+  if (te < T.app) { const u = E.io(te / T.app); const p = cp(fl.A, { x: fl.A.x, y: fl.A.y - 60 }, { x: H.x + 70, y: H.y - 40 }, H, u); return { x: p.x, y: p.y, sc }; }
+  if (te < T.carry0) return { x: H.x + Math.sin(te * 9) * 1.5, y: H.y - E.out(clamp((te - T.hook) / 0.3, 0, 1)) * 14, sc };
+  if (fl.kind === 'fetch') {
+    const home = homeDeck(fl.agent), from = { x: H.x, y: H.y - 14 };
+    if (te < T.carry1) { const u = E.io((te - T.carry0) / (T.carry1 - T.carry0)); const p = cp(from, { x: from.x + 160, y: from.y - 120 }, { x: home.x - 60, y: home.y + 140 }, home, u); return { x: p.x, y: p.y, sc: lerp(1, CAM.s, u) }; }
+    return { x: home.x, y: home.y, sc: CAM.s };
+  }
+  const tg = targetPts(fl), H2 = { x: H.x, y: H.y - 14 };
+  if (te < T.carry1) { const p = callig(H2, tg.top, E.io((te - T.carry0) / (T.carry1 - T.carry0))); return { x: p.x, y: p.y, sc: 1 }; }
+  const st = { x: tg.x0 - 16, y: tg.y };
+  if (te < T.dive1) { const u = E.out((te - T.carry1) / (T.dive1 - T.carry1)); const p = qp(tg.top.x, tg.top.y, st.x, tg.top.y + 10, st.x, st.y, u); return { x: p.x, y: p.y, sc: 1 }; }
+  if (te < T.sweep1) { const u = E.sine((te - T.dive1) / fl.sw); return { x: lerp(st.x, tg.x1 + 16, u), y: tg.y + Math.sin(u * Math.PI * 3) * 1.5, sc: 1 }; }
+  const u = E.out(clamp((te - T.sweep1) / (T.end - T.sweep1), 0, 1));
+  return { x: lerp(tg.x1 + 16, tg.x1 + 46, u), y: lerp(tg.y, tg.y - 74, u), sc: 1 };
+}
+function flightsUpdate(dt) {
+  for (let i = FLIGHTS.length - 1; i >= 0; i--) {
+    const fl = FLIGHTS[i], s = SH[fl.agent], T = fl.T, ev = fl.ev;
+    fl.te += dt * (fl.kind === 'return' ? 1 : FLY.speed);
+    const te = fl.te;
+    if (fl.kind !== 'return') {
+      const A = AS[fl.key];
+      if (!A) { FLIGHTS.splice(i, 1); if (s.fl === fl) { s.fl = null; s.hook = null; s.tok = null; startReturn(fl.agent, 0.8); } continue; }
+      if (te >= T.castA && !ev.cast) { ev.cast = 1; const S = assetAnchor(fl.key); s.hook = { x: S.x, y: S.y, u: 0, key: fl.key }; }
+      if (s.hook && !s.hook.listen && te < T.hook) { const S = assetAnchor(fl.key); s.hook.x = S.x; s.hook.y = S.y; s.hook.u = E.out(clamp((te - T.castA) / (T.castB - T.castA), 0, 1)); }
+      if (te >= T.hook && !ev.hook) {
+        ev.hook = 1; const S = assetAnchor(fl.key);
+        flashItem(A);
+        burst(S.x, S.y, 14, { sp: 90, life: 0.9, sz: 2.6 });
+        s.tok = { key: fl.key, x: S.x, y: S.y, vx: 0, vy: -40, mode: 'hang' }; if (s.hook) s.hook.u = 1;
+      }
+      if (fl.kind === 'fetch' && te >= T.carry1 && !ev.absorb) { ev.absorb = 1; const P0 = shDeck(s); if (s.tok) { s.tok.mode = 'merge'; s.tok.m0 = SIM.t; s.tok.mx = s.tok.x; s.tok.my = s.tok.y; s.tok.tx = P0.x; s.tok.ty = P0.y; } burst(P0.x, P0.y, 16, { col: AG[fl.agent].glaze, sp: 80, life: 0.8 }); s.hook = null; AG[fl.agent].flash = 1; }
+      if (fl.kind === 'weave') {
+        const tg = targetPts(fl);
+        if (te >= T.dive1 + fl.sw * 0.2 && !ev.merge) { ev.merge = 1; if (s.tok) { s.tok.mode = 'merge'; s.tok.m0 = SIM.t; s.tok.mx = s.tok.x; s.tok.my = s.tok.y; s.tok.tx = tg.cx; s.tok.ty = tg.y; } }
+        if (te >= T.dive1 && !ev.stitch) { ev.stitch = 1; TLSTITCH.push({ ta: fl.target.t0, tb: fl.target.t1, row: fl.target.track, t0: SIM.t }); }
+        if (te >= T.land && !ev.land) {
+          ev.land = 1; s.hook = null;
+          if (fl.target.track === 'shot') { const q = CLIP[fl.target.sc]; if (q) { q.st = Math.max(q.st, 2); q.fx = SIM.t; q.landed = true; } }
+          else TLS.bgmLanded = Pipe.runId;
+          A.woven = Pipe.runId; syncUsedBadges();
+          bloom(tg.cx, tg.y, fl.target.track === 'bgm' ? 70 : 46);
+          burst(tg.cx, tg.y, 22, { sp: 140, life: 1.1, sz: 3 });
+          CAM.shake = Math.max(CAM.shake, 0.16);
+        }
+      }
+    }
+    if (te >= T.end) {
+      FLIGHTS.splice(i, 1);
+      if (s.fl === fl) {
+        s.fl = null; s.hook = null;
+        if (fl.kind === 'weave') startReturn(fl.agent, 0.95);
+        else { const p = toStage(s.dx, s.dy); s.x = p.x; s.y = p.y; s.vx = s.vy = 0; s.trail.length = 0; }
+      }
+    }
+  }
+}
+function curFlight() { for (const f of FLIGHTS) if (f.kind === 'weave') return f; return null; }
+
+/* ══════════════ 18. 监视器模式 ══════════════ */
+@@@ END

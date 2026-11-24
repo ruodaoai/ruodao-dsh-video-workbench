@@ -1,0 +1,4093 @@
+{
+  "version": "promo-plan/1",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "totalDurationSec": 60.2333,
+  "totalDurationInFrames": 1807,
+  "safeZone": {
+    "platform": "universal",
+    "platformLabel": "全平台通用安全框",
+    "orientation": "portrait",
+    "width": 1080,
+    "height": 1920,
+    "safeInsets": {
+      "top": 0.09,
+      "bottom": 0.21,
+      "left": 0.05,
+      "right": 0.16
+    },
+    "subtitleBottomPct": 0.22,
+    "subtitleBottomPx": 422,
+    "safePaddingPx": {
+      "top": 173,
+      "bottom": 403,
+      "left": 54,
+      "right": 173
+    },
+    "obstructions": [
+      {
+        "id": "uni-p-top",
+        "label": "顶部平台导航预留",
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.085,
+        "tone": "warn",
+        "px": {
+          "x": 0,
+          "y": 0,
+          "w": 1080,
+          "h": 163
+        }
+      },
+      {
+        "id": "uni-p-right",
+        "label": "右侧点赞关注控件预留",
+        "x": 0.85,
+        "y": 0.4,
+        "w": 0.15,
+        "h": 0.4,
+        "tone": "danger",
+        "px": {
+          "x": 918,
+          "y": 768,
+          "w": 162,
+          "h": 768
+        }
+      },
+      {
+        "id": "uni-p-bottom",
+        "label": "底部文案简介遮挡区",
+        "x": 0,
+        "y": 0.79,
+        "w": 1,
+        "h": 0.21,
+        "tone": "danger",
+        "px": {
+          "x": 0,
+          "y": 1517,
+          "w": 1080,
+          "h": 403
+        }
+      }
+    ]
+  },
+  "resolvedShots": [
+    {
+      "id": "scene-01",
+      "index": 1,
+      "title": "别再把时间耗在拼工具",
+      "narration": "从脚本到成片，别再来回拼凑工具了！",
+      "emotion": "激昂",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "card-fan-opener 空间动态编排 · assets/images/image-ui-01-warroom-052c.png",
+      "audioFile": "",
+      "durationSec": 2.3667,
+      "durationInFrames": 71,
+      "startFrame": 0,
+      "startSec": 0,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "【产品重磅开源宣发纲要 · DSH",
+          "startSec": 0,
+          "endSec": 3.866,
+          "startFrame": 0,
+          "endFrame": 116
+        },
+        {
+          "index": 2,
+          "text": "Video Workbench】",
+          "startSec": 3.866,
+          "endSec": 8.03,
+          "startFrame": 115,
+          "endFrame": 241
+        }
+      ],
+      "subtitleText": "【产品重磅开源宣发纲要 · DSH Video Workbench】",
+      "subChunks": [
+        "从脚本到成片",
+        "别再来回拼凑工具"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "科技前沿",
+      "layout": "card-fan-opener",
+      "transition": "cut",
+      "kenBurns": "zoom-in",
+      "vfx": "3d-depth+sweep",
+      "highlights": [
+        "面向 DeepSeek Harness",
+        "AI 双引擎全链路"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "科技前沿"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 24,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "fanMedia": [
+        {
+          "assetId": "image-ui-01-warroom-052c",
+          "path": "assets/images/image-ui-01-warroom-052c.png",
+          "originalPath": "assets/images/image-ui-01-warroom-052c.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-02-llm-modal-208a",
+          "path": "assets/images/image-ui-02-llm-modal-208a.png",
+          "originalPath": "assets/images/image-ui-02-llm-modal-208a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-03-studio-assets-7b34",
+          "path": "assets/images/image-ui-03-studio-assets-7b34.png",
+          "originalPath": "assets/images/image-ui-03-studio-assets-7b34.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-04-studio-settings-b1ef",
+          "path": "assets/images/image-ui-04-studio-settings-b1ef.png",
+          "originalPath": "assets/images/image-ui-04-studio-settings-b1ef.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-05-studio-timeline-9f84",
+          "path": "assets/images/image-ui-05-studio-timeline-9f84.png",
+          "originalPath": "assets/images/image-ui-05-studio-timeline-9f84.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-06-voice-catalog-e920",
+          "path": "assets/images/image-ui-06-voice-catalog-e920.png",
+          "originalPath": "assets/images/image-ui-06-voice-catalog-e920.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-07-task-monitor-a10a",
+          "path": "assets/images/image-ui-07-task-monitor-a10a.png",
+          "originalPath": "assets/images/image-ui-07-task-monitor-a10a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        }
+      ],
+      "media": [],
+      "poolMedia": [
+        {
+          "assetId": "image-ui-01-warroom-052c",
+          "path": "assets/images/image-ui-01-warroom-052c.png",
+          "originalPath": "assets/images/image-ui-01-warroom-052c.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-02-llm-modal-208a",
+          "path": "assets/images/image-ui-02-llm-modal-208a.png",
+          "originalPath": "assets/images/image-ui-02-llm-modal-208a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-03-studio-assets-7b34",
+          "path": "assets/images/image-ui-03-studio-assets-7b34.png",
+          "originalPath": "assets/images/image-ui-03-studio-assets-7b34.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-04-studio-settings-b1ef",
+          "path": "assets/images/image-ui-04-studio-settings-b1ef.png",
+          "originalPath": "assets/images/image-ui-04-studio-settings-b1ef.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-05-studio-timeline-9f84",
+          "path": "assets/images/image-ui-05-studio-timeline-9f84.png",
+          "originalPath": "assets/images/image-ui-05-studio-timeline-9f84.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-06-voice-catalog-e920",
+          "path": "assets/images/image-ui-06-voice-catalog-e920.png",
+          "originalPath": "assets/images/image-ui-06-voice-catalog-e920.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-07-task-monitor-a10a",
+          "path": "assets/images/image-ui-07-task-monitor-a10a.png",
+          "originalPath": "assets/images/image-ui-07-task-monitor-a10a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.62,
+          "pan": 0
+        },
+        {
+          "type": "shimmer_swell",
+          "path": "audio/sfx/shimmer_swell.wav",
+          "offsetSec": 0.04,
+          "volume": 0.45,
+          "pan": 0
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 0.16,
+          "volume": 0.44,
+          "pan": -0.22
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 0.34,
+          "volume": 0.44,
+          "pan": 0.18
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 0.52,
+          "volume": 0.44,
+          "pan": -0.14
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.85,
+          "volume": 0.46,
+          "pan": 0.15
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 7.51,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 7.83,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "脚本到成片",
+        "开源工作台"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！竖屏中央散落脚本、配音、渲染、发布节点，首个重拍磁吸聚合成 DSH Video Workbench 铭牌；青蓝粒子贯穿全链路，底部副标明确面向 DeepSeek Harness。所有关键文字置于抖音防遮挡安全区。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！竖屏中央散落脚本、配音、渲染、发布节点，首个重拍磁吸聚合成 DSH Video Workbench 铭牌；青蓝粒子贯穿全链路，底部副标明确面向 DeepSeek Harness。所有关键文字置于抖音防遮挡安全区。",
+      "recipe": "impact",
+      "fromScale": 1.15,
+      "toScale": 1,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.6,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.12
+        }
+      ],
+      "windowTitle": "DSH Video Workbench",
+      "explicitZeroAsset": true
+    },
+    {
+      "id": "scene-02",
+      "index": 2,
+      "title": "四位智能体，全流程协同",
+      "narration": "四位智能体接力，策划混音到质检出片！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "app-focus-shot 空间动态编排 · assets/images/image-ui-02-llm-modal-208a.png",
+      "audioFile": "",
+      "durationSec": 2.8667,
+      "durationInFrames": 86,
+      "startFrame": 71,
+      "startSec": 2.367,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "开源仓库完整地址（必须在画面",
+          "startSec": 0,
+          "endSec": 9.089,
+          "startFrame": 0,
+          "endFrame": 273
+        },
+        {
+          "index": 2,
+          "text": "开源卡片与片尾高能展示）：",
+          "startSec": 9.089,
+          "endSec": 16.78,
+          "startFrame": 272,
+          "endFrame": 504
+        }
+      ],
+      "subtitleText": "开源仓库完整地址（必须在画面 开源卡片与片尾高能展示）：",
+      "subChunks": [
+        "四位智能体接力",
+        "策划混音到质检出片"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 2 幕",
+      "layout": "app-focus-shot",
+      "transition": "slash-wipe",
+      "kenBurns": "hold",
+      "vfx": "sparks+shockwave",
+      "highlights": [
+        "4-Agent 自动协同",
+        "实时声轨",
+        "1080P 一键出片"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 2 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 48,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTitle": "AI 作战大屏",
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.75,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "media": [
+        {
+          "path": "assets/images/image-ui-01-warroom-052c.png",
+          "width": 2880,
+          "height": 1840,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.14,
+          "volume": 0.45,
+          "pan": -0.16
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.48,
+          "pan": 0.14
+        },
+        {
+          "type": "lock",
+          "path": "audio/sfx/lock.wav",
+          "offsetSec": 1.5,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 16.26,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 16.58,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "四位智能体",
+        "接力出片"
+      ],
+      "visualBlueprint": "AppWindow 完整展示作战大屏截图，等比适配、四边始终可见，不裁切真实界面。截图外围依次亮起策划导演→素材剪辑→配音混音→动效质检导出标签；独立放大框聚焦实时声轨，不遮住主窗口，末拍弹出1080P一键出片。",
+      "motionNotes": "AppWindow 完整展示作战大屏截图，等比适配、四边始终可见，不裁切真实界面。截图外围依次亮起策划导演→素材剪辑→配音混音→动效质检导出标签；独立放大框聚焦实时声轨，不遮住主窗口，末拍弹出1080P一键出片。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-03",
+      "index": 3,
+      "title": "二十三个工具组成制作网络",
+      "narration": "二十三个工具，把视频制作串成完整链路！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "workflow-steps 空间动态编排 · assets/images/image-ui-03-studio-assets-7b34.png",
+      "audioFile": "",
+      "durationSec": 2.3667,
+      "durationInFrames": 71,
+      "startFrame": 157,
+      "startSec": 5.233,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "克隆命令：git clone",
+          "startSec": 0,
+          "endSec": 14.91,
+          "startFrame": 0,
+          "endFrame": 448
+        }
+      ],
+      "subtitleText": "克隆命令：git clone",
+      "subChunks": [
+        "二十三个工具",
+        "串起视频制作完整链路"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 3 幕",
+      "layout": "radial-climax",
+      "transition": "block-wipe",
+      "kenBurns": "zoom-out",
+      "vfx": "halftone+glitch",
+      "highlights": [
+        "23 个 Cordis 工具插件",
+        "视频制作模式 Preset"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 3 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 72,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "steps": [
+        {
+          "title": "第 3 幕",
+          "desc": "聚合图文视听",
+          "img": "assets/images/image-ui-03-studio-assets-7b34.png"
+        },
+        {
+          "title": "声画同步",
+          "desc": "自动节奏分镜",
+          "img": "assets/images/image-ui-03-studio-assets-7b34.png"
+        },
+        {
+          "title": "节奏转场",
+          "desc": "高清成片交付",
+          "img": "assets/images/image-ui-03-studio-assets-7b34.png"
+        }
+      ],
+      "media": [],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.24,
+          "volume": 0.44,
+          "pan": -0.2
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 1.02,
+          "volume": 0.44,
+          "pan": 0.2
+        },
+        {
+          "type": "shine",
+          "path": "audio/sfx/shine.wav",
+          "offsetSec": 1.8,
+          "volume": 0.4,
+          "pan": 0
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 14.39,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 14.71,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "23 个 Cordis 工具",
+        "Preset"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！DeepSeek Harness 核心节点向外点亮23个可计数工具节点，按策划、素材、声音、渲染、质检分组连线；视频制作模式 Preset 卡片插入核心，数据光束沿全链路奔流，避免伪造软件界面。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！DeepSeek Harness 核心节点向外点亮23个可计数工具节点，按策划、素材、声音、渲染、质检分组连线；视频制作模式 Preset 卡片插入核心，数据光束沿全链路奔流，避免伪造软件界面。",
+      "recipe": "pull_out",
+      "fromScale": 1.24,
+      "toScale": 1,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.14
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "Cordis 工具拓扑",
+      "explicitZeroAsset": true
+    },
+    {
+      "id": "scene-04",
+      "index": 4,
+      "title": "四大协议，一次接入",
+      "narration": "四大模型协议接入，客户端配置一键同步！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "split-wipe-compare 空间动态编排 · assets/images/image-ui-04-studio-settings-b1ef.png",
+      "audioFile": "",
+      "durationSec": 2.8667,
+      "durationInFrames": 86,
+      "startFrame": 228,
+      "startSec": 7.6,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "开源协议：",
+          "startSec": 0,
+          "endSec": 1.102,
+          "startFrame": 0,
+          "endFrame": 34
+        },
+        {
+          "index": 2,
+          "text": "MIT License（个人与商业全免费",
+          "startSec": 1.102,
+          "endSec": 6.061,
+          "startFrame": 33,
+          "endFrame": 182
+        },
+        {
+          "index": 3,
+          "text": "零硬编码路径",
+          "startSec": 6.061,
+          "endSec": 7.714,
+          "startFrame": 181,
+          "endFrame": 232
+        },
+        {
+          "index": 4,
+          "text": "零私有密钥",
+          "startSec": 7.714,
+          "endSec": 9.091,
+          "startFrame": 231,
+          "endFrame": 273
+        },
+        {
+          "index": 5,
+          "text": ".env 隔离本地路径）",
+          "startSec": 9.091,
+          "endSec": 11.57,
+          "startFrame": 272,
+          "endFrame": 348
+        }
+      ],
+      "subtitleText": "开源协议： MIT License（个人与商业全免费 零硬编码路径 零私有密钥 .env 隔离本地路径）",
+      "subChunks": [
+        "四大模型协议接入",
+        "客户端配置一键同步"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 4 幕",
+      "layout": "app-focus-shot",
+      "transition": "glitch-cut",
+      "kenBurns": "hold",
+      "vfx": "grid+scan",
+      "highlights": [
+        "OpenAI Chat / Responses",
+        "Anthropic Messages",
+        "Gemini Native"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "零硬编码路径"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "零私有密钥"
+      },
+      "counterTarget": 96,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "media": [
+        {
+          "path": "assets/images/image-ui-02-llm-modal-208a.png",
+          "width": 2880,
+          "height": 1840,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 0.24,
+          "volume": 0.48,
+          "pan": -0.15
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 1.55,
+          "volume": 0.45,
+          "pan": 0.18
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 11.05,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 11.37,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "四大协议",
+        "一键同步"
+      ],
+      "visualBlueprint": "AppWindow 等比完整展示模型接入中心截图，主窗口始终完整。外围四张小型协议卡逐拍点亮 OpenAI Chat、OpenAI Responses、Anthropic Messages、Gemini Native；独立局部放大框提示同步 DSH 客户端配置，禁止以重绘界面替代截图。",
+      "motionNotes": "AppWindow 等比完整展示模型接入中心截图，主窗口始终完整。外围四张小型协议卡逐拍点亮 OpenAI Chat、OpenAI Responses、Anthropic Messages、Gemini Native；独立局部放大框提示同步 DSH 客户端配置，禁止以重绘界面替代截图。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.7,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "AI 大模型接入中心",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-05",
+      "index": 5,
+      "title": "生成之后，还要编译修错",
+      "narration": "代码先过严格编译，最多三轮自动修错！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "metric-dashboard 空间动态编排 · assets/images/image-ui-05-studio-timeline-9f84.png",
+      "audioFile": "",
+      "durationSec": 2.3667,
+      "durationInFrames": 71,
+      "startFrame": 314,
+      "startSec": 10.467,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "【实机截图素材说明（按界面一一对应",
+          "startSec": 0,
+          "endSec": 3.954,
+          "startFrame": 0,
+          "endFrame": 119
+        },
+        {
+          "index": 2,
+          "text": "请精选核心画面并在纯代码动效转场",
+          "startSec": 3.954,
+          "endSec": 8.172,
+          "startFrame": 118,
+          "endFrame": 246
+        },
+        {
+          "index": 3,
+          "text": "间穿插展示）】",
+          "startSec": 8.172,
+          "endSec": 9.49,
+          "startFrame": 245,
+          "endFrame": 285
+        }
+      ],
+      "subtitleText": "【实机截图素材说明（按界面一一对应 请精选核心画面并在纯代码动效转场 间穿插展示）】",
+      "subChunks": [
+        "先过严格编译",
+        "最多三轮自动修错"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 5 幕",
+      "layout": "workflow-steps",
+      "transition": "cut",
+      "kenBurns": "zoom-in",
+      "vfx": "radial-speedlines",
+      "highlights": [
+        "tsc --noEmit",
+        "编译与沙箱检查",
+        "最多 3 轮自动修复"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 5 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 120,
+      "counterLabel": "科技前沿",
+      "metrics": [
+        {
+          "value": "90+",
+          "label": "第 5 幕"
+        },
+        {
+          "value": "1080P",
+          "label": "声画同步"
+        },
+        {
+          "value": "60FPS",
+          "label": "节奏转场"
+        }
+      ],
+      "media": [],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "tick_burst",
+          "path": "audio/sfx/tick_burst.wav",
+          "offsetSec": 0.2,
+          "volume": 0.44,
+          "pan": -0.1
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.48,
+          "volume": 0.4,
+          "pan": 0,
+          "d": 0.65
+        },
+        {
+          "type": "ding",
+          "path": "audio/sfx/ding.wav",
+          "offsetSec": 1.75,
+          "volume": 0.42,
+          "pan": 0.14
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 8.97,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 9.29,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "tsc --noEmit",
+        "最多三轮"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！真实命令文字 tsc --noEmit 占据中央，示意诊断流依次经过编译、沙箱、修复回路，最多三枚轮次指示灯顺序亮起；标注编译修复机制示意，不捏造实际成功日志或通过率。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！真实命令文字 tsc --noEmit 占据中央，示意诊断流依次经过编译、沙箱、修复回路，最多三枚轮次指示灯顺序亮起；标注编译修复机制示意，不捏造实际成功日志或通过率。",
+      "recipe": "push_in",
+      "fromScale": 1,
+      "toScale": 1.22,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.48,
+          "z": 1.1
+        }
+      ],
+      "windowTitle": "编译与沙箱自动修复",
+      "explicitZeroAsset": true
+    },
+    {
+      "id": "scene-06",
+      "index": 6,
+      "title": "素材、提词、自拍一次就位",
+      "narration": "素材批量入库，提词自拍也在同一工作台！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "multi-window-trio 空间动态编排 · assets/images/image-ui-06-voice-catalog-e920.png",
+      "audioFile": "",
+      "durationSec": 2.8667,
+      "durationInFrames": 86,
+      "startFrame": 385,
+      "startSec": 12.833,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "1. assets/ui_01_warroom.png",
+          "startSec": 0,
+          "endSec": 7.033,
+          "startFrame": 0,
+          "endFrame": 211
+        },
+        {
+          "index": 2,
+          "text": "—— 「AI 作战大屏」：",
+          "startSec": 7.033,
+          "endSec": 8.868,
+          "startFrame": 210,
+          "endFrame": 267
+        },
+        {
+          "index": 3,
+          "text": "4-Agent 全自动协同出片（策划导",
+          "startSec": 8.868,
+          "endSec": 13.761,
+          "startFrame": 266,
+          "endFrame": 413
+        },
+        {
+          "index": 4,
+          "text": "演 -> 素材剪辑 -> 配音混音 ->",
+          "startSec": 13.761,
+          "endSec": 16.513,
+          "startFrame": 412,
+          "endFrame": 496
+        },
+        {
+          "index": 5,
+          "text": "动效质检导出）",
+          "startSec": 16.513,
+          "endSec": 18.348,
+          "startFrame": 495,
+          "endFrame": 551
+        },
+        {
+          "index": 6,
+          "text": "实时声轨波纹条",
+          "startSec": 18.348,
+          "endSec": 20.489,
+          "startFrame": 550,
+          "endFrame": 615
+        },
+        {
+          "index": 7,
+          "text": "1080P 一键出片",
+          "startSec": 20.489,
+          "endSec": 23.24,
+          "startFrame": 614,
+          "endFrame": 698
+        }
+      ],
+      "subtitleText": "1. assets/ui_01_warroom.png —— 「AI 作战大屏」： 4-Agent 全自动协同出片（策划导 演 -> 素材剪辑 -> 配音混音 -> 动效质检导出） 实时声轨波纹条 1080P 一键出片",
+      "subChunks": [
+        "素材批量入库",
+        "提词自拍同台完成"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 6 幕",
+      "layout": "workflow-steps",
+      "transition": "light-wipe",
+      "kenBurns": "hold",
+      "vfx": "3d-depth+sweep",
+      "highlights": [
+        "本地批量扫描 / 百兆直传",
+        "可调速防镜像提词录播",
+        "隔离式 .motion 导入"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "实时声轨波纹条"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "P 一键出片"
+      },
+      "counterTarget": 144,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "media": [
+        {
+          "path": "assets/images/image-ui-03-studio-assets-7b34.png",
+          "width": 2880,
+          "height": 1840,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.2,
+          "volume": 0.42,
+          "pan": -0.24
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.48,
+          "volume": 0.42,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.76,
+          "volume": 0.42,
+          "pan": 0.24
+        },
+        {
+          "type": "shimmer_swell",
+          "path": "audio/sfx/shimmer_swell.wav",
+          "offsetSec": 1.6,
+          "volume": 0.36,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 22.72,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 23.04,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "批量入库",
+        "提词自拍"
+      ],
+      "visualBlueprint": "完整展示素材库截图，AppWindow 全程保持截图全部边界；外围步骤带依次标注本地目录扫描、百兆视频直传、提词自拍、隔离式 .motion 模板导入。以两个独立放大框轮流指向素材区与录播区，补充可调速、防镜像标签，不覆盖主界面。",
+      "motionNotes": "完整展示素材库截图，AppWindow 全程保持截图全部边界；外围步骤带依次标注本地目录扫描、百兆视频直传、提词自拍、隔离式 .motion 模板导入。以两个独立放大框轮流指向素材区与录播区，补充可调速、防镜像标签，不覆盖主界面。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "统一素材库与提词自拍棚",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-07",
+      "index": 7,
+      "title": "双引擎，不是双份录像",
+      "narration": "双引擎真正逐帧渲染，动画不靠录屏！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "mosaic-pulse-wall 空间动态编排 · assets/images/image-ui-07-task-monitor-a10a.png",
+      "audioFile": "",
+      "durationSec": 2.3667,
+      "durationInFrames": 71,
+      "startFrame": 471,
+      "startSec": 15.7,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "2. assets/",
+          "startSec": 0,
+          "endSec": 1.901,
+          "startFrame": 0,
+          "endFrame": 58
+        },
+        {
+          "index": 2,
+          "text": "ui_02_llm_modal.png —— 「",
+          "startSec": 1.901,
+          "endSec": 6.789,
+          "startFrame": 57,
+          "endFrame": 204
+        },
+        {
+          "index": 3,
+          "text": "AI 大模型接入中心」：",
+          "startSec": 6.789,
+          "endSec": 9.233,
+          "startFrame": 203,
+          "endFrame": 277
+        },
+        {
+          "index": 4,
+          "text": "支持一键同步 DSH 客户端配置",
+          "startSec": 9.233,
+          "endSec": 13.035,
+          "startFrame": 276,
+          "endFrame": 392
+        },
+        {
+          "index": 5,
+          "text": "原生兼容 OpenAI Chat /",
+          "startSec": 13.035,
+          "endSec": 16.837,
+          "startFrame": 391,
+          "endFrame": 506
+        },
+        {
+          "index": 6,
+          "text": "OpenAI Responses /",
+          "startSec": 16.837,
+          "endSec": 20.911,
+          "startFrame": 505,
+          "endFrame": 628
+        },
+        {
+          "index": 7,
+          "text": "Anthropic Messages / Gemini",
+          "startSec": 20.911,
+          "endSec": 27.157,
+          "startFrame": 627,
+          "endFrame": 815
+        },
+        {
+          "index": 8,
+          "text": "Native 4 大接口协议",
+          "startSec": 27.157,
+          "endSec": 30.416,
+          "startFrame": 814,
+          "endFrame": 913
+        },
+        {
+          "index": 9,
+          "text": "支持最多 3 轮编译与沙箱自动修复",
+          "startSec": 30.416,
+          "endSec": 34.49,
+          "startFrame": 912,
+          "endFrame": 1035
+        }
+      ],
+      "subtitleText": "2. assets/ ui_02_llm_modal.png —— 「 AI 大模型接入中心」： 支持一键同步 DSH 客户端配置 原生兼容 OpenAI Chat / OpenAI Responses / Anthropic Messages / Gemini Native 4 大接口协议 支持最多 3 轮编译与沙箱自动修复",
+      "subChunks": [
+        "双引擎真正逐帧渲染",
+        "动画不靠录屏"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 7 幕",
+      "layout": "compare-dual",
+      "transition": "slash-wipe",
+      "kenBurns": "zoom-in",
+      "vfx": "sparks+shockwave",
+      "highlights": [
+        "Remotion 4.x / React TSX",
+        "HTML5 / GSAP / Canvas",
+        "非录屏逐帧输出"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 7 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 168,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "media": [],
+      "poolMedia": [
+        {
+          "assetId": "image-ui-01-warroom-052c",
+          "path": "assets/images/image-ui-01-warroom-052c.png",
+          "originalPath": "assets/images/image-ui-01-warroom-052c.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-02-llm-modal-208a",
+          "path": "assets/images/image-ui-02-llm-modal-208a.png",
+          "originalPath": "assets/images/image-ui-02-llm-modal-208a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-03-studio-assets-7b34",
+          "path": "assets/images/image-ui-03-studio-assets-7b34.png",
+          "originalPath": "assets/images/image-ui-03-studio-assets-7b34.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-04-studio-settings-b1ef",
+          "path": "assets/images/image-ui-04-studio-settings-b1ef.png",
+          "originalPath": "assets/images/image-ui-04-studio-settings-b1ef.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-05-studio-timeline-9f84",
+          "path": "assets/images/image-ui-05-studio-timeline-9f84.png",
+          "originalPath": "assets/images/image-ui-05-studio-timeline-9f84.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-06-voice-catalog-e920",
+          "path": "assets/images/image-ui-06-voice-catalog-e920.png",
+          "originalPath": "assets/images/image-ui-06-voice-catalog-e920.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-07-task-monitor-a10a",
+          "path": "assets/images/image-ui-07-task-monitor-a10a.png",
+          "originalPath": "assets/images/image-ui-07-task-monitor-a10a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "sub_drop",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.3,
+          "volume": 0.48,
+          "pan": 0.2
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.62,
+          "volume": 0.38,
+          "pan": 0,
+          "d": 0.7
+        },
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 1,
+          "volume": 0.42,
+          "pan": -0.22
+        },
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 1.28,
+          "volume": 0.42,
+          "pan": 0.22
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 33.97,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 34.29,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "双引擎",
+        "逐帧渲染"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！左右双引擎剖面对照：Remotion 4.x React TSX 与 HTML5 / GSAP / Canvas；中央帧号栅格同步前进，同一矢量图形在两侧按帧更新，底部汇入统一视频输出，不展示未经提供的性能对比。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！左右双引擎剖面对照：Remotion 4.x React TSX 与 HTML5 / GSAP / Canvas；中央帧号栅格同步前进，同一矢量图形在两侧按帧更新，底部汇入统一视频输出，不展示未经提供的性能对比。",
+      "recipe": "impact",
+      "fromScale": 1.15,
+      "toScale": 1,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.65,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.08
+        }
+      ],
+      "windowTitle": "双引擎逐帧渲染",
+      "explicitZeroAsset": true
+    },
+    {
+      "id": "scene-08",
+      "index": 8,
+      "title": "逐镜手写，不是套壳模板",
+      "narration": "模型分批逐镜写代码，让动效跟着内容走！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "app-focus-shot 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 2.8667,
+      "durationInFrames": 86,
+      "startFrame": 542,
+      "startSec": 18.067,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "3. assets/",
+          "startSec": 0,
+          "endSec": 1.824,
+          "startFrame": 0,
+          "endFrame": 55
+        },
+        {
+          "index": 2,
+          "text": "ui_03_studio_assets.png ——",
+          "startSec": 1.824,
+          "endSec": 7.557,
+          "startFrame": 54,
+          "endFrame": 227
+        },
+        {
+          "index": 3,
+          "text": "「统一素材库与提词自拍棚」：",
+          "startSec": 7.557,
+          "endSec": 10.423,
+          "startFrame": 226,
+          "endFrame": 313
+        },
+        {
+          "index": 4,
+          "text": "本地目录批量扫描",
+          "startSec": 10.423,
+          "endSec": 12.508,
+          "startFrame": 312,
+          "endFrame": 376
+        },
+        {
+          "index": 5,
+          "text": "百兆视频直传不卡顿",
+          "startSec": 12.508,
+          "endSec": 14.853,
+          "startFrame": 375,
+          "endFrame": 446
+        },
+        {
+          "index": 6,
+          "text": "可调速防镜像内置提词器摄像头录播",
+          "startSec": 14.853,
+          "endSec": 19.022,
+          "startFrame": 445,
+          "endFrame": 571
+        },
+        {
+          "index": 7,
+          "text": "隔离式 .motion 模板导入",
+          "startSec": 19.022,
+          "endSec": 22.41,
+          "startFrame": 570,
+          "endFrame": 673
+        }
+      ],
+      "subtitleText": "3. assets/ ui_03_studio_assets.png —— 「统一素材库与提词自拍棚」： 本地目录批量扫描 百兆视频直传不卡顿 可调速防镜像内置提词器摄像头录播 隔离式 .motion 模板导入",
+      "subChunks": [
+        "模型分批逐镜写代码",
+        "让动效跟着内容走"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 8 幕",
+      "layout": "workflow-steps",
+      "transition": "glitch-cut",
+      "kenBurns": "pan-right",
+      "vfx": "halftone+glitch",
+      "highlights": [
+        "按批次调用大模型",
+        "逐镜手写 Remotion TSX",
+        "SVG / UI 动画"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "百兆视频直传不卡顿"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 8 幕"
+      },
+      "counterTarget": 192,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTitle": "Remotion 分批生成链路",
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.44,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.56,
+          "fy": 0.5,
+          "z": 1.06
+        }
+      ],
+      "media": [],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.14,
+          "volume": 0.45,
+          "pan": -0.16
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.48,
+          "pan": 0.14
+        },
+        {
+          "type": "lock",
+          "path": "audio/sfx/lock.wav",
+          "offsetSec": 1.5,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 21.89,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 22.21,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "分批生成",
+        "逐镜手写"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！批次队列逐张派发 scene TSX 卡片，React TSX 代码行转化成 SVG 曲线、UI 卡片与粒子动画；三段小预览依次亮起，明确标注大模型按批次逐镜手写 SVG/UI 动画，代码仅为机制示意。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！批次队列逐张派发 scene TSX 卡片，React TSX 代码行转化成 SVG 曲线、UI 卡片与粒子动画；三段小预览依次亮起，明确标注大模型按批次逐镜手写 SVG/UI 动画，代码仅为机制示意。",
+      "recipe": "pan_across",
+      "fromScale": 1.1,
+      "toScale": 1.12,
+      "explicitZeroAsset": true
+    },
+    {
+      "id": "scene-09",
+      "index": 9,
+      "title": "浏览器引擎，同样逐帧可控",
+      "narration": "浏览器逐帧抓取，分段缓存接住渲染链路！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "workflow-steps 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 2.3667,
+      "durationInFrames": 71,
+      "startFrame": 628,
+      "startSec": 20.933,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "4. assets/",
+          "startSec": 0,
+          "endSec": 1.995,
+          "startFrame": 0,
+          "endFrame": 60
+        },
+        {
+          "index": 2,
+          "text": "ui_04_studio_settings.png",
+          "startSec": 1.995,
+          "endSec": 8.835,
+          "startFrame": 59,
+          "endFrame": 266
+        },
+        {
+          "index": 3,
+          "text": "—— 「三重配乐",
+          "startSec": 8.835,
+          "endSec": 9.975,
+          "startFrame": 265,
+          "endFrame": 300
+        },
+        {
+          "index": 4,
+          "text": "视觉基调与透明数字人」：",
+          "startSec": 9.975,
+          "endSec": 12.825,
+          "startFrame": 299,
+          "endFrame": 385
+        },
+        {
+          "index": 5,
+          "text": "6 套电影配色（科技锋芒/墨翠轻奢",
+          "startSec": 12.825,
+          "endSec": 16.815,
+          "startFrame": 384,
+          "endFrame": 505
+        },
+        {
+          "index": 6,
+          "text": "/电影大片等）",
+          "startSec": 16.815,
+          "endSec": 18.24,
+          "startFrame": 504,
+          "endFrame": 548
+        },
+        {
+          "index": 7,
+          "text": "3 种配乐引擎（AI 写代码 48kHz",
+          "startSec": 18.24,
+          "endSec": 22.8,
+          "startFrame": 547,
+          "endFrame": 684
+        },
+        {
+          "index": 8,
+          "text": "作曲 / 上传音乐真实节拍解析 /",
+          "startSec": 22.8,
+          "endSec": 26.22,
+          "startFrame": 684,
+          "endFrame": 787
+        },
+        {
+          "index": 9,
+          "text": "TTS 氛围音景）",
+          "startSec": 26.22,
+          "endSec": 28.215,
+          "startFrame": 786,
+          "endFrame": 847
+        },
+        {
+          "index": 10,
+          "text": "标准配音 / 配音踩拍 / 纯音乐卡",
+          "startSec": 28.215,
+          "endSec": 31.635,
+          "startFrame": 846,
+          "endFrame": 950
+        },
+        {
+          "index": 11,
+          "text": "点 MV 三模式",
+          "startSec": 31.635,
+          "endSec": 33.345,
+          "startFrame": 949,
+          "endFrame": 1001
+        },
+        {
+          "index": 12,
+          "text": "透明通道 WebM 数字人/克隆分身",
+          "startSec": 33.345,
+          "endSec": 37.62,
+          "startFrame": 1000,
+          "endFrame": 1129
+        }
+      ],
+      "subtitleText": "4. assets/ ui_04_studio_settings.png —— 「三重配乐 视觉基调与透明数字人」： 6 套电影配色（科技锋芒/墨翠轻奢 /电影大片等） 3 种配乐引擎（AI 写代码 48kHz 作曲 / 上传音乐真实节拍解析 / TTS 氛围音景） 标准配音 / 配音踩拍 / 纯音乐卡 点 MV 三模式 透明通道 WebM 数字人/克隆分身",
+      "subChunks": [
+        "浏览器逐帧抓取",
+        "分段缓存接住渲染链路"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 9 幕",
+      "layout": "narrative-diorama",
+      "transition": "zoom-punch",
+      "kenBurns": "pan-right",
+      "vfx": "grid+scan",
+      "highlights": [
+        "Chromium CDP WebSocket",
+        "逐帧抓取",
+        "分段缓存"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 9 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 216,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "steps": [
+        {
+          "title": "第 9 幕",
+          "desc": "聚合图文视听",
+          "img": ""
+        },
+        {
+          "title": "声画同步",
+          "desc": "自动节奏分镜",
+          "img": ""
+        },
+        {
+          "title": "节奏转场",
+          "desc": "高清成片交付",
+          "img": ""
+        }
+      ],
+      "media": [],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.24,
+          "volume": 0.44,
+          "pan": -0.2
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 1.02,
+          "volume": 0.44,
+          "pan": 0.2
+        },
+        {
+          "type": "shine",
+          "path": "audio/sfx/shine.wav",
+          "offsetSec": 1.8,
+          "volume": 0.4,
+          "pan": 0
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 37.1,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 37.42,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "CDP WebSocket",
+        "分段缓存"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！Chromium 容器内 HTML5、GSAP、Canvas 图层逐帧推进，CDP WebSocket 光束逐个送出帧卡，再装入分段缓存队列并合成输出；镜头沿数据路径快速平移，标注架构示意而非实测监控。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！Chromium 容器内 HTML5、GSAP、Canvas 图层逐帧推进，CDP WebSocket 光束逐个送出帧卡，再装入分段缓存队列并合成输出；镜头沿数据路径快速平移，标注架构示意而非实测监控。",
+      "recipe": "pan_across",
+      "fromScale": 1.1,
+      "toScale": 1.12,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.42,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.58,
+          "fy": 0.5,
+          "z": 1.05
+        }
+      ],
+      "windowTitle": "HTML5 CDP 渲染链路",
+      "explicitZeroAsset": true
+    },
+    {
+      "id": "scene-10",
+      "index": 10,
+      "title": "配乐与风格，不止一个选项",
+      "narration": "三种配乐六套配色，配音卡点自由切换！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "split-wipe-compare 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 3.1,
+      "durationInFrames": 93,
+      "startFrame": 699,
+      "startSec": 23.3,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "5. assets/",
+          "startSec": 0,
+          "endSec": 1.891,
+          "startFrame": 0,
+          "endFrame": 57
+        },
+        {
+          "index": 2,
+          "text": "ui_05_studio_timeline.png",
+          "startSec": 1.891,
+          "endSec": 8.374,
+          "startFrame": 56,
+          "endFrame": 252
+        },
+        {
+          "index": 3,
+          "text": "—— 「分步监看台与“对 AI 说”",
+          "startSec": 8.374,
+          "endSec": 11.075,
+          "startFrame": 251,
+          "endFrame": 333
+        },
+        {
+          "index": 4,
+          "text": "小白一键改片」：",
+          "startSec": 11.075,
+          "endSec": 12.696,
+          "startFrame": 332,
+          "endFrame": 381
+        },
+        {
+          "index": 5,
+          "text": "V1分镜+A1混音双轨可视",
+          "startSec": 12.696,
+          "endSec": 15.937,
+          "startFrame": 380,
+          "endFrame": 479
+        },
+        {
+          "index": 6,
+          "text": "单幕逐帧改写重修 (ai_refine_scene)",
+          "startSec": 15.937,
+          "endSec": 22.149,
+          "startFrame": 478,
+          "endFrame": 665
+        },
+        {
+          "index": 7,
+          "text": "单幕重配与 AI 声学修音",
+          "startSec": 22.149,
+          "endSec": 25.12,
+          "startFrame": 664,
+          "endFrame": 754
+        }
+      ],
+      "subtitleText": "5. assets/ ui_05_studio_timeline.png —— 「分步监看台与“对 AI 说” 小白一键改片」： V1分镜+A1混音双轨可视 单幕逐帧改写重修 (ai_refine_scene) 单幕重配与 AI 声学修音",
+      "subChunks": [
+        "三种配乐六套配色",
+        "配音卡点自由切换"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 10 幕",
+      "layout": "app-focus-shot",
+      "transition": "flash-cut",
+      "kenBurns": "hold",
+      "vfx": "radial-speedlines",
+      "highlights": [
+        "3 种配乐引擎 / 6 套配色",
+        "AI 代码 48kHz 作曲",
+        "配音 / 踩拍 / 纯音乐 MV"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "单幕重配与 AI 声学修音"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 10 幕"
+      },
+      "counterTarget": 240,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "media": [
+        {
+          "assetId": "image-ui-04-studio-settings-b1ef",
+          "path": "assets/images/image-ui-04-studio-settings-b1ef.png",
+          "originalPath": "assets/images/image-ui-04-studio-settings-b1ef.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "hold",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 0.24,
+          "volume": 0.48,
+          "pan": -0.15
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 1.55,
+          "volume": 0.45,
+          "pan": 0.18
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 24.6,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 24.92,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "三种配乐",
+        "六套配色"
+      ],
+      "visualBlueprint": "完整展示设置页截图，AppWindow 等比缩放且四边始终可见。窗口外按拍切换三组说明：AI代码48kHz作曲／上传音乐真实节拍解析／TTS氛围音景；下方三模式标签为标准配音、配音踩拍、纯音乐卡点MV，六枚色签展示电影配色选择。",
+      "motionNotes": "完整展示设置页截图，AppWindow 等比缩放且四边始终可见。窗口外按拍切换三组说明：AI代码48kHz作曲／上传音乐真实节拍解析／TTS氛围音景；下方三模式标签为标准配音、配音踩拍、纯音乐卡点MV，六枚色签展示电影配色选择。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "配乐、视觉与制作模式",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-11",
+      "index": 11,
+      "title": "半拍闪切，鼓点就是剪辑线",
+      "narration": "实测鼓点定位高潮，半拍闪切精准踩点！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "metric-dashboard 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 2.3667,
+      "durationInFrames": 71,
+      "startFrame": 792,
+      "startSec": 26.4,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "6. assets/",
+          "startSec": 0,
+          "endSec": 1.922,
+          "startFrame": 0,
+          "endFrame": 58
+        },
+        {
+          "index": 2,
+          "text": "ui_06_voice_catalog.png ——",
+          "startSec": 1.922,
+          "endSec": 7.961,
+          "startFrame": 57,
+          "endFrame": 239
+        },
+        {
+          "index": 3,
+          "text": "「IndexTTS-2.5 204+ 本地音色",
+          "startSec": 7.961,
+          "endSec": 12.628,
+          "startFrame": 238,
+          "endFrame": 379
+        },
+        {
+          "index": 4,
+          "text": "库与 3 步克隆工坊」：",
+          "startSec": 12.628,
+          "endSec": 14.824,
+          "startFrame": 378,
+          "endFrame": 445
+        },
+        {
+          "index": 5,
+          "text": "常驻显存高速生成真人配音",
+          "startSec": 14.824,
+          "endSec": 18.118,
+          "startFrame": 444,
+          "endFrame": 544
+        },
+        {
+          "index": 6,
+          "text": "3 步录制/上传个人声音克隆试听",
+          "startSec": 18.118,
+          "endSec": 21.961,
+          "startFrame": 543,
+          "endFrame": 659
+        },
+        {
+          "index": 7,
+          "text": "支持 GPT-SoVITS 切换",
+          "startSec": 21.961,
+          "endSec": 25.53,
+          "startFrame": 658,
+          "endFrame": 766
+        }
+      ],
+      "subtitleText": "6. assets/ ui_06_voice_catalog.png —— 「IndexTTS-2.5 204+ 本地音色 库与 3 步克隆工坊」： 常驻显存高速生成真人配音 3 步录制/上传个人声音克隆试听 支持 GPT-SoVITS 切换",
+      "subChunks": [
+        "实测鼓点定位高潮",
+        "半拍闪切精准踩点"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 11 幕",
+      "layout": "metric-dashboard",
+      "transition": "block-wipe",
+      "kenBurns": "zoom-in",
+      "vfx": "3d-depth+sweep",
+      "highlights": [
+        "90—140 BPM 鼓点分析",
+        "0.5 拍极速闪切",
+        "7 种矢量转场叠层"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "步录制/上传个人声音克隆试听"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 11 幕"
+      },
+      "counterTarget": 264,
+      "counterLabel": "科技前沿",
+      "metrics": [
+        {
+          "value": "198+",
+          "label": "步录制/上传个人声音克隆试听"
+        },
+        {
+          "value": "1080P",
+          "label": "第 11 幕"
+        },
+        {
+          "value": "60FPS",
+          "label": "声画同步"
+        }
+      ],
+      "media": [],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "tick_burst",
+          "path": "audio/sfx/tick_burst.wav",
+          "offsetSec": 0.2,
+          "volume": 0.44,
+          "pan": -0.1
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.48,
+          "volume": 0.4,
+          "pan": 0,
+          "d": 0.65
+        },
+        {
+          "type": "ding",
+          "path": "audio/sfx/ding.wav",
+          "offsetSec": 1.75,
+          "volume": 0.42,
+          "pan": 0.14
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 25.01,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 25.33,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "90—140 BPM",
+        "0.5 拍"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！FFmpeg 节拍分析机制示意波形标出90—140 BPM适配范围与drops高潮定位；本片126 BPM网格中每0.5拍触发一次装饰切片和粒子重击，镜头总时长保持完整；七枚转场叠层卡围绕节拍轴展开，不展示虚构测量数值。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！FFmpeg 节拍分析机制示意波形标出90—140 BPM适配范围与drops高潮定位；本片126 BPM网格中每0.5拍触发一次装饰切片和粒子重击，镜头总时长保持完整；七枚转场叠层卡围绕节拍轴展开，不展示虚构测量数值。",
+      "recipe": "impact",
+      "fromScale": 1.15,
+      "toScale": 1,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.65,
+          "fx": 0.5,
+          "fy": 0.48,
+          "z": 1.12
+        }
+      ],
+      "windowTitle": "鼓点与高潮同步",
+      "explicitZeroAsset": true
+    },
+    {
+      "id": "scene-12",
+      "index": 12,
+      "title": "本地音色，直接开选",
+      "narration": "两百多种本地音色，常驻显存快速配音！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "multi-window-trio 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 2.8667,
+      "durationInFrames": 86,
+      "startFrame": 863,
+      "startSec": 28.767,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "7. assets/",
+          "startSec": 0,
+          "endSec": 1.864,
+          "startFrame": 0,
+          "endFrame": 56
+        },
+        {
+          "index": 2,
+          "text": "ui_07_task_monitor.png ——",
+          "startSec": 1.864,
+          "endSec": 7.455,
+          "startFrame": 55,
+          "endFrame": 224
+        },
+        {
+          "index": 3,
+          "text": "「4-Agent 任务监控与子进程调度",
+          "startSec": 7.455,
+          "endSec": 11.714,
+          "startFrame": 223,
+          "endFrame": 352
+        },
+        {
+          "index": 4,
+          "text": "中心」： 随时暂停 恢复",
+          "startSec": 11.714,
+          "endSec": 13.844,
+          "startFrame": 351,
+          "endFrame": 416
+        },
+        {
+          "index": 5,
+          "text": "一键强停子进程及断点单步重试",
+          "startSec": 13.844,
+          "endSec": 17.571,
+          "startFrame": 415,
+          "endFrame": 528
+        },
+        {
+          "index": 6,
+          "text": "实时追踪执行日志",
+          "startSec": 17.571,
+          "endSec": 19.7,
+          "startFrame": 527,
+          "endFrame": 591
+        }
+      ],
+      "subtitleText": "7. assets/ ui_07_task_monitor.png —— 「4-Agent 任务监控与子进程调度 中心」： 随时暂停 恢复 一键强停子进程及断点单步重试 实时追踪执行日志",
+      "subChunks": [
+        "两百多种本地音色",
+        "常驻显存快速配音"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 12 幕",
+      "layout": "app-focus-shot",
+      "transition": "iris-circle",
+      "kenBurns": "hold",
+      "vfx": "sparks+shockwave",
+      "highlights": [
+        "204+ 本地音色",
+        "常驻显存生成",
+        "支持 GPT-SoVITS 切换"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "恢复"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "一键强停子进程及断点单步重试"
+      },
+      "counterTarget": 288,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "media": [
+        {
+          "assetId": "image-ui-06-voice-catalog-e920",
+          "path": "assets/images/image-ui-06-voice-catalog-e920.png",
+          "originalPath": "assets/images/image-ui-06-voice-catalog-e920.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "hold",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.2,
+          "volume": 0.42,
+          "pan": -0.24
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.48,
+          "volume": 0.42,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.76,
+          "volume": 0.42,
+          "pan": 0.24
+        },
+        {
+          "type": "shimmer_swell",
+          "path": "audio/sfx/shimmer_swell.wav",
+          "offsetSec": 1.6,
+          "volume": 0.36,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 19.18,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 19.5,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "IndexTTS-2.5",
+        "204+ 音色"
+      ],
+      "visualBlueprint": "AppWindow 完整展示音色库截图，保持原始比例与全部边界；独立浮动放大框聚焦音色目录，外侧204+数字随重拍弹入。标注 IndexTTS-2.5、常驻显存、支持 GPT-SoVITS 切换，不虚构生成耗时或试听结果。",
+      "motionNotes": "AppWindow 完整展示音色库截图，保持原始比例与全部边界；独立浮动放大框聚焦音色目录，外侧204+数字随重拍弹入。标注 IndexTTS-2.5、常驻显存、支持 GPT-SoVITS 切换，不虚构生成耗时或试听结果。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "IndexTTS-2.5 本地音色库",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-13",
+      "index": 13,
+      "title": "个人声音，三步进入制作",
+      "narration": "录制上传再试听，三步建立个人声音分身！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "mosaic-pulse-wall 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 2.8667,
+      "durationInFrames": 86,
+      "startFrame": 949,
+      "startSec": 31.633,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "【必须讲完整的核心工程技术能力（",
+          "startSec": 0,
+          "endSec": 3.877,
+          "startFrame": 0,
+          "endFrame": 117
+        },
+        {
+          "index": 2,
+          "text": "面向技术创作者与开源社区）】",
+          "startSec": 3.877,
+          "endSec": 7.2,
+          "startFrame": 116,
+          "endFrame": 216
+        }
+      ],
+      "subtitleText": "【必须讲完整的核心工程技术能力（ 面向技术创作者与开源社区）】",
+      "subChunks": [
+        "录制上传再试听",
+        "三步建立个人声音分身"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 13 幕",
+      "layout": "workflow-steps",
+      "transition": "light-wipe",
+      "kenBurns": "hold",
+      "vfx": "halftone+glitch",
+      "highlights": [
+        "录制或上传",
+        "克隆与试听",
+        "仅限本人或已授权声音"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 13 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 312,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "media": [
+        {
+          "path": "assets/images/image-ui-06-voice-catalog-e920.png",
+          "width": 2880,
+          "height": 1840,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "poolMedia": [
+        {
+          "assetId": "image-ui-01-warroom-052c",
+          "path": "assets/images/image-ui-01-warroom-052c.png",
+          "originalPath": "assets/images/image-ui-01-warroom-052c.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-02-llm-modal-208a",
+          "path": "assets/images/image-ui-02-llm-modal-208a.png",
+          "originalPath": "assets/images/image-ui-02-llm-modal-208a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-03-studio-assets-7b34",
+          "path": "assets/images/image-ui-03-studio-assets-7b34.png",
+          "originalPath": "assets/images/image-ui-03-studio-assets-7b34.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-04-studio-settings-b1ef",
+          "path": "assets/images/image-ui-04-studio-settings-b1ef.png",
+          "originalPath": "assets/images/image-ui-04-studio-settings-b1ef.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-05-studio-timeline-9f84",
+          "path": "assets/images/image-ui-05-studio-timeline-9f84.png",
+          "originalPath": "assets/images/image-ui-05-studio-timeline-9f84.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-06-voice-catalog-e920",
+          "path": "assets/images/image-ui-06-voice-catalog-e920.png",
+          "originalPath": "assets/images/image-ui-06-voice-catalog-e920.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-ui-07-task-monitor-a10a",
+          "path": "assets/images/image-ui-07-task-monitor-a10a.png",
+          "originalPath": "assets/images/image-ui-07-task-monitor-a10a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 2880,
+          "height": 1840,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "sub_drop",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.3,
+          "volume": 0.48,
+          "pan": 0.2
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.62,
+          "volume": 0.38,
+          "pan": 0,
+          "d": 0.7
+        },
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 1,
+          "volume": 0.42,
+          "pan": -0.22
+        },
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 1.28,
+          "volume": 0.42,
+          "pan": 0.22
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 6.68,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 7,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "三步克隆",
+        "个人声音"
+      ],
+      "visualBlueprint": "沿用音色库实机截图并完整展示，主窗口不裁切；外围原生矢量步骤带按录制或上传→声音克隆→试听确认依次点亮，独立放大框指向克隆功能区域。底部清楚提示仅使用本人或已获授权声音，禁止伪造身份。",
+      "motionNotes": "沿用音色库实机截图并完整展示，主窗口不裁切；外围原生矢量步骤带按录制或上传→声音克隆→试听确认依次点亮，独立放大框指向克隆功能区域。底部清楚提示仅使用本人或已获授权声音，禁止伪造身份。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.75,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "三步声音克隆工坊",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-14",
+      "index": 14,
+      "title": "透明数字人，进入你的画面",
+      "narration": "透明通道数字人，让分身直接融入画面！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "app-focus-shot 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 2.3667,
+      "durationInFrames": 71,
+      "startFrame": 1035,
+      "startSec": 34.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "- 面向 DeepSeek Harness (DSH",
+          "startSec": 0,
+          "endSec": 5.95,
+          "startFrame": 0,
+          "endFrame": 179
+        },
+        {
+          "index": 2,
+          "text": ") 的 23 个 Cordis 工具插件套",
+          "startSec": 5.95,
+          "endSec": 10.412,
+          "startFrame": 178,
+          "endFrame": 313
+        },
+        {
+          "index": 3,
+          "text": "件 + 视频制作模式 Preset",
+          "startSec": 10.412,
+          "endSec": 14.28,
+          "startFrame": 312,
+          "endFrame": 429
+        }
+      ],
+      "subtitleText": "- 面向 DeepSeek Harness (DSH ) 的 23 个 Cordis 工具插件套 件 + 视频制作模式 Preset",
+      "subChunks": [
+        "透明通道数字人",
+        "让分身直接融入画面"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 14 幕",
+      "layout": "split-wipe-compare",
+      "transition": "slash-wipe",
+      "kenBurns": "hold",
+      "vfx": "grid+scan",
+      "highlights": [
+        "Alpha 透明通道",
+        "透明 WebM 数字人",
+        "人物叠加合成"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 14 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 336,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTitle": "透明数字人与克隆分身",
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "media": [
+        {
+          "path": "assets/images/image-ui-04-studio-settings-b1ef.png",
+          "width": 2880,
+          "height": 1840,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.14,
+          "volume": 0.45,
+          "pan": -0.16
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.48,
+          "pan": 0.14
+        },
+        {
+          "type": "lock",
+          "path": "audio/sfx/lock.wav",
+          "offsetSec": 1.5,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 13.76,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 14.08,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "Alpha 透明通道",
+        "WebM"
+      ],
+      "visualBlueprint": "完整展示设置页截图，AppWindow 全部边界持续可见；旁侧独立SVG棋盘格演示区用抽象人物轮廓说明Alpha透明叠加，明确标注透明合成原理示意，不伪造数字人实拍素材；放大框仅辅助指向透明WebM数字人设置。",
+      "motionNotes": "完整展示设置页截图，AppWindow 全部边界持续可见；旁侧独立SVG棋盘格演示区用抽象人物轮廓说明Alpha透明叠加，明确标注透明合成原理示意，不伪造数字人实拍素材；放大框仅辅助指向透明WebM数字人设置。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-15",
+      "index": 15,
+      "title": "先测声音，再填画面帧数",
+      "narration": "逐句实测配音时长，再把帧数准确回填！",
+      "emotion": "平静",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "workflow-steps 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 2.3667,
+      "durationInFrames": 71,
+      "startFrame": 1106,
+      "startSec": 36.867,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "- 双引擎真·逐帧渲染：",
+          "startSec": 0,
+          "endSec": 2.191,
+          "startFrame": 0,
+          "endFrame": 66
+        },
+        {
+          "index": 2,
+          "text": "HTML5/GSAP/Canvas（Chromium",
+          "startSec": 2.191,
+          "endSec": 8.491,
+          "startFrame": 65,
+          "endFrame": 255
+        },
+        {
+          "index": 3,
+          "text": "CDP WebSocket 逐帧抓取 + 分段",
+          "startSec": 8.491,
+          "endSec": 13.421,
+          "startFrame": 254,
+          "endFrame": 403
+        },
+        {
+          "index": 4,
+          "text": "缓存）与 Remotion 4.x React",
+          "startSec": 13.421,
+          "endSec": 18.351,
+          "startFrame": 402,
+          "endFrame": 551
+        },
+        {
+          "index": 5,
+          "text": "TSX（支持按批次调用大模型逐镜手",
+          "startSec": 18.351,
+          "endSec": 22.733,
+          "startFrame": 550,
+          "endFrame": 682
+        },
+        {
+          "index": 6,
+          "text": "写 SVG/UI 动画代码",
+          "startSec": 22.733,
+          "endSec": 25.472,
+          "startFrame": 681,
+          "endFrame": 765
+        },
+        {
+          "index": 7,
+          "text": "tsc --noEmit 严格编译与 3 轮",
+          "startSec": 25.472,
+          "endSec": 29.854,
+          "startFrame": 764,
+          "endFrame": 896
+        },
+        {
+          "index": 8,
+          "text": "自动修错）",
+          "startSec": 29.854,
+          "endSec": 30.95,
+          "startFrame": 895,
+          "endFrame": 929
+        }
+      ],
+      "subtitleText": "- 双引擎真·逐帧渲染： HTML5/GSAP/Canvas（Chromium CDP WebSocket 逐帧抓取 + 分段 缓存）与 Remotion 4.x React TSX（支持按批次调用大模型逐镜手 写 SVG/UI 动画代码 tsc --noEmit 严格编译与 3 轮 自动修错）",
+      "subChunks": [
+        "逐句实测配音时长",
+        "再把帧数准确回填"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 15 幕",
+      "layout": "workflow-steps",
+      "transition": "cut",
+      "kenBurns": "zoom-in",
+      "vfx": "radial-speedlines",
+      "highlights": [
+        "逐句生成配音",
+        "ffprobe 实测时长",
+        "按时长回填帧数"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 15 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 360,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "steps": [
+        {
+          "title": "第 15 幕",
+          "desc": "聚合图文视听",
+          "img": ""
+        },
+        {
+          "title": "声画同步",
+          "desc": "自动节奏分镜",
+          "img": ""
+        },
+        {
+          "title": "节奏转场",
+          "desc": "高清成片交付",
+          "img": ""
+        }
+      ],
+      "media": [],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.24,
+          "volume": 0.44,
+          "pan": -0.2
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 1.02,
+          "volume": 0.44,
+          "pan": 0.2
+        },
+        {
+          "type": "shine",
+          "path": "audio/sfx/shine.wav",
+          "offsetSec": 1.8,
+          "volume": 0.4,
+          "pan": 0
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 30.43,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 30.75,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "ffprobe 实测",
+        "帧数回填"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！IndexTTS-2.5逐句音频片段进入ffprobe测时模块，结果沿箭头回填对应镜头帧格；音频尾沿与画面尾沿对齐锁定，以公式和对齐线解释同步机制，不编造绝对零误差实测报告。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！IndexTTS-2.5逐句音频片段进入ffprobe测时模块，结果沿箭头回填对应镜头帧格；音频尾沿与画面尾沿对齐锁定，以公式和对齐线解释同步机制，不编造绝对零误差实测报告。",
+      "recipe": "push_in",
+      "fromScale": 1,
+      "toScale": 1.22,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.52,
+          "z": 1.1
+        }
+      ],
+      "windowTitle": "逐句时长与画面同步",
+      "explicitZeroAsset": true
+    },
+    {
+      "id": "scene-16",
+      "index": 16,
+      "title": "人声出现，音乐自动让位",
+      "narration": "人声一出音乐让位，重击音效照样有力！",
+      "emotion": "激昂",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": true,
+      "voiceMatchReason": "用户指定音色: [热门音色] 专业解说配音 (pack-热门音色-专业解说配音)",
+      "visualPrompt": "radial-climax 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 2.8667,
+      "durationInFrames": 86,
+      "startFrame": 1177,
+      "startSec": 39.233,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "- 音画强同步核心：",
+          "startSec": 0,
+          "endSec": 1.799,
+          "startFrame": 0,
+          "endFrame": 54
+        },
+        {
+          "index": 2,
+          "text": "FFmpeg 实测配乐 90~140 BPM",
+          "startSec": 1.799,
+          "endSec": 6.426,
+          "startFrame": 53,
+          "endFrame": 193
+        },
+        {
+          "index": 3,
+          "text": "鼓点与突降高潮 (drops)",
+          "startSec": 6.426,
+          "endSec": 9.51,
+          "startFrame": 192,
+          "endFrame": 286
+        },
+        {
+          "index": 4,
+          "text": "支持 0.5 拍极速闪切与 7 种矢量转场叠层",
+          "startSec": 9.51,
+          "endSec": 14.137,
+          "startFrame": 285,
+          "endFrame": 425
+        },
+        {
+          "index": 5,
+          "text": "IndexTTS-2.5 逐句生成配音后用",
+          "startSec": 14.137,
+          "endSec": 18.764,
+          "startFrame": 424,
+          "endFrame": 563
+        },
+        {
+          "index": 6,
+          "text": "ffprobe 实测时长回填帧数零音画",
+          "startSec": 18.764,
+          "endSec": 23.391,
+          "startFrame": 562,
+          "endFrame": 702
+        },
+        {
+          "index": 7,
+          "text": "错位",
+          "startSec": 23.391,
+          "endSec": 23.905,
+          "startFrame": 701,
+          "endFrame": 718
+        },
+        {
+          "index": 8,
+          "text": "FFmpeg sidechaincompress 自",
+          "startSec": 23.905,
+          "endSec": 30.074,
+          "startFrame": 717,
+          "endFrame": 903
+        },
+        {
+          "index": 9,
+          "text": "动压低 BGM 让位人声与刀光重击音",
+          "startSec": 30.074,
+          "endSec": 34.187,
+          "startFrame": 902,
+          "endFrame": 1026
+        },
+        {
+          "index": 10,
+          "text": "效",
+          "startSec": 34.187,
+          "endSec": 34.7,
+          "startFrame": 1025,
+          "endFrame": 1041
+        }
+      ],
+      "subtitleText": "- 音画强同步核心： FFmpeg 实测配乐 90~140 BPM 鼓点与突降高潮 (drops) 支持 0.5 拍极速闪切与 7 种矢量转场叠层 IndexTTS-2.5 逐句生成配音后用 ffprobe 实测时长回填帧数零音画 错位 FFmpeg sidechaincompress 自 动压低 BGM 让位人声与刀光重击音 效",
+      "subChunks": [
+        "人声一出音乐让位",
+        "重击音效照样有力"
+      ],
+      "subtitleLine": "",
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "高燃收尾",
+      "layout": "metric-dashboard",
+      "transition": "zoom-punch",
+      "kenBurns": "zoom-in",
+      "vfx": "3d-depth+sweep",
+      "highlights": [
+        "sidechaincompress",
+        "BGM 自动让位人声",
+        "刀光与重击音效"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "高燃收尾"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 384,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "media": [],
+      "sfxCues": [
+        {
+          "type": "sub_drop",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "shimmer_swell",
+          "path": "audio/sfx/shimmer_swell.wav",
+          "offsetSec": 0.15,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "sparkle",
+          "path": "audio/sfx/sparkle.wav",
+          "offsetSec": 0.42,
+          "volume": 0.45,
+          "pan": 0
+        },
+        {
+          "type": "stamp",
+          "path": "audio/sfx/stamp.wav",
+          "offsetSec": 1.4,
+          "volume": 0.48,
+          "pan": 0
+        },
+        {
+          "type": "chime",
+          "path": "audio/sfx/chime.wav",
+          "offsetSec": 33.35,
+          "volume": 0.48,
+          "pan": 0.1
+        }
+      ],
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "FFmpeg",
+        "sidechaincompress"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！上方人声波形进入侧链检测，下方BGM包络随人声自动下压、停顿后恢复；独立音效轨显示刀光与重击瞬态，青色信号线解释FFmpeg sidechaincompress，明确为混音原理示意，不放软件截图。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！上方人声波形进入侧链检测，下方BGM包络随人声自动下压、停顿后恢复；独立音效轨显示刀光与重击瞬态，青色信号线解释FFmpeg sidechaincompress，明确为混音原理示意，不放软件截图。",
+      "recipe": "push_in",
+      "fromScale": 1,
+      "toScale": 1.22,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.75,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.08
+        }
+      ],
+      "windowTitle": "FFmpeg 侧链闪避混音",
+      "explicitZeroAsset": true
+    },
+    {
+      "id": "scene-17",
+      "index": 17,
+      "title": "不满意哪一幕，就改哪一幕",
+      "narration": "哪幕不满意直接说，重写重配不用全片重来！",
+      "subChunks": [
+        "哪幕不满意直接说",
+        "重写重配不用全片重来"
+      ],
+      "accentWords": [
+        "对 AI 说",
+        "单幕重修"
+      ],
+      "visualBlueprint": "AppWindow 完整展示时间线截图，全部界面边界保留；外围标注V1分镜、A1混音双轨。独立放大框逐拍强调单幕选择、对AI说、重修入口，旁侧代码标签显示ai_refine_scene，并补充单幕重配与AI声学修音，不伪造操作后结果。",
+      "motionNotes": "AppWindow 完整展示时间线截图，全部界面边界保留；外围标注V1分镜、A1混音双轨。独立放大框逐拍强调单幕选择、对AI说、重修入口，旁侧代码标签显示ai_refine_scene，并补充单幕重配与AI声学修音，不伪造操作后结果。",
+      "emotion": "平静",
+      "layout": "app-focus-shot",
+      "kenBurns": "hold",
+      "transition": "block-wipe",
+      "highlights": [
+        "V1 分镜 + A1 混音",
+        "ai_refine_scene",
+        "单幕重配 / AI 声学修音"
+      ],
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "分步监看与单幕修改",
+      "explicitZeroAsset": false,
+      "media": [
+        {
+          "path": "assets/images/image-ui-05-studio-timeline-9f84.png",
+          "width": 2880,
+          "height": 1840,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "durationSec": 3.1,
+      "durationInFrames": 93,
+      "startFrame": 1263,
+      "startSec": 42.1
+    },
+    {
+      "id": "scene-18",
+      "index": 18,
+      "title": "任务可控，出错有路可退",
+      "narration": "暂停恢复强停重试，任务日志全程可追！",
+      "subChunks": [
+        "暂停恢复强停重试",
+        "任务日志全程可追"
+      ],
+      "accentWords": [
+        "断点重试",
+        "子进程调度"
+      ],
+      "visualBlueprint": "AppWindow 等比完整展示任务监控截图，主窗口不裁切；外围四个控制标签依拍亮起暂停、恢复、强停子进程、断点单步重试，独立放大框强调日志区；不添加虚构任务状态或未经素材支持的成功记录。",
+      "motionNotes": "AppWindow 等比完整展示任务监控截图，主窗口不裁切；外围四个控制标签依拍亮起暂停、恢复、强停子进程、断点单步重试，独立放大框强调日志区；不添加虚构任务状态或未经素材支持的成功记录。",
+      "emotion": "平静",
+      "layout": "app-focus-shot",
+      "kenBurns": "hold",
+      "transition": "glitch-cut",
+      "highlights": [
+        "暂停 / 恢复",
+        "一键强停子进程",
+        "断点单步重试 / 实时日志"
+      ],
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "4-Agent 任务与子进程监控",
+      "explicitZeroAsset": false,
+      "media": [
+        {
+          "path": "assets/images/image-ui-07-task-monitor-a10a.png",
+          "width": 2880,
+          "height": 1840,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "durationSec": 2.8667,
+      "durationInFrames": 86,
+      "startFrame": 1356,
+      "startSec": 45.2
+    },
+    {
+      "id": "scene-19",
+      "index": 19,
+      "title": "响度、黑屏、遮挡提前查",
+      "narration": "响度黑屏遮挡先预检，发布之前少踩坑！",
+      "subChunks": [
+        "响度黑屏遮挡先预检",
+        "发布之前少踩坑"
+      ],
+      "accentWords": [
+        "EBU R128",
+        "安全区预检"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！三张检测卡依次出现EBU R128广播响度、零黑屏检测、平台防遮挡安全区；竖屏框展示抖音、小红书、B站安全区轮廓切换。QA 7/7仅作产品质检项目标识，明确不是本片已运行通过的报告。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！三张检测卡依次出现EBU R128广播响度、零黑屏检测、平台防遮挡安全区；竖屏框展示抖音、小红书、B站安全区轮廓切换。QA 7/7仅作产品质检项目标识，明确不是本片已运行通过的报告。",
+      "emotion": "平静",
+      "layout": "metric-dashboard",
+      "kenBurns": "zoom-in",
+      "transition": "light-wipe",
+      "highlights": [
+        "EBU R128 广播响度",
+        "零黑屏检测 / QA 7/7",
+        "抖音 / 小红书 / B站安全区"
+      ],
+      "recipe": "impact",
+      "fromScale": 1.15,
+      "toScale": 1,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.06
+        }
+      ],
+      "windowTitle": "发布前质量预检",
+      "explicitZeroAsset": true,
+      "media": [],
+      "durationSec": 3.1,
+      "durationInFrames": 93,
+      "startFrame": 1442,
+      "startSec": 48.067
+    },
+    {
+      "id": "scene-20",
+      "index": 20,
+      "title": "代码免费商用，配置本地隔离",
+      "narration": "代码采用宽松开源协议，个人商用都免费！",
+      "subChunks": [
+        "代码采用宽松开源协议",
+        "个人商用都免费"
+      ],
+      "accentWords": [
+        "MIT License",
+        "免费可商用"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！MIT License开源铭牌居中，第一拍呈现个人与商业免费；第二拍三张字体卡标注SIL OFL：Noto Sans SC、思源宋体、JetBrains Mono；第三拍显示零硬编码路径、零私有密钥、.env隔离本地路径。底部保留素材、声音及外部服务另须遵守各自授权提示，不暗示全部第三方资源均属MIT。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！MIT License开源铭牌居中，第一拍呈现个人与商业免费；第二拍三张字体卡标注SIL OFL：Noto Sans SC、思源宋体、JetBrains Mono；第三拍显示零硬编码路径、零私有密钥、.env隔离本地路径。底部保留素材、声音及外部服务另须遵守各自授权提示，不暗示全部第三方资源均属MIT。",
+      "emotion": "平静",
+      "layout": "card-fan-opener",
+      "kenBurns": "zoom-out",
+      "transition": "iris-circle",
+      "highlights": [
+        "MIT License / 免费可商用",
+        "SIL OFL 开源商用字体",
+        ".env 本地路径隔离"
+      ],
+      "recipe": "pull_out",
+      "fromScale": 1.24,
+      "toScale": 1,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.1
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "开源许可与本地配置",
+      "explicitZeroAsset": true,
+      "media": [],
+      "durationSec": 3.1,
+      "durationInFrames": 93,
+      "startFrame": 1535,
+      "startSec": 51.167
+    },
+    {
+      "id": "scene-21",
+      "index": 21,
+      "title": "最后一步，把发布资料带走",
+      "narration": "一键导出发布包，成片封面清单一起带走！",
+      "subChunks": [
+        "一键导出发布包",
+        "成片封面清单一起带走"
+      ],
+      "accentWords": [
+        "Publish Pack",
+        "一键导出"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！全流程节点高速收束到Publish Pack，原生矢量文件卡依次弹出成片、封面、发布清单；卡片组成发布交付栈，最后一拍翻转为开源仓库卡，先行完整显示https://github.com/Merziller/dsh-video-workbench，不制作虚假导出实机界面。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！全流程节点高速收束到Publish Pack，原生矢量文件卡依次弹出成片、封面、发布清单；卡片组成发布交付栈，最后一拍翻转为开源仓库卡，先行完整显示https://github.com/Merziller/dsh-video-workbench，不制作虚假导出实机界面。",
+      "emotion": "平静",
+      "layout": "workflow-steps",
+      "kenBurns": "zoom-out",
+      "transition": "flash-cut",
+      "highlights": [
+        "一键 Publish Pack",
+        "成片 / 封面 / 发布清单",
+        "https://github.com/Merziller/dsh-video-workbench"
+      ],
+      "recipe": "pull_out",
+      "fromScale": 1.24,
+      "toScale": 1,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1.08
+        },
+        {
+          "t": 0.8,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "Publish Pack 发布交付",
+      "explicitZeroAsset": true,
+      "media": [],
+      "durationSec": 2.8667,
+      "durationInFrames": 86,
+      "startFrame": 1628,
+      "startSec": 54.267
+    },
+    {
+      "id": "scene-22",
+      "index": 22,
+      "title": "开源仓库，立即点亮 Star",
+      "narration": "GitHub 开源仓库 Merziller 斜杠 dsh-video-workbench，点亮 Star 立即免费上手！",
+      "subChunks": [
+        "GitHub 开源仓库 Merziller 斜杠 dsh-video-workbench",
+        "点亮 Star 立即免费上手！"
+      ],
+      "accentWords": [
+        "GitHub 开源仓库",
+        "Star",
+        "免费上手"
+      ],
+      "visualBlueprint": "由 AI 主程编写高燃全矢量 SVG 动效！禁止截图。首帧即完整呈现DSH Video Workbench与MIT开源铭牌，中央最高对比大字持续高亮完整地址https://github.com/Merziller/dsh-video-workbench，按竖屏可用宽度自动适配字号、不省略、不截断；下方完整显示git clone https://github.com/Merziller/dsh-video-workbench.git。Star矢量星标重拍点亮，粒子向仓库铭牌汇聚。旁白保持同一句连续音频，不拆成两次调用；承接上一镜持续可见的仓库卡。",
+      "motionNotes": "由 AI 主程编写高燃全矢量 SVG 动效！禁止截图。首帧即完整呈现DSH Video Workbench与MIT开源铭牌，中央最高对比大字持续高亮完整地址https://github.com/Merziller/dsh-video-workbench，按竖屏可用宽度自动适配字号、不省略、不截断；下方完整显示git clone https://github.com/Merziller/dsh-video-workbench.git。Star矢量星标重拍点亮，粒子向仓库铭牌汇聚。旁白保持同一句连续音频，不拆成两次调用；承接上一镜持续可见的仓库卡。",
+      "emotion": "激昂",
+      "layout": "kinetic-impact",
+      "kenBurns": "zoom-out",
+      "transition": "cut",
+      "highlights": [
+        "https://github.com/Merziller/dsh-video-workbench",
+        "MIT License",
+        "点亮 Star · 立即免费上手"
+      ],
+      "recipe": "freeze_end",
+      "fromScale": 1.16,
+      "toScale": 1,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.85,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        }
+      ],
+      "windowTitle": "GitHub · Merziller/dsh-video-workbench",
+      "explicitZeroAsset": true,
+      "media": [],
+      "durationSec": 3.1,
+      "durationInFrames": 93,
+      "startFrame": 1714,
+      "startSec": 57.133
+    }
+  ],
+  "beats": [
+    {
+      "time": 0,
+      "strong": true
+    },
+    {
+      "time": 0.476,
+      "strong": false
+    },
+    {
+      "time": 0.952,
+      "strong": false
+    },
+    {
+      "time": 1.429,
+      "strong": false
+    },
+    {
+      "time": 1.905,
+      "strong": true
+    },
+    {
+      "time": 2.381,
+      "strong": false
+    },
+    {
+      "time": 2.857,
+      "strong": false
+    },
+    {
+      "time": 3.333,
+      "strong": false
+    },
+    {
+      "time": 3.81,
+      "strong": true
+    },
+    {
+      "time": 4.286,
+      "strong": false
+    },
+    {
+      "time": 4.762,
+      "strong": false
+    },
+    {
+      "time": 5.238,
+      "strong": false
+    },
+    {
+      "time": 5.714,
+      "strong": true
+    },
+    {
+      "time": 6.19,
+      "strong": false
+    },
+    {
+      "time": 6.667,
+      "strong": false
+    },
+    {
+      "time": 7.143,
+      "strong": false
+    },
+    {
+      "time": 7.619,
+      "strong": true
+    },
+    {
+      "time": 8.095,
+      "strong": false
+    },
+    {
+      "time": 8.571,
+      "strong": false
+    },
+    {
+      "time": 9.048,
+      "strong": false
+    },
+    {
+      "time": 9.524,
+      "strong": true
+    },
+    {
+      "time": 10,
+      "strong": false
+    },
+    {
+      "time": 10.476,
+      "strong": false
+    },
+    {
+      "time": 10.952,
+      "strong": false
+    },
+    {
+      "time": 11.429,
+      "strong": true
+    },
+    {
+      "time": 11.905,
+      "strong": false
+    },
+    {
+      "time": 12.381,
+      "strong": false
+    },
+    {
+      "time": 12.857,
+      "strong": false
+    },
+    {
+      "time": 13.333,
+      "strong": true
+    },
+    {
+      "time": 13.81,
+      "strong": false
+    },
+    {
+      "time": 14.286,
+      "strong": false
+    },
+    {
+      "time": 14.762,
+      "strong": false
+    },
+    {
+      "time": 15.238,
+      "strong": true
+    },
+    {
+      "time": 15.714,
+      "strong": false
+    },
+    {
+      "time": 16.19,
+      "strong": false
+    },
+    {
+      "time": 16.667,
+      "strong": false
+    },
+    {
+      "time": 17.143,
+      "strong": true
+    },
+    {
+      "time": 17.619,
+      "strong": false
+    },
+    {
+      "time": 18.095,
+      "strong": false
+    },
+    {
+      "time": 18.571,
+      "strong": false
+    },
+    {
+      "time": 19.048,
+      "strong": true
+    },
+    {
+      "time": 19.524,
+      "strong": false
+    },
+    {
+      "time": 20,
+      "strong": false
+    },
+    {
+      "time": 20.476,
+      "strong": false
+    },
+    {
+      "time": 20.952,
+      "strong": true
+    },
+    {
+      "time": 21.429,
+      "strong": false
+    },
+    {
+      "time": 21.905,
+      "strong": false
+    },
+    {
+      "time": 22.381,
+      "strong": false
+    },
+    {
+      "time": 22.857,
+      "strong": true
+    },
+    {
+      "time": 23.333,
+      "strong": false
+    },
+    {
+      "time": 23.81,
+      "strong": false
+    },
+    {
+      "time": 24.286,
+      "strong": false
+    },
+    {
+      "time": 24.762,
+      "strong": true
+    },
+    {
+      "time": 25.238,
+      "strong": false
+    },
+    {
+      "time": 25.714,
+      "strong": false
+    },
+    {
+      "time": 26.19,
+      "strong": false
+    },
+    {
+      "time": 26.667,
+      "strong": true
+    },
+    {
+      "time": 27.143,
+      "strong": false
+    },
+    {
+      "time": 27.619,
+      "strong": false
+    },
+    {
+      "time": 28.095,
+      "strong": false
+    },
+    {
+      "time": 28.571,
+      "strong": true
+    },
+    {
+      "time": 29.048,
+      "strong": false
+    },
+    {
+      "time": 29.524,
+      "strong": false
+    },
+    {
+      "time": 30,
+      "strong": false
+    },
+    {
+      "time": 30.476,
+      "strong": true
+    },
+    {
+      "time": 30.952,
+      "strong": false
+    },
+    {
+      "time": 31.429,
+      "strong": false
+    },
+    {
+      "time": 31.905,
+      "strong": false
+    },
+    {
+      "time": 32.381,
+      "strong": true
+    },
+    {
+      "time": 32.857,
+      "strong": false
+    },
+    {
+      "time": 33.333,
+      "strong": false
+    },
+    {
+      "time": 33.81,
+      "strong": false
+    },
+    {
+      "time": 34.286,
+      "strong": true
+    },
+    {
+      "time": 34.762,
+      "strong": false
+    },
+    {
+      "time": 35.238,
+      "strong": false
+    },
+    {
+      "time": 35.714,
+      "strong": false
+    },
+    {
+      "time": 36.19,
+      "strong": true
+    },
+    {
+      "time": 36.667,
+      "strong": false
+    },
+    {
+      "time": 37.143,
+      "strong": false
+    },
+    {
+      "time": 37.619,
+      "strong": false
+    },
+    {
+      "time": 38.095,
+      "strong": true
+    },
+    {
+      "time": 38.571,
+      "strong": false
+    },
+    {
+      "time": 39.048,
+      "strong": false
+    },
+    {
+      "time": 39.524,
+      "strong": false
+    },
+    {
+      "time": 40,
+      "strong": true
+    },
+    {
+      "time": 40.476,
+      "strong": false
+    },
+    {
+      "time": 40.952,
+      "strong": false
+    },
+    {
+      "time": 41.429,
+      "strong": false
+    },
+    {
+      "time": 41.905,
+      "strong": true
+    },
+    {
+      "time": 42.381,
+      "strong": false
+    },
+    {
+      "time": 42.857,
+      "strong": false
+    },
+    {
+      "time": 43.333,
+      "strong": false
+    },
+    {
+      "time": 43.81,
+      "strong": true
+    },
+    {
+      "time": 44.286,
+      "strong": false
+    },
+    {
+      "time": 44.762,
+      "strong": false
+    },
+    {
+      "time": 45.238,
+      "strong": false
+    },
+    {
+      "time": 45.714,
+      "strong": true
+    },
+    {
+      "time": 46.19,
+      "strong": false
+    },
+    {
+      "time": 46.667,
+      "strong": false
+    },
+    {
+      "time": 47.143,
+      "strong": false
+    },
+    {
+      "time": 47.619,
+      "strong": true
+    },
+    {
+      "time": 48.095,
+      "strong": false
+    },
+    {
+      "time": 48.571,
+      "strong": false
+    },
+    {
+      "time": 49.048,
+      "strong": false
+    },
+    {
+      "time": 49.524,
+      "strong": true
+    },
+    {
+      "time": 50,
+      "strong": false
+    },
+    {
+      "time": 50.476,
+      "strong": false
+    },
+    {
+      "time": 50.952,
+      "strong": false
+    },
+    {
+      "time": 51.429,
+      "strong": true
+    },
+    {
+      "time": 51.905,
+      "strong": false
+    },
+    {
+      "time": 52.381,
+      "strong": false
+    },
+    {
+      "time": 52.857,
+      "strong": false
+    },
+    {
+      "time": 53.333,
+      "strong": true
+    },
+    {
+      "time": 53.81,
+      "strong": false
+    },
+    {
+      "time": 54.286,
+      "strong": false
+    },
+    {
+      "time": 54.762,
+      "strong": false
+    },
+    {
+      "time": 55.238,
+      "strong": true
+    },
+    {
+      "time": 55.714,
+      "strong": false
+    },
+    {
+      "time": 56.19,
+      "strong": false
+    },
+    {
+      "time": 56.667,
+      "strong": false
+    },
+    {
+      "time": 57.143,
+      "strong": true
+    },
+    {
+      "time": 57.619,
+      "strong": false
+    },
+    {
+      "time": 58.095,
+      "strong": false
+    },
+    {
+      "time": 58.571,
+      "strong": false
+    },
+    {
+      "time": 59.048,
+      "strong": true
+    },
+    {
+      "time": 59.524,
+      "strong": false
+    },
+    {
+      "time": 60,
+      "strong": false
+    }
+  ]
+}

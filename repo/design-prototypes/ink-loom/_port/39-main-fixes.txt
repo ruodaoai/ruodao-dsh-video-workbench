@@ -1,0 +1,43 @@
+@@@ REPLACE
+  c.fillText('任务中心可「重试」· 或按 R 重新出片', cx, cy + s * 0.9 + 22 * k);
+@@@ WITH
+  /* 小监视器（1100×640）上字号有 12px 下限，行距也要跟着保底，否则两行字叠在一起 */
+  c.fillText(fitText(c, '任务中心可「重试」· 或按 R 重新出片', w - 28 * k), cx, cy + s * 0.9 + Math.max(18, 22 * k));
+@@@ END
+@@@ REPLACE
+  if (msg) c.fillText(fitText(c, msg, w - 28 * k), cx, cy + s * 0.75 + 24 * k);
+@@@ WITH
+  if (msg) c.fillText(fitText(c, msg, w - 28 * k), cx, cy + s * 0.75 + Math.max(19, 24 * k));
+@@@ END
+@@@ REPLACE
+  const wasOv = CAM.mode === 'overview';
+  fitTopbar();
+  computeLayout(); applyLayout();
+@@@ WITH
+  const wasOv = CAM.mode === 'overview';
+  fitTopbar();
+  computeLayout();
+  /* computeLayout 会切换 body.tiny / compact（顶栏字号与间距随之变）：按新尺寸再收拢一次，否则从小窗放大到 1440 时顶栏溢出 */
+  fitTopbar();
+  applyLayout();
+@@@ END
+@@@ REPLACE
+  steps.forEach((s) => tb.classList.remove(s));
+  const over = () => tb.scrollWidth > tb.clientWidth + 1 || $('#tbFill').getBoundingClientRect().width < 4;
+  for (const s of steps) { if (!over()) break; tb.classList.add(s); }
+}
+@@@ WITH
+  /* 量尺寸时关掉过渡：body.tiny / compact 刚切换时页签、按钮的字号与内边距还在过渡动画里，半途量会误判「放得下」 */
+  tb.classList.add('tb-measure');
+  steps.forEach((s) => tb.classList.remove(s));
+  const over = () => tb.scrollWidth > tb.clientWidth + 1 || $('#tbFill').getBoundingClientRect().width < 4;
+  for (const s of steps) { if (!over()) break; tb.classList.add(s); }
+  void tb.offsetWidth;
+  tb.classList.remove('tb-measure');
+}
+@@@ END
+@@@ INSERT_BEFORE
+</style>
+@@@ TEXT
+#topbar.tb-measure,#topbar.tb-measure *{transition:none!important}
+@@@ END

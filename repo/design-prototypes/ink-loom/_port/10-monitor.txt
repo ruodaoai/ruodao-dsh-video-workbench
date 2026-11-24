@@ -1,0 +1,165 @@
+@@@ RANGE
+/* ══════════════ 18. 监视器模式 ══════════════ */
+@@@ TO
+/* ══════════════ 19. HUD 刷新（只在数值变化时写 DOM） ══════════════ */
+@@@ WITH
+/* ══════════════ 18. 监视器模式（真实成片 <video> 直接画进监视器，按工程画幅留黑边） ══════════════ */
+const MON = { cv: document.createElement('canvas'), mode: '', label: '', right: '' };
+MON.ctx = spriteText(MON.cv.getContext('2d', CTX2D));
+const VID = { el: null, url: '', ready: false, err: false };
+function videoEl() {
+  if (VID.el) return VID.el;
+  const v = document.createElement('video');
+  v.id = 'pvVideo'; v.muted = true; v.playsInline = true; v.preload = 'metadata'; v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true'); v.tabIndex = -1;
+  v.addEventListener('loadeddata', () => { VID.ready = true; VID.err = false; });
+  v.addEventListener('error', () => { VID.err = true; VID.ready = false; FILM.playing = false; });
+  v.addEventListener('ended', () => { FILM.playing = false; });
+  document.body.appendChild(v); VID.el = v;
+  return v;
+}
+function setVideoSrc(url) {
+  if (url === VID.url) return;
+  const v = videoEl(); VID.url = url; VID.ready = false; VID.err = false;
+  try { v.pause(); } catch (e) { /* ignore */ }
+  if (url) { v.src = url; try { v.load(); } catch (e) { /* ignore */ } } else { v.removeAttribute('src'); try { v.load(); } catch (e) { /* ignore */ } FILM.playing = false; }
+}
+const vidOK = () => !!(VID.el && VID.ready && !VID.err && VID.el.videoWidth > 0);
+const vidDur = () => (vidOK() && Number.isFinite(VID.el.duration) && VID.el.duration > 0 ? VID.el.duration : PREVIEW.dur || DUR);
+/* 预览时间：有成片 → 视频 currentTime；否则草稿动画时钟 */
+function filmT() { if (vidOK() && (MON.mode === 'video' || FILM.playing)) return clamp(VID.el.currentTime * (DUR / Math.max(0.01, vidDur())), 0, DUR); return FILM.t; }
+function monMode() {
+  if (!STATE || !STATE.project) return 'empty';
+  const st = Pipe.status, mp4 = vidOK();
+  if (FILM.user) return mp4 ? 'video' : 'film';
+  if (st === 'queued') return 'card';
+  if (st === 'running' || st === 'paused') {
+    const id = Pipe.active;
+    if (id === 'director') return TLS.beatRev < 1 && BEATS.length ? 'listen' : 'board';
+    if (id === 'reference') return BEATS.length ? 'listen' : 'card';
+    if (id === 'editor') return 'weave';
+    if (id === 'audio') return 'mix';
+    if (id === 'motion') return 'code';
+    if (id === 'qa') return 'render';
+    return 'card';
+  }
+  if (st === 'failed' || st === 'stopped') return mp4 && FILM.playing ? 'video' : 'halt';
+  if (st === 'completed') return mp4 ? 'video' : SCENES.length ? 'film' : 'poster';
+  if (FILM.playing) return mp4 ? 'video' : 'film';
+  return mp4 ? 'video' : 'poster';
+}
+function monRender(t) {
+  const m = L.mon, q = Math.min(LOWSPEC ? 1.5 : 2.6, Math.max(1, Math.ceil(CAM.s * 2) / 2)) * DPR;
+  const w = Math.max(2, Math.round(m.w * q)), h = Math.max(2, Math.round(m.h * q));
+  if (MON.cv.width !== w || MON.cv.height !== h) { MON.cv.width = w; MON.cv.height = h; }
+  const c = MON.ctx, W = m.w, H = m.h;
+  c.setTransform(q, 0, 0, q, 0, 0);
+  c.fillStyle = '#050403'; c.fillRect(0, 0, W, H);
+  const mode = monMode(); MON.mode = mode;
+  const ar = containRect(PROJECT.w || 16, PROJECT.h || 9, 0, 0, W, H);
+  const inFrame = (fn) => { c.save(); c.beginPath(); c.rect(ar.x, ar.y, ar.w, ar.h); c.clip(); c.translate(ar.x, ar.y); fn(ar.w, ar.h); c.restore(); if (ar.w < W - 1 || ar.h < H - 1) { c.strokeStyle = 'rgba(212,166,74,.25)'; c.lineWidth = 1; c.strokeRect(ar.x + 0.5, ar.y + 0.5, ar.w - 1, ar.h - 1); } };
+  const N = SCENES.length, ftot = totalFrames();
+  switch (mode) {
+    case 'empty': renderFilm(c, W, H, 12, { sub: false, scene: NO_SCENE, noThumb: true }); c.fillStyle = 'rgba(8,6,4,.55)'; c.fillRect(0, 0, W, H); MON.label = '待开工程'; MON.right = ''; break;
+    case 'poster': inFrame((w2, h2) => drawPoster(c, w2, h2, t)); MON.label = PREVIEW.hasMp4 ? '成片 · 封面' : N ? '待织 · 海报帧' : '待织'; MON.right = `00:00.00 / ${fmtT(DUR)}`; break;
+    case 'listen': renderListen(c, W, H, TLS.beatRev); MON.label = '节拍分析'; MON.right = [PROJECT.bpm ? PROJECT.bpm + ' BPM' : '', DROPS.length ? DROPS.length + ' 突降' : ''].filter(Boolean).join(' · ') || '配乐分析'; break;
+    case 'board': renderBoard(c, W, H, Pipe.boardN, t); MON.label = '分镜生成'; MON.right = `${Pipe.boardN} / ${N} 幕`; break;
+    case 'weave': {
+      const fl = curFlight(), sc = fl && fl.target.sc != null ? SCENES[fl.target.sc] : null;
+      inFrame((w2, h2) => { if (sc) renderFilm(c, w2, h2, sc.t0 + sc.dur * 0.55, { ui: true, scene: sc }); else renderFilm(c, w2, h2, LV.editor * DUR * 0.98, { ui: true }); weaveOverlay(c, w2, h2, fl); });
+      MON.label = '织入素材'; MON.right = fl ? `${fl.k + 1} / ${fl.n} · ${AS[fl.key] ? AS[fl.key].name : ''}` : `素材剪辑 · ${Math.round(LV.editor * 100)}%`;
+      break;
+    }
+    case 'mix': { const ht = clamp(Math.max(TLS.bgmRev, TLS.voiceRev) * DUR, 0, Math.max(0, DUR - 0.02)); inFrame((w2, h2) => { renderFilm(c, w2, h2, ht, { ui: true }); mixOverlay(c, w2, h2, ht); }); MON.label = '配音混音'; MON.right = fmtT(ht); break; }
+    case 'code': renderCode(c, W, H, MOT); MON.label = '动效编程'; MON.right = `Batch ${String(MOT.batch + 1).padStart(2, '0')} / ${MOT_NB()}`; break;
+    case 'render': { const fr = QA.frames, ft = clamp(fr / (PROJECT.fps || 30), 0, Math.max(0, DUR - 0.02)); inFrame((w2, h2) => { renderFilm(c, w2, h2, ft, { ui: true }); renderOverlay(c, w2, h2, fr); }); MON.label = '质检渲染'; MON.right = `${fr} / ${ftot} 帧`; break; }
+    case 'card': inFrame((w2, h2) => { drawPoster(c, w2, h2, t, true); }); cardOverlay(c, W, H, t); { const a = AG[Pipe.active]; MON.label = Pipe.status === 'queued' ? '排队候场' : a ? a.name : '织造中'; MON.right = Pipe.runId ? '#' + Pipe.runId.slice(-6) : ''; } break;
+    case 'halt': inFrame((w2, h2) => drawPoster(c, w2, h2, t, true)); haltOverlay(c, W, H); MON.label = Pipe.status === 'failed' ? '织造中断' : '已停止'; MON.right = `${Math.round(Pipe.pv)}%`; break;
+    case 'video': inFrame((w2, h2) => { if (vidOK()) drawContain(c, VID.el, 0, 0, w2, h2); }); MON.label = Pipe.status === 'completed' ? (FILM.playing ? '成片 · 播放中' : '成片') : FILM.playing ? '成片预览 · 播放' : '成片预览'; MON.right = `${fmtT(VID.el ? VID.el.currentTime : 0)} / ${fmtT(vidDur())}`; break;
+    default: inFrame((w2, h2) => renderFilm(c, w2, h2, FILM.t, { ui: true })); MON.label = FILM.playing ? '分镜草稿 · 播放' : '分镜草稿'; MON.right = `${fmtT(FILM.t)} / ${fmtT(DUR)}`;
+  }
+  if (FIN.t0 >= 0) { const age = SIM.t - FIN.t0; if (age >= 0 && age < 1.4) { c.fillStyle = `rgba(255,244,222,${0.65 * Math.exp(-age * 4)})`; c.fillRect(0, 0, W, H); } }
+}
+function vtext(c, s, x, y, fs, gap) { for (let i = 0; i < s.length; i++) c.fillText(s[i], x, y + i * gap); }
+/* 海报：宿主封面图 → 首幕缩略图 → 水墨程序画；叠竖排标题（取自工程名） */
+function drawPoster(c, w, h, t, dim) {
+  const im = imgOf(PREVIEW.poster) || (SCENES[0] ? imgOf(SCENES[0].thumb) : null);
+  if (im) drawCover(c, im, 0, 0, w, h);
+  else renderFilm(c, w, h, SCENES.length ? SCENES[Math.floor(SCENES.length * 0.6)].t0 + 0.2 : 12, { sub: false, noThumb: true, scene: SCENES.length ? undefined : NO_SCENE });
+  if (dim) { c.fillStyle = 'rgba(8,6,4,.5)'; c.fillRect(0, 0, w, h); return; }
+  if (!im) posterOverlay(c, w, h);
+}
+function posterOverlay(c, w, h) {
+  const k = Math.min(w / 520, h / 292), title = String(PROJECT.title || '').trim();
+  if (!title || h < 60) return;
+  const g = c.createLinearGradient(w * 0.45, 0, w, 0); g.addColorStop(0, 'rgba(8,6,4,0)'); g.addColorStop(1, 'rgba(8,6,4,.7)'); c.fillStyle = g; c.fillRect(0, 0, w, h);
+  const parts = title.split(/[：:·|｜\-—\s]+/).filter(Boolean), head = (parts[0] || title).slice(0, Math.max(2, Math.floor((h - 60 * k) / (48 * k)))), rest = parts.slice(1).join('').slice(0, Math.max(0, Math.floor((h - 70 * k) / (18 * k))));
+  c.textAlign = 'center'; c.textBaseline = 'top';
+  c.font = `${Math.round(44 * k)}px KaiTi, STKaiti, serif`; c.fillStyle = 'rgba(0,0,0,.55)'; vtext(c, head, w - 48.5 * k, 28 * k, 44 * k, 48 * k);
+  c.fillStyle = '#F4EBDA'; vtext(c, head, w - 50 * k, 26 * k, 44 * k, 48 * k);
+  if (rest) { c.font = `${Math.round(15 * k)}px KaiTi, STKaiti, serif`; c.fillStyle = 'rgba(244,235,218,.78)'; vtext(c, rest, w - 98 * k, 30 * k, 15 * k, 18 * k); }
+  c.textAlign = 'left'; c.font = `${Math.max(9, Math.round(10 * k))}px Consolas, "Microsoft YaHei UI", monospace`; c.fillStyle = 'rgba(244,235,218,.62)';
+  c.fillText(fitText(c, [PROJECT.genre, SCENES.length ? SCENES.length + ' 幕' : '', PROJECT.bpm ? PROJECT.bpm + ' BPM' : '', fmtT(DUR)].filter(Boolean).join(' · '), w - 28 * k - 110 * k), 14 * k, h - 22 * k);
+}
+function cardOverlay(c, w, h, t) {
+  const k = Math.min(w / 520, h / 292), a = AG[Pipe.active] || null, cx = w / 2, cy = h * 0.44, s = 46 * k;
+  if (a) {
+    const g = c.createRadialGradient(cx, cy, 0, cx, cy, s * 2.2); g.addColorStop(0, hexA(a.glaze, 0.35)); g.addColorStop(1, hexA(a.glaze, 0)); c.fillStyle = g; c.fillRect(cx - s * 2.2, cy - s * 2.2, s * 4.4, s * 4.4);
+    c.save(); c.translate(cx, cy); const gg = c.createLinearGradient(-s / 2, -s / 2, s / 2, s / 2); gg.addColorStop(0, mixHex(a.glaze, '#FFFFFF', 0.2)); gg.addColorStop(1, mixHex(a.glaze, '#000000', 0.3)); c.fillStyle = gg; roundRect(c, -s / 2, -s / 2, s, s, 4); c.fill();
+    c.fillStyle = '#1A110A'; c.font = `${Math.round(s * 0.6)}px KaiTi, STKaiti, serif`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(a.ch, 0, 1);
+    c.strokeStyle = hexA(P.gold2, 0.85); c.lineWidth = 1.5; c.beginPath(); c.arc(0, 0, s * 0.85, t * 2, t * 2 + 1.7); c.stroke(); c.restore();
+  }
+  const msg = Pipe.status === 'queued' ? '已进入织造队列 · 等待调度' : (a && a.task) || Pipe.msg || '';
+  c.textAlign = 'center'; c.textBaseline = 'top'; c.font = `${Math.max(12, Math.round(14 * k))}px KaiTi, STKaiti, serif`; c.fillStyle = '#F4EBDA';
+  c.fillText(fitText(c, a ? `${a.name} · ${ST_CN[a.status] || ''}` : '织机候场', w - 24 * k), cx, cy + s * 0.75);
+  c.font = `${Math.max(12, Math.round(12 * k))}px "Microsoft YaHei UI", sans-serif`; c.fillStyle = 'rgba(244,235,218,.7)';
+  if (msg) c.fillText(fitText(c, msg, w - 28 * k), cx, cy + s * 0.75 + 24 * k);
+}
+function haltOverlay(c, w, h) {
+  const k = Math.min(w / 520, h / 292), failed = Pipe.status === 'failed';
+  c.fillStyle = failed ? 'rgba(60,10,6,.55)' : 'rgba(20,18,16,.5)'; c.fillRect(0, 0, w, h);
+  const s = 40 * k, cx = w / 2, cy = h * 0.4;
+  c.save(); c.translate(cx, cy); c.rotate(-0.1); c.strokeStyle = failed ? '#E0583A' : 'rgba(237,227,207,.6)'; c.lineWidth = 2.4 * k; roundRect(c, -s, -s * 0.62, s * 2, s * 1.24, 4); c.stroke();
+  c.fillStyle = failed ? '#E0583A' : 'rgba(237,227,207,.75)'; c.font = `${Math.round(s * 0.62)}px KaiTi, STKaiti, serif`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(failed ? '中断' : '止织', 0, 1); c.restore();
+  const a = AG[Pipe.active];
+  const line = failed ? (Pipe.error || (a && a.task) || '执行失败') : Pipe.msg || '已停止当前织造';
+  c.textAlign = 'center'; c.textBaseline = 'top'; c.font = `${Math.max(12, Math.round(13 * k))}px "Microsoft YaHei UI", sans-serif`; c.fillStyle = failed ? '#F6C3B6' : 'rgba(244,235,218,.78)';
+  c.fillText(fitText(c, (a && failed ? a.name + '：' : '') + line, w - 28 * k), cx, cy + s * 0.9);
+  c.fillStyle = 'rgba(244,235,218,.55)'; c.font = `${Math.max(12, Math.round(12 * k))}px "Microsoft YaHei UI", sans-serif`;
+  c.fillText('任务中心可「重试」· 或按 R 重新出片', cx, cy + s * 0.9 + 22 * k);
+}
+function weaveOverlay(c, w, h, fl) {
+  const k = w / 520;
+  if (!fl) return;
+  const A = AS[fl.key]; if (!A) return;
+  const u = clamp(fl.te / fl.T.end, 0, 1);
+  const pw = 128 * k, ph = pw * 0.5625, px = w - pw - 12 * k, py = 12 * k;
+  c.fillStyle = 'rgba(0,0,0,.5)'; c.fillRect(px - 3, py - 3, pw + 6, ph + 22 * k);
+  const im = imgOf(A.thumb) || (TEX.art && TEX.art[fl.key]);
+  if (im) drawCover(c, im, px, py, pw, ph);
+  c.strokeStyle = '#F2D592'; c.lineWidth = 1.2;
+  const per = 2 * (pw + ph), d = per * E.out(clamp(fl.te / 1.2, 0, 1));
+  c.setLineDash([d, per]); c.strokeRect(px, py, pw, ph); c.setLineDash([]);
+  c.font = `${Math.max(9, Math.round(9.5 * k))}px "Microsoft YaHei UI", sans-serif`; c.fillStyle = '#F4EBDA'; c.textAlign = 'left'; c.textBaseline = 'top'; c.fillText(fitText(c, A.name, pw), px, py + ph + 5 * k);
+  const bw = w - 28 * k; c.fillStyle = 'rgba(255,255,255,.12)'; c.fillRect(14 * k, h - 9 * k, bw, 2 * k); c.fillStyle = '#D4A64A'; c.fillRect(14 * k, h - 9 * k, bw * u, 2 * k);
+}
+function mixOverlay(c, w, h, ht) {
+  const k = w / 520, lv = envAt(BGM_ENV, ht), mv = /subtitle-mv/.test(PROJECT.narration || ''), vv = mv ? 0 : envAt(VOICE_ENV, ht);
+  c.fillStyle = 'rgba(0,0,0,.5)'; c.fillRect(w - 64 * k, 12 * k, 52 * k, 92 * k);
+  [['乐', lv, '#D4A64A'], ['声', vv, '#D27D8A']].forEach(([n, v, col], i) => { const x = w - 56 * k + i * 22 * k, bh = 70 * k; for (let j = 0; j < 14; j++) { const on = j / 14 < v; c.fillStyle = on ? (j > 11 ? '#E0583A' : col) : 'rgba(255,255,255,.08)'; c.fillRect(x, 12 * k + 6 * k + bh - (j + 1) * (bh / 14), 14 * k, bh / 14 - 1.2 * k); } c.fillStyle = '#F4EBDA'; c.font = `${Math.max(9, Math.round(10 * k))}px KaiTi, serif`; c.textAlign = 'center'; c.textBaseline = 'top'; c.fillText(n, x + 7 * k, 12 * k + 80 * k); });
+  c.textAlign = 'left'; c.textBaseline = 'bottom'; c.font = `${Math.max(9, Math.round(9.5 * k))}px Consolas, "Microsoft YaHei UI", monospace`; c.fillStyle = 'rgba(244,235,218,.75)';
+  const seg = VOICE_SEGS.filter((g) => g.t0 <= ht).length, sfxN = SFX_ALL.filter((f) => f.t <= ht).length;
+  c.fillText(fitText(c, mv ? `纯音乐字幕 MV · 音效 ${sfxN}/${SFX_ALL.length}` : `旁白 ${seg}/${VOICE_SEGS.length} 段 · 音效 ${sfxN}/${SFX_ALL.length}`, w - 90 * k), 14 * k, h - 30 * k);
+}
+function renderOverlay(c, w, h, fr) {
+  const k = w / 520, tot = totalFrames(), u = fr / tot, sy = ((fr * 7) % Math.max(1, Math.round(h))) | 0;
+  c.fillStyle = 'rgba(242,213,146,.08)'; c.fillRect(0, sy, w, 2 * k);
+  c.fillStyle = 'rgba(0,0,0,.55)'; c.fillRect(0, h - 26 * k, w, 26 * k);
+  c.fillStyle = 'rgba(255,255,255,.12)'; c.fillRect(12 * k, h - 9 * k, w - 24 * k, 2.2 * k); c.fillStyle = '#D4A64A'; c.fillRect(12 * k, h - 9 * k, (w - 24 * k) * u, 2.2 * k);
+  c.font = `${Math.max(9, Math.round(9.5 * k))}px Consolas, monospace`; c.textBaseline = 'middle'; c.textAlign = 'left'; c.fillStyle = '#F4EBDA';
+  const right = `${fr} / ${tot}  ·  ${(u * 100).toFixed(1)}%`, rw = c.measureText(right).width;
+  c.fillText(fitText(c, `● REC  ${renderLabel()} · H.264`, w - 36 * k - rw), 12 * k, h - 18 * k);
+  c.textAlign = 'right'; c.fillText(right, w - 12 * k, h - 18 * k);
+}
+
+/* ══════════════ 19. HUD 刷新（只在数值变化时写 DOM） ══════════════ */
+@@@ END

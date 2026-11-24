@@ -1,0 +1,1190 @@
+{
+  "version": "promo-plan/1",
+  "mode": "promo-ui",
+  "genre": "ui-tutorial",
+  "genreLabel": "亮色界面软件全流程实操教程",
+  "pacingMode": "balanced",
+  "beatSync": false,
+  "title": "DSH 视频工作台实操：从新建工程到质检导出",
+  "style": "tech",
+  "targetPlatform": "universal",
+  "bpm": 114,
+  "shots": [
+    {
+      "id": "scene-01",
+      "title": "从新建工程开始",
+      "narration": "打开 DSH，先建一个视频工程。",
+      "subChunks": [
+        "打开 DSH 先建一个视频工程"
+      ],
+      "accentWords": [
+        "视频工程"
+      ],
+      "threePreset": "orbital-core",
+      "visualBlueprint": "作战大屏全幅停帧，标题落在经核验的空白处，随即让出视线，接顶栏操作实录。",
+      "motionNotes": "作战大屏全幅停帧，标题落在经核验的空白处，随即让出视线，接顶栏操作实录。",
+      "emotion": "欢快热情",
+      "voiceEmotion": "欢快热情",
+      "role": "host",
+      "speechRate": 1.11,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "工程管理"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "AI 作战大屏",
+      "durationSec": 3.5,
+      "assetRefs": [
+        "assets/images/image-01a-ui-warroom-light-9353.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-02",
+      "title": "打开抽屉并输入工程名",
+      "narration": "点顶栏的工程管理入口，打开左侧抽屉。点新建视频工程，再在弹窗里输入项目名称。",
+      "subChunks": [
+        "点顶栏的工程管理入口",
+        "打开左侧抽屉",
+        "点新建视频工程",
+        "再在弹窗里输入项目名称"
+      ],
+      "accentWords": [
+        "工程管理",
+        "项目名称"
+      ],
+      "threePreset": "cyber-terrain",
+      "visualBlueprint": "全幅播放抽屉展开和名称输入；定位环只跟随核实后的实录动作，输入完成后停帧。",
+      "motionNotes": "全幅播放抽屉展开和名称输入；定位环只跟随核实后的实录动作，输入完成后停帧。",
+      "emotion": "温和亲切",
+      "voiceEmotion": "温和亲切",
+      "role": "host",
+      "speechRate": 1.08,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "打开抽屉",
+        "输入名称"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.46,
+          "z": 1.06
+        },
+        {
+          "t": 0.55,
+          "fx": 0.36,
+          "fy": 0.32,
+          "z": 1.92
+        },
+        {
+          "t": 2.6,
+          "fx": 0.45,
+          "fy": 0.42,
+          "z": 1.75
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "工程管理",
+      "durationSec": 11,
+      "assetRefs": [
+        "assets/videos/video-01-demo-drawer-new-project-473d.mp4"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-03",
+      "title": "从列表切换已有工程",
+      "narration": "如果要接着做旧项目，不必再新建。在工程抽屉里找到原来的项目，切回对应工作区。",
+      "subChunks": [
+        "如果要接着做旧项目 不必再新建",
+        "在工程抽屉里找到原来的项目",
+        "切回对应工作区"
+      ],
+      "accentWords": [
+        "原来的项目"
+      ],
+      "threePreset": "particle-vortex",
+      "visualBlueprint": "用抽屉展开截图全幅回看列表，不标具体项目行，不重演点击，让观众认清切换入口。",
+      "motionNotes": "用抽屉展开截图全幅回看列表，不标具体项目行，不重演点击，让观众认清切换入口。",
+      "emotion": "温和亲切",
+      "voiceEmotion": "温和亲切",
+      "role": "host",
+      "speechRate": 1.08,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "历史工程",
+        "工作区切换"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "工程抽屉",
+      "durationSec": 8.5,
+      "assetRefs": [
+        "assets/images/image-01b-ui-drawer-open-8ece.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-04",
+      "title": "提交前核对工程名",
+      "narration": "提交前，先核对名称。想继续就确认创建；如果只是打开看看，点取消即可返回。",
+      "subChunks": [
+        "提交前 先核对名称",
+        "想继续就确认创建",
+        "如果只是打开看看",
+        "点取消即可返回"
+      ],
+      "accentWords": [
+        "先核对名称",
+        "确认创建"
+      ],
+      "threePreset": "floating-monoliths",
+      "visualBlueprint": "新建工程弹窗全幅停帧，保留原有输入状态，不叠加新名称，也不合成创建成功提示。",
+      "motionNotes": "新建工程弹窗全幅停帧，保留原有输入状态，不叠加新名称，也不合成创建成功提示。",
+      "emotion": "重点强调",
+      "voiceEmotion": "重点强调",
+      "role": "host",
+      "speechRate": 1.06,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "核对名称",
+        "确认或取消"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "新建视频工程",
+      "durationSec": 8.5,
+      "assetRefs": [
+        "assets/images/image-01c-ui-new-project-modal-57a0.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-05",
+      "title": "打开算力体检",
+      "narration": "点顶栏的算力状态，先看本机的 CPU、内存和显卡。担心渲染时卡住，可以切到强制低配保护。",
+      "subChunks": [
+        "点顶栏的算力状态",
+        "先看本机的 CPU 内存和显卡",
+        "担心渲染时卡住",
+        "可以切到强制低配保护"
+      ],
+      "accentWords": [
+        "本机",
+        "强制低配保护"
+      ],
+      "threePreset": "chrono-helix",
+      "visualBlueprint": "全幅跟随打开体检弹窗与切档动作，在实录选中态停留；不把后续切回误标为开启。",
+      "motionNotes": "全幅跟随打开体检弹窗与切档动作，在实录选中态停留；不把后续切回误标为开启。",
+      "emotion": "温和亲切",
+      "voiceEmotion": "温和亲切",
+      "role": "host",
+      "speechRate": 1.07,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "light-wipe",
+      "highlights": [
+        "本机实测",
+        "强制低配保护"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.6296,
+          "fy": 0.0343,
+          "z": 1.45
+        },
+        {
+          "t": 0.88,
+          "fx": 0.6296,
+          "fy": 0.0343,
+          "z": 1.52
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "算力体检",
+      "durationSec": 11,
+      "assetRefs": [
+        "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-06",
+      "title": "先对照最低配置",
+      "narration": "先看最低档：4 核 CPU、8 GB 内存。这是开启低配保护时的运行参考，不等于能流畅渲染 4K。",
+      "subChunks": [
+        "先看最低档 4 核 CPU 8 GB 内存",
+        "这是开启低配保护时的运行参考",
+        "不等于能流畅渲染 4K"
+      ],
+      "accentWords": [
+        "最低档",
+        "运行参考"
+      ],
+      "threePreset": "matrix-cubes",
+      "visualBlueprint": "同章体检截图全幅停留，观众可同时对照本机检测结果与最低档配置，不重绘表格。",
+      "motionNotes": "同章体检截图全幅停留，观众可同时对照本机检测结果与最低档配置，不重绘表格。",
+      "emotion": "重点强调",
+      "voiceEmotion": "重点强调",
+      "role": "host",
+      "speechRate": 1.05,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "4 核 CPU",
+        "8 GB 内存"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "配置档位表",
+      "durationSec": 10.5,
+      "assetRefs": [
+        "assets/images/image-02a-ui-hardware-modal-5c43.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-07",
+      "title": "区分推荐档与 4K 档",
+      "narration": "推荐档看 8 核 CPU 和 16 GB 内存。要做 4K，再看 12 核以上、32 GB 以上的档位，并核对显存要求。",
+      "subChunks": [
+        "推荐档看 8 核 CPU 和 16 GB 内存",
+        "要做 4K 再看 12 核以上",
+        "32 GB 以上的档位",
+        "并核对显存要求"
+      ],
+      "accentWords": [
+        "推荐档",
+        "显存要求"
+      ],
+      "threePreset": "orbital-core",
+      "visualBlueprint": "延续体检弹窗的同一全幅画面，保留三档横向对照，规格读完后留出时间查看显存栏。",
+      "motionNotes": "延续体检弹窗的同一全幅画面，保留三档横向对照，规格读完后留出时间查看显存栏。",
+      "emotion": "温和亲切",
+      "voiceEmotion": "温和亲切",
+      "role": "host",
+      "speechRate": 1.05,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "推荐档",
+        "4K 档"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "配置档位表",
+      "durationSec": 11.5,
+      "assetRefs": [
+        "assets/images/image-02a-ui-hardware-modal-5c43.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-08",
+      "title": "按任务选择算力模式",
+      "narration": "日常先用智能自适应。机器吃紧，就选强制低配保护，给渲染减负；资源充足，再考虑全速性能。",
+      "subChunks": [
+        "日常先用智能自适应",
+        "机器吃紧 就选强制低配保护",
+        "给渲染减负",
+        "资源充足 再考虑全速性能"
+      ],
+      "accentWords": [
+        "智能自适应",
+        "给渲染减负"
+      ],
+      "threePreset": "cyber-terrain",
+      "visualBlueprint": "全幅保留三档模式选项，定位环轻描低配保护卡片，不加波纹、不改写实际选中状态。",
+      "motionNotes": "全幅保留三档模式选项，定位环轻描低配保护卡片，不加波纹、不改写实际选中状态。",
+      "emotion": "重点强调",
+      "voiceEmotion": "重点强调",
+      "role": "host",
+      "speechRate": 1.07,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "智能自适应",
+        "强制低配保护",
+        "全速性能"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.46,
+          "z": 1.06
+        },
+        {
+          "t": 0.55,
+          "fx": 0.36,
+          "fy": 0.32,
+          "z": 1.92
+        },
+        {
+          "t": 2.6,
+          "fx": 0.45,
+          "fy": 0.42,
+          "z": 1.75
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "算力模式",
+      "durationSec": 10,
+      "assetRefs": [
+        "assets/images/image-02a-ui-hardware-modal-5c43.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-09",
+      "title": "认识作战大屏的 3 张卡",
+      "narration": "作战大屏从左到右分 3 步：左边准备素材，中间告诉 AI 要做什么，右边选引擎和发车参数。",
+      "subChunks": [
+        "作战大屏从左到右分 3 步",
+        "左边准备素材",
+        "中间告诉 AI 要做什么",
+        "右边选引擎和发车参数"
+      ],
+      "accentWords": [
+        "准备素材",
+        "发车参数"
+      ],
+      "threePreset": "particle-vortex",
+      "visualBlueprint": "作战大屏全幅停帧，沿原界面从左到右读三卡，只在导航层更新进度，不重排卡片。",
+      "motionNotes": "作战大屏全幅停帧，沿原界面从左到右读三卡，只在导航层更新进度，不重排卡片。",
+      "emotion": "欢快热情",
+      "voiceEmotion": "欢快热情",
+      "role": "host",
+      "speechRate": 1.1,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "light-wipe",
+      "highlights": [
+        "备料",
+        "需求",
+        "发车参数"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "AI 作战大屏",
+      "durationSec": 8.5,
+      "assetRefs": [
+        "assets/images/image-01a-ui-warroom-light-9353.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-10",
+      "title": "写需求并润色提示词",
+      "narration": "在中间卡片写一句需求，再点 AI 一键润色提示词。润色后先看标题和要点，别把导演备注当成成片文案。",
+      "subChunks": [
+        "在中间卡片写一句需求",
+        "再点 AI 一键润色提示词",
+        "润色后先看标题和要点",
+        "别把导演备注当成成片文案"
+      ],
+      "accentWords": [
+        "一键润色",
+        "标题和要点"
+      ],
+      "threePreset": "floating-monoliths",
+      "visualBlueprint": "整段原速播放三卡录屏，保留真实输入与模式切换；可读的润色结果帧才停留复查。",
+      "motionNotes": "整段原速播放三卡录屏，保留真实输入与模式切换；可读的润色结果帧才停留复查。",
+      "emotion": "重点强调",
+      "voiceEmotion": "重点强调",
+      "role": "host",
+      "speechRate": 1.08,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "输入需求",
+        "区分文案与导演备注"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "作战大屏实操",
+      "durationSec": 12,
+      "assetRefs": [
+        "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-11",
+      "title": "选择自由编码引擎",
+      "narration": "右侧可以选 Remotion 或 HTML5，两条路线都支持 Three.js。引擎决定怎么实现画面，不限制你做什么题材。",
+      "subChunks": [
+        "右侧可以选 Remotion 或 HTML5",
+        "两条路线都支持 Three.js",
+        "引擎决定怎么实现画面",
+        "不限制你做什么题材"
+      ],
+      "accentWords": [
+        "Remotion",
+        "HTML5",
+        "不限制题材"
+      ],
+      "threePreset": "chrono-helix",
+      "visualBlueprint": "回看同章大屏截图，轻描右卡可见的引擎入口，保留邻近选项，不标注视口外的启动按钮。",
+      "motionNotes": "回看同章大屏截图，轻描右卡可见的引擎入口，保留邻近选项，不标注视口外的启动按钮。",
+      "emotion": "温和亲切",
+      "voiceEmotion": "温和亲切",
+      "role": "host",
+      "speechRate": 1.07,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "Remotion + Three.js 3D",
+        "HTML5 + Three.js"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.7814,
+          "fy": 0.618,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.7814,
+          "fy": 0.618,
+          "z": 2.05
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "发车参数",
+      "durationSec": 10,
+      "assetRefs": [
+        "assets/images/image-01a-ui-warroom-light-9353.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-12",
+      "title": "精修第 1 步：筛选素材",
+      "narration": "切到分步精修工作台，进入素材与提词拍。先按图片筛选，想看回整个素材库，就切回全部。",
+      "subChunks": [
+        "切到分步精修工作台",
+        "进入素材与提词拍",
+        "先按图片筛选",
+        "想看回整个素材库 就切回全部"
+      ],
+      "accentWords": [
+        "分步精修工作台",
+        "全部"
+      ],
+      "threePreset": "matrix-cubes",
+      "visualBlueprint": "原速播放工作台切换与素材筛选，保留后段拍摄棚动作，只在真实筛选结果帧做短停。",
+      "motionNotes": "原速播放工作台切换与素材筛选，保留后段拍摄棚动作，只在真实筛选结果帧做短停。",
+      "emotion": "欢快热情",
+      "voiceEmotion": "欢快热情",
+      "role": "host",
+      "speechRate": 1.09,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "light-wipe",
+      "highlights": [
+        "图片筛选",
+        "查看全部"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "素材与提词拍",
+      "durationSec": 11,
+      "assetRefs": [
+        "assets/videos/video-04-demo-step1-assets-teleprompter-e5e2.mp4"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-13",
+      "title": "检查素材是否齐备",
+      "narration": "这里可以管理图片、视频和背景音乐。确认要用的素材都在库里，再点下一步，进入导演声画配乐。",
+      "subChunks": [
+        "这里可以管理图片",
+        "视频和背景音乐",
+        "确认要用的素材都在库里 再点下一步",
+        "进入导演声画配乐"
+      ],
+      "accentWords": [
+        "都在库里",
+        "下一步"
+      ],
+      "threePreset": "orbital-core",
+      "visualBlueprint": "素材页全幅停帧，先留时间查看列表，提到下一步时轻描右上角入口，不演示跳转。",
+      "motionNotes": "素材页全幅停帧，先留时间查看列表，提到下一步时轻描右上角入口，不演示跳转。",
+      "emotion": "温和亲切",
+      "voiceEmotion": "温和亲切",
+      "role": "host",
+      "speechRate": 1.08,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "图片",
+        "视频",
+        "背景音乐"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.9108,
+          "fy": 0.1485,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.9108,
+          "fy": 0.1485,
+          "z": 2.05
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "素材库",
+      "durationSec": 9,
+      "assetRefs": [
+        "assets/images/image-04a-ui-step1-assets-5e58.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-14",
+      "title": "打开提词器拍摄棚",
+      "narration": "需要真人口播时，展开提词器拍摄棚，可以先生成提词稿，再调滚动速度。已经拍好的视频，也可以直接上传。",
+      "subChunks": [
+        "需要真人口播时",
+        "展开提词器拍摄棚",
+        "可以先生成提词稿",
+        "再调滚动速度",
+        "已经拍好的视频",
+        "也可以直接上传"
+      ],
+      "accentWords": [
+        "提词稿",
+        "直接上传"
+      ],
+      "threePreset": "cyber-terrain",
+      "visualBlueprint": "全幅停在展开后的真实拍摄棚，轻描提词稿入口，保留原有上传区域，不合成摄像画面。",
+      "motionNotes": "全幅停在展开后的真实拍摄棚，轻描提词稿入口，保留原有上传区域，不合成摄像画面。",
+      "emotion": "温和亲切",
+      "voiceEmotion": "温和亲切",
+      "role": "host",
+      "speechRate": 1.08,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "口播提词稿",
+        "本机视频上传"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.46,
+          "z": 1.06
+        },
+        {
+          "t": 0.55,
+          "fx": 0.36,
+          "fy": 0.32,
+          "z": 1.92
+        },
+        {
+          "t": 2.6,
+          "fx": 0.45,
+          "fy": 0.42,
+          "z": 1.75
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "提词器拍摄棚",
+      "durationSec": 10,
+      "assetRefs": [
+        "assets/images/image-04b-ui-teleprompter-f4dd.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-15",
+      "title": "精修第 2 步：找到模型与配音入口",
+      "narration": "进入导演声画配乐。顶栏的 AI 模型管语言模型接入，旁边的配音入口管语音引擎，两个设置分开检查。",
+      "subChunks": [
+        "进入导演声画配乐",
+        "顶栏的 AI 模型管语言模型接入",
+        "旁边的配音入口管语音引擎",
+        "两个设置分开检查"
+      ],
+      "accentWords": [
+        "AI 模型",
+        "配音入口"
+      ],
+      "threePreset": "particle-vortex",
+      "visualBlueprint": "全幅原速播放模型与配音面板的真实开合，在第一个可读面板和最后状态分别短停。",
+      "motionNotes": "全幅原速播放模型与配音面板的真实开合，在第一个可读面板和最后状态分别短停。",
+      "emotion": "重点强调",
+      "voiceEmotion": "重点强调",
+      "role": "host",
+      "speechRate": 1.08,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "light-wipe",
+      "highlights": [
+        "语言模型",
+        "语音引擎"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "导演声画配乐",
+      "durationSec": 11,
+      "assetRefs": [
+        "assets/videos/video-05-demo-step2-llm-tts-0ac5.mp4"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-16",
+      "title": "设定风格与配音节奏",
+      "narration": "回到导演设置，核对润色后的需求，再定画面风格和配音。音色决定听起来是谁在讲，情绪和语速决定这段怎么讲。",
+      "subChunks": [
+        "回到导演设置",
+        "核对润色后的需求",
+        "再定画面风格和配音",
+        "音色决定听起来是谁在讲",
+        "情绪和语速决定这段怎么讲"
+      ],
+      "accentWords": [
+        "音色",
+        "情绪和语速"
+      ],
+      "threePreset": "floating-monoliths",
+      "visualBlueprint": "导演设置页全幅停帧，原样保留需求与声画选项，靠口播引导阅读，不模拟参数变化。",
+      "motionNotes": "导演设置页全幅停帧，原样保留需求与声画选项，靠口播引导阅读，不模拟参数变化。",
+      "emotion": "温和亲切",
+      "voiceEmotion": "温和亲切",
+      "role": "host",
+      "speechRate": 1.07,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "画面风格",
+        "音色",
+        "情绪与语速"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "导演设置",
+      "durationSec": 10.5,
+      "assetRefs": [
+        "assets/images/image-05a-ui-step2-director-77ba.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-17",
+      "title": "选择模型协议并测试",
+      "narration": "可以跟随 DSH 客户端，也可以自定义接入。自定义时，先按服务选择协议，再用测试连接确认是否可用。",
+      "subChunks": [
+        "可以跟随 DSH 客户端",
+        "也可以自定义接入",
+        "自定义时 先按服务选择协议",
+        "再用测试连接确认是否可用"
+      ],
+      "accentWords": [
+        "按服务选择协议",
+        "测试连接"
+      ],
+      "threePreset": "chrono-helix",
+      "visualBlueprint": "全幅保留四协议配置弹窗，读完选项后轻描测试连接按钮，不播放虚构的成功反馈。",
+      "motionNotes": "全幅保留四协议配置弹窗，读完选项后轻描测试连接按钮，不播放虚构的成功反馈。",
+      "emotion": "重点强调",
+      "voiceEmotion": "重点强调",
+      "role": "host",
+      "speechRate": 1.06,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "OpenAI",
+        "Anthropic",
+        "Responses",
+        "Gemini"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.5955,
+          "fy": 0.8091,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.5955,
+          "fy": 0.8091,
+          "z": 2.05
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "大模型配置",
+      "durationSec": 11,
+      "assetRefs": [
+        "assets/images/image-05c-ui-llm-protocols-12f5.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-18",
+      "title": "按机器条件选配音引擎",
+      "narration": "配音中心里有 IndexTTS-2.5 和 GPT-SoVITS。用 Windows 又没有独显时，可以考虑原生 CPU 语音。",
+      "subChunks": [
+        "配音中心里有 IndexTTS-2.5 和",
+        "GPT-SoVITS",
+        "用 Windows 又没有独显时",
+        "可以考虑原生 CPU 语音"
+      ],
+      "accentWords": [
+        "Windows",
+        "CPU 语音"
+      ],
+      "threePreset": "matrix-cubes",
+      "visualBlueprint": "配音中心保持全幅，三个引擎名称随口播依次读出，最后轻描 Windows 选项，不播放假试听。",
+      "motionNotes": "配音中心保持全幅，三个引擎名称随口播依次读出，最后轻描 Windows 选项，不播放假试听。",
+      "emotion": "温和亲切",
+      "voiceEmotion": "温和亲切",
+      "role": "host",
+      "speechRate": 1.05,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "IndexTTS-2.5",
+        "GPT-SoVITS",
+        "Windows 原生语音"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.8697,
+          "fy": 0.583,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.8697,
+          "fy": 0.583,
+          "z": 2.05
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "多引擎配音中心",
+      "durationSec": 11.5,
+      "assetRefs": [
+        "assets/images/image-05b-ui-tts-engines-98bc.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-19",
+      "title": "精修第 3 步：选中要改的一幕",
+      "narration": "打开监看台与改片，先切换分镜预览，找到要改的一幕。确认当前选中的分镜，再改语速或情绪。",
+      "subChunks": [
+        "打开监看台与改片",
+        "先切换分镜预览",
+        "找到要改的一幕",
+        "确认当前选中的分镜",
+        "再改语速或情绪"
+      ],
+      "accentWords": [
+        "当前选中的分镜",
+        "再改"
+      ],
+      "threePreset": "orbital-core",
+      "visualBlueprint": "全幅播放分镜切换与精修操作，在真实选中态留帧供辨认，不添加虚构的参数变化。",
+      "motionNotes": "全幅播放分镜切换与精修操作，在真实选中态留帧供辨认，不添加虚构的参数变化。",
+      "emotion": "重点强调",
+      "voiceEmotion": "重点强调",
+      "role": "host",
+      "speechRate": 1.08,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "light-wipe",
+      "highlights": [
+        "切换预览",
+        "选定单幕"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "监看台与改片",
+      "durationSec": 10.5,
+      "assetRefs": [
+        "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-20",
+      "title": "回放检查画面与口播",
+      "narration": "用成片原画时间轴回看这一幕。除了听语速，还要看口播讲到关键点时，画面有没有跟上。",
+      "subChunks": [
+        "用成片原画时间轴回看这一幕",
+        "除了听语速 还要看口播讲到关键点时",
+        "画面有没有跟上"
+      ],
+      "accentWords": [
+        "时间轴",
+        "画面有没有跟上"
+      ],
+      "threePreset": "cyber-terrain",
+      "visualBlueprint": "监看台截图全幅停帧，轻描真实时间轴入口，保留原预览内容，不让截图假装播放。",
+      "motionNotes": "监看台截图全幅停帧，轻描真实时间轴入口，保留原预览内容，不让截图假装播放。",
+      "emotion": "温和亲切",
+      "voiceEmotion": "温和亲切",
+      "role": "host",
+      "speechRate": 1.07,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "时间轴回看",
+        "核对声画"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.46,
+          "z": 1.06
+        },
+        {
+          "t": 0.55,
+          "fx": 0.36,
+          "fy": 0.32,
+          "z": 1.92
+        },
+        {
+          "t": 2.6,
+          "fx": 0.45,
+          "fy": 0.42,
+          "z": 1.75
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "成片原画时间轴",
+      "durationSec": 9,
+      "assetRefs": [
+        "assets/images/image-06a-ui-step3-monitor-cf2e.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-21",
+      "title": "用自然语言做局部改片",
+      "narration": "交给 AI 做局部改片时，先说清楚改哪一幕、改什么、哪些内容保持不变。改完回看对应分镜。",
+      "subChunks": [
+        "交给 AI 做局部改片时",
+        "先说清楚改哪一幕 改什么",
+        "哪些内容保持不变",
+        "改完回看对应分镜"
+      ],
+      "accentWords": [
+        "改哪一幕",
+        "保持不变"
+      ],
+      "threePreset": "particle-vortex",
+      "visualBlueprint": "延续监看台全幅实屏，局部改片区域随原画一起保留，不添加示例输入或假改片结果。",
+      "motionNotes": "延续监看台全幅实屏，局部改片区域随原画一起保留，不添加示例输入或假改片结果。",
+      "emotion": "重点强调",
+      "voiceEmotion": "重点强调",
+      "role": "host",
+      "speechRate": 1.07,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "指定分镜",
+        "明确改动范围",
+        "改后回看"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "单幕精修",
+      "durationSec": 9.5,
+      "assetRefs": [
+        "assets/images/image-06a-ui-step3-monitor-cf2e.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-22",
+      "title": "精修第 4 步：先看质检",
+      "narration": "进入质检导出发布。先扫一遍九宫格抽帧，再看黑屏和响度报告。有异常先回去修，不急着导出。",
+      "subChunks": [
+        "进入质检导出发布",
+        "先扫一遍九宫格抽帧",
+        "再看黑屏和响度报告",
+        "有异常先回去修 不急着导出"
+      ],
+      "accentWords": [
+        "九宫格抽帧",
+        "有异常先回去修"
+      ],
+      "threePreset": "floating-monoliths",
+      "visualBlueprint": "以质检页全幅截图说明检查顺序；现有 07 仅作入口参考，待补录真实报告出现过程。",
+      "motionNotes": "以质检页全幅截图说明检查顺序；现有 07 仅作入口参考，待补录真实报告出现过程。",
+      "emotion": "重点强调",
+      "voiceEmotion": "重点强调",
+      "role": "host",
+      "speechRate": 1.06,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "light-wipe",
+      "highlights": [
+        "抽帧",
+        "黑屏检查",
+        "响度检查"
+      ],
+      "windowTheme": "light",
+      "windowTitle": "质检导出发布",
+      "durationSec": 10,
+      "assetRefs": [
+        "assets/images/image-07a-ui-step4-qa-de19.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-23",
+      "title": "分清审片导出与高清成品",
+      "narration": "要快看一版，选 720P 快速审片导出。质检通过后，再渲染高清成品 MP4。交付前，打开导出文件检查一遍。",
+      "subChunks": [
+        "要快看一版 选 720P 快速审片导出",
+        "质检通过后 再渲染高清成品 MP4",
+        "交付前 打开导出文件检查一遍"
+      ],
+      "accentWords": [
+        "快速审片",
+        "高清成品 MP4",
+        "打开导出文件"
+      ],
+      "threePreset": "chrono-helix",
+      "visualBlueprint": "质检页全幅停帧对照两个导出入口，静帧不加点击声；完成状态和文件核对只用补录。",
+      "motionNotes": "质检页全幅停帧对照两个导出入口，静帧不加点击声；完成状态和文件核对只用补录。",
+      "emotion": "温和亲切",
+      "voiceEmotion": "温和亲切",
+      "role": "host",
+      "speechRate": 1.06,
+      "recipe": "hold",
+      "layout": "freeform-stage",
+      "kenBurns": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "transition": "cut",
+      "highlights": [
+        "720P 快速审片",
+        "高清成品 MP4"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.3435,
+          "fy": 0.6099,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.3435,
+          "fy": 0.6099,
+          "z": 2.05
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "导出选项",
+      "durationSec": 11,
+      "assetRefs": [
+        "assets/images/image-07a-ui-step4-qa-de19.png"
+      ],
+      "_mediaDimMap": {}
+    },
+    {
+      "id": "scene-24",
+      "title": "在任务监控里定位异常",
+      "narration": "任务监控里可以看策划、剪辑、配音和渲染进度。遇到异常，先查失败节点，再看该任务能否重试。",
+      "subChunks": [
+        "任务监控里可以看策划 剪辑",
+        "配音和渲染进度",
+        "遇到异常 先查失败节点",
+        "再看该任务能否重试"
+      ],
+      "accentWords": [
+        "失败节点",
+        "该任务"
+      ],
+      "threePreset": "matrix-cubes",
+      "visualBlueprint": "任务中心全幅标出真实重试入口，停在当前状态；不模拟已点击，也不预写恢复结果。",
+      "motionNotes": "任务中心全幅标出真实重试入口，停在当前状态；不模拟已点击，也不预写恢复结果。",
+      "emotion": "重点强调",
+      "voiceEmotion": "重点强调",
+      "role": "host",
+      "speechRate": 1.07,
+      "recipe": "freeze_end",
+      "layout": "freeform-stage",
+      "kenBurns": "zoom-out",
+      "fromScale": 1.16,
+      "toScale": 1,
+      "transition": "cut",
+      "highlights": [
+        "4-Agent 进度",
+        "异常任务",
+        "重试入口"
+      ],
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.6986,
+          "fy": 0.1426,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.6986,
+          "fy": 0.1426,
+          "z": 2.05
+        }
+      ],
+      "cursors": [
+        {
+          "t": 0.1,
+          "fx": 0.5186,
+          "fy": 0.3026
+        },
+        {
+          "t": 0.44,
+          "fx": 0.6986,
+          "fy": 0.1426,
+          "click": true,
+          "label": "异常"
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "任务监控",
+      "durationSec": 10.5,
+      "assetRefs": [
+        "assets/images/image-07b-ui-task-center-610a.png"
+      ],
+      "_mediaDimMap": {}
+    }
+  ]
+}

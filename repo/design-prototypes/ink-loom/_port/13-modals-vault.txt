@@ -1,0 +1,113 @@
+@@@ RANGE
+/* ══════════════ 23. 弹窗：影核广场 / 复刻对比 / 提词器 / 数字人 / 音色 / 云端 / 体检 … ══════════════ */
+@@@ TO
+/* ══════════════ 25. 事件绑定 ══════════════ */
+@@@ WITH
+/* ══════════════ 23. 弹窗：素材预览 / 九宫抽帧 / 快捷键（其余工具一律交给宿主面板 openPanel） ══════════════ */
+const MODAL = { open: null, tick: null };
+function closeMenus() { $$('.dd.open, .sel.open').forEach((e) => e.classList.remove('open')); $$('#toolsMenu, #themePop').forEach((e) => e.classList.remove('on')); }
+function openModal(kind, arg) {
+  const def = MODALS[kind]; if (!def) return;
+  closeMenus(); if (FOLIO_OPEN) closeFolio();
+  $('#mTitle').textContent = def.t; $('#mEn').textContent = def.en;
+  const card = $('#modal .m-card'); card.style.width = def.w ? `min(${def.w}px, calc(100vw - 64px))` : '';
+  const body = $('#mBody'); body.innerHTML = ''; MODAL.tick = null; MODAL.open = kind;
+  def.build(body, arg);
+  $('#modal').classList.add('on'); $('#scrim').classList.add('on');
+}
+function closeModal() {
+  if (!MODAL.open) return;
+  $$('#mBody video, #mBody audio').forEach((m) => { try { m.pause(); } catch (e) { /* ignore */ } });
+  $('#modal').classList.remove('on'); if (!FOLIO_OPEN) $('#scrim').classList.remove('on');
+  MODAL.open = null; MODAL.tick = null;
+}
+function cvs(w, h, cls) { const c = mk('canvas', cls || ''); c.width = w; c.height = h; return c; }
+const KIND_CN = { image: '图片', video: '视频', music: '音乐', sfx: '音效', voice: '人声样本', host_video: '主播视频', note: '笔记', other: '其它', audio: '音频' };
+const MODALS = {
+  sheet9: { t: '九宫抽帧', en: '3×3 CONTACT SHEET', w: 980, build(b) {
+    b.innerHTML = `<div class="sheet9" id="sh9"></div><p class="m-note">均匀抽取 9 帧 · 点击画面跳转预览 · 「精修」在分步精修中打开该幕。</p>`;
+    const cells = [];
+    for (let i = 0; i < 9; i++) {
+      const t = (DUR * (i + 0.5)) / 9, s = sceneAt(t), cell = mk('div', 'sh-cell'), btn = mk('button', 'sh-pic'), cv = cvs(480, 270);
+      btn.appendChild(cv); btn.setAttribute('aria-label', `跳转到 ${fmtT(t)}`);
+      const cap = mk('div', 'sh-cap'); const tl = mk('span', 'sh-t'); tl.textContent = fmtT(t); const nm = mk('b', 'sh-n'); nm.textContent = s.id ? `${String(s.n).padStart(2, '0')} ${s.title}` : '—'; nm.title = nm.textContent;
+      cap.appendChild(tl); cap.appendChild(nm);
+      if (s.id) { const ref = mk('button', 'btn xs'); ref.textContent = '精修'; ref.setAttribute('aria-label', `在分步精修中打开第 ${s.n} 幕`); ref.onclick = () => { closeModal(); act('openScene', { sceneId: s.id }); }; cap.appendChild(ref); }
+      cell.appendChild(btn); cell.appendChild(cap);
+      btn.onclick = () => { seekPreview(t); closeModal(); toast(`跳转 ${fmtT(t)}${s.id ? ` · 第 ${s.n} 幕《${s.title}》` : ''}`, '帧'); };
+      $('#sh9', b).appendChild(cell); cells.push({ c: cv.getContext('2d'), t, s, ok: false });
+    }
+    const draw = () => cells.forEach((q) => { if (q.ok) return; const im = q.s.id ? imgOf(q.s.thumb) : null; q.c.setTransform(1.5, 0, 0, 1.5, 0, 0); if (im) { drawCover(q.c, im, 0, 0, 320, 180); q.ok = true; } else { renderFilm(q.c, 320, 180, q.t, { ui: false, noThumb: true }); q.ok = !q.s.thumb; } });
+    draw(); MODAL.tick = () => { if (cells.some((q) => !q.ok)) draw(); };
+  } },
+  lightbox: { t: '素材预览', en: 'ASSET PREVIEW', w: 920, build(b, key) {
+    const A = AS[key]; if (!A) { b.innerHTML = '<p class="m-note">该素材已不存在。</p>'; return; }
+    $('#mTitle').textContent = A.name; $('#mTitle').title = A.name;
+    const media = A.kind === 'image' && A.url ? `<img class="lb-media" alt="${esc(A.name)}" src="${esc(A.url)}">` : /video/.test(A.kind) && A.url ? `<video class="lb-media" controls playsinline preload="metadata" src="${esc(A.url)}"></video>` : /music|voice|sfx|audio/.test(A.kind) && A.url ? `<div class="lb-aud"><canvas width="480" height="270"></canvas><audio controls preload="metadata" src="${esc(A.url)}"></audio></div>` : '<div class="lb-aud"><canvas width="480" height="270"></canvas></div>';
+    b.innerHTML = `<div class="lightbox">${media}</div><div class="lb-foot"><span class="pill">${esc(KIND_CN[A.kind] || A.kind)}</span>${A.meta ? `<span class="pill">${esc(A.meta)}</span>` : ''}<span class="pill ${A.staged ? 'g' : 'ok'}">${A.staged ? '云端待确认' : A.used.length ? `已织入 ${A.used.length} 幕` : '已入库'}</span><span class="lb-sp"></span>${A.staged ? '<button class="btn sm" data-lb="discard">丢弃</button><button class="btn gold sm" data-lb="ok">确认入库</button>' : '<button class="btn sm" data-lb="del">删除素材</button>'}<button class="btn sm" data-mclose>关闭</button></div>${A.prompt ? `<p class="m-note">提示词：${esc(A.prompt)}</p>` : ''}`;
+    const cv = $('.lb-aud canvas', b); if (cv) { const c = cv.getContext('2d'); if (TEX.art && TEX.art[key]) c.drawImage(TEX.art[key], 0, 0, 480, 270); }
+    $$('[data-lb]', b).forEach((x) => (x.onclick = () => {
+      const k = x.dataset.lb;
+      if (k === 'ok') { closeModal(); confirmStaged(key); }
+      else if (k === 'discard') { closeModal(); discardStaged(key); }
+      else if (k === 'del') { if (!x.classList.contains('arm')) { x.classList.add('arm'); x.textContent = '再次点击确认删除'; setTimeout(() => { if (x.isConnected) { x.classList.remove('arm'); x.textContent = '删除素材'; } }, 2800); return; } closeModal(); removeAsset(key); }
+    }));
+  } },
+  help: { t: '快捷键', en: 'SHORTCUTS', w: 620, build(b) {
+    const rows = [['R', '一键出片 / 继续织造'], ['空格', '播放 / 暂停预览'], ['Esc', '关闭浮层；回到全景'], ['1 / 2 / 3', '镜头：全景 / 跟随 / 近景'], ['P', '展开经折（创意主题与出片参数）'], ['T', '墨色主题'], ['+ / −', '长卷缩放'], ['F', '长卷整卷适配'], ['Ctrl + 滚轮', '在长卷上缩放；滚轮平移'], ['点击工匠', '镜头聚焦该 Agent；再次点击回到全景'], ['点击镜头轨', '在分步精修中打开该幕'], ['?', '本帮助']];
+    b.innerHTML = `<table class="hist">${rows.map(([k, v]) => `<tr><td style="width:150px"><span class="kbd">${k}</span></td><td>${v}</td></tr>`).join('')}</table>`;
+  } },
+};
+
+/* ══════════════ 24. 素材仓交互：云端确认 / 导入 / 删除（全部交给宿主执行） ══════════════ */
+function confirmStaged(key) {
+  const A = AS[key]; if (!A || !A.staged) return;
+  const card = A.el;
+  if (card) { card.classList.add('stamped', 'ok'); const tg = card.querySelector('.tag'); if (tg) tg.textContent = '入库中'; }
+  VAULT.hold = performance.now() + 950;
+  act('confirmStaging', { stagingId: A.sid }).then((r) => {
+    if (r.ok) { if (card) { const tg = card.querySelector('.tag'); if (tg) tg.textContent = '已入库'; } }
+    else if (card) { card.classList.remove('stamped', 'ok'); const tg = card.querySelector('.tag'); if (tg) tg.textContent = '待确认'; }
+  });
+}
+function discardStaged(key) {
+  const A = AS[key]; if (!A || !A.staged) return;
+  if (A.el) A.el.classList.add('gone');
+  VAULT.hold = performance.now() + 520;
+  act('discardStaging', { stagingId: A.sid }).then((r) => { if (!r.ok && A.el) A.el.classList.remove('gone'); });
+}
+function removeAsset(key) {
+  const A = AS[key]; if (!A || A.staged) return;
+  if (A.el) A.el.classList.add('gone');
+  VAULT.hold = performance.now() + 420;
+  act('removeAsset', { assetId: A.id }).then((r) => { if (!r.ok && A.el) A.el.classList.remove('gone'); });
+}
+async function importFiles(fileList) {
+  const files = Array.from(fileList || []).filter((f) => f && f.size >= 0).slice(0, 40);
+  if (!files.length) return;
+  if (!hasProject()) { toast('请先新建或打开一个视频工程', '卷', '新建工程', () => act('newProject', {}), true); return; }
+  const total = files.reduce((s, f) => s + (f.size || 0), 0);
+  if (total > 2.5 * 1073741824) { toast('单次导入超过 2.5 GB，请分批导入', '卷', null, null, true); return; }
+  $('#dropZone').classList.add('busy');
+  try {
+    const out = [], transfer = [];
+    for (const f of files) { const data = await f.arrayBuffer(); out.push({ name: String(f.name || 'upload.bin').replace(/[\\/]/g, '_'), type: f.type || '', data }); transfer.push(data); }
+    const r = await act('importFiles', { files: out }, transfer);
+    if (r.ok) toast(`已导入 ${files.length} 项素材 · 下次出片由素材剪辑自动编排`, '入');
+  } catch (e) { toast('读取文件失败：' + (e && e.message ? e.message : e), '卷', null, null, true); }
+  finally { $('#dropZone').classList.remove('busy'); }
+}
+function makeArtTex(a) {
+  const W = 240, H = 135, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const c = cv.getContext('2d');
+  if (/^spool/.test(a.art)) {
+    const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#1F1913'); g.addColorStop(1, '#0B0907'); c.fillStyle = g; c.fillRect(0, 0, W, H);
+    c.fillStyle = 'rgba(212,166,74,.2)'; for (let x = 4; x < W; x += 4) { const v = (0.25 + 0.75 * Math.abs(noise1(x * 0.06, 3))) * H * 0.34; c.fillRect(x, H / 2 - v, 2, v * 2); }
+    const sp = document.createElement('canvas'); sp.width = sp.height = 120; drawSpool(sp.getContext('2d'), 120, 120, a.art === 'spoolRouge' ? '#C8707E' : a.art === 'spoolJade' ? '#5FA48C' : '#D4A64A');
+    c.drawImage(sp, W / 2 - 60, 8, 120, 120);
+  } else drawArt(c, W, H, a.art, 0);
+  return cv;
+}
+
+/* ══════════════ 25. 事件绑定 ══════════════ */
+@@@ END

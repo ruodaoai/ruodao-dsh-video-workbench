@@ -1,0 +1,96 @@
+@@@ REPLACE
+  const prog = Pipe.prog(), tx = P.text, band = L.lblY + L.lblH + 8;
+  c.save();
+  c.lineCap = 'butt';
+@@@ WITH
+  const prog = Pipe.prog(), tx = P.text, band = L.lblY + L.lblH + 8;
+  c.save();
+  /* 整个表盘只画在工位标签带以下：进度弧、拍点环都不会穿过工位名 */
+  c.beginPath(); c.rect(cx - R0 * 4, band, R0 * 8, R0 * 8); c.clip();
+  c.lineCap = 'butt';
+@@@ END
+@@@ REPLACE
+  if (o.sc == null || o.sc > 0.8) { c.font =
+@@@ WITH
+  if ((o.sc == null || o.sc > 0.8) && o.x > L.vault.x + L.vault.w + 24 && o.y < L.tl.y - 30) { c.font =
+@@@ END
+@@@ REPLACE
+    case 'video': inFrame((w2, h2) => { if (vidOK()) drawContain(c, VID.el, 0, 0, w2, h2); });
+@@@ WITH
+    case 'video': inFrame((w2, h2) => {
+      const atStart = !FILM.playing && VID.el && VID.el.currentTime < 0.05, pim = atStart ? imgOf(PREVIEW.poster) : null;
+      if (pim) drawCover(c, pim, 0, 0, w2, h2); else if (vidOK()) drawContain(c, VID.el, 0, 0, w2, h2);
+      if (!FILM.playing) { const r = Math.min(w2, h2) * 0.11, k2 = r / 30; c.fillStyle = 'rgba(8,6,4,.55)'; c.beginPath(); c.arc(w2 / 2, h2 / 2, r, 0, TAU); c.fill(); c.strokeStyle = 'rgba(242,213,146,.85)'; c.lineWidth = 1.5; c.stroke(); c.fillStyle = '#F2D592'; c.beginPath(); c.moveTo(w2 / 2 - 8 * k2, h2 / 2 - 12 * k2); c.lineTo(w2 / 2 + 13 * k2, h2 / 2); c.lineTo(w2 / 2 - 8 * k2, h2 / 2 + 12 * k2); c.closePath(); c.fill(); }
+    });
+@@@ END
+@@@ REPLACE
+function drawStamp(c, t) {
+  if (STAMP.t0 < 0 || !TEX.seal) return;
+  const age = t - STAMP.t0; if (age < 0) return;
+@@@ WITH
+function drawStamp(c, t) {
+  if (!TEX.seal) return;
+  let age;
+  if (STAMP.t0 >= 0) age = t - STAMP.t0;
+  else if (Pipe.status === 'completed' || (Pipe.status === 'none' && PREVIEW.hasMp4)) age = 99;
+  else return;
+  if (age < 0) return;
+  if (age > 3.5 && FILM.playing) return; /* 成片播放时收起钤印，不遮挡画面 */
+@@@ END
+@@@ REPLACE
+function cullStage() {
+  const vis = (x0, y0, x1, y1) => { const a = toScreen(x0, y0), b = toScreen(x1, y1); return a.x >= SW.x - 1 && a.y >= SW.y - 1 && b.x <= SW.x + SW.w + 1 && b.y <= SW.y + SW.h + 1; };
+  AGENTS.forEach((a) => { const p = L.ag[a.id], on = vis(p.x - L.agSp / 2 + 3, L.beamY - 24, p.x + L.agSp / 2 - 3, L.lblY + L.lblH); setStyle(a.el, 'visibility', on ? '' : 'hidden', 'stv' + a.id); });
+  const m = L.mon, mon = vis(m.x, m.y + m.h + 4, m.x + m.w, m.y + m.h + (L.tiny ? 6 : 10) + 28);
+  setStyle($('#monCtl'), 'visibility', mon && hasProject() ? '' : 'hidden', 'mcv');
+}
+@@@ WITH
+function cullStage() {
+  /* 遮挡物（甲板坐标）：命令条、取景小窗、暂停印、吐司、无工程引导 —— 与之相交的工位标签 / 控制条暂时隐藏 */
+  const occ = [];
+  const add = (el, cond) => { if (!el || !cond) return; const r = el.getBoundingClientRect(); if (r.width > 1 && r.height > 1) occ.push({ x0: r.left, y0: r.top - L.topH, x1: r.right, y1: r.bottom - L.topH }); };
+  add($('#cmd'), true);
+  add($('#minimap'), CAM.mode !== 'overview');
+  add($('#pauseInk'), Pipe.status === 'paused');
+  add($('#onboard'), !$('#onboard').hidden);
+  $$('#toasts .toast').forEach((t) => add(t, true));
+  const ok = (x0, y0, x1, y1) => {
+    const a = toScreen(x0, y0), b = toScreen(x1, y1);
+    if (!(a.x >= SW.x - 1 && a.y >= SW.y - 1 && b.x <= SW.x + SW.w + 1 && b.y <= SW.y + SW.h + 1)) return false;
+    for (const o of occ) if (a.x < o.x1 && b.x > o.x0 && a.y < o.y1 && b.y > o.y0) return false;
+    return true;
+  };
+  AGENTS.forEach((a) => { const p = L.ag[a.id], on = ok(p.x - L.agSp / 2 + 3, L.lblY - 2, p.x + L.agSp / 2 - 3, L.lblY + L.lblH); setStyle(a.el, 'visibility', on ? '' : 'hidden', 'stv' + a.id); });
+  const m = L.mon, mon = ok(m.x, m.y + m.h + 4, m.x + m.w, m.y + m.h + (L.tiny ? 6 : 10) + 28);
+  setStyle($('#monCtl'), 'visibility', mon && hasProject() ? '' : 'hidden', 'mcv');
+}
+@@@ END
+@@@ REPLACE
+  const ts = $('#toasts'); ts.style.right = Math.round(L.vw - SW.x - SW.w + 10) + 'px'; ts.style.left = 'auto'; ts.style.bottom = Math.round(L.vh - (L.topH + L.tl.y) + 10) + 'px'; ts.style.maxWidth = Math.max(240, Math.min(440, SW.w * 0.46)) + 'px';
+  const pz = $('#pauseInk'); pz.style.left = SW.x + SW.w / 2 + 'px'; pz.style.top = L.topH + L.mon.y + 14 + 'px';
+@@@ WITH
+  const ts = $('#toasts'); ts.style.right = Math.round(L.vw - SW.x - SW.w + 10) + 'px'; ts.style.left = 'auto'; ts.style.bottom = Math.round(L.vh - (L.topH + L.tl.y) + 10) + 'px'; ts.style.maxWidth = Math.round(clamp(SW.x + SW.w - (L.mon.x + L.mon.w) - 20, 240, 440)) + 'px';
+  const pz = $('#pauseInk'); pz.style.left = SW.x + SW.w / 2 + 'px'; pz.style.top = L.topH + L.cmdY + L.cmdH + 10 + 'px';
+  const mh = $('#monHit'); if (mh) setRect(mh, { x: L.mon.x, y: L.mon.y, w: L.mon.w, h: L.mon.h });
+@@@ END
+@@@ REPLACE
+    <div id="stations"></div>
+    <div id="monCtl">
+@@@ WITH
+    <div id="stations"></div>
+    <button id="monHit" aria-label="播放 / 暂停预览（空格）"></button>
+    <div id="monCtl">
+@@@ END
+@@@ REPLACE
+#pvVideo{position:fixed;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none}
+@@@ WITH
+#pvVideo{position:fixed;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none}
+#monHit{position:absolute;background:transparent;border:0;cursor:pointer}
+#monHit:focus-visible{outline:1px solid var(--gold);outline-offset:6px}
+body.noproj #monHit{display:none}
+@@@ END
+@@@ REPLACE
+  $('#mcPlay').onclick = toggleFilm; $('#tlPlay').onclick = toggleFilm; $('#mcMute').onclick = toggleMute;
+@@@ WITH
+  $('#mcPlay').onclick = toggleFilm; $('#tlPlay').onclick = toggleFilm; $('#mcMute').onclick = toggleMute; $('#monHit').onclick = () => { if (!Pipe.live() || FILM.user || vidOK()) toggleFilm(); };
+@@@ END

@@ -1,0 +1,106 @@
+@@@ REPLACE
+  const ts = $('#toasts'); ts.style.right = Math.round(L.vw - SW.x - SW.w + 10) + 'px'; ts.style.left = 'auto'; ts.style.bottom = Math.round(L.vh - (L.topH + L.tl.y) + 10) + 'px'; ts.style.maxWidth = Math.round(clamp(SW.x + SW.w - (L.mon.x + L.mon.w) - 20, 240, 440)) + 'px';
+@@@ WITH
+  placeToasts();
+@@@ END
+@@@ REPLACE
+  box.appendChild(t);
+  while (box.children.length > 4) box.firstChild.remove();
+@@@ WITH
+  placeToasts();
+  box.appendChild(t);
+  /* 主屏最多四张；悬在面板页眉时只留同一行放得下的（最多两张），不往下盖住页签 / 步骤导航 */
+  while (box.children.length > (box.classList.contains('k-top') ? 2 : 4)) box.firstChild.remove();
+  if (box.classList.contains('k-top')) trimTopToasts(box);
+@@@ END
+@@@ REPLACE
+  PK.on('frame-open', (f) => { inkFrameDecor(f); kitFrameLoad(); closeMenus(); hideTip(); });
+  PK.on('frame-close', () => { kitFrameLoad(); syncModeTabs(); });
+@@@ WITH
+  PK.on('frame-open', (f) => { inkFrameDecor(f); kitFrameLoad(); closeMenus(); hideTip(); placeToastsSoon(); });
+  PK.on('frame-close', () => { kitFrameLoad(); syncModeTabs(); placeToastsSoon(); });
+  /* 面板内容加载后会长高（居中弹窗的页眉随之上移）：有吐司在场时每 0.4 秒校正一次位置 */
+  setInterval(() => { const ts = $('#toasts'); if (ts && ts.childElementCount && ((PK.frames && PK.frames.stack.length) || FOLIO_OPEN)) placeToasts(); }, 400);
+@@@ END
+@@@ REPLACE
+    value: String(DIR.topic || ''),
+    onSaved: (v) => {
+@@@ WITH
+    value: String(DIR.topic || ''),
+    title: '需求输入 · 创意需求',
+    onSaved: (v) => {
+@@@ END
+@@@ INSERT_BEFORE
+/* 面板打开时：页眉朱印（每个面板一个字）、「保存并一键出片」用朱砂印按钮 —— 只做装饰，不改面板逻辑 */
+@@@ TEXT
+/* 吐司位置（作战大屏与原生面板共用同一个 #toasts）：
+   主屏 = 舞台右下、长卷之上；原生面板打开时避开面板 —— 先用面板外左右的留白（宽屏下的弹窗 / 侧抽屉），
+   放不下（整屏工作台、小窗口）就悬在最上层面板页眉的空白处（标题与关闭钮之间）。绝不压住面板页脚的操作按钮。 */
+const TOAST_KIT = { head: '.pk-frame-h', full: '.pk-frame-idx,.pk-frame-ico,.pk-frame-t,.pk-frame-en', short: '.pk-frame-idx,.pk-frame-ico,.pk-frame-t', end: '.pk-frame-tools>*,.pk-frame-x' };
+const TOAST_FOLIO = { head: '.fo-head', full: '.fo-head .pn-t b,.fo-head .pn-t i,.fo-sum', short: '.fo-head .pn-t b,.fo-head .pn-t i', end: '[data-fclose]' };
+function placeToasts() {
+  const ts = $('#toasts'); if (!ts) return;
+  /* 需要让开的「面板」：所有打开的原生面板 + 展开中的经折 */
+  const boxes = (window.PK && PK.frames ? PK.frames.stack : []).filter((f) => f && f.el && f.el.isConnected && !f.closed).map((f) => ({ el: f.el, s: TOAST_KIT }));
+  const fo = FOLIO_OPEN ? $('#folio .fo-card') : null; if (fo) boxes.push({ el: fo, s: TOAST_FOLIO });
+  const put = (o) => {
+    ['left', 'right', 'top', 'bottom'].forEach((k) => { ts.style[k] = o[k] == null ? 'auto' : Math.round(o[k]) + 'px'; });
+    const w = Math.round(Math.max(200, o.w)) + 'px'; ts.style.maxWidth = w; ts.style.width = o.fixed ? w : '';
+  };
+  if (!boxes.length) {
+    ts.classList.remove('in-kit', 'k-top', 'k-left');
+    if (L.vw && SW.w > 1) put({ right: L.vw - SW.x - SW.w + 10, bottom: L.vh - (L.topH + L.tl.y) + 10, w: clamp(SW.x + SW.w - (L.mon.x + L.mon.w) - 20, 240, 440) });
+    return;
+  }
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, top = null;
+  for (const f of boxes) {
+    const r = f.el.getBoundingClientRect(); if (r.width < 4 || r.height < 4) continue;
+    x0 = Math.min(x0, r.left); x1 = Math.max(x1, r.right);
+    if (r.top < y0) { y0 = r.top; top = f; }
+  }
+  if (!top) return;
+  ts.classList.add('in-kit');
+  const roomR = innerWidth - x1 - 28, roomL = x0 - 28;
+  if (Math.max(roomR, roomL) >= 280) {
+    const right = roomR >= 280;
+    ts.classList.remove('k-top'); ts.classList.toggle('k-left', !right);
+    put(right ? { right: 14, bottom: 16, w: Math.min(440, roomR + 14) } : { left: 14, bottom: 16, w: Math.min(440, roomL + 14) });
+    return;
+  }
+  ts.classList.remove('k-left'); ts.classList.add('k-top');
+  const fr = top.el.getBoundingClientRect(), head = top.el.querySelector(top.s.head);
+  let a = fr.left + 16, b = fr.right - 16, y = fr.top + 6;
+  if (head) {
+    const hr = head.getBoundingClientRect(); y = hr.top + 6;
+    const right = (sel) => { let x = hr.left + 14; head.querySelectorAll(sel).forEach((n) => { const r = n.getBoundingClientRect(); if (r.width) x = Math.max(x, r.right); }); return x + 14; };
+    let bx = hr.right - 14;
+    head.querySelectorAll(top.s.end).forEach((n) => { const r = n.getBoundingClientRect(); if (r.width) bx = Math.min(bx, r.left); });
+    bx -= 14;
+    /* 优先放在「题名 + 英文细注」与关闭钮之间；太窄就只让开题名（英文细注 / 参数摘要只是装饰） */
+    const full = right(top.s.full), short = right(top.s.short);
+    if (bx - full >= 420) { a = full; b = bx; } else if (bx - short >= 300) { a = short; b = bx; }
+  }
+  const w = Math.min(900, b - a);
+  put({ left: a + (b - a - w) / 2, top: Math.max(6, y), w, fixed: true });
+  while (ts.children.length > 2) ts.firstChild.remove();
+  trimTopToasts(ts);
+}
+/* 页眉里的签条只排一行：换到第二行的旧签条先撤下（最新的一张总会留下） */
+function trimTopToasts(box) {
+  while (box.children.length > 1 && box.firstElementChild.offsetTop !== box.lastElementChild.offsetTop) box.firstElementChild.remove();
+}
+let PLACE_T = 0;
+function placeToastsSoon() { placeToasts(); clearTimeout(PLACE_T); PLACE_T = setTimeout(placeToasts, 320); }
+@@@ END
+@@@ REPLACE
+  $('#scrim').classList.add('on'); FOLIO_OPEN = true;
+  syncFolio(); growTopic();
+@@@ WITH
+  $('#scrim').classList.add('on'); FOLIO_OPEN = true;
+  syncFolio(); growTopic(); placeToastsSoon(); kitFrameLoad();
+@@@ END
+@@@ REPLACE
+f.setAttribute('aria-hidden', 'true'); FOLIO_OPEN = false;
+@@@ WITH
+f.setAttribute('aria-hidden', 'true'); FOLIO_OPEN = false; placeToastsSoon(); kitFrameLoad();
+@@@ END

@@ -1,0 +1,7 @@
+{
+  "name": "@dsh-video/video-app",
+  "version": "0.1.0",
+  "description": "DSH Video Workbench Bundle Config (`video` profile)",
+  "license": "MIT",
+  "type": "module"
+}

@@ -1,0 +1,138 @@
+{
+  "name": "dsh-video-workbench",
+  "version": "0.6.0",
+  "description": "全智能体通用双引擎 AI 视频工作台 (DSH / Claude Code / Codex / WorkBuddy / Cursor / 无黑窗静默后台)：41 个 MCP & Cordis 工具、全新 AI Agent 作战大屏（三套皮肤）、内置人物库与「人物画风」、AI 看图画面自检、影核广场 (CinePulse Hub) MOTION.md 模板社区、全品类自适应 FFmpeg 节拍卡点与 48kHz 音效母带、参考视频左右分屏同步对比、多轨时间轴可视化微调、可选 BYOK 云端生图/生视频/Suno & MiniMax 音频及自定义协议、可选本地 TTS 一键依赖安装包。原创作者: Merziller (QQ: 1411574209 | 微信: Merziller | k26789228@gmail.com)",
+  "license": "MIT",
+  "author": {
+    "name": "Merziller",
+    "email": "k26789228@gmail.com",
+    "url": "https://github.com/Merziller/dsh-video-workbench"
+  },
+  "contact": {
+    "author": "Merziller",
+    "qq": "1411574209",
+    "wechat": "Merziller",
+    "email": "k26789228@gmail.com",
+    "github": "https://github.com/Merziller/dsh-video-workbench"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Merziller/dsh-video-workbench.git"
+  },
+  "homepage": "https://github.com/Merziller/dsh-video-workbench#readme",
+  "bugs": {
+    "url": "https://github.com/Merziller/dsh-video-workbench/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "main": "./index.js",
+  "bin": {
+    "dsh-video-workbench": "./bin/dsh-video-cli.mjs",
+    "dsh-video-mcp": "./bin/dsh-video-mcp.mjs"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./mcp": "./bin/dsh-video-mcp.mjs",
+    "./cli": "./bin/dsh-video-cli.mjs",
+    "./client": "./packages/dsh-web-video-workbench/lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "bin",
+    "packages/shared",
+    "packages/dsh-tool-local-tts",
+    "packages/dsh-tool-avatar",
+    "packages/dsh-tool-video-suite",
+    "packages/dsh-tool-media",
+    "packages/dsh-preset-video",
+    "packages/dsh-web-video-workbench",
+    "scripts/dsh-runner.mjs",
+    "scripts/install-profile.mjs",
+    "scripts/install-tts-engine.mjs",
+    "scripts/install-tts-engine.ps1",
+    "scripts/tts-bridge.py",
+    "scripts/tts-server.py",
+    "start-workbench.vbs",
+    "start-workbench.cmd",
+    "stop-workbench.cmd",
+    "templates/cinepulse-hub",
+    "voice-packs/README.md",
+    "voice-packs/catalog.example.json",
+    ".mcp.json",
+    ".claude-plugin",
+    "SKILL.md",
+    "AGENTS.md",
+    "docs/install.md",
+    "docs/plaza-community.md",
+    ".env.example",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "scripts": {
+    "studio": "node ./bin/dsh-video-cli.mjs studio --open",
+    "mcp": "node ./bin/dsh-video-mcp.mjs",
+    "doctor": "node ./bin/dsh-video-cli.mjs doctor",
+    "install:tts": "node ./scripts/install-tts-engine.mjs",
+    "dsh": "node ./scripts/dsh-runner.mjs",
+    "dsh:video": "node ./scripts/dsh-runner.mjs video",
+    "setup:profile": "node ./scripts/install-profile.mjs",
+    "pack:bundle": "node ./scripts/pack-bundle.mjs",
+    "test": "node ./scripts/self-test.mjs"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "@react-three/fiber": "^8.18.0",
+    "@remotion/bundler": "4.0.542",
+    "@remotion/cli": "4.0.542",
+    "@remotion/motion-blur": "4.0.542",
+    "@remotion/renderer": "4.0.542",
+    "@remotion/three": "4.0.542",
+    "@types/react": "^18.3.31",
+    "@types/three": "^0.170.0",
+    "animejs": "4.5.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "4.0.542",
+    "three": "^0.170.0",
+    "tsl-textures": "2.0.0",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "mcp",
+    "claude-code",
+    "codex",
+    "workbuddy",
+    "cursor",
+    "agent-skill",
+    "motion-md",
+    "reference-remake",
+    "cordis",
+    "remotion",
+    "threejs",
+    "vibecoding",
+    "ffmpeg",
+    "video",
+    "indextts",
+    "gpt-sovits",
+    "video-workbench"
+  ]
+}

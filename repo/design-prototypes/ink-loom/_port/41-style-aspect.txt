@@ -1,0 +1,39 @@
+41 · 风格「AI 自由匹配」+「我的风格预设」+ 3:4 画幅（经折 · 出片参数 → 风格 LOOK）
+- 风格签保留宿主给的提示与配色：AI 自由匹配（AI 的选择 / 新设计，名字显示为「AI：<名称>」）与「我的风格预设」用自己的配色签
+- 我的风格预设单独起一行小标题；名字过长时单行省略号，悬停看全名与说明；超过约 5 行时在签框内滚动（8–10+ 个也不撑破经折）
+- 画幅签由宿主下发（新增 3:4 竖版 · 小红书），无需改动
+
+@@@ REPLACE
+const STYLE_SW = { tech: '#5FB3C8', cinematic: '#C8361D', documentary: '#B9B4A8', energetic: '#D45FA0', warm: '#D9A066', emerald: '#3F8F75' };
+@@@ WITH
+const STYLE_SW = { tech: '#5FB3C8', cinematic: '#C8361D', documentary: '#B9B4A8', energetic: '#D45FA0', warm: '#D9A066', emerald: '#3F8F75' };
+/* 风格签配色：宿主给的配色（AI 自由匹配的选择 / 新设计、我的风格预设）> 本皮肤的预设色 > 金色 */
+const styleSwBg = (o) => (o.colors && o.colors.length >= 3 ? `linear-gradient(135deg,${o.colors[0]},${o.colors[1]} 58%,${o.colors[2]})` : STYLE_SW[o.preset || o.value] || (o.value === 'auto' ? 'linear-gradient(135deg,#7A5FD0,#5FB3C8 55%,#D9A066)' : 'var(--gold)'));
+const isMineStyle = (o) => o.kind === 'user' || String(o.value).startsWith('user:');
+@@@ END
+
+@@@ REPLACE
+  const items = optsFor(src).map((o) => `<button class="tag-s${kind === 'w' ? ' w' : ''}" data-v="${esc(o.value)}" title="${esc(o.label)}">${kind === 'sw' ? `<i class="sw" style="background:${STYLE_SW[o.value] || 'var(--gold)'}"></i>` : ''}<span>${esc(o.label)}</span></button>`).join('');
+@@@ WITH
+  const tag = (o) => `<button class="tag-s${kind === 'w' ? ' w' : ''}" data-v="${esc(o.value)}" title="${esc(o.hint ? `${o.label} · ${o.hint}` : o.label)}">${kind === 'sw' ? `<i class="sw" style="background:${styleSwBg(o)}"></i>` : ''}<span>${esc(o.label)}</span></button>`;
+  const all = optsFor(src), mine = kind === 'sw' ? all.filter(isMineStyle) : [];
+  const items = all.filter((o) => !mine.includes(o)).map(tag).join('') + (mine.length ? `<span class="tags-h">我的风格预设 · ${mine.length}</span>${mine.map(tag).join('')}` : '');
+@@@ END
+
+@@@ REPLACE
+  ['engines', 'creationModes', 'aspectRatios', 'qualities', 'narrationModes', 'bgmModes', 'pacingModes', 'styles', 'avatarLayouts'].forEach((k) => (OPTV[k] = pick(k)));
+@@@ WITH
+  ['engines', 'creationModes', 'aspectRatios', 'qualities', 'narrationModes', 'bgmModes', 'pacingModes', 'avatarLayouts'].forEach((k) => (OPTV[k] = pick(k)));
+  // 风格签保留提示与配色（AI 自由匹配的选择 / 新设计、我的风格预设）
+  OPTV.styles = arr(o && o.styles).filter((x) => x && x.value != null).map((x) => ({ value: x.value, label: String(x.label == null ? x.value : x.label), hint: String(x.hint || ''), kind: String(x.kind || ''), preset: String(x.preset || ''), colors: arr(x.colors).map(String).filter((c) => /^#[0-9a-f]{6}$/i.test(c)).slice(0, 3) }));
+@@@ END
+
+@@@ INSERT_BEFORE
+</style>
+@@@ TEXT
+/* 41 · 风格签：AI 自由匹配 + 6 个预设 + 我的风格预设（8–10+ 个）—— 单行省略号、悬停看全名；超过约 5 行在签框内滚动 */
+.tags[data-k="style"]{max-height:176px;overflow-y:auto;overscroll-behavior:contain;padding-right:2px;align-content:flex-start}
+.tags[data-k="style"] .tag-s{white-space:nowrap;max-width:100%}
+.tags[data-k="style"] .tag-s span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal}
+.tags-h{flex:1 1 100%;margin-top:3px;font:12px/1.4 var(--kai);color:var(--t2);letter-spacing:.08em}
+@@@ END

@@ -1,0 +1,95 @@
+@@@ INSERT_BEFORE
+</style>
+@@@ TEXT
+/* 隐藏的浮层一律 visibility:hidden（不止 opacity），保证屏幕阅读器与重叠检查都看不到它们 */
+.menu{visibility:hidden;transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease),visibility 0s linear var(--dur)}
+.dd.open .menu,.menu.on,.sel.open .menu{visibility:visible;transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease),visibility 0s}
+#tip{visibility:hidden}
+#tip.on{visibility:visible}
+#modal .m-card{visibility:hidden;transition:all .42s var(--ease),visibility 0s linear .42s}
+#modal.on .m-card{visibility:visible;transition:all .42s var(--ease),visibility 0s}
+#minimap{visibility:hidden}
+body.cam-on #minimap{visibility:visible}
+#pauseInk{visibility:hidden}
+body.paused #pauseInk{visibility:visible}
+.stage-card .stamp{visibility:hidden}
+.stage-card.stamped .stamp{visibility:visible}
+/* 任务中心按可用高度分级收拢：两列八工 → 收起八工 → 收起仪表 → 收起时间 */
+#tasks.d1 .ag8{grid-template-columns:1fr 1fr;column-gap:10px}
+#tasks.d1 .ag8 .ag-p{display:none}
+#tasks.d2 .ag8,#tasks.d2 .tc-ag>.sec-h{display:none}
+#tasks.d2 .tc-ag .meters{margin-top:0}
+#tasks.d3 .tc-ag{display:none}
+#tasks.d4 .tc-times{display:none}
+@@@ END
+@@@ INSERT_BEFORE
+function shSnapHome() {
+@@@ TEXT
+/* 任务中心：先完整，放不下再逐级收拢，直到日志至少留出两行 */
+function fitTasks() {
+  const t = $('#tasks'), body = $('.tc-body'), lg = $('#logList'); if (!t || !body || !lg) return;
+  const steps = ['d1', 'd2', 'd3', 'd4'];
+  steps.forEach((s) => t.classList.remove(s));
+  const tight = () => body.scrollHeight > body.clientHeight + 1 || lg.clientHeight < 56;
+  for (const s of steps) { if (!tight()) break; t.classList.add(s); }
+  trimLog();
+}
+/* 素材仓：滚出视窗的条目只隐藏文字（缩略图照常滚动），文字绝不压到长卷或页签上 */
+let VTRIM = 0;
+function trimVault() {
+  const list = $('#vList'); if (!list) return;
+  const lr = list.getBoundingClientRect();
+  $$('.shelf-h, .it-meta, .mount .used-b, .sc-body, .v-empty', list).forEach((el) => {
+    const r = el.getBoundingClientRect(), inside = r.height <= 0 || (r.top >= lr.top - 0.5 && r.bottom <= lr.bottom + 0.5);
+    const v = inside ? '' : 'hidden'; if (el.style.visibility !== v) el.style.visibility = v;
+  });
+}
+const trimVaultSoon = () => { if (!VTRIM) VTRIM = requestAnimationFrame(() => { VTRIM = 0; trimVault(); }); };
+@@@ END
+@@@ REPLACE
+  shSnapHome();
+  trimLog();
+  TEX.vig = null;
+}
+@@@ WITH
+  shSnapHome();
+  fitTasks(); trimVault();
+  TEX.vig = null;
+}
+@@@ END
+@@@ REPLACE
+  vl.addEventListener('scroll', () => { VAULT.touched = SIM.real; }, { passive: true });
+@@@ WITH
+  vl.addEventListener('scroll', () => { VAULT.touched = SIM.real; trimVaultSoon(); }, { passive: true });
+@@@ END
+@@@ REPLACE
+  applyVaultFilter();
+  updateVaultCount();
+  list.scrollTop = keepTop;
+  syncUsedBadges(true);
+}
+@@@ WITH
+  applyVaultFilter();
+  updateVaultCount();
+  list.scrollTop = keepTop;
+  syncUsedBadges(true);
+  trimVaultSoon();
+}
+@@@ END
+@@@ REPLACE
+  $$('#vList .shelf').forEach((s) => s.classList.toggle('hide', f !== 'all' && s.dataset.kind !== f));
+}
+@@@ WITH
+  $$('#vList .shelf').forEach((s) => s.classList.toggle('hide', f !== 'all' && s.dataset.kind !== f));
+  trimVaultSoon();
+}
+@@@ END
+@@@ REPLACE
+  if (first) { showWaiting(false); onResize(); }
+}
+@@@ WITH
+  if (first) { showWaiting(false); onResize(); }
+  else if (!TASKFIT.done) { TASKFIT.done = true; fitTasks(); }
+}
+const TASKFIT = { done: false };
+@@@ END

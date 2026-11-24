@@ -1,0 +1,55 @@
+@@@ INSERT_BEFORE
+const TOOLS = [['影', '影核广场', 'TEMPLATES', 'plaza'],
+@@@ TEXT
+const keyClick = (el, fn) => el.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target === el) { e.preventDefault(); e.stopPropagation(); fn(e); } });
+function tlPoint(e) { const p = toDeck(e.clientX, e.clientY); return { p, t: xT(p.x) }; }
+function bindStage() {
+  $('#btnRun').onclick = runAction;
+  $('#capsule').onclick = () => openFolio(true);
+  $$('#camSeg [data-cam]').forEach((b) => (b.onclick = () => setCam(b.dataset.cam)));
+  const st = $('#stations');
+  st.addEventListener('click', (e) => { const s = e.target.closest('.station'); if (s) focusAgent(s.dataset.agent); });
+  st.addEventListener('keydown', (e) => { const s = e.target.closest('.station'); if (s && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); e.stopPropagation(); focusAgent(s.dataset.agent); } });
+  st.addEventListener('mousemove', (e) => {
+    const s = e.target.closest('.station'); if (!s) { hideTip(); return; }
+    const a = AG[s.dataset.agent];
+    showTip(`<b>${esc(a.name)}</b> <span class="mono" style="font-size:11px;color:var(--t3)">${a.en}</span><div class="tr"><em>釉色</em><span style="color:${a.glaze}">■ ${a.glazeName}</span></div><div class="tr"><em>状态</em><span>${ST_CN[a.status] || '—'}</span></div><div class="tr"><em>子任务</em><span>${esc(a.task || '—')}</span></div><div class="tr"><em>进度</em><span class="mono">${Math.round(clamp(a.prog, 0, 1) * 100)}%</span></div><div class="tip-k">点击聚焦 · 再次点击回到全景</div>`, e.clientX, e.clientY);
+  });
+  st.addEventListener('mouseleave', hideTip);
+  $('#mcPlay').onclick = toggleFilm; $('#tlPlay').onclick = toggleFilm; $('#mcMute').onclick = toggleMute;
+  $('#mcBar').onclick = (e) => { const r = e.currentTarget.getBoundingClientRect(); seekPreview(clamp((e.clientX - r.left) / Math.max(1, r.width), 0, 1) * DUR); };
+  $('#mc9').onclick = () => openModal('sheet9');
+  $('#tlZi').onclick = () => tlZoom(1.5, PH.t); $('#tlZo').onclick = () => tlZoom(1 / 1.5, PH.t); $('#tlFit').onclick = tlFit;
+  const hit = $('#tlHit');
+  hit.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const { t } = tlPoint(e);
+    if (e.ctrlKey || e.altKey) tlZoom(e.deltaY < 0 ? 1.25 : 0.8, t);
+    else { const span = TLV.a1 - TLV.a0, d = ((e.deltaY || e.deltaX) / 600) * span; const a0 = clamp(TLV.a0 + d, -0.6, DUR + 0.6 - span); TLV.a0 = a0; TLV.a1 = a0 + span; TLV.manual = true; $('#tlFit').classList.toggle('on', span >= DUR); }
+  }, { passive: false });
+  const rowAt = (y) => Object.keys(L.rows).find((k) => y >= L.rows[k].y && y <= L.rows[k].y + L.rows[k].h);
+  const sceneIx = (t) => { if (!SCENES.length || t < 0 || t > DUR) return -1; return sceneAt(t).i; };
+  hit.addEventListener('click', (e) => {
+    if (!hasProject()) return;
+    const { p, t: t0 } = tlPoint(e), row = rowAt(p.y);
+    let t = clamp(t0, 0, Math.max(0, DUR - 0.05));
+    if (row === 'shot' || row === 'sub') { const i = sceneIx(t0); if (i >= 0 && CLIP[i] && CLIP[i].st > 0) { act('openScene', { sceneId: SCENES[i].id }); return; } }
+    if ($('#tlSnap').checked && BEATS.length) { let best = null; for (const [b] of BEATS) if (best == null || Math.abs(b - t) < Math.abs(best - t)) best = b; if (best != null && Math.abs(best - t) < 0.4) t = best; }
+    seekPreview(t);
+  });
+  hit.addEventListener('mousemove', (e) => {
+    const { p, t } = tlPoint(e);
+    if (t < 0 || t > DUR || !SCENES.length) { hideTip(); HOVER.scene = -1; return; }
+    const row = rowAt(p.y), i = sceneIx(t), s = SCENES[i];
+    HOVER.scene = row === 'shot' && CLIP[i] && CLIP[i].st > 0 ? i : -1;
+    hit.style.cursor = (row === 'shot' || row === 'sub') && CLIP[i] && CLIP[i].st > 0 ? 'pointer' : 'crosshair';
+    let extra = '';
+    if (row === 'sfx' && SFX_ALL.length) { const f = SFX_ALL.reduce((m, x) => (Math.abs(x.t - t) < Math.abs(m.t - t) ? x : m), SFX_ALL[0]); if (Math.abs(f.t - t) < 0.4) { const k = sfxK(f.type); extra = `<div class="tr"><em>音效</em><span>${k.g} ${esc(k.n)} · ${fmtT(f.t)}</span></div>`; } }
+    if (row === 'ruler' && BEATS.length) { const b = BEATS.reduce((m, x) => (Math.abs(x[0] - t) < Math.abs(m[0] - t) ? x : m), BEATS[0]); extra = `<div class="tr"><em>拍点</em><span>${b[1] ? '重拍（金针）' : '弱拍'} · ${fmtT(b[0])}</span></div>`; }
+    if (row === 'bgm' && MUSIC.length) { const mu = MUSIC.find((m) => t >= m.t0 && t <= m.t1) || MUSIC[0]; extra = `<div class="tr"><em>配乐</em><span>${esc(mu.name)}</span></div>`; }
+    const act2 = (row === 'shot' || row === 'sub') && CLIP[i] && CLIP[i].st > 0 ? '<div class="tip-k">点击在「分步精修」中打开该幕</div>' : '<div class="tip-k">点击定位预览</div>';
+    showTip(`<b>${String(s.n).padStart(2, '0')} · ${esc(s.title)}</b>${s.locked ? ' <span class="pill g">已锁定</span>' : ''}<div class="tr"><em>时间</em><span class="mono">${fmtT(s.t0)} – ${fmtT(s.t1)}</span></div><div class="tr"><em>镜头气质</em><span>${(BROCADE[s.mode] || BROCADE.clean).name}</span></div>${s.sub ? `<div class="tr"><em>字幕</em><span>${esc(s.sub)}</span></div>` : ''}${extra}${act2}`, e.clientX, e.clientY);
+  });
+  hit.addEventListener('mouseleave', () => { hideTip(); HOVER.scene = -1; });
+}
+@@@ END

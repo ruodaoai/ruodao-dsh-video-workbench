@@ -1,0 +1,47 @@
+{
+  "id": "com.ruodao.dsh-video-workbench",
+  "name": "AI 视频全链路工作台",
+  "version": "0.6.2",
+  "apiVersion": ">=0.1.0 <0.2.0",
+  "description": "双引擎（Remotion + Three.js / HTML5 CDP）AI 视频全链路工作台。常驻服务负责拉起本地可视化工作台 (127.0.0.1)、把若道当前配置的模型与本地生图号池自动写入插件配置，并提供 41 个 MCP 视频工具。",
+  "requires": {
+    "capabilities": {
+      "required": {
+        "commands": "0.1.0",
+        "code.execute": "0.1.0"
+      }
+    }
+  },
+  "permissions": [
+    "process",
+    "network",
+    "clipboard"
+  ],
+  "contributes": {
+    "services": [
+      {
+        "id": "main",
+        "title": "视频工作台常驻服务（Studio 托管 · 模型适配 · 号池适配）",
+        "description": "拉起 dsh-video-workbench 本地可视化工作台 (http://127.0.0.1:4399)，把若道当前选中的文本模型（RUODAO_LLM_* env 注入）写入插件 LLM 配置，把本地生图号池 (127.0.0.1:8100/v1, gpt-image-2.6) 写入云端媒体配置，并保持双端配置同步。",
+        "action": {
+          "type": "process",
+          "command": "node",
+          "args": [
+            "bin/service.mjs"
+          ],
+          "cwd": "."
+        }
+      }
+    ]
+  },
+  "capabilities": [
+    "local-service",
+    "mcp-tools",
+    "video-render",
+    "tts",
+    "beat-sync",
+    "cloud-media",
+    "reference-remake",
+    "motion-templates"
+  ]
+}

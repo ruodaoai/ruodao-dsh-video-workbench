@@ -1,0 +1,87 @@
+# 影核广场 · CinePulse Hub — 作品投稿表单
+# 插件里的「投稿到影核广场 → 去 GitHub 投稿」会打开这个表单并预先填好下面的字段（URL 参数名 = 字段 id）：
+#   tpl_title, category, description, tags, author, contact, package, sha256, plugin_version
+# 改字段 id 时请同步修改 packages/dsh-tool-media/plaza-community.js 里的 buildSubmissionChannels()。
+name: 影核广场投稿 · CinePulse Hub Submission
+description: 把用 DSH Video Workbench 做的作品投稿到影核广场，作者审核通过后会收录进在线模板库，所有用户都能一键套用。
+title: '[影核广场投稿] '
+labels: ['plaza-submission']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢投稿！请先确认：投稿包是在插件「影核广场 → 投稿到影核广场」里生成的 zip 文件（已经过隐私检查：不含素材原文件、配音、API 密钥、本机路径）。
+        **注意：GitHub Issue 和附件都是公开的**，所有人都能看到你填写的内容和投稿包。如果不想公开联系方式，请留空，或改用邮件投稿（k26789228@gmail.com）。
+  - type: input
+    id: tpl_title
+    attributes:
+      label: 作品标题
+      description: 会作为模板名称显示在影核广场（作者可能会微调）。
+      placeholder: 例如：秋日咖啡馆 · 温暖治愈宣传片
+    validations:
+      required: true
+  - type: input
+    id: category
+    attributes:
+      label: 分类
+      description: 历史高燃卡点 / 科技产品发布会 / SaaS · 软件教程 / 深度科普拆解 / 数据榜单洞察 / 其他
+      placeholder: 例如：科技产品发布会（product-promo）
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 一句话简介
+      description: 画风、节奏与适合的题材。
+      placeholder: 例如：暖色调 · 慢推镜头 · 轻爵士卡点，适合咖啡 / 烘焙 / 门店新品宣传
+  - type: input
+    id: tags
+    attributes:
+      label: 标签
+      placeholder: 例如：温暖、门店、竖屏
+  - type: input
+    id: author
+    attributes:
+      label: 作者昵称
+      description: 收录后会显示在模板卡片上。
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: 联系方式（可选，公开可见）
+      description: 方便作者就收录细节联系你。留空也完全可以。
+  - type: input
+    id: package
+    attributes:
+      label: 投稿包文件名
+      placeholder: xxx-20261122-153000.zip
+    validations:
+      required: true
+  - type: input
+    id: sha256
+    attributes:
+      label: 投稿包 SHA-256
+      description: 插件自动填写，作者用它核对附件是否完整。
+  - type: input
+    id: plugin_version
+    attributes:
+      label: 插件版本
+      placeholder: v0.6.0
+  - type: textarea
+    id: attachment
+    attributes:
+      label: 上传投稿包（必填）
+      description: 把投稿包 zip 文件拖到这个框里（或点下方「粘贴、拖放或点击添加文件」），等上传完成、出现链接后再提交。
+      placeholder: 把 .zip 文件拖到这里
+    validations:
+      required: true
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: 授权声明
+      options:
+        - label: 我授权作者 Merziller 在「影核广场」展示、整理（可调整标题、分类与简介）和分发这份投稿；投稿内容为本人原创或已获授权，不侵犯他人的版权、肖像权与隐私。
+          required: true
+        - label: 我知道 GitHub Issue 和附件是公开的。
+          required: true

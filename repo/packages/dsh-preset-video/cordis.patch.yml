@@ -1,0 +1,21 @@
+plugins:
+  - path: '@deepseek-ai/dsh-agent-preset'
+    config:
+      id: video-maker
+      name: 视频制作模式
+      description: 支持 HTML/GSAP 与 Remotion 双引擎的视频工作台模式（含音色包导入、AI 音色匹配与 3x3 九宫格自检）
+      order: 15
+      plugins:
+        - path: '@deepseek-ai/dsh-persona'
+        - path: '@deepseek-ai/dsh-agent-instructions'
+        - path: '@deepseek-ai/dsh-tool-bash'
+        - path: '@deepseek-ai/dsh-tool-pwsh'
+        - path: '@deepseek-ai/dsh-tool-fs'
+        - path: '@deepseek-ai/dsh-tool-fs-search'
+        - path: '@deepseek-ai/dsh-tool-jobs'
+        - path: '@deepseek-ai/dsh-skill-filesystem'
+        - path: '@deepseek-ai/dsh-tool-skill'
+        - path: ../dsh-tool-local-tts/index.js
+        - path: ../dsh-tool-avatar/index.js
+        - path: ../dsh-tool-video-suite/index.js
+        - path: ../dsh-tool-media/index.js

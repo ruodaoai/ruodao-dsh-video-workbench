@@ -1,0 +1,42 @@
+@@@ REPLACE
+  box.innerHTML = ''; box.appendChild(frag);
+  if (stick) box.scrollTop = box.scrollHeight;
+}
+@@@ WITH
+  box.innerHTML = ''; box.appendChild(frag);
+  if (stick) box.scrollTop = box.scrollHeight;
+  trimLog();
+}
+/* 只显示完整落在日志视窗里的行（不让半截行压在「实时日志」标题下） */
+let TRIM_RAF = 0;
+function trimLog() {
+  const box = $('#logList'); if (!box) return;
+  const top = box.scrollTop - 0.5, bot = box.scrollTop + box.clientHeight + 0.5;
+  for (const p of box.children) { const y0 = p.offsetTop, y1 = y0 + p.offsetHeight, v = y0 >= top && y1 <= bot ? '' : 'hidden'; if (p.style.visibility !== v) p.style.visibility = v; }
+}
+@@@ END
+@@@ REPLACE
+  lg.addEventListener('scroll', () => { LOGV.stick = lg.scrollTop + lg.clientHeight >= lg.scrollHeight - 24; });
+@@@ WITH
+  lg.addEventListener('scroll', () => { LOGV.stick = lg.scrollTop + lg.clientHeight >= lg.scrollHeight - 24; if (!TRIM_RAF) TRIM_RAF = requestAnimationFrame(() => { TRIM_RAF = 0; trimLog(); }); }, { passive: true });
+@@@ END
+@@@ REPLACE
+.log{flex:1;min-height:0;overflow-y:auto;
+@@@ WITH
+.log{position:relative;flex:1;min-height:0;overflow-y:auto;
+@@@ END
+@@@ REPLACE
+  shSnapHome();
+  TEX.vig = null;
+}
+@@@ WITH
+  shSnapHome();
+  trimLog();
+  TEX.vig = null;
+}
+@@@ END
+@@@ REPLACE
+.v-list{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:2px 0 4px;scrollbar-width:thin}
+@@@ WITH
+.v-list{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:2px 0 10px;scrollbar-width:thin;-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 16px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 16px),transparent)}
+@@@ END

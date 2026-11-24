@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "dsh-video-workbench": {
+      "command": "node",
+      "args": ["./bin/dsh-video-mcp.mjs"],
+      "env": {}
+    }
+  }
+}

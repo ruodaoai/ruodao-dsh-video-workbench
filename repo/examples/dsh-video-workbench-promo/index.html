@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1080, initial-scale=1.0" />
+  <title>DSH Video Workbench：双引擎全链路，开源即开拍</title>
+  <style>
+    @font-face {
+  font-family: 'Noto Sans SC';
+  src: url('fonts/NotoSansSC-VF.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Han Serif SC Heavy';
+  src: url('fonts/SourceHanSerifSC-Heavy.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+    :root {
+      --bg: #050608;
+      --surface: #10141E;
+      --text: #F1F5F9;
+      --sub: #94A3B8;
+      --accent: #2F7BFF;
+      --accent2: #7DB2FF;
+      --gold: #F5B92E;
+      --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'HarmonyOS Sans SC', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Cascadia Mono', 'Liberation Mono', ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%; overflow: hidden;
+      background: #030406;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-sans); color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+    #stage {
+      position: relative; width: 1080px; height: 1920px;
+      flex: 0 0 auto; min-width: 1080px; min-height: 1920px;
+      overflow: hidden; background: var(--bg);
+      transform-origin: center center;
+    }
+    #world {
+      position: absolute; inset: 0;
+      transform-origin: 50% 50%;
+    }
+    .layer { position: absolute; inset: 0; pointer-events: none; }
+    canvas.layer { width: 100%; height: 100%; }
+
+    #scene-slots { position: absolute; inset: 0; overflow: hidden; }
+    .k-scene { position: absolute; inset: 0; overflow: hidden; display: none; }
+    .k-scene.active { display: block; }
+
+    /* Media & Procedural Backgrounds */
+    .k-bg-procedural {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 75% 65% at 28% 35%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 64%),
+        radial-gradient(ellipse 65% 65% at 78% 70%, color-mix(in srgb, var(--accent2) 22%, transparent), transparent 62%),
+        linear-gradient(160deg, var(--bg) 0%, var(--surface) 100%);
+    }
+    .k-bg-media { position: absolute; inset: 0; overflow: hidden; }
+    .k-bg-media .k-media-el {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transform-origin: 50% 50%;
+    }
+    .k-bg-grade {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(5,6,8,0.22) 0%, rgba(5,6,8,0.1) 35%, rgba(5,6,8,0.68) 100%);
+    }
+    .k-hero-scrim {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(90deg, rgba(5,6,8,0.88) 0%, rgba(5,6,8,0.62) 48%, rgba(5,6,8,0.25) 100%);
+    }
+    .k-dark-veil {
+      position: absolute; inset: 0; pointer-events: none;
+      background: rgba(5,6,8,0.72);
+    }
+    .k-dark-veil-soft {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 72% 64% at 50% 48%, rgba(5,6,8,0.36) 0%, rgba(5,6,8,0.68) 100%);
+    }
+
+    /* 3D Perspective Card Swarm */
+    .k-3d-space {
+      position: absolute; inset: 0; perspective: 1150px; perspective-origin: 50% 48%; pointer-events: none;
+    }
+    .k-3d-world {
+      position: absolute; left: 50%; top: 50%; transform-style: preserve-3d;
+    }
+    .k-3d-card {
+      position: absolute; left: 0; top: 0; width: 320px; border-radius: 10px; overflow: hidden;
+      background: rgba(14,18,28,0.92); border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.65); transform-style: preserve-3d;
+    }
+    .k-3d-media { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .k-3d-chrome {
+      position: absolute; top: 8px; left: 10px; display: flex; gap: 5px;
+    }
+    .k-3d-chrome i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.65); }
+    .k-3d-badge {
+      width: auto; min-width: 190px; padding: 12px 22px;
+      display: inline-flex; align-items: center; gap: 10px;
+      font: 700 22px var(--font-mono); color: #E2E8F0; white-space: nowrap;
+      border-color: color-mix(in srgb, var(--accent2) 55%, transparent);
+    }
+    .k-3d-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--gold); }
+
+    /* Split Stage & Showcase Frames */
+    .k-split-grid {
+      position: relative; z-index: 4; width: 100%; height: 100%;
+      padding: 82px 105px 494px; display: flex; align-items: center; justify-content: space-between; gap: 52px;
+    }
+    .k-split-grid.k-reverse { flex-direction: row-reverse; }
+    .k-left-col {
+      flex: 1.05; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 22px;
+    }
+    .k-right-col {
+      flex: 1; display: flex; align-items: center; justify-content: center; perspective: 1200px;
+    }
+
+    .k-center-stage {
+      position: relative; z-index: 4; width: 100%; height: 100%;
+      padding: 84px 115px 494px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; gap: 24px;
+    }
+
+    /* Typography */
+    .k-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font: 700 18px var(--font-mono); letter-spacing: 3px; color: var(--accent2);
+      text-transform: uppercase;
+    }
+    .k-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px var(--gold); }
+    .k-headline {
+      font-family: var(--font-sans); font-size: 92px; font-weight: 900; line-height: 1.14;
+      letter-spacing: -1px; max-width: 100%;
+    }
+    .k-headline-lg { font-size: 108px; }
+    .k-headline-md { font-size: 76px; }
+    .k-headline-sm { font-size: 62px; }
+    .k-line-row { display: block; }
+    .k-ch {
+      display: inline-block;
+      background: linear-gradient(180deg,#FFFFFF 0%,#E2E8F0 52%,#94A3B8 100%); -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 6px 0 rgba(0,0,0,0.48)) drop-shadow(0 16px 26px rgba(0,0,0,0.55));
+    }
+    .k-subline {
+      font-size: 28px; line-height: 1.48; font-weight: 600; color: var(--sub); max-width: 780px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    }
+
+    /* Pills & Callouts */
+    .k-pills-row { display: flex; flex-wrap: wrap; gap: 14px; }
+    .k-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 40px;
+      background: rgba(15,23,42,0.72); border: 1.5px solid color-mix(in srgb, var(--accent2) 55%, transparent);
+      font: 700 22px var(--font-sans); color: #F8FAFC;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+    }
+    .k-pill span { color: var(--gold); }
+
+    .k-accent-rule {
+      width: 240px; height: 4px; border-radius: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--accent2));
+      transform-origin: left center;
+    }
+    .k-callouts { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 760px; }
+    .k-callout {
+      display: flex; align-items: center; gap: 18px; padding: 15px 22px; border-radius: 12px;
+      background: linear-gradient(180deg, rgba(24,28,36,0.92), rgba(12,14,19,0.94));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-left: 4px solid var(--accent-bar, var(--accent2));
+      box-shadow: 0 18px 42px rgba(0,0,0,0.45);
+    }
+    .k-cnum { font: 800 24px var(--font-mono); color: var(--accent-bar, var(--gold)); }
+    .k-ctxt { font: 700 27px var(--font-sans); color: #F8FAFC; }
+
+    /* Showcase Media Window + PiP */
+    .k-card-stage { position: relative; width: 100%; max-width: 820px; transform-style: preserve-3d; }
+    .k-mac-frame {
+      position: relative; width: 100%; border-radius: 16px; overflow: hidden;
+      background: #0E1118; border: 1.5px solid rgba(255,255,255,0.22);
+      box-shadow: 0 36px 90px rgba(0,0,0,0.72), 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent);
+    }
+    .k-mac-bar {
+      height: 36px; display: flex; align-items: center; gap: 8px; padding: 0 16px;
+      background: rgba(20,24,34,0.95); border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .k-mac-bar i { width: 10px; height: 10px; border-radius: 50%; }
+    .k-mac-bar i:nth-child(1) { background: #FF5F57; }
+    .k-mac-bar i:nth-child(2) { background: #FEBC2E; }
+    .k-mac-bar i:nth-child(3) { background: #28C840; }
+    .k-mac-bar span { margin-left: 10px; font: 600 13px var(--font-mono); color: var(--sub); letter-spacing: 1.5px; }
+    .k-mac-viewport { position: relative; width: 100%; aspect-ratio: 16/10; overflow: hidden; background: #07100F; }
+    .k-mac-viewport .k-media-el { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .k-spec-glint {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.16) 49%, transparent 62%);
+    }
+    .k-pip-frame {
+      position: absolute; right: -28px; bottom: -28px; width: 42%; aspect-ratio: 16/10;
+      border-radius: 14px; overflow: hidden; border: 2px solid var(--gold);
+      box-shadow: 0 22px 55px rgba(0,0,0,0.78); background: #0B0D12;
+    }
+    .k-pip-frame .k-media-el { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .k-terminal-card {
+      width: 100%; border-radius: 16px; overflow: hidden;
+      background: linear-gradient(180deg, rgba(20,24,32,0.94), rgba(10,12,17,0.96));
+      border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 30px 80px rgba(0,0,0,0.65);
+    }
+    .k-term-body { padding: 34px; display: flex; flex-direction: column; gap: 22px; }
+    .k-term-row { display: flex; align-items: center; gap: 18px; font-size: 28px; }
+    .k-term-row span { font: 700 20px var(--font-mono); color: var(--gold); padding: 4px 12px; border-radius: 6px; background: rgba(245,185,46,0.14); }
+    .k-term-row b { color: #F8FAFC; font-weight: 700; }
+
+    /* Mosaic Pulse Wall */
+    .k-mosaic-wrap {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      perspective: 1400px;
+    }
+    .k-mosaic-grid {
+      width: 956px; height: 1498px; display: grid;
+      grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
+      gap: 20px; transform-style: preserve-3d;
+    }
+    .k-mosaic-cell {
+      position: relative; border-radius: 14px; overflow: hidden;
+      background: #10141D; border: 1.5px solid rgba(255,255,255,0.16);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6); transform-style: preserve-3d;
+    }
+    .k-mosaic-cell .k-media-el { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .k-mosaic-typo {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font: 900 42px var(--font-sans); color: var(--text);
+      background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 28%, transparent), #0B0D14);
+    }
+    .k-mosaic-badge {
+      position: absolute; left: 12px; top: 12px; padding: 4px 10px; border-radius: 6px;
+      background: rgba(5,6,8,0.78); font: 700 14px var(--font-mono); color: var(--accent2);
+    }
+    .k-bottom-fade {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(5,6,8,0.08) 0%, rgba(5,6,8,0.22) 48%, rgba(5,6,8,0.92) 100%);
+    }
+    .k-mosaic-overlay {
+      position: absolute; left: 96px; right: 96px; bottom: 500px; z-index: 6;
+      display: flex; align-items: flex-end; gap: 34px;
+    }
+    .k-counter-badge {
+      display: flex; flex-direction: column; padding: 14px 24px; border-radius: 12px;
+      background: rgba(8,10,16,0.88); border-left: 5px solid var(--gold);
+    }
+    .k-cnt-num {
+      font: 900 72px/1 var(--font-mono);
+      background: linear-gradient(180deg,#CFE1FF 0%,#4F95FF 55%,#1F5FE0 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .k-cnt-unit { font: 700 16px var(--font-mono); color: var(--sub); letter-spacing: 3px; margin-top: 4px; }
+
+    /* Compare Dual */
+    .k-compare-row {
+      display: flex; align-items: center; justify-content: center; gap: 36px; width: 100%; max-width: 1440px; margin-top: 10px;
+    }
+    .k-cmp-card {
+      flex: 1; max-width: 580px; padding: 40px 34px; border-radius: 20px; text-align: left;
+      background: linear-gradient(180deg, rgba(24,28,36,0.94), rgba(11,13,18,0.94));
+      border: 1px solid rgba(255,255,255,0.14); border-top: 4px solid var(--accent2);
+      box-shadow: 0 30px 75px rgba(0,0,0,0.62);
+    }
+    .k-cmp-card.k-cmp-b { border-top-color: var(--gold); }
+    .k-cmp-tag { font: 700 18px var(--font-mono); color: var(--accent2); letter-spacing: 2px; }
+    .k-cmp-gold { color: var(--gold); }
+    .k-cmp-val { font: 900 46px/1.22 var(--font-sans); color: #FFFFFF; margin-top: 18px; }
+    .k-cmp-bridge { width: 96px; height: 3px; position: relative; overflow: hidden; }
+    .k-cmp-bridge i { display: block; width: 100%; height: 100%; border-top: 3px dashed rgba(255,255,255,0.45); }
+
+    /* Climax Glow Bar & Seal */
+    .k-glow-bar {
+      width: 680px; height: 4px; border-radius: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--accent), var(--accent2));
+      box-shadow: 0 0 24px color-mix(in srgb, var(--accent) 65%, transparent);
+    }
+    .k-stamp-seal {
+      padding: 12px 32px; border: 4px solid var(--gold); border-radius: 8px;
+      font: 900 32px var(--font-mono); letter-spacing: 5px; color: var(--gold);
+      box-shadow: 0 0 36px rgba(245,185,46,0.22);
+    }
+
+    /* Post Filters, Vignette, Grain, Flash, Chrome, Subtitles */
+    #vig {
+      background: radial-gradient(ellipse 78% 72% at 50% 48%, transparent 56%, rgba(0,0,0,0.58) 100%);
+    }
+    #grain-layer { opacity: 0.055; mix-blend-mode: screen; }
+    #glc {
+      opacity: 0;
+      background: repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0 2px, transparent 2px 7px);
+      mix-blend-mode: screen;
+    }
+    #flash { background: #FFFFFF; opacity: 0; }
+    #chrome-hud .k-corner {
+      position: absolute; width: 22px; height: 22px; opacity: 0.48;
+      border-color: rgba(255,255,255,0.65); border-style: solid; border-width: 0;
+    }
+    #c-tl { left: 32px; top: 32px; border-left-width: 2px; border-top-width: 2px; }
+    #c-tr { right: 32px; top: 32px; border-right-width: 2px; border-top-width: 2px; }
+    #c-bl { left: 32px; bottom: 32px; border-left-width: 2px; border-bottom-width: 2px; }
+    #c-br { right: 32px; bottom: 32px; border-right-width: 2px; border-bottom-width: 2px; }
+
+    #sub-wrap {
+      position: absolute; left: 54px; right: 173px; bottom: 422px;
+      display: flex; justify-content: center; pointer-events: none; z-index: 25;
+    }
+    #sub-pill {
+      padding: 8px 26px; border-radius: 10px;
+      background: rgba(5,7,11,0.78);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-family: var(--font-sans); font-size: 28px; font-weight: 700; line-height: 1.35;
+      color: #FFFFFF; max-width: 907px; text-align: center; white-space: normal;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.92);
+    }
+    #progress-line {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+      background: rgba(255,255,255,0.08); z-index: 30;
+    }
+    #progress-fill {
+      width: 0%; height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+    }
+    #ai-badge {
+      position: absolute; top: 173px; left: 54px; z-index: 28;
+      padding: 6px 14px; border-radius: 999px;
+      background: rgba(8,12,20,0.76); border: 1px solid rgba(255,255,255,0.18);
+      font: 600 15px var(--font-sans); color: #E2E8F0; letter-spacing: 0.03em;
+    }
+    #avatar-overlay-wrap {
+      position: absolute; pointer-events: none; z-index: 27; display: none; overflow: hidden;
+      border-radius: 20px; border: 1.5px solid color-mix(in srgb, var(--accent) 55%, transparent);
+      background: rgba(6,10,18,0.28);
+      box-shadow: 0 18px 46px rgba(0,0,0,0.55);
+    }
+    #avatar-overlay-wrap.is-fullscreen {
+      inset: 0; border-radius: 0; border: none; background: transparent; box-shadow: none; z-index: 24;
+    }
+    #avatar-overlay-video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    #avatar-overlay-wrap.is-fullscreen #avatar-overlay-video {
+      object-fit: contain;
+    }
+    #end-notice-wrap {
+      position: absolute; left: 54px; right: 173px; bottom: 510px;
+      display: flex; justify-content: center; pointer-events: none; z-index: 29; opacity: 0;
+    }
+    #end-notice {
+      padding: 7px 18px; border-radius: 999px;
+      background: rgba(6,10,18,0.86); border: 1px solid color-mix(in srgb, var(--accent2) 38%, transparent);
+      font: 600 15px var(--font-sans); color: #CBD5E1; letter-spacing: 0.02em; text-align: center;
+    }
+    
+    /* Portrait Responsive Adaptation (1080x1920) */
+    .k-split-grid, .k-split-grid.k-reverse {
+      flex-direction: column; justify-content: center; gap: 28px;
+      padding: 173px 173px 502px 54px;
+    }
+    .k-left-col { width: 100%; align-items: center; text-align: center; }
+    .k-right-col { width: 100%; }
+    .k-center-stage { padding: 173px 173px 502px 54px; gap: 22px; }
+    .k-headline { font-size: 58px; }
+    .k-headline-lg { font-size: 66px; }
+    .k-headline-md { font-size: 50px; }
+    .k-headline-sm { font-size: 42px; }
+    .k-subline { font-size: 24px; max-width: 100%; }
+    .k-card-stage { max-width: 100%; }
+    .k-pip-frame { right: 8px; bottom: -18px; width: 38%; }
+    .k-mosaic-grid {
+      width: 950px; height: 998px;
+      grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); gap: 14px;
+    }
+    .k-mosaic-overlay { left: 40px; right: 40px; bottom: 492px; flex-direction: column; align-items: flex-start; gap: 14px; }
+    .k-cnt-num { font-size: 52px; }
+    .k-compare-row { flex-direction: column; gap: 20px; }
+    .k-cmp-card { max-width: 100%; width: 100%; padding: 28px 24px; }
+    .k-cmp-val { font-size: 36px; }
+    .k-cmp-bridge { width: 3px; height: 34px; }
+    .k-cmp-bridge i { border-top: none; border-left: 3px dashed rgba(255,255,255,0.45); }
+    .k-glow-bar { width: 702px; }
+    #sub-wrap { bottom: 422px; }
+    #sub-pill { max-width: 907px; font-size: 28px; white-space: normal; }
+    
+
+    /* Product Showcase Windows, Focus Camera, Fan Opener, Workflow, A/B Wipe, Dashboard & Trio */
+    .k-app-stage {
+      position: absolute; inset: 0; z-index: 4;
+      padding: 86px 68px 490px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+    }
+    .k-fan-stage { gap: 18px; }
+    .k-fan-arc { position: relative; width: 100%; height: 430px; display: flex; justify-content: center; align-items: center; }
+    .k-fan-card {
+      position: absolute; width: 236px; height: 336px; border-radius: 16px; overflow: hidden;
+      background: #0A1615; border: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+      box-shadow: 0 24px 52px rgba(0,0,0,0.72);
+    }
+    .k-fan-card .k-media-el { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .k-fan-badge {
+      display: inline-flex; align-items: center; gap: 12px; padding: 8px 20px; border-radius: 999px;
+      background: rgba(6,14,14,0.88); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+      font: 800 16px var(--font-mono); color: var(--accent); letter-spacing: 2px;
+    }
+    .k-brand-mini { width: 22px; height: 22px; border-radius: 5px; object-fit: cover; display: block; }
+    .k-app-wide { align-items: center; }
+    .k-app-split { flex-direction: row; gap: 42px; align-items: center; }
+    .k-app-split .k-split-copy { flex: 0 0 34%; max-width: none; }
+    .k-app-head { width: 100%; max-width: 1420px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .k-app-head-l { display: flex; align-items: center; gap: 14px; }
+    .k-tag-chip {
+      padding: 5px 14px; border-radius: 999px;
+      background: rgba(var(--rgbAccent), 0.16); border: 1px solid var(--accent);
+      font: 800 15px var(--font-mono); color: var(--accent);
+    }
+    .k-tag-gold { background: rgba(var(--rgbGold), 0.16); border-color: var(--gold); color: var(--gold); }
+    .k-app-head-title { font: 900 30px var(--font-sans); color: var(--text); }
+    .k-app-head-sub { font: 700 18px var(--font-sans); color: var(--gold); }
+    .k-app-win-wrap {
+      position: relative; flex: 1; width: 100%; max-width: 1420px;
+      min-height: 0; height: 100%; display: flex; align-items: center; justify-content: center;
+    }
+    .k-app-split .k-app-win-wrap { width: auto; }
+    .k-app-win {
+      width: 100%; height: 100%; max-width: 100%; max-height: 100%; display: flex; flex-direction: column;
+      border-radius: 18px; overflow: hidden; background: #0B1514;
+      border: 1.5px solid color-mix(in srgb, var(--accent) 42%, transparent);
+      box-shadow: 0 30px 78px rgba(0,0,0,0.68);
+    }
+    .k-app-win.k-win-light, .k-trio-win.k-win-light { background: #F8FAFC; }
+    .k-app-win.k-win-light .k-app-bar, .k-trio-win.k-win-light .k-app-bar { background: rgba(226,232,240,0.95); border-bottom-color: rgba(15,23,42,0.12); }
+    .k-app-win.k-win-light .k-app-title, .k-trio-win.k-win-light .k-app-title { color: #0F172A; }
+    .k-app-win.k-win-light .k-app-view, .k-trio-win.k-win-light .k-app-view { background: #FFFFFF; }
+    .k-app-bar {
+      height: 38px; padding: 0 16px; display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+      background: rgba(13,26,25,0.96); border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .k-app-dots { display: flex; gap: 6px; }
+    .k-app-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+    .k-app-dots i:nth-child(1) { background: #FF5F56; }
+    .k-app-dots i:nth-child(2) { background: #FFBD2E; }
+    .k-app-dots i:nth-child(3) { background: #27C93F; }
+    .k-app-title { font: 700 14px var(--font-sans); color: #E2E8F0; }
+    .k-app-kicker {
+      margin-left: auto; padding: 3px 10px; border-radius: 999px;
+      background: rgba(255,255,255,0.06); font: 700 12px var(--font-mono); color: var(--gold);
+    }
+    .k-app-view { position: relative; flex: 1; overflow: hidden; background: #07100F; min-height: 0; display: flex; align-items: center; justify-content: center; }
+    .k-cam-stage { position: relative; width: 100%; height: 100%; transform-origin: 0 0; }
+    .k-cam-stage .k-media-el, .k-app-view > .k-media-el, .k-wipe-a .k-media-el, .k-wipe-b .k-media-el { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .k-cam-stage.is-aspect-fitted .k-media-el { object-fit: fill; }
+    .k-mark-box {
+      position: absolute; border-radius: 12px; border: 2.5px solid var(--accent);
+      box-shadow: 0 0 0 4px rgba(0,0,0,0.38), 0 0 24px var(--accent);
+      pointer-events: none; z-index: 10; opacity: 0;
+    }
+    .k-mark-box.k-mark-ring { border-radius: 999px; }
+    .k-mark-box.k-mark-gold { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(0,0,0,0.38), 0 0 24px var(--gold); }
+    .k-mark-chip {
+      position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%);
+      padding: 4px 12px; border-radius: 999px; white-space: nowrap;
+      background: rgba(6,14,14,0.94); border: 1.5px solid var(--accent);
+      font: 800 16px var(--font-sans); color: #F8FAFC;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    }
+    .k-mark-box.k-mark-gold .k-mark-chip { border-color: var(--gold); }
+    .k-mark-chip.k-mark-below { bottom: auto; top: calc(100% + 8px); }
+    .k-loupe-ring {
+      position: absolute; right: 22px; bottom: 22px; width: 220px; height: 220px;
+      border-radius: 50%; overflow: hidden; border: 3.5px solid var(--gold);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.8); background: #07100F; z-index: 18;
+    }
+    .k-loupe-ring.k-loupe-left { right: auto; left: 22px; }
+    .k-loupe-cam { position: absolute; left: 0; top: 0; width: 100%; height: 100%; transform-origin: 0 0; }
+    .k-loupe-cam .k-media-el { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .k-loupe-cam.is-aspect-fitted .k-media-el { object-fit: fill; }
+    .k-loupe-tag {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); max-width: 84%;
+      padding: 3px 10px; border-radius: 999px; background: rgba(6,14,14,0.94);
+      border: 1px solid var(--gold); color: #FFF; font: 800 12px var(--font-sans);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .k-wf-stage { justify-content: space-between; }
+    .k-wf-head { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .k-wf-row { display: flex; gap: 18px; width: 100%; flex: 1; min-height: 0; align-items: stretch; }
+    .k-wf-card {
+      flex: 1; border-radius: 18px; overflow: hidden; background: rgba(9,19,18,0.88);
+      border: 2px solid rgba(255,255,255,0.14); display: flex; flex-direction: column;
+      box-shadow: 0 14px 36px rgba(0,0,0,0.48);
+    }
+    .k-wf-top { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; font: 900 17px var(--font-mono); color: var(--accent); }
+    .k-wf-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.2); display: block; }
+    .k-wf-media { flex: 1; position: relative; background: #07100F; min-height: 0; }
+    .k-wf-media .k-media-el { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .k-wf-info { padding: 14px 16px; }
+    .k-wf-title { font: 800 21px var(--font-sans); color: #F8FAFC; }
+    .k-wf-desc { font: 500 14px var(--font-sans); color: var(--sub); margin-top: 4px; }
+    .k-wipe-a, .k-wipe-b { position: absolute; inset: 0; }
+    .k-wipe-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: linear-gradient(180deg, var(--accent), var(--gold)); box-shadow: 0 0 18px var(--accent); transform: translateX(-1.5px); z-index: 8; }
+    .k-wipe-knob {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 36px; height: 36px;
+      border-radius: 50%; background: #081312; border: 2px solid var(--gold); color: #FFF;
+      display: flex; align-items: center; justify-content: center; font: 900 13px var(--font-mono);
+    }
+    .k-wipe-tag { position: absolute; top: 16px; padding: 5px 14px; border-radius: 999px; background: rgba(6,14,14,0.9); font: 800 15px var(--font-sans); z-index: 10; }
+    .k-wipe-tag-l { left: 16px; border: 1px solid var(--accent); color: var(--accent); }
+    .k-wipe-tag-r { right: 16px; border: 1px solid var(--gold); color: var(--gold); }
+    .k-dash-grid { flex-direction: row; gap: 32px; align-items: center; }
+    .k-dash-left { flex: 0 0 39%; display: flex; flex-direction: column; gap: 18px; }
+    .k-dash-right { flex: 1; width: auto; height: 100%; }
+    .k-dash-panel { padding: 24px; border-radius: 18px; background: rgba(10,22,21,0.9); border: 1.5px solid color-mix(in srgb, var(--accent) 32%, transparent); display: flex; flex-direction: column; gap: 14px; }
+    .k-dash-panel-top { display: flex; justify-content: space-between; align-items: center; }
+    .k-dash-panel-top span { font: 800 19px var(--font-sans); color: #E2E8F0; }
+    .k-dash-panel-top em { font-style: normal; font: 700 13px var(--font-mono); color: var(--gold); }
+    .k-dash-num { font: 900 54px var(--font-mono); color: var(--accent); line-height: 1.05; }
+    .k-dash-bar { height: 8px; border-radius: 99px; background: rgba(255,255,255,0.08); overflow: hidden; }
+    .k-dash-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--gold)); }
+    .k-dash-cells { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
+    .k-dash-cell { height: 13px; border-radius: 4px; background: rgba(255,255,255,0.08); display: block; }
+    .k-trio-stage { justify-content: center; gap: 24px; }
+    .k-trio-row { display: flex; gap: 22px; width: 100%; flex: 1; min-height: 0; align-items: center; justify-content: center; }
+    .k-trio-win {
+      flex: 1; height: 88%; display: flex; flex-direction: column; border-radius: 16px; overflow: hidden;
+      background: #0B1514; border: 1.5px solid rgba(255,255,255,0.16); box-shadow: 0 22px 52px rgba(0,0,0,0.62);
+    }
+    #workflow-hud {
+      position: absolute; top: 77px; left: 50%; transform: translateX(-50%);
+      display: none; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 999px;
+      background: rgba(8,16,15,0.84); border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.45); z-index: 29; pointer-events: none;
+    }
+    .k-hud-step { padding: 3px 10px; border-radius: 999px; font: 700 14px var(--font-sans); color: #94A3B8; white-space: nowrap; }
+    .k-hud-step.is-done { background: rgba(var(--rgbAccent), 0.16); color: var(--accent); }
+    .k-hud-step.is-active { background: linear-gradient(90deg, var(--accent), var(--gold)); color: #061211; font-weight: 900; }
+    .k-hud-sep { color: rgba(255,255,255,0.22); font-size: 13px; }
+    .k-hud-sec { font: 800 13px var(--font-mono); color: var(--gold); margin-left: 6px; }
+    
+    .k-app-stage { padding: 100px 36px 506px; }
+    .k-app-split, .k-dash-grid, .k-wf-row, .k-trio-row { flex-direction: column; }
+    .k-fan-card { width: 170px; height: 245px; }
+    
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div id="world">
+      <canvas id="fxb" class="layer" width="1080" height="1920"></canvas>
+      <div id="scene-slots"></div>
+      <canvas id="fxt" class="layer" width="1080" height="1920"></canvas>
+    </div>
+    <div id="vig" class="layer"></div>
+    <canvas id="grain-layer" class="layer" width="1080" height="1920"></canvas>
+    <div id="glc" class="layer"></div>
+    <canvas id="trc" class="layer" width="1080" height="1920"></canvas>
+    <div id="flash" class="layer"></div>
+    <div id="chrome-hud" class="layer">
+      <div id="c-tl" class="k-corner"></div>
+      <div id="c-tr" class="k-corner"></div>
+      <div id="c-bl" class="k-corner"></div>
+      <div id="c-br" class="k-corner"></div>
+    </div>
+    <div id="ai-badge">AI 辅助创作</div>
+    <div id="workflow-hud"></div>
+    <div id="avatar-overlay-wrap"><video id="avatar-overlay-video" muted playsinline preload="auto"></video></div>
+    <div id="end-notice-wrap"><div id="end-notice">本视频由 DeepSeek Harness 创作：AI 大模型编码驱动视觉合成 · AI 编程合成配乐 + IndexTTS-2.5 语音合成</div></div>
+    <div id="sub-wrap"><div id="sub-pill"></div></div>
+    <div id="progress-line"><div id="progress-fill"></div></div>
+  </div>
+
+  <template class="scene-template" data-scene-id="scene-01" data-layout="card-fan-opener"><div class="k-scene" data-scene-idx="0">
+      <div class="k-app-stage k-fan-stage">
+        <div class="k-fan-arc"><div class="k-fan-card" data-fi="0" data-total="7"><img class="k-media-el k-extra-media k-extra-0" src="assets/images/image-ui-01-warroom-052c.png" alt="" data-motion="zoom-in"></div><div class="k-fan-card" data-fi="1" data-total="7"><img class="k-media-el k-extra-media k-extra-1" src="assets/images/image-ui-02-llm-modal-208a.png" alt="" data-motion="zoom-in"></div><div class="k-fan-card" data-fi="2" data-total="7"><img class="k-media-el k-extra-media k-extra-2" src="assets/images/image-ui-03-studio-assets-7b34.png" alt="" data-motion="zoom-in"></div><div class="k-fan-card" data-fi="3" data-total="7"><img class="k-media-el k-extra-media k-extra-3" src="assets/images/image-ui-04-studio-settings-b1ef.png" alt="" data-motion="zoom-in"></div><div class="k-fan-card" data-fi="4" data-total="7"><img class="k-media-el k-extra-media k-extra-4" src="assets/images/image-ui-05-studio-timeline-9f84.png" alt="" data-motion="zoom-in"></div><div class="k-fan-card" data-fi="5" data-total="7"><img class="k-media-el k-extra-media k-extra-5" src="assets/images/image-ui-06-voice-catalog-e920.png" alt="" data-motion="zoom-in"></div><div class="k-fan-card" data-fi="6" data-total="7"><img class="k-media-el k-extra-media k-extra-6" src="assets/images/image-ui-07-task-monitor-a10a.png" alt="" data-motion="zoom-in"></div></div>
+        <div class="k-fan-badge">
+          <span class="k-dot"></span>
+          <span>科技前沿</span>
+        </div>
+        <div class="k-headline k-headline-lg"><div class="k-line-row"><span class="k-ch">别</span><span class="k-ch">再</span><span class="k-ch">把</span><span class="k-ch">时</span><span class="k-ch">间</span><span class="k-ch">耗</span><span class="k-ch">在</span><span class="k-ch">拼</span><span class="k-ch">工</span><span class="k-ch">具</span></div></div>
+        <div class="k-pills-row"><div class="k-pill"><span>◆</span>面向 DeepSeek Harness</div><div class="k-pill"><span>◆</span>AI 双引擎全链路</div></div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-02" data-layout="app-focus-shot"><div class="k-scene" data-scene-idx="1">
+        <div class="k-app-stage k-app-wide">
+          <div class="k-app-head">
+            <div class="k-app-head-l">
+              <span class="k-tag-chip">第 2 幕</span>
+              <span class="k-app-head-title">四位智能体，全流程协同</span>
+            </div>
+            <span class="k-app-head-sub">4-Agent 自动协同 · 实时声轨 · 1080P 一键出片</span>
+          </div>
+          <div class="k-app-win-wrap">
+      <div class="k-app-win ">
+        <div class="k-app-bar">
+          <div class="k-app-dots"><i></i><i></i><i></i></div>
+          
+          <span class="k-app-title">【重磅开源宣发短视频】全流程介绍面向 DeepSeek Harness (DSH) 的开源 AI 双引擎全链路视频制作插件工作台 DSH Video Workbench（MIT 协议免费可商用）：从 4-Agent 作战大屏、23 个 Cordis 工具插件、OpenAI/Anthropic/Gemini/Responses 4协议接入与3轮tsc自动修复、分批AI手写Remotion TSX与HTML5 CDP双引擎逐帧渲染、90~140 BPM音乐鼓点与0.5拍疾速卡点、IndexTTS-2.5 204+音色与3步克隆实验室、Alpha透明通道数字人、FFmpeg侧链闪避混音、EBU R128响度与抖音防遮挡安全区预检到一键Publish Pack导出；全片节奏高燃密实（每镜2.0~3.2秒），所有含截图镜必须完整展示实机界面，纯代码镜用高燃动态 SVG 图表与粒子演绎，并在片尾最后一幕将开源号召保持在同一句完整旁白内（“GitHub 开源仓库 Merziller 斜杠 dsh-video-workbench，点亮 Star 立即免费上手！”），同时屏幕大字高亮完整仓库地址 https://github.com/Merziller/dsh-video-workbench ！</span>
+          <span class="k-app-kicker">第 2 幕</span>
+        </div>
+        <div class="k-app-view">
+          <div class="k-cam-stage" data-nw="2880" data-nh="1840"><img class="k-media-el k-primary-media" src="assets/edited/image-ui-01-warroom-052c-edited.png" alt="" data-motion="hold"></div>
+        </div>
+      </div>
+      </div>
+        </div></div></template>
+  <template class="scene-template" data-scene-id="scene-03" data-layout="radial-climax"><div class="k-scene" data-scene-idx="2">
+      <div class="k-bg-procedural"></div>
+      <div class="k-dark-veil-soft"></div>
+      <div class="k-center-stage k-climax-stage">
+        <div class="k-eyebrow"><span class="k-dot"></span><span>第 3 幕</span></div>
+        <div class="k-headline k-headline-lg"><div class="k-line-row"><span class="k-ch">二</span><span class="k-ch">十</span><span class="k-ch">三</span><span class="k-ch">个</span><span class="k-ch">工</span><span class="k-ch">具</span></div><div class="k-line-row"><span class="k-ch">组</span><span class="k-ch">成</span><span class="k-ch">制</span><span class="k-ch">作</span><span class="k-ch">网</span><span class="k-ch">络</span></div></div>
+        <div class="k-glow-bar"></div>
+        <div class="k-stamp-seal">23 个 Cordis 工具插件</div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-04" data-layout="app-focus-shot"><div class="k-scene" data-scene-idx="3">
+        <div class="k-app-stage k-app-wide">
+          <div class="k-app-head">
+            <div class="k-app-head-l">
+              <span class="k-tag-chip">第 4 幕</span>
+              <span class="k-app-head-title">四大协议，一次接入</span>
+            </div>
+            <span class="k-app-head-sub">OpenAI Chat / Responses · Anthropic Messages · Gemini Native</span>
+          </div>
+          <div class="k-app-win-wrap">
+      <div class="k-app-win ">
+        <div class="k-app-bar">
+          <div class="k-app-dots"><i></i><i></i><i></i></div>
+          
+          <span class="k-app-title">四大协议，一次接入</span>
+          <span class="k-app-kicker">第 4 幕</span>
+        </div>
+        <div class="k-app-view">
+          <div class="k-cam-stage" data-nw="2880" data-nh="1840"><img class="k-media-el k-primary-media" src="assets/edited/image-ui-02-llm-modal-208a-edited.png" alt="" data-motion="hold"></div>
+        </div>
+      </div>
+      </div>
+        </div></div></template>
+  <template class="scene-template" data-scene-id="scene-05" data-layout="workflow-steps"><div class="k-scene" data-scene-idx="4">
+      <div class="k-app-stage k-wf-stage">
+        <div class="k-wf-head">
+          <div class="k-eyebrow"><span class="k-dot"></span><span>第 5 幕</span></div>
+          <div class="k-headline k-headline-sm"><div class="k-line-row"><span class="k-ch">生</span><span class="k-ch">成</span><span class="k-ch">之</span><span class="k-ch">后</span><span class="k-ch">，</span><span class="k-ch">还</span><span class="k-ch">要</span><span class="k-ch">编</span><span class="k-ch">译</span><span class="k-ch">修</span><span class="k-ch">错</span></div></div>
+        </div>
+        <div class="k-wf-row">
+      <div class="k-wf-card" data-wi="0">
+        <div class="k-wf-top"><span>01</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">tsc --noEmit</div>
+          <div class="k-wf-desc">Step 1</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="1">
+        <div class="k-wf-top"><span>02</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">编译与沙箱检查</div>
+          <div class="k-wf-desc">Step 2</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="2">
+        <div class="k-wf-top"><span>03</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">最多 3 轮自动修复</div>
+          <div class="k-wf-desc">Step 3</div>
+        </div>
+      </div></div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-06" data-layout="workflow-steps"><div class="k-scene" data-scene-idx="5">
+      <div class="k-app-stage k-wf-stage">
+        <div class="k-wf-head">
+          <div class="k-eyebrow"><span class="k-dot"></span><span>第 6 幕</span></div>
+          <div class="k-headline k-headline-sm"><div class="k-line-row"><span class="k-ch">素</span><span class="k-ch">材</span><span class="k-ch">、</span><span class="k-ch">提</span><span class="k-ch">词</span><span class="k-ch">、</span></div><div class="k-line-row"><span class="k-ch">自</span><span class="k-ch">拍</span><span class="k-ch">一</span><span class="k-ch">次</span><span class="k-ch">就</span><span class="k-ch">位</span></div></div>
+        </div>
+        <div class="k-wf-row">
+      <div class="k-wf-card" data-wi="0">
+        <div class="k-wf-top"><span>01</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"><img class="k-media-el k-extra-media k-extra-0" src="assets/edited/image-ui-03-studio-assets-7b34-edited.png" alt="" data-motion="zoom-in"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">本地批量扫描 / 百兆直传</div>
+          <div class="k-wf-desc">Step 1</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="1">
+        <div class="k-wf-top"><span>02</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"><img class="k-media-el k-extra-media k-extra-1" src="assets/edited/image-ui-03-studio-assets-7b34-edited.png" alt="" data-motion="zoom-in"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">可调速防镜像提词录播</div>
+          <div class="k-wf-desc">Step 2</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="2">
+        <div class="k-wf-top"><span>03</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"><img class="k-media-el k-extra-media k-extra-2" src="assets/edited/image-ui-03-studio-assets-7b34-edited.png" alt="" data-motion="zoom-in"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">隔离式 .motion 导入</div>
+          <div class="k-wf-desc">Step 3</div>
+        </div>
+      </div></div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-07" data-layout="compare-dual"><div class="k-scene" data-scene-idx="6">
+      <div class="k-bg-procedural"></div>
+      <div class="k-dark-veil"></div>
+      <div class="k-center-stage">
+        <div class="k-eyebrow"><span class="k-dot"></span><span>07 / 22 · 第 7 幕</span></div>
+        <div class="k-headline k-headline-md"><div class="k-line-row"><span class="k-ch">双</span><span class="k-ch">引</span><span class="k-ch">擎</span><span class="k-ch">，</span><span class="k-ch">不</span><span class="k-ch">是</span><span class="k-ch">双</span><span class="k-ch">份</span><span class="k-ch">录</span><span class="k-ch">像</span></div></div>
+        <div class="k-compare-row">
+          <div class="k-cmp-card k-cmp-a">
+            <div class="k-cmp-tag">A · 传统方案</div>
+            <div class="k-cmp-val">第 7 幕</div>
+          </div>
+          <div class="k-cmp-bridge"><i></i></div>
+          <div class="k-cmp-card k-cmp-b">
+            <div class="k-cmp-tag k-cmp-gold">B · 智能重构</div>
+            <div class="k-cmp-val">声画同步</div>
+          </div>
+        </div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-08" data-layout="workflow-steps"><div class="k-scene" data-scene-idx="7">
+      <div class="k-app-stage k-wf-stage">
+        <div class="k-wf-head">
+          <div class="k-eyebrow"><span class="k-dot"></span><span>第 8 幕</span></div>
+          <div class="k-headline k-headline-sm"><div class="k-line-row"><span class="k-ch">逐</span><span class="k-ch">镜</span><span class="k-ch">手</span><span class="k-ch">写</span><span class="k-ch">，</span><span class="k-ch">不</span><span class="k-ch">是</span><span class="k-ch">套</span><span class="k-ch">壳</span><span class="k-ch">模</span><span class="k-ch">板</span></div></div>
+        </div>
+        <div class="k-wf-row">
+      <div class="k-wf-card" data-wi="0">
+        <div class="k-wf-top"><span>01</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">按批次调用大模型</div>
+          <div class="k-wf-desc">Step 1</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="1">
+        <div class="k-wf-top"><span>02</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">逐镜手写 Remotion TSX</div>
+          <div class="k-wf-desc">Step 2</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="2">
+        <div class="k-wf-top"><span>03</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">SVG / UI 动画</div>
+          <div class="k-wf-desc">Step 3</div>
+        </div>
+      </div></div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-09" data-layout="narrative-diorama"><div class="k-scene" data-scene-idx="8">
+      <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 48%, rgba(245,158,11,0.38), rgba(110,20,16,0.55) 45%, #070406 90%);"></div>
+      <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.9;">
+        <circle cx="960" cy="520" r="128" fill="#FFF7DF" opacity="0.92" />
+        <path d="M-20,780 L280,620 L620,695 L980,580 L1340,680 L1690,610 L1940,740 L1940,1080 L-20,1080 Z" fill="#180B08" />
+      </svg>
+      
+      
+      <div class="k-center-stage">
+        <div class="k-eyebrow"><span class="k-dot"></span><span>09 / 22 · 浏览器引擎，同样逐帧可控</span></div>
+        <div class="k-headline k-headline-lg"><div class="k-line-row"><span class="k-ch">浏</span><span class="k-ch">览</span><span class="k-ch">器</span><span class="k-ch">引</span><span class="k-ch">擎</span><span class="k-ch">，</span></div><div class="k-line-row"><span class="k-ch">同</span><span class="k-ch">样</span><span class="k-ch">逐</span><span class="k-ch">帧</span><span class="k-ch">可</span><span class="k-ch">控</span></div></div>
+        <div class="k-pills-row"><div class="k-pill"><span>◆</span>Chromium CDP WebSocket</div><div class="k-pill"><span>◆</span>逐帧抓取</div><div class="k-pill"><span>◆</span>分段缓存</div></div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-10" data-layout="app-focus-shot"><div class="k-scene" data-scene-idx="9">
+        <div class="k-app-stage k-app-wide">
+          <div class="k-app-head">
+            <div class="k-app-head-l">
+              <span class="k-tag-chip">第 10 幕</span>
+              <span class="k-app-head-title">配乐与风格，不止一个选项</span>
+            </div>
+            <span class="k-app-head-sub">3 种配乐引擎 / 6 套配色 · AI 代码 48kHz 作曲 · 配音 / 踩拍 / 纯音乐 MV</span>
+          </div>
+          <div class="k-app-win-wrap">
+      <div class="k-app-win ">
+        <div class="k-app-bar">
+          <div class="k-app-dots"><i></i><i></i><i></i></div>
+          
+          <span class="k-app-title">配乐与风格，不止一个选项</span>
+          <span class="k-app-kicker">第 10 幕</span>
+        </div>
+        <div class="k-app-view">
+          <div class="k-cam-stage" data-nw="2880" data-nh="1840"><img class="k-media-el k-primary-media" src="assets/edited/image-ui-04-studio-settings-b1ef-edited.png" alt="" data-motion="hold"></div>
+        </div>
+      </div>
+      </div>
+        </div></div></template>
+  <template class="scene-template" data-scene-id="scene-11" data-layout="metric-dashboard"><div class="k-scene" data-scene-idx="10">
+      <div class="k-app-stage k-dash-grid">
+        <div class="k-dash-left">
+          <div class="k-eyebrow"><span class="k-dot"></span><span>第 11 幕</span></div>
+          <div class="k-headline k-headline-sm k-headline-left"><div class="k-line-row"><span class="k-ch">半</span><span class="k-ch">拍</span><span class="k-ch">闪</span><span class="k-ch">切</span><span class="k-ch">，</span><span class="k-ch">鼓</span></div><div class="k-line-row"><span class="k-ch">点</span><span class="k-ch">就</span><span class="k-ch">是</span><span class="k-ch">剪</span><span class="k-ch">辑</span><span class="k-ch">线</span></div></div>
+          <div class="k-dash-panel">
+            <div class="k-dash-panel-top">
+              <span>步录制/上传个人声音克隆试听</span>
+              <em>0.5 拍极速闪切</em>
+            </div>
+            <div class="k-dash-num" data-target="264" data-suffix="+">0+</div>
+            <div class="k-dash-bar"><div class="k-dash-bar-fill"></div></div>
+            <div class="k-dash-cells"><span class="k-dash-cell" data-ci="0"></span><span class="k-dash-cell" data-ci="1"></span><span class="k-dash-cell" data-ci="2"></span><span class="k-dash-cell" data-ci="3"></span><span class="k-dash-cell" data-ci="4"></span><span class="k-dash-cell" data-ci="5"></span><span class="k-dash-cell" data-ci="6"></span><span class="k-dash-cell" data-ci="7"></span><span class="k-dash-cell" data-ci="8"></span><span class="k-dash-cell" data-ci="9"></span><span class="k-dash-cell" data-ci="10"></span><span class="k-dash-cell" data-ci="11"></span><span class="k-dash-cell" data-ci="12"></span><span class="k-dash-cell" data-ci="13"></span><span class="k-dash-cell" data-ci="14"></span><span class="k-dash-cell" data-ci="15"></span><span class="k-dash-cell" data-ci="16"></span><span class="k-dash-cell" data-ci="17"></span><span class="k-dash-cell" data-ci="18"></span><span class="k-dash-cell" data-ci="19"></span></div>
+          </div>
+        </div>
+        <div class="k-app-win-wrap k-dash-right">
+          <div class="k-app-win">
+            <div class="k-app-bar">
+              <div class="k-app-dots"><i></i><i></i><i></i></div>
+              
+              <span class="k-app-title">半拍闪切，鼓点就是剪辑线</span>
+              <span class="k-app-kicker">ENGINE</span>
+            </div>
+            <div class="k-app-view">
+              <div class="k-cam-stage" data-nw="0" data-nh="0"></div>
+            </div>
+          </div>
+        </div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-12" data-layout="app-focus-shot"><div class="k-scene" data-scene-idx="11">
+        <div class="k-app-stage k-app-wide">
+          <div class="k-app-head">
+            <div class="k-app-head-l">
+              <span class="k-tag-chip">第 12 幕</span>
+              <span class="k-app-head-title">本地音色，直接开选</span>
+            </div>
+            <span class="k-app-head-sub">204+ 本地音色 · 常驻显存生成 · 支持 GPT-SoVITS 切换</span>
+          </div>
+          <div class="k-app-win-wrap">
+      <div class="k-app-win ">
+        <div class="k-app-bar">
+          <div class="k-app-dots"><i></i><i></i><i></i></div>
+          
+          <span class="k-app-title">本地音色，直接开选</span>
+          <span class="k-app-kicker">第 12 幕</span>
+        </div>
+        <div class="k-app-view">
+          <div class="k-cam-stage" data-nw="2880" data-nh="1840"><img class="k-media-el k-primary-media" src="assets/edited/image-ui-06-voice-catalog-e920-edited.png" alt="" data-motion="hold"></div>
+        </div>
+      </div>
+      </div>
+        </div></div></template>
+  <template class="scene-template" data-scene-id="scene-13" data-layout="workflow-steps"><div class="k-scene" data-scene-idx="12">
+      <div class="k-app-stage k-wf-stage">
+        <div class="k-wf-head">
+          <div class="k-eyebrow"><span class="k-dot"></span><span>第 13 幕</span></div>
+          <div class="k-headline k-headline-sm"><div class="k-line-row"><span class="k-ch">个</span><span class="k-ch">人</span><span class="k-ch">声</span><span class="k-ch">音</span><span class="k-ch">，</span><span class="k-ch">三</span><span class="k-ch">步</span><span class="k-ch">进</span><span class="k-ch">入</span><span class="k-ch">制</span><span class="k-ch">作</span></div></div>
+        </div>
+        <div class="k-wf-row">
+      <div class="k-wf-card" data-wi="0">
+        <div class="k-wf-top"><span>01</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"><img class="k-media-el k-extra-media k-extra-0" src="assets/images/image-ui-01-warroom-052c.png" alt="" data-motion="zoom-in"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">录制或上传</div>
+          <div class="k-wf-desc">Step 1</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="1">
+        <div class="k-wf-top"><span>02</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"><img class="k-media-el k-extra-media k-extra-1" src="assets/images/image-ui-02-llm-modal-208a.png" alt="" data-motion="zoom-in"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">克隆与试听</div>
+          <div class="k-wf-desc">Step 2</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="2">
+        <div class="k-wf-top"><span>03</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"><img class="k-media-el k-extra-media k-extra-2" src="assets/images/image-ui-03-studio-assets-7b34.png" alt="" data-motion="zoom-in"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">仅限本人或已授权声音</div>
+          <div class="k-wf-desc">Step 3</div>
+        </div>
+      </div></div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-14" data-layout="split-wipe-compare"><div class="k-scene" data-scene-idx="13">
+      <div class="k-app-stage k-app-wide">
+        <div class="k-app-head">
+          <div class="k-app-head-l">
+            <span class="k-tag-chip k-tag-gold">A / B COMPARE</span>
+            <span class="k-app-head-title">透明数字人，进入你的画面</span>
+          </div>
+          <span class="k-app-head-sub">Alpha 透明通道 · 透明 WebM 数字人 · 人物叠加合成</span>
+        </div>
+        <div class="k-app-win-wrap">
+          <div class="k-app-win">
+            <div class="k-app-bar">
+              <div class="k-app-dots"><i></i><i></i><i></i></div>
+              
+              <span class="k-app-title">【重磅开源宣发短视频】全流程介绍面向 DeepSeek Harness (DSH) 的开源 AI 双引擎全链路视频制作插件工作台 DSH Video Workbench（MIT 协议免费可商用）：从 4-Agent 作战大屏、23 个 Cordis 工具插件、OpenAI/Anthropic/Gemini/Responses 4协议接入与3轮tsc自动修复、分批AI手写Remotion TSX与HTML5 CDP双引擎逐帧渲染、90~140 BPM音乐鼓点与0.5拍疾速卡点、IndexTTS-2.5 204+音色与3步克隆实验室、Alpha透明通道数字人、FFmpeg侧链闪避混音、EBU R128响度与抖音防遮挡安全区预检到一键Publish Pack导出；全片节奏高燃密实（每镜2.0~3.2秒），所有含截图镜必须完整展示实机界面，纯代码镜用高燃动态 SVG 图表与粒子演绎，并在片尾最后一幕将开源号召保持在同一句完整旁白内（“GitHub 开源仓库 Merziller 斜杠 dsh-video-workbench，点亮 Star 立即免费上手！”），同时屏幕大字高亮完整仓库地址 https://github.com/Merziller/dsh-video-workbench ！</span>
+              <span class="k-app-kicker">WIPE</span>
+            </div>
+            <div class="k-app-view k-wipe-wrap">
+              <div class="k-wipe-a"><img class="k-media-el k-primary-media" src="assets/edited/image-ui-04-studio-settings-b1ef-edited.png" alt="" data-motion="hold"></div>
+              <div class="k-wipe-b"><img class="k-media-el k-extra-media k-extra-1" src="assets/edited/image-ui-04-studio-settings-b1ef-edited.png" alt="" data-motion="hold"></div>
+              <div class="k-wipe-line"><div class="k-wipe-knob">⇆</div></div>
+              <div class="k-wipe-tag k-wipe-tag-l">传统方案</div>
+              <div class="k-wipe-tag k-wipe-tag-r">智能重构</div>
+            </div>
+          </div>
+        </div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-15" data-layout="workflow-steps"><div class="k-scene" data-scene-idx="14">
+      <div class="k-app-stage k-wf-stage">
+        <div class="k-wf-head">
+          <div class="k-eyebrow"><span class="k-dot"></span><span>第 15 幕</span></div>
+          <div class="k-headline k-headline-sm"><div class="k-line-row"><span class="k-ch">先</span><span class="k-ch">测</span><span class="k-ch">声</span><span class="k-ch">音</span><span class="k-ch">，</span><span class="k-ch">再</span><span class="k-ch">填</span><span class="k-ch">画</span><span class="k-ch">面</span><span class="k-ch">帧</span><span class="k-ch">数</span></div></div>
+        </div>
+        <div class="k-wf-row">
+      <div class="k-wf-card" data-wi="0">
+        <div class="k-wf-top"><span>01</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">第 15 幕</div>
+          <div class="k-wf-desc">聚合图文视听</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="1">
+        <div class="k-wf-top"><span>02</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">声画同步</div>
+          <div class="k-wf-desc">自动节奏分镜</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="2">
+        <div class="k-wf-top"><span>03</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">节奏转场</div>
+          <div class="k-wf-desc">高清成片交付</div>
+        </div>
+      </div></div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-16" data-layout="metric-dashboard"><div class="k-scene" data-scene-idx="15">
+      <div class="k-app-stage k-dash-grid">
+        <div class="k-dash-left">
+          <div class="k-eyebrow"><span class="k-dot"></span><span>高燃收尾</span></div>
+          <div class="k-headline k-headline-sm k-headline-left"><div class="k-line-row"><span class="k-ch">人</span><span class="k-ch">声</span><span class="k-ch">出</span><span class="k-ch">现</span><span class="k-ch">，</span><span class="k-ch">音</span><span class="k-ch">乐</span><span class="k-ch">自</span><span class="k-ch">动</span><span class="k-ch">让</span><span class="k-ch">位</span></div></div>
+          <div class="k-dash-panel">
+            <div class="k-dash-panel-top">
+              <span>sidechaincompress</span>
+              <em>BGM 自动让位人声</em>
+            </div>
+            <div class="k-dash-num" data-target="384" data-suffix="+">0+</div>
+            <div class="k-dash-bar"><div class="k-dash-bar-fill"></div></div>
+            <div class="k-dash-cells"><span class="k-dash-cell" data-ci="0"></span><span class="k-dash-cell" data-ci="1"></span><span class="k-dash-cell" data-ci="2"></span><span class="k-dash-cell" data-ci="3"></span><span class="k-dash-cell" data-ci="4"></span><span class="k-dash-cell" data-ci="5"></span><span class="k-dash-cell" data-ci="6"></span><span class="k-dash-cell" data-ci="7"></span><span class="k-dash-cell" data-ci="8"></span><span class="k-dash-cell" data-ci="9"></span><span class="k-dash-cell" data-ci="10"></span><span class="k-dash-cell" data-ci="11"></span><span class="k-dash-cell" data-ci="12"></span><span class="k-dash-cell" data-ci="13"></span><span class="k-dash-cell" data-ci="14"></span><span class="k-dash-cell" data-ci="15"></span><span class="k-dash-cell" data-ci="16"></span><span class="k-dash-cell" data-ci="17"></span><span class="k-dash-cell" data-ci="18"></span><span class="k-dash-cell" data-ci="19"></span></div>
+          </div>
+        </div>
+        <div class="k-app-win-wrap k-dash-right">
+          <div class="k-app-win">
+            <div class="k-app-bar">
+              <div class="k-app-dots"><i></i><i></i><i></i></div>
+              
+              <span class="k-app-title">人声出现，音乐自动让位</span>
+              <span class="k-app-kicker">ENGINE</span>
+            </div>
+            <div class="k-app-view">
+              <div class="k-cam-stage" data-nw="0" data-nh="0"></div>
+            </div>
+          </div>
+        </div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-17" data-layout="app-focus-shot"><div class="k-scene" data-scene-idx="16">
+        <div class="k-app-stage k-app-wide">
+          <div class="k-app-head">
+            <div class="k-app-head-l">
+              <span class="k-tag-chip">科技前沿</span>
+              <span class="k-app-head-title">不满意哪一幕，就改哪一幕</span>
+            </div>
+            <span class="k-app-head-sub">V1 分镜 + A1 混音 · ai_refine_scene · 单幕重配 / AI 声学修音</span>
+          </div>
+          <div class="k-app-win-wrap">
+      <div class="k-app-win ">
+        <div class="k-app-bar">
+          <div class="k-app-dots"><i></i><i></i><i></i></div>
+          
+          <span class="k-app-title">不满意哪一幕，就改哪一幕</span>
+          <span class="k-app-kicker">科技前沿</span>
+        </div>
+        <div class="k-app-view">
+          <div class="k-cam-stage" data-nw="2880" data-nh="1840"><img class="k-media-el k-primary-media" src="assets/edited/image-ui-05-studio-timeline-9f84-edited.png" alt="" data-motion="hold"></div>
+        </div>
+      </div>
+      </div>
+        </div></div></template>
+  <template class="scene-template" data-scene-id="scene-18" data-layout="app-focus-shot"><div class="k-scene" data-scene-idx="17">
+        <div class="k-app-stage k-app-wide">
+          <div class="k-app-head">
+            <div class="k-app-head-l">
+              <span class="k-tag-chip">第 2 幕</span>
+              <span class="k-app-head-title">任务可控，出错有路可退</span>
+            </div>
+            <span class="k-app-head-sub">暂停 / 恢复 · 一键强停子进程 · 断点单步重试 / 实时日志</span>
+          </div>
+          <div class="k-app-win-wrap">
+      <div class="k-app-win ">
+        <div class="k-app-bar">
+          <div class="k-app-dots"><i></i><i></i><i></i></div>
+          
+          <span class="k-app-title">【重磅开源宣发短视频】全流程介绍面向 DeepSeek Harness (DSH) 的开源 AI 双引擎全链路视频制作插件工作台 DSH Video Workbench（MIT 协议免费可商用）：从 4-Agent 作战大屏、23 个 Cordis 工具插件、OpenAI/Anthropic/Gemini/Responses 4协议接入与3轮tsc自动修复、分批AI手写Remotion TSX与HTML5 CDP双引擎逐帧渲染、90~140 BPM音乐鼓点与0.5拍疾速卡点、IndexTTS-2.5 204+音色与3步克隆实验室、Alpha透明通道数字人、FFmpeg侧链闪避混音、EBU R128响度与抖音防遮挡安全区预检到一键Publish Pack导出；全片节奏高燃密实（每镜2.0~3.2秒），所有含截图镜必须完整展示实机界面，纯代码镜用高燃动态 SVG 图表与粒子演绎，并在片尾最后一幕将开源号召保持在同一句完整旁白内（“GitHub 开源仓库 Merziller 斜杠 dsh-video-workbench，点亮 Star 立即免费上手！”），同时屏幕大字高亮完整仓库地址 https://github.com/Merziller/dsh-video-workbench ！</span>
+          <span class="k-app-kicker">第 2 幕</span>
+        </div>
+        <div class="k-app-view">
+          <div class="k-cam-stage" data-nw="2880" data-nh="1840"><img class="k-media-el k-primary-media" src="assets/edited/image-ui-07-task-monitor-a10a-edited.png" alt="" data-motion="hold"></div>
+        </div>
+      </div>
+      </div>
+        </div></div></template>
+  <template class="scene-template" data-scene-id="scene-19" data-layout="metric-dashboard"><div class="k-scene" data-scene-idx="18">
+      <div class="k-app-stage k-dash-grid">
+        <div class="k-dash-left">
+          <div class="k-eyebrow"><span class="k-dot"></span><span>第 3 幕</span></div>
+          <div class="k-headline k-headline-sm k-headline-left"><div class="k-line-row"><span class="k-ch">响</span><span class="k-ch">度</span><span class="k-ch">、</span><span class="k-ch">黑</span><span class="k-ch">屏</span><span class="k-ch">、</span><span class="k-ch">遮</span><span class="k-ch">挡</span><span class="k-ch">提</span><span class="k-ch">前</span><span class="k-ch">查</span></div></div>
+          <div class="k-dash-panel">
+            <div class="k-dash-panel-top">
+              <span>EBU R128 广播响度</span>
+              <em>零黑屏检测 / QA 7/7</em>
+            </div>
+            <div class="k-dash-num" data-target="72" data-suffix="+">0+</div>
+            <div class="k-dash-bar"><div class="k-dash-bar-fill"></div></div>
+            <div class="k-dash-cells"><span class="k-dash-cell" data-ci="0"></span><span class="k-dash-cell" data-ci="1"></span><span class="k-dash-cell" data-ci="2"></span><span class="k-dash-cell" data-ci="3"></span><span class="k-dash-cell" data-ci="4"></span><span class="k-dash-cell" data-ci="5"></span><span class="k-dash-cell" data-ci="6"></span><span class="k-dash-cell" data-ci="7"></span><span class="k-dash-cell" data-ci="8"></span><span class="k-dash-cell" data-ci="9"></span><span class="k-dash-cell" data-ci="10"></span><span class="k-dash-cell" data-ci="11"></span><span class="k-dash-cell" data-ci="12"></span><span class="k-dash-cell" data-ci="13"></span><span class="k-dash-cell" data-ci="14"></span><span class="k-dash-cell" data-ci="15"></span><span class="k-dash-cell" data-ci="16"></span><span class="k-dash-cell" data-ci="17"></span><span class="k-dash-cell" data-ci="18"></span><span class="k-dash-cell" data-ci="19"></span></div>
+          </div>
+        </div>
+        <div class="k-app-win-wrap k-dash-right">
+          <div class="k-app-win">
+            <div class="k-app-bar">
+              <div class="k-app-dots"><i></i><i></i><i></i></div>
+              
+              <span class="k-app-title">响度、黑屏、遮挡提前查</span>
+              <span class="k-app-kicker">ENGINE</span>
+            </div>
+            <div class="k-app-view">
+              <div class="k-cam-stage" data-nw="0" data-nh="0"></div>
+            </div>
+          </div>
+        </div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-20" data-layout="card-fan-opener"><div class="k-scene" data-scene-idx="19">
+      <div class="k-app-stage k-fan-stage">
+        <div class="k-fan-arc"></div>
+        <div class="k-fan-badge">
+          <span class="k-dot"></span>
+          <span>第 4 幕</span>
+        </div>
+        <div class="k-headline k-headline-lg"><div class="k-line-row"><span class="k-ch">代</span><span class="k-ch">码</span><span class="k-ch">免</span><span class="k-ch">费</span><span class="k-ch">商</span><span class="k-ch">用</span><span class="k-ch">，</span></div><div class="k-line-row"><span class="k-ch">配</span><span class="k-ch">置</span><span class="k-ch">本</span><span class="k-ch">地</span><span class="k-ch">隔</span><span class="k-ch">离</span></div></div>
+        <div class="k-pills-row"><div class="k-pill"><span>◆</span>MIT License / 免费可商用</div><div class="k-pill"><span>◆</span>SIL OFL 开源商用字体</div><div class="k-pill"><span>◆</span>.env 本地路径隔离</div></div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-21" data-layout="workflow-steps"><div class="k-scene" data-scene-idx="20">
+      <div class="k-app-stage k-wf-stage">
+        <div class="k-wf-head">
+          <div class="k-eyebrow"><span class="k-dot"></span><span>第 5 幕</span></div>
+          <div class="k-headline k-headline-sm"><div class="k-line-row"><span class="k-ch">最</span><span class="k-ch">后</span><span class="k-ch">一</span><span class="k-ch">步</span><span class="k-ch">，</span><span class="k-ch">把</span></div><div class="k-line-row"><span class="k-ch">发</span><span class="k-ch">布</span><span class="k-ch">资</span><span class="k-ch">料</span><span class="k-ch">带</span><span class="k-ch">走</span></div></div>
+        </div>
+        <div class="k-wf-row">
+      <div class="k-wf-card" data-wi="0">
+        <div class="k-wf-top"><span>01</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">一键 Publish Pack</div>
+          <div class="k-wf-desc">Step 1</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="1">
+        <div class="k-wf-top"><span>02</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">成片 / 封面 / 发布清单</div>
+          <div class="k-wf-desc">Step 2</div>
+        </div>
+      </div>
+      <div class="k-wf-card" data-wi="2">
+        <div class="k-wf-top"><span>03</span><i class="k-wf-dot"></i></div>
+        <div class="k-wf-media"></div>
+        <div class="k-wf-info">
+          <div class="k-wf-title">https://github.com/Merziller/dsh-video-workbench</div>
+          <div class="k-wf-desc">Step 3</div>
+        </div>
+      </div></div>
+      </div></div></template>
+  <template class="scene-template" data-scene-id="scene-22" data-layout="kinetic-impact"><div class="k-scene" data-scene-idx="21">
+      <div class="k-bg-procedural"></div>
+      <div class="k-dark-veil-soft"></div>
+      <div class="k-center-stage">
+        <div class="k-eyebrow"><span class="k-dot"></span><span>22 / 22 · 第 6 幕</span></div>
+        <div class="k-headline k-headline-lg k-glitch-target"><div class="k-line-row"><span class="k-ch">开</span><span class="k-ch">源</span><span class="k-ch">仓</span><span class="k-ch">库</span><span class="k-ch">，</span><span class="k-ch">立</span><span class="k-ch">即</span></div><div class="k-line-row"><span class="k-ch">点</span><span class="k-ch">亮</span><span class="k-ch">&nbsp;</span><span class="k-ch">S</span><span class="k-ch">t</span><span class="k-ch">a</span><span class="k-ch">r</span></div></div>
+        <div class="k-pills-row"><div class="k-pill"><span>◆</span>https://github.com/Merziller/dsh-video-workbench</div><div class="k-pill"><span>◆</span>MIT License</div><div class="k-pill"><span>◆</span>点亮 Star · 立即免费上手</div></div>
+      </div></div></template>
+
+  <script>
+  (() => {
+    const CFG = {"fps":30,"width":1080,"height":1920,"totalFrames":2415,"totalSec":80.5,"rgbAccent":"125,178,255","rgbGold":"245,185,46","accent":"#2F7BFF","accent2":"#7DB2FF","gold":"#F5B92E","beats":[{"time":0.01,"strong":true,"isDrop":false,"index":0,"barIndex":1,"beatInBar":0,"energy":0.996},{"time":0.5185,"strong":false,"isDrop":false,"index":1,"barIndex":1,"beatInBar":1,"energy":1.904},{"time":1.0269,"strong":false,"isDrop":false,"index":2,"barIndex":1,"beatInBar":2,"energy":2.154},{"time":1.5354,"strong":false,"isDrop":false,"index":3,"barIndex":1,"beatInBar":3,"energy":1.932},{"time":2.0439,"strong":true,"isDrop":false,"index":4,"barIndex":2,"beatInBar":0,"energy":2.332},{"time":2.5524,"strong":false,"isDrop":false,"index":5,"barIndex":2,"beatInBar":1,"energy":1.785},{"time":3.0608,"strong":false,"isDrop":false,"index":6,"barIndex":2,"beatInBar":2,"energy":2.018},{"time":3.5693,"strong":false,"isDrop":false,"index":7,"barIndex":2,"beatInBar":3,"energy":1.937},{"time":4.0778,"strong":true,"isDrop":false,"index":8,"barIndex":3,"beatInBar":0,"energy":1.822},{"time":4.5863,"strong":false,"isDrop":false,"index":9,"barIndex":3,"beatInBar":1,"energy":1.854},{"time":5.0947,"strong":false,"isDrop":false,"index":10,"barIndex":3,"beatInBar":2,"energy":1.764},{"time":5.6032,"strong":false,"isDrop":false,"index":11,"barIndex":3,"beatInBar":3,"energy":1.688},{"time":6.1117,"strong":true,"isDrop":false,"index":12,"barIndex":4,"beatInBar":0,"energy":1.904},{"time":6.6202,"strong":false,"isDrop":false,"index":13,"barIndex":4,"beatInBar":1,"energy":1.701},{"time":7.1286,"strong":false,"isDrop":false,"index":14,"barIndex":4,"beatInBar":2,"energy":1.983},{"time":7.6371,"strong":false,"isDrop":false,"index":15,"barIndex":4,"beatInBar":3,"energy":1.716},{"time":8.1456,"strong":true,"isDrop":false,"index":16,"barIndex":5,"beatInBar":0,"energy":2.115},{"time":8.6541,"strong":false,"isDrop":false,"index":17,"barIndex":5,"beatInBar":1,"energy":1.592},{"time":9.1625,"strong":false,"isDrop":false,"index":18,"barIndex":5,"beatInBar":2,"energy":1.714},{"time":9.671,"strong":false,"isDrop":false,"index":19,"barIndex":5,"beatInBar":3,"energy":1.479},{"time":10.1795,"strong":true,"isDrop":false,"index":20,"barIndex":6,"beatInBar":0,"energy":1.826},{"time":10.688,"strong":false,"isDrop":false,"index":21,"barIndex":6,"beatInBar":1,"energy":1.86},{"time":11.1964,"strong":false,"isDrop":false,"index":22,"barIndex":6,"beatInBar":2,"energy":1.592},{"time":11.7049,"strong":false,"isDrop":false,"index":23,"barIndex":6,"beatInBar":3,"energy":1.797},{"time":12.2134,"strong":true,"isDrop":false,"index":24,"barIndex":7,"beatInBar":0,"energy":1.858},{"time":12.7219,"strong":false,"isDrop":false,"index":25,"barIndex":7,"beatInBar":1,"energy":1.808},{"time":13.2303,"strong":false,"isDrop":false,"index":26,"barIndex":7,"beatInBar":2,"energy":1.673},{"time":13.7388,"strong":false,"isDrop":false,"index":27,"barIndex":7,"beatInBar":3,"energy":1.643},{"time":14.2473,"strong":true,"isDrop":false,"index":28,"barIndex":8,"beatInBar":0,"energy":2.098},{"time":14.7558,"strong":false,"isDrop":false,"index":29,"barIndex":8,"beatInBar":1,"energy":1.746},{"time":15.2642,"strong":false,"isDrop":false,"index":30,"barIndex":8,"beatInBar":2,"energy":1.78},{"time":15.7727,"strong":false,"isDrop":false,"index":31,"barIndex":8,"beatInBar":3,"energy":1.631},{"time":16.2812,"strong":true,"isDrop":false,"index":32,"barIndex":9,"beatInBar":0,"energy":1.957},{"time":16.7897,"strong":false,"isDrop":false,"index":33,"barIndex":9,"beatInBar":1,"energy":1.948},{"time":17.2981,"strong":false,"isDrop":false,"index":34,"barIndex":9,"beatInBar":2,"energy":1.614},{"time":17.8066,"strong":false,"isDrop":false,"index":35,"barIndex":9,"beatInBar":3,"energy":1.851},{"time":18.3151,"strong":true,"isDrop":false,"index":36,"barIndex":10,"beatInBar":0,"energy":1.846},{"time":18.8236,"strong":false,"isDrop":false,"index":37,"barIndex":10,"beatInBar":1,"energy":1.73},{"time":19.332,"strong":false,"isDrop":false,"index":38,"barIndex":10,"beatInBar":2,"energy":1.556},{"time":19.8405,"strong":false,"isDrop":false,"index":39,"barIndex":10,"beatInBar":3,"energy":1.682},{"time":20.349,"strong":true,"isDrop":false,"index":40,"barIndex":11,"beatInBar":0,"energy":2.093},{"time":20.8575,"strong":false,"isDrop":false,"index":41,"barIndex":11,"beatInBar":1,"energy":1.924},{"time":21.3659,"strong":false,"isDrop":false,"index":42,"barIndex":11,"beatInBar":2,"energy":2.159},{"time":21.8744,"strong":false,"isDrop":false,"index":43,"barIndex":11,"beatInBar":3,"energy":1.929},{"time":22.3829,"strong":true,"isDrop":false,"index":44,"barIndex":12,"beatInBar":0,"energy":2.185},{"time":22.8914,"strong":false,"isDrop":false,"index":45,"barIndex":12,"beatInBar":1,"energy":1.965},{"time":23.3998,"strong":false,"isDrop":false,"index":46,"barIndex":12,"beatInBar":2,"energy":1.843},{"time":23.9083,"strong":false,"isDrop":false,"index":47,"barIndex":12,"beatInBar":3,"energy":2.172},{"time":24.4168,"strong":true,"isDrop":false,"index":48,"barIndex":13,"beatInBar":0,"energy":1.997},{"time":24.9253,"strong":false,"isDrop":false,"index":49,"barIndex":13,"beatInBar":1,"energy":2.057},{"time":25.4337,"strong":false,"isDrop":false,"index":50,"barIndex":13,"beatInBar":2,"energy":1.634},{"time":25.9422,"strong":false,"isDrop":false,"index":51,"barIndex":13,"beatInBar":3,"energy":1.933},{"time":26.4507,"strong":true,"isDrop":false,"index":52,"barIndex":14,"beatInBar":0,"energy":1.904},{"time":26.9592,"strong":false,"isDrop":false,"index":53,"barIndex":14,"beatInBar":1,"energy":1.801},{"time":27.4676,"strong":false,"isDrop":false,"index":54,"barIndex":14,"beatInBar":2,"energy":2.103},{"time":27.9761,"strong":false,"isDrop":false,"index":55,"barIndex":14,"beatInBar":3,"energy":1.84},{"time":28.4846,"strong":true,"isDrop":false,"index":56,"barIndex":15,"beatInBar":0,"energy":2.255},{"time":28.9931,"strong":false,"isDrop":false,"index":57,"barIndex":15,"beatInBar":1,"energy":1.855},{"time":29.5015,"strong":false,"isDrop":false,"index":58,"barIndex":15,"beatInBar":2,"energy":1.998},{"time":30.01,"strong":false,"isDrop":false,"index":59,"barIndex":15,"beatInBar":3,"energy":1.797},{"time":30.5185,"strong":true,"isDrop":false,"index":60,"barIndex":16,"beatInBar":0,"energy":2.057},{"time":31.0269,"strong":false,"isDrop":false,"index":61,"barIndex":16,"beatInBar":1,"energy":2.283},{"time":31.5354,"strong":false,"isDrop":false,"index":62,"barIndex":16,"beatInBar":2,"energy":2.087},{"time":32.0439,"strong":false,"isDrop":false,"index":63,"barIndex":16,"beatInBar":3,"energy":2.081},{"time":32.5524,"strong":true,"isDrop":false,"index":64,"barIndex":17,"beatInBar":0,"energy":2.154},{"time":33.0608,"strong":false,"isDrop":false,"index":65,"barIndex":17,"beatInBar":1,"energy":2.155},{"time":33.5693,"strong":false,"isDrop":false,"index":66,"barIndex":17,"beatInBar":2,"energy":2.348},{"time":34.0778,"strong":false,"isDrop":false,"index":67,"barIndex":17,"beatInBar":3,"energy":2.044},{"time":34.5863,"strong":true,"isDrop":false,"index":68,"barIndex":18,"beatInBar":0,"energy":2.549},{"time":35.0947,"strong":false,"isDrop":false,"index":69,"barIndex":18,"beatInBar":1,"energy":2.022},{"time":35.6032,"strong":false,"isDrop":false,"index":70,"barIndex":18,"beatInBar":2,"energy":2.093},{"time":36.1117,"strong":false,"isDrop":false,"index":71,"barIndex":18,"beatInBar":3,"energy":1.833},{"time":36.6202,"strong":true,"isDrop":false,"index":72,"barIndex":19,"beatInBar":0,"energy":2.237},{"time":37.1286,"strong":false,"isDrop":false,"index":73,"barIndex":19,"beatInBar":1,"energy":2.418},{"time":37.6371,"strong":false,"isDrop":false,"index":74,"barIndex":19,"beatInBar":2,"energy":1.666},{"time":38.1456,"strong":false,"isDrop":false,"index":75,"barIndex":19,"beatInBar":3,"energy":1.897},{"time":38.6541,"strong":true,"isDrop":false,"index":76,"barIndex":20,"beatInBar":0,"energy":1.862},{"time":39.1625,"strong":false,"isDrop":false,"index":77,"barIndex":20,"beatInBar":1,"energy":1.722},{"time":39.671,"strong":false,"isDrop":false,"index":78,"barIndex":20,"beatInBar":2,"energy":1.623},{"time":40.1795,"strong":false,"isDrop":false,"index":79,"barIndex":20,"beatInBar":3,"energy":1.625},{"time":40.688,"strong":true,"isDrop":false,"index":80,"barIndex":21,"beatInBar":0,"energy":1.961},{"time":41.1964,"strong":false,"isDrop":false,"index":81,"barIndex":21,"beatInBar":1,"energy":1.565},{"time":41.7049,"strong":false,"isDrop":false,"index":82,"barIndex":21,"beatInBar":2,"energy":1.852},{"time":42.2134,"strong":false,"isDrop":false,"index":83,"barIndex":21,"beatInBar":3,"energy":1.376},{"time":42.7219,"strong":true,"isDrop":false,"index":84,"barIndex":22,"beatInBar":0,"energy":1.888},{"time":43.2303,"strong":false,"isDrop":false,"index":85,"barIndex":22,"beatInBar":1,"energy":1.372},{"time":43.7388,"strong":false,"isDrop":false,"index":86,"barIndex":22,"beatInBar":2,"energy":1.546},{"time":44.2473,"strong":false,"isDrop":false,"index":87,"barIndex":22,"beatInBar":3,"energy":2.1},{"time":44.7558,"strong":true,"isDrop":false,"index":88,"barIndex":23,"beatInBar":0,"energy":2.133},{"time":45.2642,"strong":false,"isDrop":false,"index":89,"barIndex":23,"beatInBar":1,"energy":2.001},{"time":45.7727,"strong":false,"isDrop":false,"index":90,"barIndex":23,"beatInBar":2,"energy":1.849},{"time":46.2812,"strong":false,"isDrop":false,"index":91,"barIndex":23,"beatInBar":3,"energy":1.927},{"time":46.7897,"strong":true,"isDrop":false,"index":92,"barIndex":24,"beatInBar":0,"energy":2.351},{"time":47.2981,"strong":false,"isDrop":false,"index":93,"barIndex":24,"beatInBar":1,"energy":1.847},{"time":47.8066,"strong":false,"isDrop":false,"index":94,"barIndex":24,"beatInBar":2,"energy":1.781},{"time":48.3151,"strong":false,"isDrop":false,"index":95,"barIndex":24,"beatInBar":3,"energy":1.646},{"time":48.8236,"strong":true,"isDrop":false,"index":96,"barIndex":25,"beatInBar":0,"energy":1.836},{"time":49.332,"strong":false,"isDrop":false,"index":97,"barIndex":25,"beatInBar":1,"energy":1.546},{"time":49.8405,"strong":false,"isDrop":false,"index":98,"barIndex":25,"beatInBar":2,"energy":1.626},{"time":50.349,"strong":false,"isDrop":false,"index":99,"barIndex":25,"beatInBar":3,"energy":1.869},{"time":50.8575,"strong":true,"isDrop":false,"index":100,"barIndex":26,"beatInBar":0,"energy":1.794},{"time":51.3659,"strong":false,"isDrop":false,"index":101,"barIndex":26,"beatInBar":1,"energy":2.19},{"time":51.8744,"strong":false,"isDrop":false,"index":102,"barIndex":26,"beatInBar":2,"energy":1.949},{"time":52.3829,"strong":false,"isDrop":false,"index":103,"barIndex":26,"beatInBar":3,"energy":2.008},{"time":52.8914,"strong":true,"isDrop":false,"index":104,"barIndex":27,"beatInBar":0,"energy":2.209},{"time":53.3998,"strong":false,"isDrop":false,"index":105,"barIndex":27,"beatInBar":1,"energy":1.957},{"time":53.9083,"strong":false,"isDrop":false,"index":106,"barIndex":27,"beatInBar":2,"energy":2.386},{"time":54.4168,"strong":false,"isDrop":false,"index":107,"barIndex":27,"beatInBar":3,"energy":1.859},{"time":54.9253,"strong":true,"isDrop":false,"index":108,"barIndex":28,"beatInBar":0,"energy":2.289},{"time":55.4337,"strong":false,"isDrop":false,"index":109,"barIndex":28,"beatInBar":1,"energy":1.79},{"time":55.9422,"strong":false,"isDrop":false,"index":110,"barIndex":28,"beatInBar":2,"energy":1.909},{"time":56.4507,"strong":false,"isDrop":false,"index":111,"barIndex":28,"beatInBar":3,"energy":1.841},{"time":56.9592,"strong":true,"isDrop":false,"index":112,"barIndex":29,"beatInBar":0,"energy":1.876},{"time":57.4676,"strong":false,"isDrop":false,"index":113,"barIndex":29,"beatInBar":1,"energy":1.98},{"time":57.9761,"strong":false,"isDrop":false,"index":114,"barIndex":29,"beatInBar":2,"energy":1.714},{"time":58.4846,"strong":false,"isDrop":false,"index":115,"barIndex":29,"beatInBar":3,"energy":1.91},{"time":58.9931,"strong":true,"isDrop":false,"index":116,"barIndex":30,"beatInBar":0,"energy":1.778},{"time":59.5015,"strong":false,"isDrop":false,"index":117,"barIndex":30,"beatInBar":1,"energy":1.803},{"time":60.01,"strong":false,"isDrop":false,"index":118,"barIndex":30,"beatInBar":2,"energy":2.034},{"time":60.5185,"strong":false,"isDrop":false,"index":119,"barIndex":30,"beatInBar":3,"energy":1.71},{"time":61.0269,"strong":true,"isDrop":false,"index":120,"barIndex":31,"beatInBar":0,"energy":2.205},{"time":61.5354,"strong":false,"isDrop":false,"index":121,"barIndex":31,"beatInBar":1,"energy":1.907},{"time":62.0439,"strong":false,"isDrop":false,"index":122,"barIndex":31,"beatInBar":2,"energy":1.81},{"time":62.5524,"strong":false,"isDrop":false,"index":123,"barIndex":31,"beatInBar":3,"energy":1.761},{"time":63.0608,"strong":true,"isDrop":false,"index":124,"barIndex":32,"beatInBar":0,"energy":2.107},{"time":63.5693,"strong":false,"isDrop":false,"index":125,"barIndex":32,"beatInBar":1,"energy":2.016},{"time":64.0778,"strong":false,"isDrop":false,"index":126,"barIndex":32,"beatInBar":2,"energy":1.746},{"time":64.5863,"strong":false,"isDrop":false,"index":127,"barIndex":32,"beatInBar":3,"energy":1.935},{"time":65.0947,"strong":true,"isDrop":false,"index":128,"barIndex":33,"beatInBar":0,"energy":1.926},{"time":65.6032,"strong":false,"isDrop":false,"index":129,"barIndex":33,"beatInBar":1,"energy":1.891},{"time":66.1117,"strong":false,"isDrop":false,"index":130,"barIndex":33,"beatInBar":2,"energy":1.687},{"time":66.6202,"strong":false,"isDrop":false,"index":131,"barIndex":33,"beatInBar":3,"energy":1.765},{"time":67.1286,"strong":true,"isDrop":false,"index":132,"barIndex":34,"beatInBar":0,"energy":2.233},{"time":67.6371,"strong":false,"isDrop":false,"index":133,"barIndex":34,"beatInBar":1,"energy":1.801},{"time":68.1456,"strong":false,"isDrop":false,"index":134,"barIndex":34,"beatInBar":2,"energy":2.204},{"time":68.6541,"strong":false,"isDrop":false,"index":135,"barIndex":34,"beatInBar":3,"energy":1.934},{"time":69.1625,"strong":true,"isDrop":false,"index":136,"barIndex":35,"beatInBar":0,"energy":2.348},{"time":69.671,"strong":false,"isDrop":false,"index":137,"barIndex":35,"beatInBar":1,"energy":2.04},{"time":70.1795,"strong":false,"isDrop":false,"index":138,"barIndex":35,"beatInBar":2,"energy":1.994},{"time":70.688,"strong":false,"isDrop":false,"index":139,"barIndex":35,"beatInBar":3,"energy":2.187},{"time":71.1964,"strong":true,"isDrop":false,"index":140,"barIndex":36,"beatInBar":0,"energy":1.486},{"time":71.7049,"strong":false,"isDrop":false,"index":141,"barIndex":36,"beatInBar":1,"energy":1.345},{"time":72.2134,"strong":false,"isDrop":false,"index":142,"barIndex":36,"beatInBar":2,"energy":1.176},{"time":72.7219,"strong":false,"isDrop":false,"index":143,"barIndex":36,"beatInBar":3,"energy":1.342},{"time":73.2303,"strong":true,"isDrop":false,"index":144,"barIndex":37,"beatInBar":0,"energy":1.371},{"time":73.7388,"strong":false,"isDrop":false,"index":145,"barIndex":37,"beatInBar":1,"energy":1.266},{"time":74.2473,"strong":false,"isDrop":false,"index":146,"barIndex":37,"beatInBar":2,"energy":1.483},{"time":74.7558,"strong":false,"isDrop":false,"index":147,"barIndex":37,"beatInBar":3,"energy":1.267},{"time":75.2642,"strong":true,"isDrop":false,"index":148,"barIndex":38,"beatInBar":0,"energy":1.568},{"time":75.7727,"strong":false,"isDrop":false,"index":149,"barIndex":38,"beatInBar":1,"energy":1.265},{"time":76.2812,"strong":false,"isDrop":false,"index":150,"barIndex":38,"beatInBar":2,"energy":0.534},{"time":76.7897,"strong":false,"isDrop":false,"index":151,"barIndex":38,"beatInBar":3,"energy":0.314},{"time":77.2981,"strong":true,"isDrop":false,"index":152,"barIndex":39,"beatInBar":0,"energy":0}],"avatarClip":null,"avatarLayout":"pip-br","timeline":[{"id":"scene-01","idx":0,"layout":"card-fan-opener","transition":"cut","kenBurns":"zoom-in","vfx":"3d-depth+sweep","startFrame":0,"endFrame":107,"startSec":0,"endSec":3.566666666666667,"durFrames":107,"durSec":3.566666666666667,"narration":"从脚本到成片，别再来回拼凑工具了！","subtitles":[{"index":1,"text":"从脚本到成片","startSec":0.22,"endSec":1.259,"startFrame":6,"endFrame":38,"sceneId":"scene-01","localStartSec":0.22,"localEndSec":1.259,"globalStartSec":0.22,"globalEndSec":1.259,"globalStartFrame":7,"globalEndFrame":38},{"index":2,"text":"别再来回拼凑工具","startSec":1.259,"endSec":2.854,"startFrame":37,"endFrame":86,"sceneId":"scene-01","localStartSec":1.259,"localEndSec":2.854,"globalStartSec":1.259,"globalEndSec":2.854,"globalStartFrame":38,"globalEndFrame":86}],"counterTarget":24,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.6,"fx":0.5,"fy":0.5,"z":1.12}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-02","idx":1,"layout":"app-focus-shot","transition":"slash-wipe","kenBurns":"hold","vfx":"sparks+shockwave","startFrame":107,"endFrame":214,"startSec":3.566666666666667,"endSec":7.133333333333334,"durFrames":107,"durSec":3.566666666666667,"narration":"四位智能体接力，策划混音到质检出片！","subtitles":[{"index":1,"text":"四位智能体接力","startSec":0.22,"endSec":1.414,"startFrame":6,"endFrame":43,"sceneId":"scene-02","localStartSec":0.22,"localEndSec":1.414,"globalStartSec":3.787,"globalEndSec":4.981,"globalStartFrame":114,"globalEndFrame":149},{"index":2,"text":"策划混音到质检出片","startSec":1.414,"endSec":3.182,"startFrame":42,"endFrame":96,"sceneId":"scene-02","localStartSec":1.414,"localEndSec":3.182,"globalStartSec":4.981,"globalEndSec":6.749,"globalStartFrame":149,"globalEndFrame":202}],"counterTarget":48,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.75,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-03","idx":2,"layout":"radial-climax","transition":"block-wipe","kenBurns":"zoom-out","vfx":"halftone+glitch","startFrame":214,"endFrame":336,"startSec":7.133333333333334,"endSec":11.2,"durFrames":122,"durSec":4.066666666666666,"narration":"二十三个工具，把视频制作串成完整链路！","subtitles":[{"index":1,"text":"二十三个工具","startSec":0.22,"endSec":1.189,"startFrame":6,"endFrame":36,"sceneId":"scene-03","localStartSec":0.22,"localEndSec":1.189,"globalStartSec":7.353,"globalEndSec":8.322,"globalStartFrame":221,"globalEndFrame":250},{"index":2,"text":"把视频制作串成完整链路","startSec":1.189,"endSec":3.25,"startFrame":35,"endFrame":98,"sceneId":"scene-03","localStartSec":1.189,"localEndSec":3.25,"globalStartSec":8.322,"globalEndSec":10.383,"globalStartFrame":250,"globalEndFrame":312}],"counterTarget":72,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1.14},{"t":0.8,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-04","idx":3,"layout":"app-focus-shot","transition":"glitch-cut","kenBurns":"hold","vfx":"grid+scan","startFrame":336,"endFrame":427,"startSec":11.2,"endSec":14.233333333333333,"durFrames":91,"durSec":3.033333333333333,"narration":"四大模型协议接入，客户端配置一键同步！","subtitles":[{"index":1,"text":"四大模型协议接入","startSec":0.22,"endSec":1.37,"startFrame":6,"endFrame":42,"sceneId":"scene-04","localStartSec":0.22,"localEndSec":1.37,"globalStartSec":11.42,"globalEndSec":12.57,"globalStartFrame":343,"globalEndFrame":377},{"index":2,"text":"客户端配置一键同步","startSec":1.37,"endSec":2.663,"startFrame":41,"endFrame":80,"sceneId":"scene-04","localStartSec":1.37,"localEndSec":2.663,"globalStartSec":12.57,"globalEndSec":13.863,"globalStartFrame":377,"globalEndFrame":416}],"counterTarget":96,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.7,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-05","idx":4,"layout":"workflow-steps","transition":"cut","kenBurns":"zoom-in","vfx":"radial-speedlines","startFrame":427,"endFrame":534,"startSec":14.233333333333333,"endSec":17.8,"durFrames":107,"durSec":3.566666666666667,"narration":"代码先过严格编译，最多三轮自动修错！","subtitles":[{"index":1,"text":"先过严格编译","startSec":0.22,"endSec":1.299,"startFrame":6,"endFrame":39,"sceneId":"scene-05","localStartSec":0.22,"localEndSec":1.299,"globalStartSec":14.453,"globalEndSec":15.532,"globalStartFrame":434,"globalEndFrame":466},{"index":2,"text":"最多三轮自动修错","startSec":1.299,"endSec":2.992,"startFrame":38,"endFrame":90,"sceneId":"scene-05","localStartSec":1.299,"localEndSec":2.992,"globalStartSec":15.532,"globalEndSec":17.225,"globalStartFrame":466,"globalEndFrame":517}],"counterTarget":120,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.8,"fx":0.5,"fy":0.48,"z":1.1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-06","idx":5,"layout":"workflow-steps","transition":"light-wipe","kenBurns":"hold","vfx":"3d-depth+sweep","startFrame":534,"endFrame":656,"startSec":17.8,"endSec":21.866666666666667,"durFrames":122,"durSec":4.066666666666666,"narration":"素材批量入库，提词自拍也在同一工作台！","subtitles":[{"index":1,"text":"素材批量入库","startSec":0.22,"endSec":1.289,"startFrame":6,"endFrame":39,"sceneId":"scene-06","localStartSec":0.22,"localEndSec":1.289,"globalStartSec":18.02,"globalEndSec":19.089,"globalStartFrame":541,"globalEndFrame":573},{"index":2,"text":"提词自拍也在同一工作台","startSec":1.289,"endSec":3.42,"startFrame":38,"endFrame":103,"sceneId":"scene-06","localStartSec":1.289,"localEndSec":3.42,"globalStartSec":19.089,"globalEndSec":21.22,"globalStartFrame":573,"globalEndFrame":637}],"counterTarget":144,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.8,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-07","idx":6,"layout":"compare-dual","transition":"slash-wipe","kenBurns":"zoom-in","vfx":"sparks+shockwave","startFrame":656,"endFrame":763,"startSec":21.866666666666667,"endSec":25.433333333333334,"durFrames":107,"durSec":3.566666666666667,"narration":"双引擎真正逐帧渲染，动画不靠录屏！","subtitles":[{"index":1,"text":"双引擎真正逐帧渲染","startSec":0.22,"endSec":1.941,"startFrame":6,"endFrame":59,"sceneId":"scene-07","localStartSec":0.22,"localEndSec":1.941,"globalStartSec":22.087,"globalEndSec":23.808,"globalStartFrame":663,"globalEndFrame":714},{"index":2,"text":"动画不靠录屏","startSec":1.941,"endSec":3.054,"startFrame":58,"endFrame":92,"sceneId":"scene-07","localStartSec":1.941,"localEndSec":3.054,"globalStartSec":23.808,"globalEndSec":24.921,"globalStartFrame":714,"globalEndFrame":748}],"counterTarget":168,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.65,"fx":0.5,"fy":0.5,"z":1.08}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-08","idx":7,"layout":"workflow-steps","transition":"glitch-cut","kenBurns":"pan-right","vfx":"halftone+glitch","startFrame":763,"endFrame":870,"startSec":25.433333333333334,"endSec":29,"durFrames":107,"durSec":3.566666666666667,"narration":"模型分批逐镜写代码，让动效跟着内容走！","subtitles":[{"index":1,"text":"模型分批逐镜写代码","startSec":0.22,"endSec":1.565,"startFrame":6,"endFrame":47,"sceneId":"scene-08","localStartSec":0.22,"localEndSec":1.565,"globalStartSec":25.653,"globalEndSec":26.998,"globalStartFrame":770,"globalEndFrame":810},{"index":2,"text":"让动效跟着内容走","startSec":1.565,"endSec":3.012,"startFrame":46,"endFrame":91,"sceneId":"scene-08","localStartSec":1.565,"localEndSec":3.012,"globalStartSec":26.998,"globalEndSec":28.445,"globalStartFrame":810,"globalEndFrame":853}],"counterTarget":192,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.44,"fy":0.5,"z":1},{"t":0.8,"fx":0.56,"fy":0.5,"z":1.06}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-09","idx":8,"layout":"narrative-diorama","transition":"zoom-punch","kenBurns":"pan-right","vfx":"grid+scan","startFrame":870,"endFrame":977,"startSec":29,"endSec":32.56666666666667,"durFrames":107,"durSec":3.566666666666667,"narration":"浏览器逐帧抓取，分段缓存接住渲染链路！","subtitles":[{"index":1,"text":"浏览器逐帧抓取","startSec":0.22,"endSec":1.359,"startFrame":6,"endFrame":41,"sceneId":"scene-09","localStartSec":0.22,"localEndSec":1.359,"globalStartSec":29.22,"globalEndSec":30.359,"globalStartFrame":877,"globalEndFrame":911},{"index":2,"text":"分段缓存接住渲染链路","startSec":1.359,"endSec":3.188,"startFrame":40,"endFrame":96,"sceneId":"scene-09","localStartSec":1.359,"localEndSec":3.188,"globalStartSec":30.359,"globalEndSec":32.188,"globalStartFrame":911,"globalEndFrame":966}],"counterTarget":216,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.42,"fy":0.5,"z":1},{"t":0.8,"fx":0.58,"fy":0.5,"z":1.05}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-10","idx":9,"layout":"app-focus-shot","transition":"flash-cut","kenBurns":"hold","vfx":"radial-speedlines","startFrame":977,"endFrame":1083,"startSec":32.56666666666667,"endSec":36.1,"durFrames":106,"durSec":3.533333333333333,"narration":"三种配乐六套配色，配音卡点自由切换！","subtitles":[{"index":1,"text":"三种配乐六套配色","startSec":0.22,"endSec":1.695,"startFrame":6,"endFrame":51,"sceneId":"scene-10","localStartSec":0.22,"localEndSec":1.695,"globalStartSec":32.787,"globalEndSec":34.262,"globalStartFrame":984,"globalEndFrame":1028},{"index":2,"text":"配音卡点自由切换","startSec":1.695,"endSec":3.206,"startFrame":50,"endFrame":97,"sceneId":"scene-10","localStartSec":1.695,"localEndSec":3.206,"globalStartSec":34.262,"globalEndSec":35.773,"globalStartFrame":1028,"globalEndFrame":1073}],"counterTarget":240,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.8,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-11","idx":10,"layout":"metric-dashboard","transition":"block-wipe","kenBurns":"zoom-in","vfx":"3d-depth+sweep","startFrame":1083,"endFrame":1190,"startSec":36.1,"endSec":39.666666666666664,"durFrames":107,"durSec":3.566666666666667,"narration":"实测鼓点定位高潮，半拍闪切精准踩点！","subtitles":[{"index":1,"text":"实测鼓点定位高潮","startSec":0.22,"endSec":1.583,"startFrame":6,"endFrame":48,"sceneId":"scene-11","localStartSec":0.22,"localEndSec":1.583,"globalStartSec":36.32,"globalEndSec":37.683,"globalStartFrame":1090,"globalEndFrame":1130},{"index":2,"text":"半拍闪切精准踩点","startSec":1.583,"endSec":2.946,"startFrame":47,"endFrame":89,"sceneId":"scene-11","localStartSec":1.583,"localEndSec":2.946,"globalStartSec":37.683,"globalEndSec":39.046,"globalStartFrame":1130,"globalEndFrame":1171}],"counterTarget":264,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.65,"fx":0.5,"fy":0.48,"z":1.12}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-12","idx":11,"layout":"app-focus-shot","transition":"iris-circle","kenBurns":"hold","vfx":"sparks+shockwave","startFrame":1190,"endFrame":1297,"startSec":39.666666666666664,"endSec":43.233333333333334,"durFrames":107,"durSec":3.566666666666667,"narration":"两百多种本地音色，常驻显存快速配音！","subtitles":[{"index":1,"text":"两百多种本地音色","startSec":0.22,"endSec":1.482,"startFrame":6,"endFrame":45,"sceneId":"scene-12","localStartSec":0.22,"localEndSec":1.482,"globalStartSec":39.887,"globalEndSec":41.149,"globalStartFrame":1197,"globalEndFrame":1234},{"index":2,"text":"常驻显存快速配音","startSec":1.482,"endSec":3.011,"startFrame":44,"endFrame":91,"sceneId":"scene-12","localStartSec":1.482,"localEndSec":3.011,"globalStartSec":41.149,"globalEndSec":42.678,"globalStartFrame":1234,"globalEndFrame":1280}],"counterTarget":288,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.8,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-13","idx":12,"layout":"workflow-steps","transition":"light-wipe","kenBurns":"hold","vfx":"halftone+glitch","startFrame":1297,"endFrame":1404,"startSec":43.233333333333334,"endSec":46.8,"durFrames":107,"durSec":3.566666666666667,"narration":"录制上传再试听，三步建立个人声音分身！","subtitles":[{"index":1,"text":"录制上传再试听","startSec":0.22,"endSec":1.285,"startFrame":6,"endFrame":39,"sceneId":"scene-13","localStartSec":0.22,"localEndSec":1.285,"globalStartSec":43.453,"globalEndSec":44.518,"globalStartFrame":1304,"globalEndFrame":1336},{"index":2,"text":"三步建立个人声音分身","startSec":1.285,"endSec":3.052,"startFrame":38,"endFrame":92,"sceneId":"scene-13","localStartSec":1.285,"localEndSec":3.052,"globalStartSec":44.518,"globalEndSec":46.285,"globalStartFrame":1336,"globalEndFrame":1389}],"counterTarget":312,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.75,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-14","idx":13,"layout":"split-wipe-compare","transition":"slash-wipe","kenBurns":"hold","vfx":"grid+scan","startFrame":1404,"endFrame":1510,"startSec":46.8,"endSec":50.333333333333336,"durFrames":106,"durSec":3.533333333333333,"narration":"透明通道数字人，让分身直接融入画面！","subtitles":[{"index":1,"text":"透明通道数字人","startSec":0.22,"endSec":1.309,"startFrame":6,"endFrame":40,"sceneId":"scene-14","localStartSec":0.22,"localEndSec":1.309,"globalStartSec":47.02,"globalEndSec":48.109,"globalStartFrame":1411,"globalEndFrame":1443},{"index":2,"text":"让分身直接融入画面","startSec":1.309,"endSec":2.955,"startFrame":39,"endFrame":89,"sceneId":"scene-14","localStartSec":1.309,"localEndSec":2.955,"globalStartSec":48.109,"globalEndSec":49.755,"globalStartFrame":1443,"globalEndFrame":1493}],"counterTarget":336,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.8,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-15","idx":14,"layout":"workflow-steps","transition":"cut","kenBurns":"zoom-in","vfx":"radial-speedlines","startFrame":1510,"endFrame":1617,"startSec":50.333333333333336,"endSec":53.9,"durFrames":107,"durSec":3.566666666666667,"narration":"逐句实测配音时长，再把帧数准确回填！","subtitles":[{"index":1,"text":"逐句实测配音时长","startSec":0.22,"endSec":1.493,"startFrame":6,"endFrame":45,"sceneId":"scene-15","localStartSec":0.22,"localEndSec":1.493,"globalStartSec":50.553,"globalEndSec":51.826,"globalStartFrame":1517,"globalEndFrame":1555},{"index":2,"text":"再把帧数准确回填","startSec":1.493,"endSec":3.008,"startFrame":44,"endFrame":91,"sceneId":"scene-15","localStartSec":1.493,"localEndSec":3.008,"globalStartSec":51.826,"globalEndSec":53.341,"globalStartFrame":1555,"globalEndFrame":1600}],"counterTarget":360,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.8,"fx":0.5,"fy":0.52,"z":1.1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-16","idx":15,"layout":"metric-dashboard","transition":"zoom-punch","kenBurns":"zoom-in","vfx":"3d-depth+sweep","startFrame":1617,"endFrame":1724,"startSec":53.9,"endSec":57.46666666666667,"durFrames":107,"durSec":3.566666666666667,"narration":"人声一出音乐让位，重击音效照样有力！","subtitles":[{"index":1,"text":"人声一出音乐让位","startSec":0.22,"endSec":1.432,"startFrame":6,"endFrame":43,"sceneId":"scene-16","localStartSec":0.22,"localEndSec":1.432,"globalStartSec":54.12,"globalEndSec":55.332,"globalStartFrame":1624,"globalEndFrame":1660},{"index":2,"text":"重击音效照样有力","startSec":1.432,"endSec":2.919,"startFrame":42,"endFrame":88,"sceneId":"scene-16","localStartSec":1.432,"localEndSec":2.919,"globalStartSec":55.332,"globalEndSec":56.819,"globalStartFrame":1660,"globalEndFrame":1705}],"counterTarget":384,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.75,"fx":0.5,"fy":0.5,"z":1.08}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-17","idx":16,"layout":"app-focus-shot","transition":"block-wipe","kenBurns":"hold","vfx":"3d-depth+sweep","startFrame":1724,"endFrame":1831,"startSec":57.46666666666667,"endSec":61.03333333333333,"durFrames":107,"durSec":3.566666666666667,"narration":"哪幕不满意直接说，重写重配不用全片重来！","subtitles":[{"index":1,"text":"哪幕不满意直接说","startSec":0.22,"endSec":1.377,"startFrame":6,"endFrame":42,"sceneId":"scene-17","localStartSec":0.22,"localEndSec":1.377,"globalStartSec":57.687,"globalEndSec":58.844,"globalStartFrame":1731,"globalEndFrame":1765},{"index":2,"text":"重写重配不用全片重来","startSec":1.377,"endSec":3.039,"startFrame":41,"endFrame":92,"sceneId":"scene-17","localStartSec":1.377,"localEndSec":3.039,"globalStartSec":58.844,"globalEndSec":60.506,"globalStartFrame":1765,"globalEndFrame":1815}],"counterTarget":24,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.8,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-18","idx":17,"layout":"app-focus-shot","transition":"glitch-cut","kenBurns":"hold","vfx":"sparks+shockwave","startFrame":1831,"endFrame":1938,"startSec":61.03333333333333,"endSec":64.6,"durFrames":107,"durSec":3.566666666666667,"narration":"暂停恢复强停重试，任务日志全程可追！","subtitles":[{"index":1,"text":"暂停恢复强停重试","startSec":0.22,"endSec":1.549,"startFrame":6,"endFrame":47,"sceneId":"scene-18","localStartSec":0.22,"localEndSec":1.549,"globalStartSec":61.253,"globalEndSec":62.582,"globalStartFrame":1838,"globalEndFrame":1877},{"index":2,"text":"任务日志全程可追","startSec":1.549,"endSec":3.098,"startFrame":46,"endFrame":93,"sceneId":"scene-18","localStartSec":1.549,"localEndSec":3.098,"globalStartSec":62.582,"globalEndSec":64.131,"globalStartFrame":1877,"globalEndFrame":1924}],"counterTarget":48,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.8,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-19","idx":18,"layout":"metric-dashboard","transition":"light-wipe","kenBurns":"zoom-in","vfx":"halftone+glitch","startFrame":1938,"endFrame":2044,"startSec":64.6,"endSec":68.13333333333334,"durFrames":106,"durSec":3.533333333333333,"narration":"响度黑屏遮挡先预检，发布之前少踩坑！","subtitles":[{"index":1,"text":"响度黑屏遮挡先预检","startSec":0.22,"endSec":1.696,"startFrame":6,"endFrame":51,"sceneId":"scene-19","localStartSec":0.22,"localEndSec":1.696,"globalStartSec":64.82,"globalEndSec":66.296,"globalStartFrame":1945,"globalEndFrame":1989},{"index":2,"text":"发布之前少踩坑","startSec":1.696,"endSec":3.039,"startFrame":50,"endFrame":92,"sceneId":"scene-19","localStartSec":1.696,"localEndSec":3.039,"globalStartSec":66.296,"globalEndSec":67.639,"globalStartFrame":1989,"globalEndFrame":2029}],"counterTarget":72,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.8,"fx":0.5,"fy":0.5,"z":1.06}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-20","idx":19,"layout":"card-fan-opener","transition":"iris-circle","kenBurns":"zoom-out","vfx":"grid+scan","startFrame":2044,"endFrame":2151,"startSec":68.13333333333334,"endSec":71.7,"durFrames":107,"durSec":3.566666666666667,"narration":"代码采用宽松开源协议，个人商用都免费！","subtitles":[{"index":1,"text":"代码采用宽松开源协议","startSec":0.22,"endSec":1.784,"startFrame":6,"endFrame":54,"sceneId":"scene-20","localStartSec":0.22,"localEndSec":1.784,"globalStartSec":68.353,"globalEndSec":69.917,"globalStartFrame":2051,"globalEndFrame":2098},{"index":2,"text":"个人商用都免费","startSec":1.784,"endSec":3.048,"startFrame":53,"endFrame":92,"sceneId":"scene-20","localStartSec":1.784,"localEndSec":3.048,"globalStartSec":69.917,"globalEndSec":71.181,"globalStartFrame":2098,"globalEndFrame":2135}],"counterTarget":96,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1.1},{"t":0.8,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-21","idx":20,"layout":"workflow-steps","transition":"flash-cut","kenBurns":"zoom-out","vfx":"radial-speedlines","startFrame":2151,"endFrame":2258,"startSec":71.7,"endSec":75.26666666666667,"durFrames":107,"durSec":3.566666666666667,"narration":"一键导出发布包，成片封面清单一起带走！","subtitles":[{"index":1,"text":"一键导出发布包","startSec":0.22,"endSec":1.294,"startFrame":6,"endFrame":39,"sceneId":"scene-21","localStartSec":0.22,"localEndSec":1.294,"globalStartSec":71.92,"globalEndSec":72.994,"globalStartFrame":2158,"globalEndFrame":2190},{"index":2,"text":"成片封面清单一起带走","startSec":1.294,"endSec":3.078,"startFrame":38,"endFrame":93,"sceneId":"scene-21","localStartSec":1.294,"localEndSec":3.078,"globalStartSec":72.994,"globalEndSec":74.778,"globalStartFrame":2190,"globalEndFrame":2243}],"counterTarget":120,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1.08},{"t":0.8,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""},{"id":"scene-22","idx":21,"layout":"kinetic-impact","transition":"cut","kenBurns":"zoom-out","vfx":"3d-depth+sweep","startFrame":2258,"endFrame":2415,"startSec":75.26666666666667,"endSec":80.5,"durFrames":157,"durSec":5.233333333333333,"narration":"GitHub 开源仓库 Merziller 斜杠 dsh-video-workbench，点亮 Star 立即免费上手！","subtitles":[{"index":1,"text":"GitHub 开源仓库 Merziller 斜杠 dsh-video-workbench","startSec":0.22,"endSec":3.306,"startFrame":6,"endFrame":100,"sceneId":"scene-22","localStartSec":0.22,"localEndSec":3.306,"globalStartSec":75.487,"globalEndSec":78.573,"globalStartFrame":2265,"globalEndFrame":2357},{"index":2,"text":"点亮 Star 立即免费上手！","startSec":3.306,"endSec":4.889,"startFrame":99,"endFrame":147,"sceneId":"scene-22","localStartSec":3.306,"localEndSec":4.889,"globalStartSec":78.573,"globalEndSec":80.156,"globalStartFrame":2357,"globalEndFrame":2405}],"counterTarget":144,"workflowSteps":[],"hudStep":-1,"cams":[{"t":0,"fx":0.5,"fy":0.5,"z":1},{"t":0.85,"fx":0.5,"fy":0.5,"z":1}],"loupe":null,"avatarClip":null,"avatarLayout":""}]};
+    const stageEl = document.getElementById('stage');
+    const worldEl = document.getElementById('world');
+    const slotsEl = document.getElementById('scene-slots');
+    const fxb = document.getElementById('fxb').getContext('2d');
+    const fxt = document.getElementById('fxt').getContext('2d');
+    const trc = document.getElementById('trc').getContext('2d');
+    const grainCanvas = document.getElementById('grain-layer');
+    const grainCtx = grainCanvas.getContext('2d');
+    const glcEl = document.getElementById('glc');
+    const flashEl = document.getElementById('flash');
+    const subPill = document.getElementById('sub-pill');
+    const progFill = document.getElementById('progress-fill');
+    const endNoticeWrap = document.getElementById('end-notice-wrap');
+
+    function fitStage() {
+      const s = Math.min(window.innerWidth / CFG.width, window.innerHeight / CFG.height) || 1;
+      stageEl.style.transform = 'scale(' + s + ')';
+    }
+    window.addEventListener('resize', fitStage);
+    fitStage();
+
+    // Deterministic Math & Easing Library
+    const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+    const lerp = (a, b, x) => a + (b - a) * x;
+    const pr = (t, a, b) => clamp((t - a) / Math.max(1e-5, b - a));
+    const hash = (n) => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+    const noise = (t) => { const i = Math.floor(t), f = t - i, u = f * f * (3 - 2 * f); return lerp(hash(i), hash(i + 1), u) * 2 - 1; };
+    const EZ = {
+      out: (x) => 1 - Math.pow(1 - x, 3),
+      out5: (x) => 1 - Math.pow(1 - x, 5),
+      expo: (x) => (x >= 1 ? 1 : 1 - Math.pow(2, -10 * x)),
+      inout: (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2),
+      in: (x) => x * x * x,
+      spring: (x) => (x >= 1 ? 1 : 1 - Math.exp(-7 * x) * Math.cos(8.5 * x) * (1 - x * 0.2)),
+    };
+
+    function beatPulse(t, onlyStrong = false) {
+      let v = 0;
+      const beats = CFG.beats || [];
+      for (let i = beats.length - 1; i >= 0; i--) {
+        const b = beats[i];
+        if (b.time > t) continue;
+        const dt = t - b.time;
+        if (dt > 0.5) break;
+        if (onlyStrong && !b.strong) continue;
+        v = Math.max(v, Math.exp(-dt * 11) * (b.strong ? 1 : 0.45));
+      }
+      return v;
+    }
+
+    function shakeAt(t, t0, dur = 0.35, amp = 14) {
+      const x = pr(t, t0, t0 + dur);
+      if (x <= 0 || x >= 1) return [0, 0];
+      const k = (1 - x) * amp;
+      return [k * noise(t * 48), k * noise(t * 48 + 11)];
+    }
+
+    // Offscreen 256x256 procedural noise pattern for subtle cinema grain
+    const gTile = document.createElement('canvas');
+    gTile.width = 256; gTile.height = 256;
+    {
+      const gx = gTile.getContext('2d');
+      const id = gx.createImageData(256, 256);
+      for (let i = 0; i < id.data.length; i += 4) {
+        const v = Math.floor(hash(i * 0.25) * 255);
+        id.data[i] = v; id.data[i + 1] = v; id.data[i + 2] = v; id.data[i + 3] = 28;
+      }
+      gx.putImageData(id, 0, 0);
+    }
+    const gPat = grainCtx.createPattern(gTile, 'repeat');
+
+    // Canvas2D Particle & Light FX Primitives
+    function drawStars(ctx, t, n, alpha, col) {
+      for (let i = 0; i < n; i++) {
+        const x = ((hash(i * 1.31 + 3) + t * (0.008 + hash(i * 2.1) * 0.015)) % 1) * CFG.width;
+        const y = hash(i * 2.77 + 5) * CFG.height;
+        const tw = 0.4 + 0.6 * Math.sin(t * (1.8 + hash(i) * 3) + i);
+        const r = 1.2 + hash(i * 5.3) * 2.4;
+        ctx.fillStyle = 'rgba(' + col + ',' + (alpha * tw).toFixed(3) + ')';
+        ctx.fillRect(x, y, r, r);
+      }
+    }
+
+    function drawGlow(ctx, x, y, r, col, a) {
+      if (a <= 0.01) return;
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, 'rgba(255,255,255,' + (a * 0.7).toFixed(3) + ')');
+      g.addColorStop(0.25, 'rgba(' + col + ',' + (a * 0.6).toFixed(3) + ')');
+      g.addColorStop(1, 'rgba(' + col + ',0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill();
+      ctx.restore();
+    }
+
+    function drawSparks(ctx, t, t0, x, y, col, count = 48, seed = 7) {
+      const life = 0.85;
+      for (let i = 0; i < count; i++) {
+        const age = t - t0 - hash(i * 7.1 + seed) * 0.08;
+        const L = life * (0.5 + hash(i * 3.3 + seed) * 0.65);
+        if (age <= 0 || age > L) continue;
+        const ang = (hash(i * 1.7 + seed) - 0.5) * 6.28;
+        const sp = 360 + hash(i * 9.1 + seed) * 880;
+        const g = 520;
+        const px = x + Math.cos(ang) * sp * age;
+        const py = y + Math.sin(ang) * sp * age + 0.5 * g * age * age;
+        const vx = Math.cos(ang) * sp;
+        const vy = Math.sin(ang) * sp + g * age;
+        const tail = Math.hypot(vx, vy) * 0.018;
+        const k = 1 - age / L;
+        ctx.strokeStyle = 'rgba(' + col + ',' + (k * 0.92).toFixed(3) + ')';
+        ctx.lineWidth = 1.4 + k * 1.8;
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(px - (vx / Math.hypot(vx, vy)) * tail, py - (vy / Math.hypot(vx, vy)) * tail);
+        ctx.stroke();
+      }
+    }
+
+    function drawShockRing(ctx, t, t0, cx, cy, maxR, dur, col) {
+      const p = pr(t, t0, t0 + dur);
+      if (p <= 0 || p >= 1) return;
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.strokeStyle = 'rgba(' + col + ',' + (1 - p).toFixed(3) + ')';
+      ctx.lineWidth = 3 * (1 + (1 - p) * 2.5);
+      ctx.beginPath(); ctx.arc(cx, cy, EZ.out(p) * maxR, 0, 6.2832); ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawScanSweep(ctx, t, t0, dur, col) {
+      const p = pr(t, t0, t0 + dur);
+      if (p <= 0 || p >= 1) return;
+      const x = lerp(-120, CFG.width + 120, EZ.inout(p));
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      const g = ctx.createLinearGradient(x - 240, 0, x, 0);
+      g.addColorStop(0, 'rgba(' + col + ',0)');
+      g.addColorStop(1, 'rgba(' + col + ',0.38)');
+      ctx.fillStyle = g;
+      ctx.fillRect(x - 240, 0, 240, CFG.height);
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.fillRect(x, 0, 2, CFG.height);
+      ctx.restore();
+    }
+
+    function drawRadialLines(ctx, t, cx, cy, intensity, col) {
+      if (intensity <= 0.01) return;
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      for (let i = 0; i < 110; i++) {
+        const a = hash(i * 1.3 + 5) * 6.2832;
+        const sp = 0.6 + hash(i * 2.9 + 5) * 1.4;
+        const ph = (t * sp * 1.5 + hash(i * 7.7)) % 1;
+        const r0 = lerp(120, 1280, ph);
+        const L = 45 + hash(i * 5.1) * 180;
+        ctx.strokeStyle = 'rgba(' + col + ',' + (intensity * (0.16 + 0.45 * hash(i * 3.3)) * Math.sin(Math.PI * ph)).toFixed(3) + ')';
+        ctx.lineWidth = 1.2 + hash(i) * 1.6;
+        ctx.beginPath();
+        ctx.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0);
+        ctx.lineTo(cx + Math.cos(a) * Math.max(0, r0 - L), cy + Math.sin(a) * Math.max(0, r0 - L));
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    // Clone template.scene-template scenes into stage ONCE
+    const sceneEls = [];
+    document.querySelectorAll('template.scene-template').forEach((tpl, idx) => {
+      const frag = tpl.content.cloneNode(true);
+      const scEl = frag.querySelector('.k-scene');
+      slotsEl.appendChild(frag);
+      const meta = CFG.timeline[idx] || {};
+      const chEls = [...scEl.querySelectorAll('.k-ch')];
+      const bgMedia = scEl.querySelector('.k-bg-media .k-media-el');
+      const cardStage = scEl.querySelector('.k-card-stage');
+      const macGlint = scEl.querySelector('.k-spec-glint');
+      const eyebrow = scEl.querySelector('.k-eyebrow');
+      const subline = scEl.querySelector('.k-subline');
+      const ruleEl = scEl.querySelector('.k-accent-rule');
+      const glowBar = scEl.querySelector('.k-glow-bar');
+      const sealEl = scEl.querySelector('.k-stamp-seal');
+      const pills = [...scEl.querySelectorAll('.k-pill')];
+      const callouts = [...scEl.querySelectorAll('.k-callout')];
+      const cards3d = [...scEl.querySelectorAll('.k-3d-card')].map((el, ci) => {
+        const ang = hash(ci * 1.37 + 9) * 6.2832;
+        const rad = 420 + hash(ci * 5.9 + 9) * 680;
+        return {
+          el,
+          x: Math.cos(ang) * rad * 1.15,
+          y: Math.sin(ang) * rad * 0.56,
+          z: -1800 + (ci / 16) * 2000,
+          rx: (hash(ci * 3.1) - 0.5) * 32,
+          ry: (hash(ci * 6.2) - 0.5) * 44,
+          rz: (hash(ci * 9.4) - 0.5) * 18,
+          sp: 0.7 + hash(ci * 2.9) * 0.55,
+        };
+      });
+      const mosaicCells = [...scEl.querySelectorAll('.k-mosaic-cell')];
+      const cntNum = scEl.querySelector('.k-cnt-num');
+      const cmpA = scEl.querySelector('.k-cmp-a');
+      const cmpB = scEl.querySelector('.k-cmp-b');
+      const cmpBridge = scEl.querySelector('.k-cmp-bridge');
+      const appWinWrap = scEl.querySelector('.k-app-win-wrap');
+      const appWin = scEl.querySelector('.k-app-win');
+      const appBar = scEl.querySelector('.k-app-bar');
+      const appView = scEl.querySelector('.k-app-view');
+      const camStage = scEl.querySelector('.k-cam-stage');
+      const markBoxes = [...scEl.querySelectorAll('.k-mark-box')];
+      const loupeRing = scEl.querySelector('.k-loupe-ring');
+      const loupeCam = scEl.querySelector('.k-loupe-cam');
+      const fanCards = [...scEl.querySelectorAll('.k-fan-card')];
+      const wfCards = [...scEl.querySelectorAll('.k-wf-card')];
+      const wipeB = scEl.querySelector('.k-wipe-b');
+      const wipeLine = scEl.querySelector('.k-wipe-line');
+      const dashNum = scEl.querySelector('.k-dash-num');
+      const dashBarFill = scEl.querySelector('.k-dash-bar-fill');
+      const dashCells = [...scEl.querySelectorAll('.k-dash-cell')];
+      const trioWins = [...scEl.querySelectorAll('.k-trio-win')];
+      const videos = [...scEl.querySelectorAll('video')];
+
+      sceneEls.push({
+        scEl, meta, chEls, bgMedia, cardStage, macGlint, eyebrow, subline, ruleEl, glowBar, sealEl,
+        pills, callouts, cards3d, mosaicCells, cntNum, cmpA, cmpB, cmpBridge,
+        appWinWrap, appWin, appBar, appView, camStage, markBoxes, loupeRing, loupeCam, fanCards, wfCards, wipeB, wipeLine, dashNum, dashBarFill, dashCells, trioWins,
+        videos,
+      });
+    });
+
+    function animateHeadline(chEls, localT, outT) {
+      chEls.forEach((ch, i) => {
+        const t0 = 0.08 + i * 0.032;
+        const x = pr(localT, t0, t0 + 0.24);
+        const exitX = outT != null ? pr(localT, outT + i * 0.01, outT + i * 0.01 + 0.2) : 0;
+        const op = clamp(x * 4) * (1 - exitX);
+        const s = 1 + (1 - EZ.out5(x)) * 1.35;
+        const dy = -EZ.in(exitX) * 40;
+        ch.style.opacity = op.toFixed(3);
+        ch.style.transform = 'translateY(' + dy.toFixed(1) + 'px) scale(' + s.toFixed(3) + ')';
+      });
+    }
+
+    function applyKenBurns(el, motion, p) {
+      if (!el) return;
+      if (motion === 'zoom-out') el.style.transform = 'scale(' + lerp(1.14, 1.0, p).toFixed(4) + ')';
+      else if (motion === 'pan-left') el.style.transform = 'scale(1.1) translateX(' + lerp(3.2, -3.2, p).toFixed(2) + '%)';
+      else if (motion === 'pan-right') el.style.transform = 'scale(1.1) translateX(' + lerp(-3.2, 3.2, p).toFixed(2) + '%)';
+      else el.style.transform = 'scale(' + lerp(1.0, 1.12, p).toFixed(4) + ')';
+    }
+
+    function renderTransitions(t) {
+      trc.clearRect(0, 0, CFG.width, CFG.height);
+      let flashVal = 0;
+      let glitchVal = 0;
+
+      for (let i = 1; i < CFG.timeline.length; i++) {
+        const sc = CFG.timeline[i];
+        const cut = sc.startSec;
+        const kind = sc.transition || 'iris-circle';
+
+        if (kind === 'iris-circle') {
+          const pre = 0.26, post = 0.36;
+          if (t >= cut - pre && t <= cut + post) {
+            const R1 = t < cut ? EZ.in(pr(t, cut - pre, cut)) * 1260 : 1320;
+            const R2 = t < cut ? 0 : EZ.out(pr(t, cut, cut + post)) * 1340;
+            trc.beginPath();
+            trc.arc(CFG.width / 2, CFG.height / 2, R1, 0, 6.2832);
+            if (R2 > 0) trc.arc(CFG.width / 2, CFG.height / 2, R2, 0, 6.2832, true);
+            trc.fillStyle = CFG.accent;
+            trc.fill('evenodd');
+            if (R1 > 4) {
+              trc.lineWidth = 22; trc.strokeStyle = CFG.accent2;
+              trc.beginPath(); trc.arc(CFG.width / 2, CFG.height / 2, Math.max(0, R1 - 11), 0, 6.2832); trc.stroke();
+            }
+          }
+        } else if (kind === 'block-wipe') {
+          const d = 0.44;
+          const x = (t - (cut - d / 2)) / d;
+          if (x > 0 && x < 1) {
+            const G = 64;
+            for (let gy = 0; gy < CFG.height / G + 1; gy++) {
+              for (let gx = 0; gx < CFG.width / G + 1; gx++) {
+                const cx = gx * G + G / 2, cy = gy * G + G / 2;
+                const h = hash(gx * 31 + gy * 17);
+                const ramp = (cx / CFG.width) * 0.7 + h * 0.3;
+                const s = x < 0.5 ? clamp((x / 0.5) * 1.75 - ramp * 0.75) : 1 - clamp(((x - 0.5) / 0.5) * 1.75 - (1 - ramp) * 0.75);
+                if (s < 0.03) continue;
+                const q = G * s;
+                const colPick = hash(gx * 73 + gy * 41);
+                trc.fillStyle = colPick < 0.07 ? CFG.gold : colPick < 0.28 ? CFG.accent : '#080C18';
+                trc.fillRect(cx - q / 2, cy - q / 2, q, q);
+              }
+            }
+          }
+        } else if (kind === 'light-wipe') {
+          const d = 0.36;
+          const p = pr(t, cut - d / 2, cut + d / 2);
+          if (p > 0 && p < 1) {
+            drawScanSweep(trc, t, cut - d / 2, d, CFG.rgbGold);
+            flashVal = Math.max(flashVal, Math.sin(p * Math.PI) * 0.45);
+          }
+        } else if (kind === 'glitch-cut') {
+          const d = 0.28;
+          const x = pr(t, cut - d / 2, cut + d / 2);
+          if (x > 0 && x < 1) {
+            glitchVal = Math.max(glitchVal, Math.sin(x * Math.PI));
+            flashVal = Math.max(flashVal, Math.exp(-Math.abs(t - cut) * 18) * 0.45);
+          }
+        } else {
+          // zoom-punch flash
+          const dt = t - cut;
+          if (dt >= -0.02 && dt <= 0.22) {
+            flashVal = Math.max(flashVal, Math.exp(-Math.max(0, dt) * 16) * 0.55);
+          }
+        }
+      }
+
+      flashEl.style.opacity = flashVal.toFixed(3);
+      if (glitchVal > 0.03) {
+        const j = Math.floor(t * 48);
+        const dx = glitchVal * 12 * (hash(j) - 0.5);
+        worldEl.style.filter = 'drop-shadow(' + dx.toFixed(1) + 'px 0 0 rgba(255,40,70,0.7)) drop-shadow(' + (-dx).toFixed(1) + 'px 0 0 rgba(40,220,255,0.7))';
+        glcEl.style.opacity = (glitchVal * 0.85).toFixed(2);
+      } else {
+        if (worldEl.style.filter) worldEl.style.filter = '';
+        glcEl.style.opacity = '0';
+      }
+    }
+
+    function renderFrameSync(frameNum) {
+      const f = Math.max(0, Math.min(CFG.totalFrames - 1, Math.round(frameNum)));
+      const t = f / CFG.fps;
+      const pct = (f / Math.max(1, CFG.totalFrames - 1)) * 100;
+      progFill.style.width = pct.toFixed(2) + '%';
+
+      let activeIdx = 0;
+      for (let i = 0; i < CFG.timeline.length; i++) {
+        if (f >= CFG.timeline[i].startFrame) activeIdx = i;
+      }
+      const cur = sceneEls[activeIdx];
+      const meta = cur ? cur.meta : CFG.timeline[0];
+      const localT = t - meta.startSec;
+      const durT = Math.max(1, meta.durSec);
+      const p = clamp(localT / durT);
+
+      // Update active DOM classes
+      sceneEls.forEach((s, idx) => {
+        const isActive = idx === activeIdx;
+        if (s.scEl.classList.contains('active') !== isActive) {
+          s.scEl.classList.toggle('active', isActive);
+        }
+      });
+
+      // Global #world camera rig: subtle beat pulse + restrained shake on impact scenes only
+      const isHeavyImpact = ['kinetic-impact', 'radial-climax', '3d-stage-opener', 'mosaic-pulse-wall'].includes(meta.layout);
+      const [shX, shY] = isHeavyImpact ? shakeAt(t, meta.startSec, 0.28, 9) : [0, 0];
+      const punch = isHeavyImpact && pr(localT, 0, 0.30) < 1 ? (1 - EZ.out(pr(localT, 0, 0.30))) * 0.032 : 0;
+      const camZoom = 1 + beatPulse(t, true) * (isHeavyImpact ? 0.010 : 0.004) + punch;
+      worldEl.style.transform = 'translate(' + shX.toFixed(1) + 'px,' + shY.toFixed(1) + 'px) scale(' + camZoom.toFixed(4) + ')';
+
+      // Render Background Canvas (#fxb)
+      fxb.clearRect(0, 0, CFG.width, CFG.height);
+      drawStars(fxb, t, 85, 0.42, CFG.rgbAccent);
+
+      // Render Scene Animations
+      if (cur) {
+        applyKenBurns(cur.bgMedia, meta.kenBurns, p);
+        const outT = activeIdx < sceneEls.length - 1 ? durT - 0.35 : null;
+        animateHeadline(cur.chEls, localT, outT);
+
+        if (cur.eyebrow) {
+          const eIn = EZ.expo(pr(localT, 0.02, 0.32));
+          cur.eyebrow.style.opacity = eIn.toFixed(3);
+          cur.eyebrow.style.transform = 'translateY(' + ((1 - eIn) * 20).toFixed(1) + 'px)';
+        }
+        if (cur.subline) {
+          const sIn = EZ.expo(pr(localT, 0.35, 0.72));
+          cur.subline.style.opacity = sIn.toFixed(3);
+          cur.subline.style.transform = 'translateY(' + ((1 - sIn) * 22).toFixed(1) + 'px)';
+        }
+        if (cur.ruleEl) {
+          const rIn = EZ.expo(pr(localT, 0.32, 0.75));
+          cur.ruleEl.style.transform = 'scaleX(' + rIn.toFixed(3) + ')';
+        }
+        if (cur.glowBar) {
+          const gIn = EZ.expo(pr(localT, 0.35, 0.85));
+          cur.glowBar.style.transform = 'scaleX(' + gIn.toFixed(3) + ')';
+        }
+        if (cur.sealEl) {
+          const sl = pr(localT, 0.65, 0.88);
+          cur.sealEl.style.opacity = clamp(sl * 4).toFixed(3);
+          cur.sealEl.style.transform = 'scale(' + (1 + (1 - EZ.out5(sl)) * 1.4).toFixed(3) + ') rotate(-5deg)';
+        }
+        cur.pills.forEach((pill, pi) => {
+          const t0 = 0.45 + pi * 0.14;
+          const x = pr(localT, t0, t0 + 0.38);
+          pill.style.opacity = clamp(x * 4).toFixed(3);
+          pill.style.transform = 'scale(' + (0.65 + 0.35 * EZ.spring(x)).toFixed(3) + ')';
+        });
+        cur.callouts.forEach((c, ci) => {
+          const t0 = 0.42 + ci * 0.16;
+          const x = EZ.expo(pr(localT, t0, t0 + 0.45));
+          c.style.opacity = x.toFixed(3);
+          c.style.transform = 'translateX(' + ((1 - x) * 90).toFixed(1) + 'px)';
+        });
+        if (cur.cardStage) {
+          const x = EZ.expo(pr(localT, 0.12, 0.62));
+          const rotY = (activeIdx % 2 ? 7 : -7) + Math.sin(localT * 1.1) * 1.8;
+          const rotX = 2 + Math.cos(localT * 0.9) * 1.2;
+          cur.cardStage.style.opacity = x.toFixed(3);
+          cur.cardStage.style.transform =
+            'translateY(' + ((1 - x) * 44).toFixed(1) + 'px) rotateY(' + rotY.toFixed(2) + 'deg) rotateX(' + rotX.toFixed(2) + 'deg) scale(' + (0.92 + 0.08 * x).toFixed(4) + ')';
+        }
+        if (cur.macGlint) {
+          const gx = lerp(-120, 120, pr(localT, 0.55, 1.35));
+          cur.macGlint.style.transform = 'translateX(' + gx.toFixed(1) + '%)';
+          cur.macGlint.style.opacity = pr(localT, 0.55, 0.7) * (1 - pr(localT, 1.2, 1.35));
+        }
+
+        // 3D Stage Opener Card Swarm
+        cur.cards3d.forEach((c) => {
+          let zz = c.z + localT * 520 * c.sp;
+          zz = ((zz % 2400) + 2400) % 2400 - 1900;
+          const fadeIn = pr(localT, 0, 0.45);
+          const near = zz > 260 ? clamp((zz - 260) / 300) : 0;
+          const op = clamp((zz + 1900) / 500) * (1 - near) * fadeIn * 0.78;
+          c.el.style.opacity = op.toFixed(3);
+          c.el.style.transform =
+            'translate3d(' + c.x.toFixed(1) + 'px,' + (c.y + Math.sin(localT + c.sp) * 14).toFixed(1) + 'px,' + zz.toFixed(1) + 'px) rotateX(' + c.rx + 'deg) rotateY(' + c.ry + 'deg) translate(-50%,-50%)';
+        });
+
+        // Mosaic Pulse Wall
+        if (cur.mosaicCells.length > 0) {
+          const pulse = beatPulse(t, false);
+          const activeBeatGroup = Math.floor(localT * 2.2) % cur.mosaicCells.length;
+          cur.mosaicCells.forEach((cell, mi) => {
+            const cIn = EZ.spring(pr(localT, 0.06 + mi * 0.07, 0.46 + mi * 0.07));
+            const isBeatPop = mi === activeBeatGroup || (mi + 3) % cur.mosaicCells.length === activeBeatGroup;
+            const popZ = isBeatPop ? 48 * pulse : 0;
+            cell.style.opacity = clamp(cIn * 1.4).toFixed(3);
+            cell.style.borderColor = isBeatPop && pulse > 0.2 ? CFG.gold : 'rgba(255,255,255,0.16)';
+            cell.style.transform = 'translateZ(' + popZ.toFixed(1) + 'px) scale(' + (0.85 + 0.15 * cIn + (isBeatPop ? pulse * 0.04 : 0)).toFixed(4) + ')';
+          });
+          if (cur.cntNum) {
+            const nVal = Math.round(EZ.out(pr(localT, 0.25, 1.45)) * meta.counterTarget);
+            cur.cntNum.textContent = String(nVal).padStart(2, '0') + '+';
+          }
+        }
+
+        // Compare Dual
+        if (cur.cmpA && cur.cmpB) {
+          const ax = EZ.expo(pr(localT, 0.22, 0.65));
+          const bx = EZ.expo(pr(localT, 0.34, 0.77));
+          cur.cmpA.style.opacity = ax.toFixed(3);
+          cur.cmpA.style.transform = 'translateX(' + ((1 - ax) * -140).toFixed(1) + 'px)';
+          cur.cmpB.style.opacity = bx.toFixed(3);
+          cur.cmpB.style.transform = 'translateX(' + ((1 - bx) * 140).toFixed(1) + 'px)';
+          if (cur.cmpBridge) cur.cmpBridge.style.transform = 'scaleX(' + EZ.expo(pr(localT, 0.55, 0.9)).toFixed(3) + ')';
+        }
+
+        // Card Fan Opener
+        if (cur.fanCards && cur.fanCards.length > 0) {
+          const isPort = CFG.width < CFG.height;
+          const totalC = cur.fanCards.length;
+          const mid = (totalC - 1) / 2;
+          cur.fanCards.forEach((card, fi) => {
+            const rel = fi - mid;
+            const sp = EZ.spring(pr(localT, fi * 0.06, fi * 0.06 + 0.45));
+            const angle = rel * (isPort ? 7.5 : 9.2) * sp;
+            const tx = rel * (isPort ? 74 : 136) * (CFG.width > CFG.height ? Math.min(1.5, CFG.width / 1920) : 1) * sp;
+            const ty = Math.abs(rel) * (isPort ? 14 : 20) + (1 - sp) * 60;
+            const sc = (1 - Math.abs(rel) * 0.05) * (0.85 + 0.15 * sp);
+            card.style.zIndex = String(20 - Math.round(Math.abs(rel) * 3));
+            card.style.opacity = clamp(sp * 1.4).toFixed(3);
+            card.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) rotate(' + angle.toFixed(2) + 'deg) scale(' + sc.toFixed(4) + ')';
+          });
+        }
+
+        // FocusShot Normalized Zoom & Pan + Pixel-Locked Hotspots + Aspect-Fitted Window + Magnifier Loupe
+        let fittedRatio = 0;
+        if (cur.camStage) {
+          const stageMedia = cur.camStage.querySelector('.k-media-el');
+          const nw = (stageMedia && (stageMedia.naturalWidth || stageMedia.videoWidth)) || Number(cur.camStage.dataset.nw || 0);
+          const nh = (stageMedia && (stageMedia.naturalHeight || stageMedia.videoHeight)) || Number(cur.camStage.dataset.nh || 0);
+          if (nw > 0 && nh > 0) {
+            fittedRatio = nw / nh;
+            if (cur.appWinWrap && cur.appWin && cur.appView) {
+              const wrapW = cur.appWinWrap.clientWidth || 0;
+              const wrapH = cur.appWinWrap.clientHeight || 0;
+              const barH = cur.appBar ? cur.appBar.offsetHeight : 38;
+              const fitKey = nw + 'x' + nh + ':' + wrapW + 'x' + wrapH;
+              if (wrapW > 40 && wrapH > barH + 40 && cur._lastWinFitKey !== fitKey) {
+                cur._lastWinFitKey = fitKey;
+                const availW = wrapW;
+                const availH = Math.max(80, wrapH - barH);
+                let imgW = availW;
+                let imgH = Math.round(imgW / fittedRatio);
+                if (imgH > availH) {
+                  imgH = availH;
+                  imgW = Math.round(imgH * fittedRatio);
+                }
+                cur.appWin.style.width = imgW + 'px';
+                cur.appWin.style.height = (imgH + barH) + 'px';
+                cur.appWin.style.flex = '0 0 auto';
+                cur.camStage.style.width = '100%';
+                cur.camStage.style.height = '100%';
+                cur.camStage.classList.add('is-aspect-fitted');
+              }
+            } else if (cur.appView) {
+              const vw = cur.appView.clientWidth || 0;
+              const vh = cur.appView.clientHeight || 0;
+              if (vw > 40 && vh > 40) {
+                const targetW = (vw / vh > fittedRatio) ? vh * fittedRatio : vw;
+                const targetH = (vw / vh > fittedRatio) ? vh : vw / fittedRatio;
+                cur.camStage.style.width = Math.round(targetW) + 'px';
+                cur.camStage.style.height = Math.round(targetH) + 'px';
+                cur.camStage.classList.add('is-aspect-fitted');
+              }
+            }
+          }
+          const normCam = (rawKey, idx, totalLen) => {
+            const r = rawKey || {};
+            const tVal = Number.isFinite(Number(r.t)) ? Number(r.t) : Number.isFinite(Number(r.at)) ? Number(r.at) : idx / Math.max(1, totalLen - 1);
+            const fxVal = Number.isFinite(Number(r.fx)) ? Number(r.fx) : Number.isFinite(Number(r.x)) ? Number(r.x) : 0.5;
+            const fyVal = Number.isFinite(Number(r.fy)) ? Number(r.fy) : Number.isFinite(Number(r.y)) ? Number(r.y) : 0.5;
+            const zVal = Number.isFinite(Number(r.z)) ? Number(r.z) : Number.isFinite(Number(r.s)) ? Number(r.s) : 1.0;
+            return { t: tVal, fx: fxVal, fy: fyVal, z: Math.max(0.5, zVal) };
+          };
+          const rawCams = Array.isArray(meta.cams) && meta.cams.length
+            ? meta.cams.map((k, ki) => normCam(k, ki, meta.cams.length))
+            : [{ t: 0, fx: 0.5, fy: 0.5, z: 1.0 }, { t: 1, fx: 0.5, fy: 0.5, z: 1.06 }];
+          const keys = rawCams.length === 1 ? [rawCams[0], { ...rawCams[0], t: 1 }] : [...rawCams].sort((a, b) => a.t - b.t);
+          let fx = keys[0].fx, fy = keys[0].fy, z = keys[0].z;
+          for (let ki = 0; ki < keys.length - 1; ki++) {
+            const a = keys[ki], b = keys[ki + 1];
+            if (p >= a.t && p <= b.t) {
+              const u = clamp((p - a.t) / Math.max(0.001, b.t - a.t));
+              const e = u * u * (3 - 2 * u);
+              fx = lerp(a.fx, b.fx, e); fy = lerp(a.fy, b.fy, e); z = lerp(a.z, b.z, e);
+              break;
+            }
+            if (p > b.t) { fx = b.fx; fy = b.fy; z = b.z; }
+          }
+          const tx = Math.max(1 - z, Math.min(0, 0.5 - fx * z)) * 100;
+          const ty = Math.max(1 - z, Math.min(0, 0.5 - fy * z)) * 100;
+          cur.camStage.style.transform = 'translate(' + tx.toFixed(3) + '%,' + ty.toFixed(3) + '%) scale(' + z.toFixed(4) + ')';
+        }
+        if (cur.markBoxes && cur.markBoxes.length > 0) {
+          cur.markBoxes.forEach((mb) => {
+            const sf = Number(mb.dataset.start || 6);
+            const st = sf / Math.max(1, CFG.fps);
+            const mIn = EZ.spring(pr(localT, st, st + 0.35));
+            const pulse = 0.72 + 0.28 * Math.sin(Math.max(0, localT - st) * 6.5);
+            mb.style.opacity = localT >= st ? (mIn * pulse).toFixed(3) : '0';
+            mb.style.transform = 'scale(' + (1.16 - 0.16 * mIn).toFixed(4) + ')';
+          });
+        }
+        if (cur.loupeCam && meta.loupe) {
+          const lx = Number(meta.loupe.fx ?? 0.5), ly = Number(meta.loupe.fy ?? 0.5);
+          const lz = Number(meta.loupe.z ?? 2.6) + p * 0.2;
+          const L = cur.loupeRing ? (cur.loupeRing.clientWidth || 220) : 220;
+          if (fittedRatio > 0) {
+            const lw = fittedRatio >= 1 ? Math.round(L * fittedRatio) : L;
+            const lh = fittedRatio >= 1 ? L : Math.round(L / fittedRatio);
+            cur.loupeCam.style.width = lw + 'px';
+            cur.loupeCam.style.height = lh + 'px';
+            cur.loupeCam.classList.add('is-aspect-fitted');
+            const txPx = Math.max(L - lw * lz, Math.min(0, L / 2 - lx * lw * lz));
+            const tyPx = Math.max(L - lh * lz, Math.min(0, L / 2 - ly * lh * lz));
+            cur.loupeCam.style.transform = 'translate(' + txPx.toFixed(1) + 'px,' + tyPx.toFixed(1) + 'px) scale(' + lz.toFixed(4) + ')';
+          } else {
+            const ltx = Math.max(1 - lz, Math.min(0, 0.5 - lx * lz)) * 100;
+            const lty = Math.max(1 - lz, Math.min(0, 0.5 - ly * lz)) * 100;
+            cur.loupeCam.style.transform = 'translate(' + ltx.toFixed(3) + '%,' + lty.toFixed(3) + '%) scale(' + lz.toFixed(4) + ')';
+          }
+        }
+
+        // Workflow Steps
+        if (cur.wfCards && cur.wfCards.length > 0) {
+          const activeStep = Math.min(cur.wfCards.length - 1, Math.floor(p * cur.wfCards.length));
+          cur.wfCards.forEach((wc, wi) => {
+            const sp = EZ.spring(pr(localT, wi * 0.09, wi * 0.09 + 0.4));
+            const isAct = wi === activeStep;
+            wc.style.opacity = clamp(sp * 1.4).toFixed(3);
+            wc.style.transform = 'translateY(' + ((1 - sp) * 32).toFixed(1) + 'px) scale(' + (isAct ? '1.03' : '1.0') + ')';
+            wc.style.borderColor = isAct ? CFG.gold : 'rgba(255,255,255,0.14)';
+            const dot = wc.querySelector('.k-wf-dot');
+            if (dot) dot.style.background = isAct ? CFG.accent : 'rgba(255,255,255,0.2)';
+          });
+        }
+
+        // Split Wipe Compare
+        if (cur.wipeB && cur.wipeLine) {
+          const split = 0.5 + 0.34 * Math.sin(p * Math.PI * 2 - Math.PI / 2);
+          const pctStr = (split * 100).toFixed(2) + '%';
+          cur.wipeB.style.clipPath = 'inset(0 0 0 ' + pctStr + ')';
+          cur.wipeLine.style.left = pctStr;
+        }
+
+        // Metric Dashboard
+        if (cur.dashNum) {
+          const targetVal = Number(cur.dashNum.dataset.target || 100);
+          const suffixStr = cur.dashNum.dataset.suffix || '';
+          const eP = EZ.out(pr(localT, 0.16, Math.min(durT - 0.25, 1.8)));
+          const disp = Math.round(targetVal * eP);
+          cur.dashNum.textContent = disp.toLocaleString('en-US') + suffixStr;
+          if (cur.dashBarFill) cur.dashBarFill.style.width = (eP * 100).toFixed(1) + '%';
+          if (cur.dashCells && cur.dashCells.length > 0) {
+            const lit = Math.round(eP * cur.dashCells.length);
+            cur.dashCells.forEach((cell, ci) => {
+              const on = ci < lit;
+              cell.style.background = on ? (ci % 4 === 0 ? CFG.gold : CFG.accent) : 'rgba(255,255,255,0.08)';
+              cell.style.opacity = on ? '0.94' : '0.45';
+            });
+          }
+        }
+
+        // Multi-Window Trio
+        if (cur.trioWins && cur.trioWins.length > 0) {
+          const actWin = Math.min(cur.trioWins.length - 1, Math.floor(p * cur.trioWins.length));
+          cur.trioWins.forEach((tw, wi) => {
+            const isAct = wi === actWin;
+            const sp = EZ.spring(pr(localT, wi * 0.08, wi * 0.08 + 0.42));
+            tw.style.opacity = (clamp(sp * 1.4) * (isAct ? 1 : 0.84)).toFixed(3);
+            tw.style.transform = 'scale(' + ((isAct ? 1.03 : 0.96) * (0.9 + 0.1 * sp)).toFixed(4) + ')';
+            tw.style.borderColor = isAct ? CFG.gold : 'rgba(255,255,255,0.16)';
+            const b = tw.querySelector('.k-trio-badge');
+            if (b) b.textContent = isAct ? 'ACTIVE' : 'VIEW';
+          });
+        }
+      }
+
+      // Update Top Workflow HUD
+      const wfHudEl = document.getElementById('workflow-hud');
+      if (wfHudEl) {
+        const wfSteps = Array.isArray(meta.workflowSteps) ? meta.workflowSteps : [];
+        const actStep = Number(meta.hudStep ?? -1);
+        if (wfSteps.length > 0 && actStep >= 0) {
+          wfHudEl.style.display = 'flex';
+          const secCode = String(activeIdx + 1).padStart(2, '0') + ' / ' + String(CFG.timeline.length).padStart(2, '0');
+          const key = secCode + ':' + actStep + ':' + wfSteps.join('|');
+          if (wfHudEl.dataset.key !== key) {
+            wfHudEl.dataset.key = key;
+            wfHudEl.innerHTML = wfSteps.map((st, si) => {
+              const cls = si === actStep ? 'is-active' : si < actStep ? 'is-done' : '';
+              return '<span class="k-hud-step ' + cls + '">' + st + '</span>' + (si < wfSteps.length - 1 ? '<span class="k-hud-sep">›</span>' : '');
+            }).join('') + '<span class="k-hud-sec">' + secCode + '</span>';
+          }
+        } else {
+          wfHudEl.style.display = 'none';
+        }
+      }
+
+      // Render Foreground VFX Canvas (#fxt)
+      fxt.clearRect(0, 0, CFG.width, CFG.height);
+      if (meta.layout === 'radial-climax') {
+        drawRadialLines(fxt, t, CFG.width / 2, CFG.height / 2, 0.65, CFG.rgbAccent);
+        drawGlow(fxt, CFG.width / 2, CFG.height / 2, 420, CFG.rgbGold, 0.16 + beatPulse(t, true) * 0.1);
+      }
+      if (localT < 1.0 && ['kinetic-impact', 'radial-climax', '3d-stage-opener', 'mosaic-pulse-wall'].includes(meta.layout)) {
+        drawShockRing(fxt, localT, 0.04, CFG.width * 0.5, CFG.height * 0.45, Math.min(CFG.width, CFG.height) * 0.78, 0.65, CFG.rgbAccent);
+        drawSparks(fxt, localT, 0.1, CFG.width * 0.5, CFG.height * 0.45, CFG.rgbGold, 36, activeIdx + 5);
+        drawScanSweep(fxt, localT, 0.35, 0.55, CFG.rgbAccent);
+      }
+
+      // Transitions + 24fps Shifted Grain
+      renderTransitions(t);
+      grainCtx.clearRect(0, 0, CFG.width, CFG.height);
+      grainCtx.save();
+      const ox = Math.floor(hash(Math.floor(t * 24)) * 256);
+      const oy = Math.floor(hash(Math.floor(t * 24) + 7) * 256);
+      grainCtx.translate(-ox, -oy);
+      grainCtx.fillStyle = gPat;
+      grainCtx.fillRect(ox, oy, CFG.width, CFG.height);
+      grainCtx.restore();
+
+      // Synchronized Bottom Single-Line Subtitle
+      const subs = meta.subtitles || [];
+      let activeSub = null;
+      for (const sb of subs) {
+        if (localT >= Number(sb.startSec || 0) && localT <= Number(sb.endSec || 999)) {
+          activeSub = sb;
+          break;
+        }
+      }
+      if (!activeSub && subs.length > 0 && localT >= Number(subs[subs.length - 1].startSec || 0)) {
+        activeSub = subs[subs.length - 1];
+      }
+      let txt = '';
+      if (activeSub) {
+        txt = activeSub.text;
+      } else if (subs.length > 0) {
+        txt = localT < Number(subs[0].startSec || 0) ? subs[0].text : subs[subs.length - 1].text;
+      } else {
+        txt = String(meta.narration || '').slice(0, 22);
+      }
+      if (txt) {
+        subPill.style.display = 'block';
+        if (subPill.textContent !== txt) subPill.textContent = txt;
+      } else {
+        subPill.style.display = 'none';
+      }
+      if (endNoticeWrap) {
+        const noticeStartSec = Math.max(0, CFG.totalSec - Math.min(2.2, Math.max(1.0, CFG.totalSec * 0.2)));
+        const nAlpha = t >= noticeStartSec ? clamp((t - noticeStartSec) / 0.35) : 0;
+        endNoticeWrap.style.opacity = nAlpha.toFixed(3);
+      }
+    }
+
+    const avatarWrap = document.getElementById('avatar-overlay-wrap');
+    const avatarVideo = document.getElementById('avatar-overlay-video');
+    let loadedAvatarSrc = '';
+
+    async function syncAvatarOverlay(frameNum) {
+      if (!avatarWrap || !avatarVideo) return;
+      const item = (CFG.timeline || []).find((s) => frameNum >= s.startFrame && frameNum < s.endFrame) || (CFG.timeline || [])[0];
+      const clip = item?.avatarClip?.path ? item.avatarClip : (CFG.avatarClip?.path ? CFG.avatarClip : null);
+      const layout = item?.avatarLayout || clip?.layout || CFG.avatarLayout || 'pip-br';
+      if (!clip?.path || layout === 'off') {
+        avatarWrap.style.display = 'none';
+        return;
+      }
+      const cleanRel = String(clip.path).replace(/^\.?[\\/]+/, '').replace(/\\/g, '/');
+      if (loadedAvatarSrc !== cleanRel) {
+        loadedAvatarSrc = cleanRel;
+        avatarVideo.src = cleanRel;
+        if (avatarVideo.readyState < 1) {
+          await new Promise((res) => {
+            avatarVideo.onloadedmetadata = res;
+            avatarVideo.onerror = res;
+            setTimeout(res, 1500);
+          });
+        }
+      }
+      const isPortrait = CFG.width < CFG.height;
+      avatarWrap.style.display = 'block';
+      if (layout === 'fullscreen') {
+        avatarWrap.className = 'is-fullscreen';
+        avatarWrap.style.left = '0px';
+        avatarWrap.style.right = '0px';
+        avatarWrap.style.top = '0px';
+        avatarWrap.style.bottom = '0px';
+        avatarWrap.style.width = '100%';
+        avatarWrap.style.height = '100%';
+      } else {
+        avatarWrap.className = '';
+        const boxW = isPortrait ? Math.round(CFG.width * 0.34) : Math.round(CFG.width * 0.22);
+        const boxH = Math.round(boxW * 1.125);
+        const sidePx = isPortrait ? 28 : 42;
+        const bottomPx = isPortrait ? Math.round(CFG.height * 0.25) : 96;
+        avatarWrap.style.top = 'auto';
+        avatarWrap.style.bottom = bottomPx + 'px';
+        avatarWrap.style.width = boxW + 'px';
+        avatarWrap.style.height = boxH + 'px';
+        avatarWrap.style.left = layout === 'pip-bl' ? sidePx + 'px' : 'auto';
+        avatarWrap.style.right = layout === 'pip-bl' ? 'auto' : sidePx + 'px';
+      }
+      if (avatarVideo.readyState >= 1) {
+        const dur = Number.isFinite(avatarVideo.duration) && avatarVideo.duration > 0.2 ? avatarVideo.duration : 10;
+        const targetSec = (frameNum / Math.max(1, CFG.fps)) % dur;
+        if (Math.abs((avatarVideo.currentTime || 0) - targetSec) > 0.015) {
+          await new Promise((resolveSeek) => {
+            const done = () => {
+              avatarVideo.removeEventListener('seeked', done);
+              resolveSeek();
+            };
+            avatarVideo.addEventListener('seeked', done, { once: true });
+            try { avatarVideo.currentTime = Math.max(0, Math.min(dur - 0.04, targetSec)); } catch { done(); }
+            setTimeout(done, 120);
+          });
+        }
+      }
+    }
+
+    async function seekVideosForActiveScene(frameNum) {
+      const f = Math.max(0, Math.min(CFG.totalFrames - 1, Math.round(frameNum)));
+      const t = f / CFG.fps;
+      let activeIdx = 0;
+      for (let i = 0; i < CFG.timeline.length; i++) {
+        if (f >= CFG.timeline[i].startFrame) activeIdx = i;
+      }
+      const cur = sceneEls[activeIdx];
+      if (!cur || !cur.videos.length) return;
+      const localT = Math.max(0, t - cur.meta.startSec);
+      const tasks = cur.videos.map((v) => {
+        if (!v || v.readyState < 1) return Promise.resolve();
+        const vidDur = Number.isFinite(v.duration) && v.duration > 0.1 ? v.duration : 10;
+        const target = localT % vidDur;
+        if (Math.abs(v.currentTime - target) < 0.022) return Promise.resolve();
+        return new Promise((res) => {
+          let done = false;
+          const finish = () => {
+            if (done) return;
+            done = true;
+            v.removeEventListener('seeked', finish);
+            res();
+          };
+          v.addEventListener('seeked', finish);
+          try { v.currentTime = target; } catch { finish(); }
+          setTimeout(finish, 70);
+        });
+      });
+      await Promise.all(tasks);
+    }
+
+    window.__seekToFrame = async (frame) => {
+      await seekVideosForActiveScene(frame);
+      await syncAvatarOverlay(frame);
+      renderFrameSync(frame);
+      return frame;
+    };
+
+    function fitStageToViewport() {
+      const vw = window.innerWidth || CFG.width;
+      const vh = window.innerHeight || CFG.height;
+      const scale = Math.min(vw / CFG.width, vh / CFG.height);
+      stageEl.style.transform = Math.abs(scale - 1) < 0.002 ? '' : 'scale(' + scale.toFixed(4) + ')';
+    }
+    window.addEventListener('resize', fitStageToViewport);
+    fitStageToViewport();
+
+    // Smooth Live Preview Mode (runs when not ?render=1)
+    const isRenderMode = new URLSearchParams(location.search).get('render') === '1';
+    if (!isRenderMode) {
+      let playing = false;
+      let curFrame = 0;
+      let lastTs = 0;
+      const tick = (ts) => {
+        if (playing) {
+          if (!lastTs) lastTs = ts;
+          const dt = (ts - lastTs) / 1000;
+          lastTs = ts;
+          curFrame += dt * CFG.fps;
+          if (curFrame >= CFG.totalFrames) curFrame = 0;
+          renderFrameSync(curFrame);
+          try { window.parent.postMessage({ type: 'dsh-video-frame', frame: Math.floor(curFrame) }, '*'); } catch {}
+        }
+        requestAnimationFrame(tick);
+      };
+      window.addEventListener('message', async (ev) => {
+        const d = ev?.data;
+        if (!d || typeof d !== 'object') return;
+        if (d.type === 'dsh-play') { playing = true; lastTs = 0; }
+        else if (d.type === 'dsh-pause') { playing = false; }
+        else if (d.type === 'dsh-seek') {
+          playing = false;
+          curFrame = Number(d.frame) || 0;
+          await window.__seekToFrame(curFrame);
+        }
+      });
+      renderFrameSync(0);
+      requestAnimationFrame(tick);
+    } else {
+      renderFrameSync(0);
+    }
+  })();
+  </script>
+</body>
+</html>

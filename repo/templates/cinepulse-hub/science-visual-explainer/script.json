@@ -1,0 +1,1116 @@
+{
+  "title": "深度科普拆解 · 量子叠加与硬核原理可视化",
+  "aspectRatio": "16:9",
+  "fps": 30,
+  "quality": "1080p",
+  "engine": "html",
+  "style": "tech",
+  "genre": "science-explainer",
+  "genreLabel": "深度科普动态原理拆解",
+  "narrationMode": "tts-beat-sync",
+  "pacingMode": "balanced",
+  "subtitleStyle": "cinematic",
+  "totalDurationSec": 37.1,
+  "totalDurationInFrames": 1113,
+  "audioProfile": {
+    "genreKey": "science-explainer",
+    "profileName": "深度科普动态拆解声场",
+    "beatCutIntensity": "medium",
+    "blitzAllowed": false,
+    "minBeatMultiple": 1,
+    "cameraBeatIntensity": 0.24,
+    "targetLufs": -14.5,
+    "bgmDuckRatio": 3,
+    "sfxBoostVoice": 1.02,
+    "sfxBoostMv": 1.24,
+    "bgmVolVoice": 0.36,
+    "bgmVolMv": 0.74,
+    "sfxPalette": {
+      "opener": [
+        "shimmer_swell",
+        "radar"
+      ],
+      "drop": [
+        "sub_drop",
+        "sparkle"
+      ],
+      "action": [
+        "whoosh",
+        "radar"
+      ],
+      "data": [
+        "counter",
+        "tick"
+      ],
+      "neutral": [
+        "card",
+        "pop_soft"
+      ],
+      "internal": [
+        "radar",
+        "counter",
+        "sparkle"
+      ],
+      "preCut": [
+        "riser",
+        "swoosh"
+      ]
+    }
+  },
+  "bgm": {
+    "enabled": true,
+    "mode": "auto",
+    "bpm": 108,
+    "beats": [
+      {
+        "time": 0,
+        "strong": true,
+        "index": 0
+      },
+      {
+        "time": 0.5556,
+        "strong": false,
+        "index": 1
+      },
+      {
+        "time": 1.1111,
+        "strong": false,
+        "index": 2
+      },
+      {
+        "time": 1.6667,
+        "strong": false,
+        "index": 3
+      },
+      {
+        "time": 2.2222,
+        "strong": true,
+        "index": 4
+      },
+      {
+        "time": 2.7778,
+        "strong": false,
+        "index": 5
+      },
+      {
+        "time": 3.3333,
+        "strong": false,
+        "index": 6
+      },
+      {
+        "time": 3.8889,
+        "strong": false,
+        "index": 7
+      },
+      {
+        "time": 4.4444,
+        "strong": true,
+        "index": 8
+      },
+      {
+        "time": 5,
+        "strong": false,
+        "index": 9
+      },
+      {
+        "time": 5.5556,
+        "strong": false,
+        "index": 10
+      },
+      {
+        "time": 6.1111,
+        "strong": false,
+        "index": 11
+      },
+      {
+        "time": 6.6667,
+        "strong": true,
+        "index": 12
+      },
+      {
+        "time": 7.2222,
+        "strong": false,
+        "index": 13
+      },
+      {
+        "time": 7.7778,
+        "strong": false,
+        "index": 14
+      },
+      {
+        "time": 8.3333,
+        "strong": false,
+        "index": 15
+      },
+      {
+        "time": 8.8889,
+        "strong": true,
+        "index": 16
+      },
+      {
+        "time": 9.4444,
+        "strong": false,
+        "index": 17
+      },
+      {
+        "time": 10,
+        "strong": false,
+        "index": 18
+      },
+      {
+        "time": 10.5556,
+        "strong": false,
+        "index": 19
+      },
+      {
+        "time": 11.1111,
+        "strong": true,
+        "index": 20
+      },
+      {
+        "time": 11.6667,
+        "strong": false,
+        "index": 21
+      },
+      {
+        "time": 12.2222,
+        "strong": false,
+        "index": 22
+      },
+      {
+        "time": 12.7778,
+        "strong": false,
+        "index": 23
+      },
+      {
+        "time": 13.3333,
+        "strong": true,
+        "index": 24
+      },
+      {
+        "time": 13.8889,
+        "strong": false,
+        "index": 25
+      },
+      {
+        "time": 14.4444,
+        "strong": false,
+        "index": 26
+      },
+      {
+        "time": 15,
+        "strong": false,
+        "index": 27
+      },
+      {
+        "time": 15.5556,
+        "strong": true,
+        "index": 28
+      },
+      {
+        "time": 16.1111,
+        "strong": false,
+        "index": 29
+      },
+      {
+        "time": 16.6667,
+        "strong": false,
+        "index": 30
+      },
+      {
+        "time": 17.2222,
+        "strong": false,
+        "index": 31
+      },
+      {
+        "time": 17.7778,
+        "strong": true,
+        "index": 32
+      },
+      {
+        "time": 18.3333,
+        "strong": false,
+        "index": 33
+      },
+      {
+        "time": 18.8889,
+        "strong": false,
+        "index": 34
+      },
+      {
+        "time": 19.4444,
+        "strong": false,
+        "index": 35
+      },
+      {
+        "time": 20,
+        "strong": true,
+        "index": 36
+      },
+      {
+        "time": 20.5556,
+        "strong": false,
+        "index": 37
+      },
+      {
+        "time": 21.1111,
+        "strong": false,
+        "index": 38
+      },
+      {
+        "time": 21.6667,
+        "strong": false,
+        "index": 39
+      },
+      {
+        "time": 22.2222,
+        "strong": true,
+        "index": 40
+      },
+      {
+        "time": 22.7778,
+        "strong": false,
+        "index": 41
+      },
+      {
+        "time": 23.3333,
+        "strong": false,
+        "index": 42
+      },
+      {
+        "time": 23.8889,
+        "strong": false,
+        "index": 43
+      },
+      {
+        "time": 24.4444,
+        "strong": true,
+        "index": 44
+      },
+      {
+        "time": 25,
+        "strong": false,
+        "index": 45
+      },
+      {
+        "time": 25.5556,
+        "strong": false,
+        "index": 46
+      },
+      {
+        "time": 26.1111,
+        "strong": false,
+        "index": 47
+      },
+      {
+        "time": 26.6667,
+        "strong": true,
+        "index": 48
+      },
+      {
+        "time": 27.2222,
+        "strong": false,
+        "index": 49
+      },
+      {
+        "time": 27.7778,
+        "strong": false,
+        "index": 50
+      },
+      {
+        "time": 28.3333,
+        "strong": false,
+        "index": 51
+      },
+      {
+        "time": 28.8889,
+        "strong": true,
+        "index": 52
+      },
+      {
+        "time": 29.4444,
+        "strong": false,
+        "index": 53
+      },
+      {
+        "time": 30,
+        "strong": false,
+        "index": 54
+      },
+      {
+        "time": 30.5556,
+        "strong": false,
+        "index": 55
+      },
+      {
+        "time": 31.1111,
+        "strong": true,
+        "index": 56
+      },
+      {
+        "time": 31.6667,
+        "strong": false,
+        "index": 57
+      },
+      {
+        "time": 32.2222,
+        "strong": false,
+        "index": 58
+      },
+      {
+        "time": 32.7778,
+        "strong": false,
+        "index": 59
+      },
+      {
+        "time": 33.3333,
+        "strong": true,
+        "index": 60
+      },
+      {
+        "time": 33.8889,
+        "strong": false,
+        "index": 61
+      },
+      {
+        "time": 34.4444,
+        "strong": false,
+        "index": 62
+      },
+      {
+        "time": 35,
+        "strong": false,
+        "index": 63
+      },
+      {
+        "time": 35.5556,
+        "strong": true,
+        "index": 64
+      },
+      {
+        "time": 36.1111,
+        "strong": false,
+        "index": 65
+      },
+      {
+        "time": 36.6667,
+        "strong": false,
+        "index": 66
+      },
+      {
+        "time": 37.2222,
+        "strong": false,
+        "index": 67
+      },
+      {
+        "time": 37.7778,
+        "strong": true,
+        "index": 68
+      },
+      {
+        "time": 38.3333,
+        "strong": false,
+        "index": 69
+      },
+      {
+        "time": 38.8889,
+        "strong": false,
+        "index": 70
+      }
+    ]
+  },
+  "referenceStyle": {
+    "sourceName": "影核广场:深度科普拆解 · 量子叠加与硬核原理可视化",
+    "title": "深度科普拆解 · 量子叠加与硬核原理可视化",
+    "genre": "science-explainer",
+    "genreLabel": "深度科普动态原理拆解",
+    "style": "tech",
+    "narrationMode": "tts-beat-sync",
+    "durationSec": 37.1,
+    "shotCount": 8,
+    "avgShotSec": 4.64,
+    "bpm": 108,
+    "visualStyle": "10 镜硬核科普拆解模板：3D 轨道粒子开场 + 架构分层流程图 + 雷达声呐/计数器音效与精准原理标注，一键套用物理、生物、AI 算法或工程原理解说。",
+    "colorPalette": {
+      "background": "#060D1F",
+      "primary": "#38BDF8",
+      "accent": "#A855F7",
+      "highlight": "#F8FAFC"
+    },
+    "vfxSignature": [
+      "3D 量子轨道球",
+      "矢量原理连线动画",
+      "激光扫描雷达脉冲",
+      "关键词霓虹高亮"
+    ],
+    "transitionSignature": [
+      "light-wipe",
+      "iris-circle",
+      "zoom-punch",
+      "slash-wipe",
+      "glitch-cut"
+    ],
+    "subtitleStyle": "cinematic",
+    "pacingSignature": {
+      "targetShotCount": 8,
+      "avgShotSec": 4.64,
+      "bpm": 108,
+      "recommendedPacingMode": "balanced"
+    },
+    "replicationPrompt": "采用深空蓝紫科学实验室美学与 3D 轨道球/矢量拆解图结合；按【悬念提问→核心原理可视化→结构分层拆解→量化对比→现实应用→金句总结】6 步推进，配雷达声呐与数字跳动音效，镜头保持 0.24 柔和节拍律动，保证原理文字清晰可读。"
+  },
+  "scenes": [
+    {
+      "id": "scene-01",
+      "index": 1,
+      "title": "1 秒算完 1 万年的秘密",
+      "narration": "为什么一台量子计算机 1 秒就能完成超级计算机 1 万年的计算？",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.2,
+      "durationInFrames": 126,
+      "startFrame": 0,
+      "startSec": 0,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "为什么一台量子计算机 1 秒就能完成超级计算机 1 万年的计算",
+          "startSec": 0,
+          "endSec": 4.2,
+          "startFrame": 0,
+          "endFrame": 126
+        }
+      ],
+      "subtitleText": "为什么一台量子计算机 1 秒就能完成超级计算机 1 万年的计算？",
+      "subChunks": [
+        "为什么一台量子计算机 1 秒就能完成超级计算机 1 万年的计算？"
+      ],
+      "accentWords": [
+        "量子计算机",
+        "1 万年"
+      ],
+      "highlights": [
+        "量子叠加",
+        "指数算力"
+      ],
+      "layout": "3d-stage-opener",
+      "threePreset": "orbital-core",
+      "transition": "cut",
+      "kicker": "PART 01",
+      "visualBlueprint": "1 秒算完 1 万年的秘密",
+      "speechRate": 1.05,
+      "endSec": 4.2,
+      "endFrame": 126,
+      "sfxCues": [
+        {
+          "type": "shimmer_swell",
+          "path": "audio/sfx/shimmer_swell.wav",
+          "offsetSec": 0,
+          "volume": 0.79,
+          "pan": 0
+        },
+        {
+          "type": "radar",
+          "path": "audio/sfx/radar.wav",
+          "offsetSec": 0.02,
+          "volume": 0.63,
+          "pan": 0
+        },
+        {
+          "type": "radar",
+          "path": "audio/sfx/radar.wav",
+          "offsetSec": 2.222,
+          "volume": 0.67,
+          "pan": 0.2
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 3.78,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "为什么一台量子计算机 一 秒就能完成，超级计算机 一 万年的计算？",
+      "ttsNarrationRef": "为什么一台量子计算机 1 秒就能完成超级计算机 1 万年的计算？"
+    },
+    {
+      "id": "scene-02",
+      "index": 2,
+      "title": "经典比特：非 0 即 1",
+      "narration": "传统芯片里的每个比特就像开关，同一时刻只能处于 0 或 1 两种状态之一。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.5,
+      "durationInFrames": 135,
+      "startFrame": 126,
+      "startSec": 4.2,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "传统芯片里的每个比特就像开关，同一时刻只能处于 0 或 1 两种状态之一",
+          "startSec": 0,
+          "endSec": 4.5,
+          "startFrame": 0,
+          "endFrame": 135
+        }
+      ],
+      "subtitleText": "传统芯片里的每个比特就像开关，同一时刻只能处于 0 或 1 两种状态之一。",
+      "subChunks": [
+        "传统芯片里的每个比特就像开关，同一时刻只能处于 0 或 1 两种状态之一。"
+      ],
+      "accentWords": [
+        "非 0 即 1"
+      ],
+      "highlights": [
+        "串行遍历",
+        "晶体管开关"
+      ],
+      "layout": "svg-architecture-flow",
+      "threePreset": "matrix-cubes",
+      "transition": "light-wipe",
+      "kicker": "PART 02",
+      "visualBlueprint": "经典比特：非 0 即 1",
+      "speechRate": 1.05,
+      "endSec": 8.7,
+      "endFrame": 261,
+      "sfxCues": [
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0,
+          "volume": 0.68,
+          "pan": 0.1
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 2.467,
+          "volume": 0.67,
+          "pan": -0.2
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 4.08,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "传统芯片里的每个比特就像开关，同一时刻只能处于 零 或 一 两种状态之一。",
+      "ttsNarrationRef": "传统芯片里的每个比特就像开关，同一时刻只能处于 0 或 1 两种状态之一。"
+    },
+    {
+      "id": "scene-03",
+      "index": 3,
+      "title": "量子叠加态的并行宇宙",
+      "narration": "而量子比特在观测之前可以同时处于 0 与 1 的叠加态，如同旋转中的硬币。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.8,
+      "durationInFrames": 144,
+      "startFrame": 261,
+      "startSec": 8.7,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "而量子比特在观测之前可以同时处于 0 与 1 的叠加态，如同旋转中的硬币",
+          "startSec": 0,
+          "endSec": 4.8,
+          "startFrame": 0,
+          "endFrame": 144
+        }
+      ],
+      "subtitleText": "而量子比特在观测之前可以同时处于 0 与 1 的叠加态，如同旋转中的硬币。",
+      "subChunks": [
+        "而量子比特在观测之前可以同时处于 0 与 1 的叠加态，如同旋转中的硬币。"
+      ],
+      "accentWords": [
+        "叠加态",
+        "同时"
+      ],
+      "highlights": [
+        "布洛赫球面",
+        "概率幅干涉"
+      ],
+      "layout": "vibecoding-spring-stage",
+      "threePreset": "chrono-helix",
+      "transition": "iris-circle",
+      "kicker": "PART 03",
+      "visualBlueprint": "量子叠加态的并行宇宙",
+      "speechRate": 1.05,
+      "endSec": 13.5,
+      "endFrame": 405,
+      "sfxCues": [
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 0,
+          "volume": 0.68,
+          "pan": -0.1
+        },
+        {
+          "type": "sparkle",
+          "path": "audio/sfx/sparkle.wav",
+          "offsetSec": 2.411,
+          "volume": 0.67,
+          "pan": 0.2
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 4.38,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "而量子比特在观测之前可以同时处于 零， 与 一 的叠加态，如同旋转中的硬币。",
+      "ttsNarrationRef": "而量子比特在观测之前可以同时处于 0 与 1 的叠加态，如同旋转中的硬币。"
+    },
+    {
+      "id": "scene-04",
+      "index": 4,
+      "title": "算力指数级跃迁：2 的 N 次方",
+      "narration": "每增加 1 个量子比特，并行状态数直接翻倍，300 个比特就能超越宇宙原子总数。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.8,
+      "durationInFrames": 144,
+      "startFrame": 405,
+      "startSec": 13.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "每增加 1 个量子比特，并行状态数直接翻倍，300 个比特就能超越宇宙原子总数",
+          "startSec": 0,
+          "endSec": 4.8,
+          "startFrame": 0,
+          "endFrame": 144
+        }
+      ],
+      "subtitleText": "每增加 1 个量子比特，并行状态数直接翻倍，300 个比特就能超越宇宙原子总数。",
+      "subChunks": [
+        "每增加 1 个量子比特，并行状态数直接翻倍，300 个比特就能超越宇宙原子总数。"
+      ],
+      "accentWords": [
+        "翻倍",
+        "300 个比特"
+      ],
+      "highlights": [
+        "2^N 维度空间",
+        "指数爆发"
+      ],
+      "layout": "mosaic-pulse-wall",
+      "threePreset": "orbital-core",
+      "transition": "zoom-punch",
+      "counterTarget": 300,
+      "kicker": "PART 04",
+      "visualBlueprint": "算力指数级跃迁：2 的 N 次方",
+      "speechRate": 1.05,
+      "endSec": 18.3,
+      "endFrame": 549,
+      "sfxCues": [
+        {
+          "type": "sparkle",
+          "path": "audio/sfx/sparkle.wav",
+          "offsetSec": 0,
+          "volume": 0.83,
+          "pan": 0
+        },
+        {
+          "type": "sub_drop",
+          "path": "audio/sfx/sub_drop.wav",
+          "offsetSec": 0.015,
+          "volume": 0.58,
+          "pan": 0.12
+        },
+        {
+          "type": "radar",
+          "path": "audio/sfx/radar.wav",
+          "offsetSec": 2.056,
+          "volume": 0.67,
+          "pan": -0.2
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 4.278,
+          "volume": 0.67,
+          "pan": 0.2
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 4.38,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "每增加 一 个量子比特，并行状态数直接翻倍，三百 个比特就能超越宇宙原子总数。",
+      "ttsNarrationRef": "每增加 1 个量子比特，并行状态数直接翻倍，300 个比特就能超越宇宙原子总数。"
+    },
+    {
+      "id": "scene-05",
+      "index": 5,
+      "title": "量子纠缠：超距联动",
+      "narration": "当多个量子比特发生纠缠，无论相隔多远，改变其一另一端便瞬间联动响应。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.6,
+      "durationInFrames": 138,
+      "startFrame": 549,
+      "startSec": 18.3,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "当多个量子比特发生纠缠，无论相隔多远，改变其一另一端便瞬间联动响应",
+          "startSec": 0,
+          "endSec": 4.6,
+          "startFrame": 0,
+          "endFrame": 138
+        }
+      ],
+      "subtitleText": "当多个量子比特发生纠缠，无论相隔多远，改变其一另一端便瞬间联动响应。",
+      "subChunks": [
+        "当多个量子比特发生纠缠，无论相隔多远，改变其一另一端便瞬间联动响应。"
+      ],
+      "accentWords": [
+        "量子纠缠",
+        "瞬间联动"
+      ],
+      "highlights": [
+        "非局域关联",
+        "量子门电路"
+      ],
+      "layout": "hud-telemetry-dashboard",
+      "threePreset": "particle-vortex",
+      "transition": "slash-wipe",
+      "kicker": "PART 05",
+      "visualBlueprint": "量子纠缠：超距联动",
+      "speechRate": 1.05,
+      "endSec": 22.9,
+      "endFrame": 687,
+      "sfxCues": [
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0,
+          "volume": 0.77,
+          "pan": -0.16
+        },
+        {
+          "type": "radar",
+          "path": "audio/sfx/radar.wav",
+          "offsetSec": 0.012,
+          "volume": 0.68,
+          "pan": 0
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 1.7,
+          "volume": 0.67,
+          "pan": 0.2
+        },
+        {
+          "type": "sparkle",
+          "path": "audio/sfx/sparkle.wav",
+          "offsetSec": 3.922,
+          "volume": 0.67,
+          "pan": -0.2
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 4.18,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "当多个量子比特发生纠缠，无论相隔多远，改变其一另一端便瞬间联动响应。",
+      "ttsNarrationRef": "当多个量子比特发生纠缠，无论相隔多远，改变其一另一端便瞬间联动响应。"
+    },
+    {
+      "id": "scene-06",
+      "index": 6,
+      "title": "干涉算法：放大正确答案",
+      "narration": "量子算法并非盲目穷举，而是利用波的干涉抵消错误路径、精准放大正确答案。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.8,
+      "durationInFrames": 144,
+      "startFrame": 687,
+      "startSec": 22.9,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "量子算法并非盲目穷举，而是利用波的干涉抵消错误路径、精准放大正确答案",
+          "startSec": 0,
+          "endSec": 4.8,
+          "startFrame": 0,
+          "endFrame": 144
+        }
+      ],
+      "subtitleText": "量子算法并非盲目穷举，而是利用波的干涉抵消错误路径、精准放大正确答案。",
+      "subChunks": [
+        "量子算法并非盲目穷举，而是利用波的干涉抵消错误路径、精准放大正确答案。"
+      ],
+      "accentWords": [
+        "波的干涉",
+        "放大正确答案"
+      ],
+      "highlights": [
+        "相长干涉",
+        "相消干涉"
+      ],
+      "layout": "workflow-steps",
+      "threePreset": "orbital-core",
+      "transition": "light-wipe",
+      "kicker": "PART 06",
+      "visualBlueprint": "干涉算法：放大正确答案",
+      "speechRate": 1.05,
+      "endSec": 27.7,
+      "endFrame": 831,
+      "sfxCues": [
+        {
+          "type": "tick",
+          "path": "audio/sfx/tick.wav",
+          "offsetSec": 0,
+          "volume": 0.72,
+          "pan": 0
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.02,
+          "volume": 0.52,
+          "pan": -0.1
+        },
+        {
+          "type": "sparkle",
+          "path": "audio/sfx/sparkle.wav",
+          "offsetSec": 1.544,
+          "volume": 0.67,
+          "pan": -0.2
+        },
+        {
+          "type": "radar",
+          "path": "audio/sfx/radar.wav",
+          "offsetSec": 3.767,
+          "volume": 0.67,
+          "pan": 0.2
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 4.38,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "量子算法并非盲目穷举，而是利用波的干涉抵消错误路径、精准放大正确答案。",
+      "ttsNarrationRef": "量子算法并非盲目穷举，而是利用波的干涉抵消错误路径、精准放大正确答案。"
+    },
+    {
+      "id": "scene-07",
+      "index": 7,
+      "title": "极低温挑战：零下 273 度",
+      "narration": "为了防止环境热噪声破坏脆弱的相干性，量子芯片必须在接近绝对零度的冰箱中运行。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.6,
+      "durationInFrames": 138,
+      "startFrame": 831,
+      "startSec": 27.7,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "为了防止环境热噪声破坏脆弱的相干性，量子芯片必须在接近绝对零度的冰箱中运行",
+          "startSec": 0,
+          "endSec": 4.6,
+          "startFrame": 0,
+          "endFrame": 138
+        }
+      ],
+      "subtitleText": "为了防止环境热噪声破坏脆弱的相干性，量子芯片必须在接近绝对零度的冰箱中运行。",
+      "subChunks": [
+        "为了防止环境热噪声破坏脆弱的相干性，量子芯片必须在接近绝对零度的冰箱中运行。"
+      ],
+      "accentWords": [
+        "绝对零度",
+        "相干性"
+      ],
+      "highlights": [
+        "15 mK 稀释制冷",
+        "量子纠错"
+      ],
+      "layout": "metric-dashboard",
+      "threePreset": "orbital-core",
+      "transition": "glitch-cut",
+      "counterTarget": 273,
+      "kicker": "PART 07",
+      "visualBlueprint": "极低温挑战：零下 273 度",
+      "speechRate": 1.05,
+      "endSec": 32.3,
+      "endFrame": 969,
+      "sfxCues": [
+        {
+          "type": "glitch",
+          "path": "audio/sfx/glitch.wav",
+          "offsetSec": 0,
+          "volume": 0.83,
+          "pan": 0
+        },
+        {
+          "type": "sparkle",
+          "path": "audio/sfx/sparkle.wav",
+          "offsetSec": 0.015,
+          "volume": 0.58,
+          "pan": 0.12
+        },
+        {
+          "type": "radar",
+          "path": "audio/sfx/radar.wav",
+          "offsetSec": 1.189,
+          "volume": 0.67,
+          "pan": 0.2
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 3.411,
+          "volume": 0.67,
+          "pan": -0.2
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 4.18,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "为了防止环境热噪声破坏脆弱的相干性，量子芯片必须在接近绝对零度的冰箱中运行。",
+      "ttsNarrationRef": "为了防止环境热噪声破坏脆弱的相干性，量子芯片必须在接近绝对零度的冰箱中运行。"
+    },
+    {
+      "id": "scene-08",
+      "index": 8,
+      "title": "重塑药物、材料与密码学",
+      "narration": "从分子级新药模拟、高温超导材料发现到下一代后量子密码，算力边界正在重写。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.8,
+      "durationInFrames": 144,
+      "startFrame": 969,
+      "startSec": 32.3,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "从分子级新药模拟、高温超导材料发现到下一代后量子密码，算力边界正在重写",
+          "startSec": 0,
+          "endSec": 4.8,
+          "startFrame": 0,
+          "endFrame": 144
+        }
+      ],
+      "subtitleText": "从分子级新药模拟、高温超导材料发现到下一代后量子密码，算力边界正在重写。",
+      "subChunks": [
+        "从分子级新药模拟、高温超导材料发现到下一代后量子密码，算力边界正在重写。"
+      ],
+      "accentWords": [
+        "分子级新药",
+        "算力边界"
+      ],
+      "highlights": [
+        "量子化学",
+        "能源材料",
+        "密码演进"
+      ],
+      "layout": "radial-climax",
+      "threePreset": "floating-monoliths",
+      "transition": "zoom-punch",
+      "kicker": "PART 08",
+      "visualBlueprint": "重塑药物、材料与密码学",
+      "speechRate": 1.05,
+      "endSec": 37.1,
+      "endFrame": 1113,
+      "sfxCues": [
+        {
+          "type": "sparkle",
+          "path": "audio/sfx/sparkle.wav",
+          "offsetSec": 0,
+          "volume": 0.83,
+          "pan": 0
+        },
+        {
+          "type": "sub_drop",
+          "path": "audio/sfx/sub_drop.wav",
+          "offsetSec": 0.015,
+          "volume": 0.58,
+          "pan": 0.12
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 1.033,
+          "volume": 0.67,
+          "pan": -0.2
+        },
+        {
+          "type": "sparkle",
+          "path": "audio/sfx/sparkle.wav",
+          "offsetSec": 3.256,
+          "volume": 0.67,
+          "pan": 0.2
+        }
+      ],
+      "ttsText": "从分子级新药模拟、高温超导材料发现到下一代后量子密码，算力边界正在重写。",
+      "ttsNarrationRef": "从分子级新药模拟、高温超导材料发现到下一代后量子密码，算力边界正在重写。"
+    }
+  ],
+  "width": 1920,
+  "height": 1080,
+  "voiceMode": "auto",
+  "defaultVoiceId": "auto",
+  "updatedAt": "2026-11-19T19:13:21.097Z"
+}

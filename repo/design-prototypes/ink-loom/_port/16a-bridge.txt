@@ -1,0 +1,56 @@
+@@@ INSERT_BEFORE
+/* ══════════════ 28. 启动 ══════════════ */
+@@@ TEXT
+/* ══════════════ 27b. 宿主桥接（BRIDGE.md v1：只收 window.parent 的消息；每个动作都有 result） ══════════════ */
+const SKIN_ID = 'ink-loom';
+let STATE = null, PREV = null;
+const TL = { sig: '', asig: '' };
+let SCENE_IX = {};
+const REQ = new Map();
+let REQ_SEQ = 0;
+const LOGV = { stick: true, sig: '' };
+const ACT_CN = { run: '一键出片', pause: '暂停', resume: '继续', stop: '停止', retry: '重试', setDirector: '更新参数', polishTopic: 'AI 润色', importFiles: '导入素材', removeAsset: '删除素材', confirmStaging: '确认入库', discardStaging: '丢弃', selectProject: '切换工程', newProject: '新建工程', openPanel: '打开面板', openScene: '打开分镜', setSkin: '切换皮肤', setLowSpec: '低配保护', backToChat: '返回对话' };
+function post(msg, transfer) { try { if (window.parent && window.parent !== window) window.parent.postMessage(Object.assign({ v: 1 }, msg), '*', transfer && transfer.length ? transfer : undefined); return true; } catch (e) { return false; } }
+/* act(action, payload) → Promise<{ ok, error?, data? }>（20 s 未回复视为失败；openPanel 等宿主模态不提示超时） */
+function act(action, payload, transfer) {
+  const id = `ink-${Date.now().toString(36)}-${++REQ_SEQ}`;
+  return new Promise((resolve) => {
+    const quiet = /^(openPanel|newProject|openScene|backToChat|setSkin)$/.test(action);
+    const timer = setTimeout(() => { if (!REQ.has(id)) return; REQ.delete(id); if (!quiet) toast(`${ACT_CN[action] || action}：宿主未响应`, '断', null, null, true); resolve({ ok: false, error: 'timeout' }); }, action === 'importFiles' ? 300000 : 20000);
+    REQ.set(id, { action, resolve, timer });
+    if (!post({ type: 'dsh-vw/action', id, action, payload: payload || {} }, transfer)) {
+      clearTimeout(timer); REQ.delete(id);
+      if (!quiet) toast(`${ACT_CN[action] || action}：未连接到宿主`, '断', null, null, true);
+      resolve({ ok: false, error: 'no-host' });
+    }
+  });
+}
+function onResult(m) {
+  const r = REQ.get(m.id); if (!r) return;
+  REQ.delete(m.id); clearTimeout(r.timer);
+  const res = { ok: !!m.ok, error: m.error ? String(m.error) : '', data: m.data };
+  if (!res.ok) {
+    toast(`${ACT_CN[r.action] || r.action}失败：${res.error || '未知错误'}`, '误', null, null, true);
+    if (r.action === 'setDirector') { Object.keys(PENDING).forEach((k) => delete PENDING[k]); if (STATE && STATE.director) applyDirector(STATE.director, true); }
+  }
+  r.resolve(res);
+}
+function onEvent(ev, data) {
+  data = data || {};
+  if (ev === 'toast') { const lv = String(data.level || 'info'); toast(String(data.text || ''), lv === 'success' ? '成' : lv === 'error' ? '误' : '讯', null, null, lv === 'error'); }
+  else if (ev === 'focus-agent') { const id = data.agentId; if (AG[id]) { AG[id].flash = 1; if (CAM.auto || CAM.mode === 'overview') { /* 跟随模式下 camAim 自会对准；全景时只闪光 */ } } }
+  else if (ev === 'asset-added') { const ids = Array.isArray(data.assetIds) ? data.assetIds : []; later(0.25, () => ids.forEach((aid) => { const A = AS['a:' + aid]; if (A && A.el) { ensureVisible(A.el); flashItem(A); } })); }
+  else if (ev === 'run-started') { BEAM.sweep = 1; AGENTS.forEach((a, i) => later(0.1 + i * 0.07, () => { a.flash = 1; const p = L.ag[a.id]; burstS(p.x, L.beamY, 5, { sp: 60, life: 0.7, sz: 2.2 }); })); }
+  else if (ev === 'run-finished') { /* 状态快照里的 run.status 驱动收尾编舞（成片钤印 / 失败红态） */ }
+}
+window.addEventListener('message', (e) => {
+  if (e.source !== window.parent || e.source === window) return;
+  const m = e.data;
+  if (!m || typeof m !== 'object' || typeof m.type !== 'string' || m.type.indexOf('dsh-vw/') !== 0) return;
+  try {
+    if (m.type === 'dsh-vw/state') { if (m.state && typeof m.state === 'object') applyState(m.state); }
+    else if (m.type === 'dsh-vw/result') onResult(m);
+    else if (m.type === 'dsh-vw/event') onEvent(String(m.event || ''), m.data);
+  } catch (err) { console.warn('[墨韵织机] 处理宿主消息失败：', err && err.message); }
+});
+@@@ END

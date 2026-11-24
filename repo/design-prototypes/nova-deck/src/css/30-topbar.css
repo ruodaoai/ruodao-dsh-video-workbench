@@ -1,0 +1,56 @@
+/* =====================================================================
+   Top bar — owns the whole chrome while the skin is live (BRIDGE rule 10)
+   ===================================================================== */
+#topbar{position:fixed;left:0;right:0;top:0;height:var(--top-h);z-index:6;display:flex;align-items:center;gap:10px;padding:0 14px;background:linear-gradient(180deg,rgba(4,6,14,.97),rgba(6,9,26,.92));border-bottom:1px solid var(--hair);box-shadow:0 12px 30px -12px rgba(0,0,0,.7);min-width:0}
+#topbar::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--acc-rgb),.95),transparent) no-repeat;background-size:26% 100%;animation:scanx 7s linear infinite;pointer-events:none}
+@keyframes scanx{from{background-position:-40% 0}to{background-position:140% 0}}
+#topbar>*{flex:none}
+.tb-brand{display:flex;align-items:center;gap:9px}
+.tb-logo{width:30px;height:30px;filter:drop-shadow(0 0 6px rgba(var(--acc-rgb),.55))}
+.tb-bt b{display:block;font:700 15px/1 var(--f-hud);letter-spacing:.26em;color:var(--ink)}
+.tb-bt span{display:block;margin-top:4px;font:500 8.5px/1 var(--f-hud);letter-spacing:.3em;color:var(--ink3)}
+.tb-back{border-radius:999px}
+.proj{display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;border-radius:8px;border:1px solid var(--hair);background:rgba(var(--acc-rgb),.04);max-width:240px;min-width:0;flex:0 1 auto!important;transition:all var(--d1) var(--ez)}
+.proj:hover{border-color:var(--hair2);background:rgba(var(--acc-rgb),.08)}
+.proj .pd{width:7px;height:7px;transform:rotate(45deg);background:var(--amb);box-shadow:0 0 8px var(--amb);flex:none}
+.proj.none .pd{background:var(--ink4);box-shadow:none}
+.proj .pn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700;font-size:12.5px;min-width:0}
+.proj .caret,.skinbtn .caret{color:var(--ink3);font-size:9px;flex:none}
+.modes{display:flex;align-items:stretch;height:100%}
+.modes button{position:relative;padding:0 13px;color:var(--ink2);font-size:13px;white-space:nowrap;transition:color var(--d1);display:inline-flex;align-items:center;gap:4px}
+.modes button em{font:600 11px var(--f-hud);font-style:normal;color:var(--ink3)}
+.modes button em:empty{display:none}
+.modes button::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:2px;border-radius:2px;background:var(--acc);box-shadow:0 0 10px var(--acc);transform:scaleX(0);transition:transform var(--d2) var(--ez)}
+.modes button:hover{color:var(--ink)}
+.modes button.on{color:var(--ink);font-weight:700}
+.modes button.on::after{transform:scaleX(1)}
+.tb-busy{display:flex;align-items:center;gap:7px;height:28px;padding:0 12px 0 10px;border-radius:999px;border:1px solid rgba(var(--amb-rgb),.55);background:rgba(var(--amb-rgb),.1);color:#ffe2ad;font-size:12px;font-weight:600;max-width:320px;min-width:0;flex:0 1 auto!important;box-shadow:0 0 16px rgba(var(--amb-rgb),.18)}
+.tb-busy .spin{width:12px;height:12px;border-radius:50%;border:2px solid rgba(var(--amb-rgb),.3);border-top-color:var(--amb);animation:spin .8s linear infinite;flex:none}
+.tb-busy .bt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.tb-sp{flex:1 1 4px!important;min-width:4px}
+.sls{display:flex;align-items:center;gap:2px}
+.sl{display:flex;align-items:center;gap:6px;height:28px;padding:0 8px;border-radius:7px;border:1px solid transparent;white-space:nowrap;transition:all var(--d1) var(--ez);min-width:0}
+.sl:hover{border-color:var(--hair);background:rgba(var(--acc-rgb),.05)}
+.sl .k{font:600 12px var(--f-ui);color:var(--ink2)}
+.sl .v{font:500 12px var(--f-ui);color:var(--ink);max-width:132px;overflow:hidden;text-overflow:ellipsis}
+.sl.bad .k{color:#ffcf8f}
+.sl-all{display:none;align-items:center;gap:4px;height:28px;padding:0 9px;border-radius:999px;border:1px solid var(--hair);background:rgba(3,6,18,.6)}
+.sl-all:hover{border-color:var(--hair2)}
+.cam-seg>button{padding:0 9px}
+.cam-seg>button i{opacity:.9}
+.skinbtn{display:flex;align-items:center;gap:6px;height:30px;padding:0 9px 0 4px;border-radius:999px;border:1px solid var(--hair2);background:rgba(3,6,18,.6);transition:all var(--d1) var(--ez)}
+.skinbtn:hover{border-color:var(--hair3);box-shadow:0 0 14px rgba(var(--acc-rgb),.2)}
+.skinbtn b{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:800 12px var(--f-hud);color:#021118;background:var(--acc);box-shadow:0 0 10px rgba(var(--acc-rgb),.5)}
+.skinbtn .sn{font-size:12px;color:var(--ink2);white-space:nowrap}
+.tb-ic{display:flex;gap:6px}
+@media (max-width:1760px){.sl .v{display:none}}
+@media (max-width:1500px){.tb-bt span{display:none}.sls{display:none}.sl-all{display:flex}.modes button{padding:0 10px}.proj{max-width:190px}.skinbtn .sn{display:none}.cam-seg .cl{display:none}.cam-seg>button{padding:0 8px}}
+@media (max-width:1340px){.tb-bt{display:none}.proj{max-width:150px}.modes button{padding:0 8px;font-size:12px}#topbar{gap:7px;padding:0 10px}.modes button em{display:none}}
+@media (max-width:1180px){.proj{max-width:128px}.tb-busy{max-width:220px}}
+.skin-pop .pi b{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:800 11px var(--f-hud);color:#021118;flex:none}
+.skin-pop .pi .sd{width:10px;height:10px;border-radius:3px;flex:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.status-pop .pi .led{margin-right:2px}
+.status-pop .pi .sv{margin-left:auto;font:500 12px var(--f-ui);color:var(--ink3);max-width:200px;overflow:hidden;text-overflow:ellipsis}
+.proj-pop{max-width:min(420px,calc(100vw - 16px))}
+.proj-pop .pi .pt{overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
+.proj-pop .list{max-height:min(52vh,420px);overflow-y:auto}

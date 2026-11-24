@@ -1,0 +1,76 @@
+@@@ RANGE
+/* ══════════════ 26. 取景小窗 ══════════════ */
+@@@ TO
+const FPS_CAP = QS.has('fps') ? +QS.get('fps') : SOFT ? 10 : 0;
+@@@ WITH
+/* ══════════════ 26. 取景小窗（舞台窗口缩略 + 当前取景框） ══════════════ */
+const MM = { cv: $('#mmCv') }; MM.c = MM.cv.getContext('2d');
+function drawMinimap() {
+  if (CAM.mode === 'overview' && CAM.s < 1.01) return;
+  const cv = MM.cv, cw = cv.clientWidth || 186, ch = cv.clientHeight || 104;
+  if (cw < 4 || ch < 4) return;
+  if (cv.width !== Math.round(cw * DPR) || cv.height !== Math.round(ch * DPR)) { cv.width = Math.round(cw * DPR); cv.height = Math.round(ch * DPR); }
+  const c = MM.c, k = Math.min(cw / SW.w, ch / SW.h), ox = (cw - SW.w * k) / 2, oy = (ch - SW.h * k) / 2;
+  c.setTransform(DPR, 0, 0, DPR, 0, 0); c.clearRect(0, 0, cw, ch);
+  c.fillStyle = hexA(P.bg, 0.9); c.fillRect(ox, oy, SW.w * k, SW.h * k);
+  c.translate(ox, oy); c.scale(k, k); c.translate(-SW.x, -SW.y);
+  c.strokeStyle = hexA(P.gold, 0.5); c.lineWidth = 1 / k;
+  c.beginPath(); c.arc(L.mon.cx, L.mon.cy, L.dialR, 0, TAU); c.stroke(); c.strokeRect(L.mon.x, L.mon.y, L.mon.w, L.mon.h);
+  c.fillStyle = hexA(P.gold, 0.6); c.fillRect(L.beamX0, L.beamY - 3, L.beamX1 - L.beamX0, 6);
+  AGENTS.forEach((a) => { const h = L.ag[a.id]; c.fillStyle = a.status === 'skip' ? hexA(a.glaze, 0.35) : a.glaze; c.beginPath(); c.arc(h.x, h.y, a.status === 'run' ? 12 : 8, 0, TAU); c.fill(); });
+  const hw = SW.w / (2 * CAM.s), hh = SW.h / (2 * CAM.s);
+  c.strokeStyle = P.gold2; c.lineWidth = 2 / k; c.strokeRect(CAM.x - hw, CAM.y - hh, hw * 2, hh * 2);
+  c.fillStyle = hexA(P.gold2, 0.08); c.fillRect(CAM.x - hw, CAM.y - hh, hw * 2, hh * 2);
+}
+
+/* ══════════════ 27. 主循环（唯一 rAF · delta time · 低配 30fps · 后台停帧） ══════════════ */
+let LAST = performance.now(), FPS = 60;
+function filmUpdate(dt, rdt) {
+  if (FILM.playing && !vidOK() && rdt > 0) { FILM.t += rdt; if (FILM.t >= DUR - 0.02) FILM.t = 0; }
+  if (vidOK() && FILM.playing && VID.el.paused && !VID.el.ended) FILM.playing = false;
+  PH.work = Pipe.live() && !FILM.user && Pipe.focusT != null;
+  const nt = PH.work ? Pipe.focusT : filmT();
+  const prev = PH.t; PH.t = nt;
+  if (rdt > 0 && nt > prev && nt - prev < 4) { for (const [tb, st] of BEATS) { if (st && tb > prev && tb <= nt) { tlPulse(); break; } } }
+}
+function tlPulse() {
+  if (LOWSPEC || SIM.real - (TLS.lastPulse || -9) < 0.36) return;
+  TLS.lastPulse = SIM.real; TLS.pulse = 1;
+  const e = $('#scroll'); e.classList.remove('pulse'); void e.offsetWidth; e.classList.add('pulse');
+}
+const FPS_CAP = QS.has('fps') ? +QS.get('fps') : SOFT ? 10 : 0;
+@@@ END
+@@@ RANGE
+function frameBody(now, cap) {
+@@@ TO
+  if (MODAL.tick) MODAL.tick(dt, SIM.t);
+}
+@@@ WITH
+function frameBody(now, cap) {
+  const rdt = Math.min(cap ? 0.15 : 0.05, Math.max(0, (now - LAST) / 1000)); LAST = now;
+  if (rdt > 0) FPS = lerp(FPS, 1 / rdt, 0.06);
+  window.__fps = Math.round(FPS);
+  const dt = SIM.frozen ? 0 : rdt;
+  SIM.t += dt; SIM.real += rdt;
+  Pipe.update(rdt);
+  if (dt > 0) flightsUpdate(dt);
+  filmUpdate(dt, rdt);
+  if (dt > 0) {
+    EDGES.forEach((e) => (e.heat = Math.max(0, e.heat - dt * 0.45)));
+    AGENTS.forEach((a) => (a.flash = Math.max(0, a.flash - dt * 1.4)));
+    BEAM.sweep = Math.max(0, BEAM.sweep - dt * 0.75);
+    TLS.pulse = Math.max(0, TLS.pulse - dt * 2.6);
+    DIAL.rot += dt * (Pipe.running() ? (Pipe.active === 'qa' ? 0.42 : 0.07) : 0.012);
+  }
+  for (let n = Math.min(6, Math.ceil(dt / 0.034)), i = 0; i < n; i++) { shUpdate(dt / n, SIM.t - dt + (dt * (i + 1)) / n); partsStep(dt / n); }
+  if (FILM.user && !FILM.userAt) FILM.userAt = SIM.real; else if (!FILM.user) FILM.userAt = 0;
+  if (FILM.user && Pipe.live() && !FILM.playing && SIM.real - FILM.userAt > 8) FILM.user = false;
+  tlAim(); tlStep(rdt);
+  camAim(); for (let n = Math.min(6, Math.ceil(rdt / 0.034)), i = 0; i < n; i++) camStep(rdt / n);
+  const H = window.__halt || 0;
+  if (!(H & 1)) drawWorld(SIM.t);
+  if (!(H & 2)) drawFx(SIM.t);
+  drawMinimap(); uiTick();
+  if (MODAL.tick) MODAL.tick(dt, SIM.t);
+}
+@@@ END

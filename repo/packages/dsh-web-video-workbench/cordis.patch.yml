@@ -1,0 +1,5 @@
+- insert:
+    - id: preset-video
+      name: '@dsh-video/preset-video'
+    - id: web-video-workbench
+      name: '@dsh-video/web-video-workbench'

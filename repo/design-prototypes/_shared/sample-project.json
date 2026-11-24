@@ -1,0 +1,2022 @@
+{
+ "title": "霍去病：你把少年留在大汉",
+ "genre": "历史剪影高燃战斗卡点动画",
+ "bpm": 90,
+ "durationSec": 142.6012,
+ "fps": 30,
+ "resolution": "1920x1080",
+ "drops": [
+  6.612,
+  28.6122,
+  103.278,
+  135.2718
+ ],
+ "beats": [
+  {
+   "t": 0.616,
+   "strong": false
+  },
+  {
+   "t": 1.282,
+   "strong": false
+  },
+  {
+   "t": 1.949,
+   "strong": true
+  },
+  {
+   "t": 2.615,
+   "strong": false
+  },
+  {
+   "t": 3.281,
+   "strong": false
+  },
+  {
+   "t": 3.949,
+   "strong": false
+  },
+  {
+   "t": 4.615,
+   "strong": true
+  },
+  {
+   "t": 5.281,
+   "strong": false
+  },
+  {
+   "t": 5.946,
+   "strong": false
+  },
+  {
+   "t": 6.612,
+   "strong": true
+  },
+  {
+   "t": 7.279,
+   "strong": true
+  },
+  {
+   "t": 7.945,
+   "strong": false
+  },
+  {
+   "t": 8.611,
+   "strong": false
+  },
+  {
+   "t": 9.277,
+   "strong": false
+  },
+  {
+   "t": 9.944,
+   "strong": true
+  },
+  {
+   "t": 10.599,
+   "strong": false
+  },
+  {
+   "t": 11.277,
+   "strong": false
+  },
+  {
+   "t": 11.929,
+   "strong": false
+  },
+  {
+   "t": 12.61,
+   "strong": true
+  },
+  {
+   "t": 13.262,
+   "strong": false
+  },
+  {
+   "t": 13.943,
+   "strong": false
+  },
+  {
+   "t": 14.596,
+   "strong": false
+  },
+  {
+   "t": 15.277,
+   "strong": true
+  },
+  {
+   "t": 15.93,
+   "strong": false
+  },
+  {
+   "t": 16.61,
+   "strong": false
+  },
+  {
+   "t": 17.264,
+   "strong": false
+  },
+  {
+   "t": 17.943,
+   "strong": true
+  },
+  {
+   "t": 18.597,
+   "strong": false
+  },
+  {
+   "t": 19.277,
+   "strong": false
+  },
+  {
+   "t": 19.93,
+   "strong": false
+  },
+  {
+   "t": 20.611,
+   "strong": true
+  },
+  {
+   "t": 21.264,
+   "strong": false
+  },
+  {
+   "t": 21.944,
+   "strong": false
+  },
+  {
+   "t": 22.595,
+   "strong": false
+  },
+  {
+   "t": 23.277,
+   "strong": true
+  },
+  {
+   "t": 23.928,
+   "strong": false
+  },
+  {
+   "t": 24.61,
+   "strong": false
+  },
+  {
+   "t": 25.278,
+   "strong": false
+  },
+  {
+   "t": 25.945,
+   "strong": true
+  },
+  {
+   "t": 26.609,
+   "strong": false
+  },
+  {
+   "t": 27.278,
+   "strong": false
+  },
+  {
+   "t": 27.943,
+   "strong": false
+  },
+  {
+   "t": 28.612,
+   "strong": true
+  },
+  {
+   "t": 29.276,
+   "strong": false
+  },
+  {
+   "t": 29.948,
+   "strong": false
+  },
+  {
+   "t": 30.609,
+   "strong": false
+  },
+  {
+   "t": 31.276,
+   "strong": true
+  },
+  {
+   "t": 31.936,
+   "strong": false
+  },
+  {
+   "t": 32.603,
+   "strong": false
+  },
+  {
+   "t": 33.269,
+   "strong": false
+  },
+  {
+   "t": 33.936,
+   "strong": true
+  },
+  {
+   "t": 34.602,
+   "strong": false
+  },
+  {
+   "t": 35.27,
+   "strong": false
+  },
+  {
+   "t": 35.936,
+   "strong": false
+  },
+  {
+   "t": 36.603,
+   "strong": true
+  },
+  {
+   "t": 37.269,
+   "strong": false
+  },
+  {
+   "t": 37.936,
+   "strong": false
+  },
+  {
+   "t": 38.602,
+   "strong": false
+  },
+  {
+   "t": 39.28,
+   "strong": true
+  },
+  {
+   "t": 39.933,
+   "strong": false
+  },
+  {
+   "t": 40.61,
+   "strong": false
+  },
+  {
+   "t": 41.266,
+   "strong": false
+  },
+  {
+   "t": 41.943,
+   "strong": true
+  },
+  {
+   "t": 42.597,
+   "strong": false
+  },
+  {
+   "t": 43.276,
+   "strong": false
+  },
+  {
+   "t": 43.931,
+   "strong": false
+  },
+  {
+   "t": 44.61,
+   "strong": true
+  },
+  {
+   "t": 45.267,
+   "strong": false
+  },
+  {
+   "t": 45.943,
+   "strong": false
+  },
+  {
+   "t": 46.611,
+   "strong": false
+  },
+  {
+   "t": 47.283,
+   "strong": true
+  },
+  {
+   "t": 47.95,
+   "strong": false
+  },
+  {
+   "t": 48.617,
+   "strong": false
+  },
+  {
+   "t": 49.282,
+   "strong": false
+  },
+  {
+   "t": 49.949,
+   "strong": true
+  },
+  {
+   "t": 50.613,
+   "strong": false
+  },
+  {
+   "t": 51.282,
+   "strong": false
+  },
+  {
+   "t": 51.947,
+   "strong": false
+  },
+  {
+   "t": 52.613,
+   "strong": true
+  },
+  {
+   "t": 53.269,
+   "strong": false
+  },
+  {
+   "t": 53.947,
+   "strong": false
+  },
+  {
+   "t": 54.602,
+   "strong": false
+  },
+  {
+   "t": 55.28,
+   "strong": true
+  },
+  {
+   "t": 55.936,
+   "strong": false
+  },
+  {
+   "t": 56.614,
+   "strong": false
+  },
+  {
+   "t": 57.269,
+   "strong": false
+  },
+  {
+   "t": 57.946,
+   "strong": true
+  },
+  {
+   "t": 58.602,
+   "strong": false
+  },
+  {
+   "t": 59.279,
+   "strong": false
+  },
+  {
+   "t": 59.936,
+   "strong": false
+  },
+  {
+   "t": 60.61,
+   "strong": true
+  },
+  {
+   "t": 61.265,
+   "strong": false
+  },
+  {
+   "t": 61.944,
+   "strong": false
+  },
+  {
+   "t": 62.599,
+   "strong": false
+  },
+  {
+   "t": 63.277,
+   "strong": true
+  },
+  {
+   "t": 63.933,
+   "strong": false
+  },
+  {
+   "t": 64.61,
+   "strong": false
+  },
+  {
+   "t": 65.267,
+   "strong": false
+  },
+  {
+   "t": 65.944,
+   "strong": true
+  },
+  {
+   "t": 66.601,
+   "strong": false
+  },
+  {
+   "t": 67.279,
+   "strong": false
+  },
+  {
+   "t": 67.947,
+   "strong": false
+  },
+  {
+   "t": 68.614,
+   "strong": true
+  },
+  {
+   "t": 69.281,
+   "strong": false
+  },
+  {
+   "t": 69.948,
+   "strong": false
+  },
+  {
+   "t": 70.614,
+   "strong": false
+  },
+  {
+   "t": 71.281,
+   "strong": true
+  },
+  {
+   "t": 71.948,
+   "strong": false
+  },
+  {
+   "t": 72.615,
+   "strong": false
+  },
+  {
+   "t": 73.282,
+   "strong": false
+  },
+  {
+   "t": 73.949,
+   "strong": true
+  },
+  {
+   "t": 74.601,
+   "strong": false
+  },
+  {
+   "t": 75.268,
+   "strong": false
+  },
+  {
+   "t": 75.934,
+   "strong": false
+  },
+  {
+   "t": 76.6,
+   "strong": true
+  },
+  {
+   "t": 77.267,
+   "strong": false
+  },
+  {
+   "t": 77.934,
+   "strong": false
+  },
+  {
+   "t": 78.597,
+   "strong": false
+  },
+  {
+   "t": 79.264,
+   "strong": true
+  },
+  {
+   "t": 79.93,
+   "strong": false
+  },
+  {
+   "t": 80.597,
+   "strong": false
+  },
+  {
+   "t": 81.263,
+   "strong": false
+  },
+  {
+   "t": 81.939,
+   "strong": true
+  },
+  {
+   "t": 82.598,
+   "strong": false
+  },
+  {
+   "t": 83.273,
+   "strong": false
+  },
+  {
+   "t": 83.931,
+   "strong": false
+  },
+  {
+   "t": 84.598,
+   "strong": true
+  },
+  {
+   "t": 85.264,
+   "strong": false
+  },
+  {
+   "t": 85.931,
+   "strong": false
+  },
+  {
+   "t": 86.598,
+   "strong": false
+  },
+  {
+   "t": 87.272,
+   "strong": true
+  },
+  {
+   "t": 87.938,
+   "strong": false
+  },
+  {
+   "t": 88.613,
+   "strong": false
+  },
+  {
+   "t": 89.282,
+   "strong": false
+  },
+  {
+   "t": 89.949,
+   "strong": true
+  },
+  {
+   "t": 90.615,
+   "strong": false
+  },
+  {
+   "t": 91.282,
+   "strong": false
+  },
+  {
+   "t": 91.949,
+   "strong": false
+  },
+  {
+   "t": 92.616,
+   "strong": true
+  },
+  {
+   "t": 93.279,
+   "strong": false
+  },
+  {
+   "t": 93.946,
+   "strong": false
+  },
+  {
+   "t": 94.612,
+   "strong": false
+  },
+  {
+   "t": 95.277,
+   "strong": true
+  },
+  {
+   "t": 95.944,
+   "strong": false
+  },
+  {
+   "t": 96.609,
+   "strong": false
+  },
+  {
+   "t": 97.276,
+   "strong": false
+  },
+  {
+   "t": 97.943,
+   "strong": true
+  },
+  {
+   "t": 98.602,
+   "strong": false
+  },
+  {
+   "t": 99.269,
+   "strong": false
+  },
+  {
+   "t": 99.943,
+   "strong": false
+  },
+  {
+   "t": 100.611,
+   "strong": true
+  },
+  {
+   "t": 101.278,
+   "strong": false
+  },
+  {
+   "t": 101.945,
+   "strong": false
+  },
+  {
+   "t": 102.611,
+   "strong": false
+  },
+  {
+   "t": 103.278,
+   "strong": true
+  },
+  {
+   "t": 103.943,
+   "strong": false
+  },
+  {
+   "t": 104.61,
+   "strong": false
+  },
+  {
+   "t": 105.277,
+   "strong": false
+  },
+  {
+   "t": 105.943,
+   "strong": true
+  },
+  {
+   "t": 106.61,
+   "strong": false
+  },
+  {
+   "t": 107.276,
+   "strong": false
+  },
+  {
+   "t": 107.933,
+   "strong": false
+  },
+  {
+   "t": 108.61,
+   "strong": true
+  },
+  {
+   "t": 109.266,
+   "strong": false
+  },
+  {
+   "t": 109.943,
+   "strong": false
+  },
+  {
+   "t": 110.611,
+   "strong": false
+  },
+  {
+   "t": 111.279,
+   "strong": true
+  },
+  {
+   "t": 111.945,
+   "strong": false
+  },
+  {
+   "t": 112.613,
+   "strong": false
+  },
+  {
+   "t": 113.279,
+   "strong": false
+  },
+  {
+   "t": 113.946,
+   "strong": true
+  },
+  {
+   "t": 114.612,
+   "strong": false
+  },
+  {
+   "t": 115.279,
+   "strong": false
+  },
+  {
+   "t": 115.946,
+   "strong": false
+  },
+  {
+   "t": 116.613,
+   "strong": true
+  },
+  {
+   "t": 117.272,
+   "strong": false
+  },
+  {
+   "t": 117.946,
+   "strong": false
+  },
+  {
+   "t": 118.605,
+   "strong": false
+  },
+  {
+   "t": 119.279,
+   "strong": true
+  },
+  {
+   "t": 119.938,
+   "strong": false
+  },
+  {
+   "t": 120.613,
+   "strong": false
+  },
+  {
+   "t": 121.272,
+   "strong": false
+  },
+  {
+   "t": 121.947,
+   "strong": true
+  },
+  {
+   "t": 122.605,
+   "strong": false
+  },
+  {
+   "t": 123.28,
+   "strong": false
+  },
+  {
+   "t": 123.936,
+   "strong": false
+  },
+  {
+   "t": 124.612,
+   "strong": true
+  },
+  {
+   "t": 125.266,
+   "strong": false
+  },
+  {
+   "t": 125.946,
+   "strong": false
+  },
+  {
+   "t": 126.599,
+   "strong": false
+  },
+  {
+   "t": 127.278,
+   "strong": true
+  },
+  {
+   "t": 127.93,
+   "strong": false
+  },
+  {
+   "t": 128.611,
+   "strong": false
+  },
+  {
+   "t": 129.26,
+   "strong": false
+  },
+  {
+   "t": 129.942,
+   "strong": true
+  },
+  {
+   "t": 130.593,
+   "strong": false
+  },
+  {
+   "t": 131.272,
+   "strong": false
+  },
+  {
+   "t": 131.938,
+   "strong": false
+  },
+  {
+   "t": 132.605,
+   "strong": true
+  },
+  {
+   "t": 133.272,
+   "strong": false
+  },
+  {
+   "t": 133.939,
+   "strong": false
+  },
+  {
+   "t": 134.605,
+   "strong": false
+  },
+  {
+   "t": 135.272,
+   "strong": true
+  },
+  {
+   "t": 135.938,
+   "strong": false
+  },
+  {
+   "t": 136.605,
+   "strong": false
+  },
+  {
+   "t": 137.272,
+   "strong": false
+  },
+  {
+   "t": 137.94,
+   "strong": true
+  },
+  {
+   "t": 138.607,
+   "strong": false
+  },
+  {
+   "t": 139.274,
+   "strong": false
+  },
+  {
+   "t": 139.941,
+   "strong": false
+  },
+  {
+   "t": 140.607,
+   "strong": true
+  },
+  {
+   "t": 141.275,
+   "strong": false
+  },
+  {
+   "t": 141.942,
+   "strong": false
+  },
+  {
+   "t": 142.622,
+   "strong": false
+  }
+ ],
+ "scenes": [
+  {
+   "id": "scene-01",
+   "title": "府门之下",
+   "startSec": 0,
+   "durationSec": 1.93,
+   "actionMode": "clean",
+   "subtitle": "你生来便站在府门之外",
+   "sfx": []
+  },
+  {
+   "id": "scene-02",
+   "title": "母亲的背影",
+   "startSec": 1.93,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你是侍女未婚所生的孩子",
+   "sfx": [
+    {
+     "type": "slash_sweep",
+     "t": 1.949
+    }
+   ]
+  },
+  {
+   "id": "scene-03",
+   "title": "凤阙升起",
+   "startSec": 4.6,
+   "durationSec": 1.33,
+   "actionMode": "clean",
+   "subtitle": "你的姨母登上皇后之位",
+   "sfx": []
+  },
+  {
+   "id": "scene-04",
+   "title": "命运开门",
+   "startSec": 5.93,
+   "durationSec": 0.33,
+   "actionMode": "drop-impact",
+   "subtitle": "你的命运骤然撞开宫门",
+   "sfx": [
+    {
+     "type": "heavy_impact",
+     "t": 5.948
+    }
+   ]
+  },
+  {
+   "id": "scene-05",
+   "title": "将军之影",
+   "startSec": 6.27,
+   "durationSec": 2.33,
+   "actionMode": "clean",
+   "subtitle": "你的舅舅已是大将军",
+   "sfx": []
+  },
+  {
+   "id": "scene-06",
+   "title": "少年练骑",
+   "startSec": 8.6,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你却只向马背讨一个名字",
+   "sfx": []
+  },
+  {
+   "id": "scene-07",
+   "title": "边烽入夜",
+   "startSec": 11.27,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你听见边关的烽火在催",
+   "sfx": []
+  },
+  {
+   "id": "scene-08",
+   "title": "18岁",
+   "startSec": 13.93,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你18岁便请缨向北",
+   "sfx": []
+  },
+  {
+   "id": "scene-09",
+   "title": "800轻骑",
+   "startSec": 16.6,
+   "durationSec": 2.67,
+   "actionMode": "cavalry",
+   "subtitle": "你只带800轻骑出阵",
+   "sfx": [
+    {
+     "type": "horse_gallop",
+     "t": 16.61
+    },
+    {
+     "type": "war_drum",
+     "t": 17.947
+    }
+   ]
+  },
+  {
+   "id": "scene-10",
+   "title": "离开主阵",
+   "startSec": 19.27,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你甩开主阵直入大漠",
+   "sfx": []
+  },
+  {
+   "id": "scene-11",
+   "title": "敌营在前",
+   "startSec": 21.93,
+   "durationSec": 2.67,
+   "actionMode": "cavalry",
+   "subtitle": "你把敌营当作前路",
+   "sfx": [
+    {
+     "type": "horse_gallop",
+     "t": 21.944
+    },
+    {
+     "type": "war_drum",
+     "t": 23.281
+    }
+   ]
+  },
+  {
+   "id": "scene-12",
+   "title": "首战交锋",
+   "startSec": 24.6,
+   "durationSec": 2.67,
+   "actionMode": "clash-flurry",
+   "subtitle": "你把第一道阻拦撞碎",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 24.948
+    },
+    {
+     "type": "metal_clash",
+     "t": 24.948
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 25.261
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 25.615
+    },
+    {
+     "type": "metal_clash",
+     "t": 25.615
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 25.946
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 26.277
+    },
+    {
+     "type": "metal_clash",
+     "t": 26.277
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 26.596
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 26.945
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 26.945
+    }
+   ]
+  },
+  {
+   "id": "scene-13",
+   "title": "一击开路",
+   "startSec": 27.27,
+   "durationSec": 0.33,
+   "actionMode": "single-clash",
+   "subtitle": "你让锋芒先于姓名",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 27.444
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 27.444
+    }
+   ]
+  },
+  {
+   "id": "scene-14",
+   "title": "少年破围",
+   "startSec": 27.6,
+   "durationSec": 3.67,
+   "actionMode": "clash-flurry",
+   "subtitle": "你在敌阵最深处破围",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 27.943
+    },
+    {
+     "type": "metal_clash",
+     "t": 27.943
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 28.277
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 28.611
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 28.611
+    },
+    {
+     "type": "heavy_impact",
+     "t": 28.611
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 28.944
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 29.267
+    },
+    {
+     "type": "metal_clash",
+     "t": 29.267
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 29.609
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 29.948
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 29.948
+    }
+   ]
+  },
+  {
+   "id": "scene-15",
+   "title": "敌旗落下",
+   "startSec": 31.27,
+   "durationSec": 0.67,
+   "actionMode": "clean",
+   "subtitle": "你身后敌旗接连倒下",
+   "sfx": [
+    {
+     "type": "slash_sweep",
+     "t": 31.281
+    }
+   ]
+  },
+  {
+   "id": "scene-16",
+   "title": "2028首虏",
+   "startSec": 31.93,
+   "durationSec": 2,
+   "actionMode": "clean",
+   "subtitle": "你此战斩获2028首虏",
+   "sfx": []
+  },
+  {
+   "id": "scene-17",
+   "title": "功冠全军",
+   "startSec": 33.93,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你让军功越过了出身",
+   "sfx": []
+  },
+  {
+   "id": "scene-18",
+   "title": "冠军封侯",
+   "startSec": 36.6,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你以少年之身封冠军侯",
+   "sfx": []
+  },
+  {
+   "id": "scene-19",
+   "title": "不止于侯",
+   "startSec": 39.27,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你却把封侯当作起点",
+   "sfx": []
+  },
+  {
+   "id": "scene-20",
+   "title": "河西在望",
+   "startSec": 41.93,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你把下一程指向河西",
+   "sfx": [
+    {
+     "type": "slash_sweep",
+     "t": 41.945
+    }
+   ]
+  },
+  {
+   "id": "scene-21",
+   "title": "春出陇西",
+   "startSec": 44.6,
+   "durationSec": 2.67,
+   "actionMode": "cavalry",
+   "subtitle": "你率铁骑踏破陇西晨霜",
+   "sfx": [
+    {
+     "type": "war_drum",
+     "t": 44.609
+    },
+    {
+     "type": "horse_gallop",
+     "t": 44.61
+    }
+   ]
+  },
+  {
+   "id": "scene-22",
+   "title": "越焉支山",
+   "startSec": 47.27,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你越过焉支山的风雪",
+   "sfx": []
+  },
+  {
+   "id": "scene-23",
+   "title": "谷口奔袭",
+   "startSec": 49.93,
+   "durationSec": 2.67,
+   "actionMode": "cavalry",
+   "subtitle": "你借山谷把铁骑藏锋",
+   "sfx": [
+    {
+     "type": "horse_gallop",
+     "t": 49.949
+    },
+    {
+     "type": "war_drum",
+     "t": 49.949
+    }
+   ]
+  },
+  {
+   "id": "scene-24",
+   "title": "河西鏖战",
+   "startSec": 52.6,
+   "durationSec": 2.67,
+   "actionMode": "clash-flurry",
+   "subtitle": "你用长矛撕开河西战阵",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 52.941
+    },
+    {
+     "type": "metal_clash",
+     "t": 52.941
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 53.264
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 53.608
+    },
+    {
+     "type": "metal_clash",
+     "t": 53.608
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 53.949
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 54.275
+    },
+    {
+     "type": "metal_clash",
+     "t": 54.275
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 54.599
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 54.941
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 54.941
+    }
+   ]
+  },
+  {
+   "id": "scene-25",
+   "title": "矛刃相接",
+   "startSec": 55.27,
+   "durationSec": 0.67,
+   "actionMode": "single-clash",
+   "subtitle": "你迎着刀锋再进一步",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 55.608
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 55.608
+    }
+   ]
+  },
+  {
+   "id": "scene-26",
+   "title": "阵线崩开",
+   "startSec": 55.93,
+   "durationSec": 2,
+   "actionMode": "clash-flurry",
+   "subtitle": "你身后的铁骑踏开重围",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 56.276
+    },
+    {
+     "type": "metal_clash",
+     "t": 56.276
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 56.62
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 56.942
+    },
+    {
+     "type": "metal_clash",
+     "t": 56.942
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 57.27
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 57.613
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 57.613
+    }
+   ]
+  },
+  {
+   "id": "scene-27",
+   "title": "金人入汉",
+   "startSec": 57.93,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你带回敌庭祭天金人",
+   "sfx": [
+    {
+     "type": "slash_sweep",
+     "t": 57.95
+    }
+   ]
+  },
+  {
+   "id": "scene-28",
+   "title": "战报未冷",
+   "startSec": 60.6,
+   "durationSec": 1.33,
+   "actionMode": "clean",
+   "subtitle": "你的战报墨迹尚未干",
+   "sfx": []
+  },
+  {
+   "id": "scene-29",
+   "title": "夏日再征",
+   "startSec": 61.93,
+   "durationSec": 2.67,
+   "actionMode": "cavalry",
+   "subtitle": "你又向河西深处奔去",
+   "sfx": [
+    {
+     "type": "horse_gallop",
+     "t": 61.944
+    },
+    {
+     "type": "war_drum",
+     "t": 63.279
+    }
+   ]
+  },
+  {
+   "id": "scene-30",
+   "title": "祁连在前",
+   "startSec": 64.6,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你把祁连雪峰踏在身后",
+   "sfx": []
+  },
+  {
+   "id": "scene-31",
+   "title": "祁连锋刃",
+   "startSec": 67.27,
+   "durationSec": 2.67,
+   "actionMode": "clash-flurry",
+   "subtitle": "你迎上祁连山下的锋刃",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 67.613
+    },
+    {
+     "type": "metal_clash",
+     "t": 67.613
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 67.934
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 68.282
+    },
+    {
+     "type": "metal_clash",
+     "t": 68.282
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 68.613
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 68.948
+    },
+    {
+     "type": "metal_clash",
+     "t": 68.948
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 69.269
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 69.617
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 69.617
+    }
+   ]
+  },
+  {
+   "id": "scene-32",
+   "title": "回矛一瞬",
+   "startSec": 69.93,
+   "durationSec": 0.67,
+   "actionMode": "single-clash",
+   "subtitle": "你回身一矛挡住寒光",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 70.282
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 70.282
+    }
+   ]
+  },
+  {
+   "id": "scene-33",
+   "title": "再破重阵",
+   "startSec": 70.6,
+   "durationSec": 3.33,
+   "actionMode": "clash-flurry",
+   "subtitle": "你让重围在马前崩开",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 70.949
+    },
+    {
+     "type": "metal_clash",
+     "t": 70.949
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 71.284
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 71.621
+    },
+    {
+     "type": "metal_clash",
+     "t": 71.621
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 71.934
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 72.282
+    },
+    {
+     "type": "metal_clash",
+     "t": 72.282
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 72.619
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 72.95
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 72.95
+    }
+   ]
+  },
+  {
+   "id": "scene-34",
+   "title": "山河静下",
+   "startSec": 73.93,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你让祁连长风卷过战旗",
+   "sfx": []
+  },
+  {
+   "id": "scene-35",
+   "title": "浑邪归汉",
+   "startSec": 76.6,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你迎来浑邪王归汉",
+   "sfx": [
+    {
+     "type": "slash_sweep",
+     "t": 76.619
+    }
+   ]
+  },
+  {
+   "id": "scene-36",
+   "title": "40000人",
+   "startSec": 79.27,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你迎40000人走向汉关",
+   "sfx": []
+  },
+  {
+   "id": "scene-37",
+   "title": "河西贯通",
+   "startSec": 81.93,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你把河西凿成向西的门",
+   "sfx": []
+  },
+  {
+   "id": "scene-38",
+   "title": "丝路曙光",
+   "startSec": 84.6,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你为丝路推开一扇门",
+   "sfx": []
+  },
+  {
+   "id": "scene-39",
+   "title": "赐第在前",
+   "startSec": 87.27,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你却没有停在长安华屋",
+   "sfx": [
+    {
+     "type": "slash_sweep",
+     "t": 87.272
+    }
+   ]
+  },
+  {
+   "id": "scene-40",
+   "title": "何以家为",
+   "startSec": 89.93,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你言匈奴未灭何以家为",
+   "sfx": []
+  },
+  {
+   "id": "scene-41",
+   "title": "再系披风",
+   "startSec": 92.6,
+   "durationSec": 1.33,
+   "actionMode": "clean",
+   "subtitle": "你又把披风系向北风",
+   "sfx": []
+  },
+  {
+   "id": "scene-42",
+   "title": "元狩4年",
+   "startSec": 93.93,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你在元狩4年再赴漠北",
+   "sfx": []
+  },
+  {
+   "id": "scene-43",
+   "title": "50000骑",
+   "startSec": 96.6,
+   "durationSec": 2.67,
+   "actionMode": "cavalry",
+   "subtitle": "你率50000骑直指漠北",
+   "sfx": [
+    {
+     "type": "horse_gallop",
+     "t": 96.61
+    },
+    {
+     "type": "war_drum",
+     "t": 97.944
+    }
+   ]
+  },
+  {
+   "id": "scene-44",
+   "title": "举矛向北",
+   "startSec": 99.27,
+   "durationSec": 0.67,
+   "actionMode": "clean",
+   "subtitle": "你向漠北举起手中长矛",
+   "sfx": []
+  },
+  {
+   "id": "scene-45",
+   "title": "两军将撞",
+   "startSec": 99.93,
+   "durationSec": 3.33,
+   "actionMode": "cavalry",
+   "subtitle": "你迎着敌骑卷起的黑潮",
+   "sfx": [
+    {
+     "type": "horse_gallop",
+     "t": 99.943
+    },
+    {
+     "type": "war_drum",
+     "t": 100.612
+    }
+   ]
+  },
+  {
+   "id": "scene-46",
+   "title": "漠北正撞",
+   "startSec": 103.27,
+   "durationSec": 2.67,
+   "actionMode": "clash-flurry",
+   "subtitle": "你把漠北撞成金铁风暴",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 103.612
+    },
+    {
+     "type": "metal_clash",
+     "t": 103.612
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 103.926
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 104.28
+    },
+    {
+     "type": "metal_clash",
+     "t": 104.28
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 104.611
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 104.945
+    },
+    {
+     "type": "metal_clash",
+     "t": 104.945
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 105.261
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 105.603
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 105.603
+    }
+   ]
+  },
+  {
+   "id": "scene-47",
+   "title": "寒锋一撞",
+   "startSec": 105.93,
+   "durationSec": 0.67,
+   "actionMode": "single-clash",
+   "subtitle": "你在万军之间再进一矛",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 106.277
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 106.277
+    }
+   ]
+  },
+  {
+   "id": "scene-48",
+   "title": "凿穿战阵",
+   "startSec": 106.6,
+   "durationSec": 2,
+   "actionMode": "clash-flurry",
+   "subtitle": "你带着汉骑凿穿敌阵",
+   "sfx": [
+    {
+     "type": "blade_whoosh",
+     "t": 106.933
+    },
+    {
+     "type": "metal_clash",
+     "t": 106.933
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 107.275
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 107.605
+    },
+    {
+     "type": "metal_clash",
+     "t": 107.605
+    },
+    {
+     "type": "metal_clash_hi",
+     "t": 107.933
+    },
+    {
+     "type": "blade_whoosh",
+     "t": 108.279
+    },
+    {
+     "type": "metal_clash_heavy",
+     "t": 108.279
+    }
+   ]
+  },
+  {
+   "id": "scene-49",
+   "title": "千里不止",
+   "startSec": 108.6,
+   "durationSec": 2.67,
+   "actionMode": "cavalry",
+   "subtitle": "你越过大漠仍不肯停",
+   "sfx": [
+    {
+     "type": "horse_gallop",
+     "t": 108.611
+    }
+   ]
+  },
+  {
+   "id": "scene-50",
+   "title": "绝漠长驱",
+   "startSec": 111.27,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你把行军线画向天尽头",
+   "sfx": [
+    {
+     "type": "slash_sweep",
+     "t": 111.28
+    }
+   ]
+  },
+  {
+   "id": "scene-51",
+   "title": "70443首虏",
+   "startSec": 113.93,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你斩获70443首虏",
+   "sfx": []
+  },
+  {
+   "id": "scene-52",
+   "title": "回望同袍",
+   "startSec": 116.6,
+   "durationSec": 2,
+   "actionMode": "clean",
+   "subtitle": "你也把同袍留在风沙里",
+   "sfx": []
+  },
+  {
+   "id": "scene-53",
+   "title": "登临高山",
+   "startSec": 118.6,
+   "durationSec": 3.33,
+   "actionMode": "clean",
+   "subtitle": "你向狼居胥的高处走去",
+   "sfx": []
+  },
+  {
+   "id": "scene-54",
+   "title": "封狼居胥",
+   "startSec": 121.93,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你在狼居胥山封祭告天",
+   "sfx": [
+    {
+     "type": "slash_sweep",
+     "t": 121.95
+    }
+   ]
+  },
+  {
+   "id": "scene-55",
+   "title": "禅于姑衍",
+   "startSec": 124.6,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你又在姑衍山祭告大地",
+   "sfx": []
+  },
+  {
+   "id": "scene-56",
+   "title": "瀚海天光",
+   "startSec": 127.27,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你终于望见瀚海的天光",
+   "sfx": []
+  },
+  {
+   "id": "scene-57",
+   "title": "饮马瀚海",
+   "startSec": 129.93,
+   "durationSec": 0.67,
+   "actionMode": "clean",
+   "subtitle": "你的战马低头饮尽天光",
+   "sfx": []
+  },
+  {
+   "id": "scene-58",
+   "title": "24岁",
+   "startSec": 130.6,
+   "durationSec": 2,
+   "actionMode": "clean",
+   "subtitle": "你却在24岁骤然谢幕",
+   "sfx": []
+  },
+  {
+   "id": "scene-59",
+   "title": "送君归陵",
+   "startSec": 132.6,
+   "durationSec": 2.67,
+   "actionMode": "clean",
+   "subtitle": "你归来时万骑低下战旗",
+   "sfx": []
+  },
+  {
+   "id": "scene-60",
+   "title": "长眠茂陵",
+   "startSec": 135.27,
+   "durationSec": 2.67,
+   "actionMode": "drop-impact",
+   "subtitle": "你把少年长眠在茂陵",
+   "sfx": [
+    {
+     "type": "heavy_impact",
+     "t": 135.279
+    }
+   ]
+  },
+  {
+   "id": "scene-61",
+   "title": "少年不老",
+   "startSec": 137.94,
+   "durationSec": 4.67,
+   "actionMode": "clean",
+   "subtitle": "你的一生很短山河记得",
+   "sfx": [
+    {
+     "type": "slash_sweep",
+     "t": 137.943
+    }
+   ]
+  }
+ ],
+ "agents": [
+  {
+   "id": "director",
+   "name": "策划导演",
+   "en": "DIRECTOR"
+  },
+  {
+   "id": "editor",
+   "name": "素材剪辑",
+   "en": "EDITOR"
+  },
+  {
+   "id": "audio",
+   "name": "配音混音",
+   "en": "AUDIO"
+  },
+  {
+   "id": "motion",
+   "name": "动效编程",
+   "en": "MOTION CODER"
+  },
+  {
+   "id": "qa",
+   "name": "质检渲染",
+   "en": "QA · RENDER"
+  },
+  {
+   "id": "avatar",
+   "name": "数字人",
+   "en": "AVATAR"
+  },
+  {
+   "id": "cloud",
+   "name": "云端生成",
+   "en": "CLOUD GEN"
+  },
+  {
+   "id": "reference",
+   "name": "参考复刻",
+   "en": "REFERENCE"
+  }
+ ],
+ "assets": [
+  {
+   "type": "music",
+   "name": "战歌BGM_90BPM.mp3",
+   "dur": 142.6
+  },
+  {
+   "type": "video",
+   "name": "参考样片_霍去病.mp4",
+   "dur": 96.4
+  },
+  {
+   "type": "image",
+   "name": "祁连山_晨雾.png"
+  },
+  {
+   "type": "image",
+   "name": "汉军骑兵剪影.png"
+  },
+  {
+   "type": "image",
+   "name": "匈奴王帐.png"
+  },
+  {
+   "type": "image",
+   "name": "封狼居胥_祭台.png"
+  },
+  {
+   "type": "voice",
+   "name": "旁白_沉稳男声.wav",
+   "dur": 12
+  },
+  {
+   "type": "note",
+   "name": "分镜要点.md"
+  },
+  {
+   "type": "cloud",
+   "name": "云端生图_河西走廊.png",
+   "staged": true
+  },
+  {
+   "type": "cloud",
+   "name": "MiniMax Music 3 试听.mp3",
+   "staged": true
+  }
+ ],
+ "logs": [
+  "策划导演：已测得 BGM 90 BPM · 首拍 0.6155s · 4 个高潮突降点",
+  "策划导演：61 幕分镜已生成 (1920x1080)",
+  "素材剪辑：8 张素材智能裁切调色完成",
+  "配音混音：纯音乐卡点模式，跳过 TTS",
+  "配音混音：117 个音效按画面编排，56 次兵刃撞击锁定半拍",
+  "动效编程：第 7/16 批 TSX 编写中 (Batch08.tsx)",
+  "动效编程：tsc 发现 2 处类型错误，第 1 轮修复通过",
+  "质检渲染：Remotion 1080p30 渲染 4278 帧",
+  "质检渲染：-12.2 LUFS · 峰值 -1.9 dBTP · 7 项质检通过"
+ ]
+}

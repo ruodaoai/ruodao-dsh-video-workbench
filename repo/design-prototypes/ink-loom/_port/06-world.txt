@@ -1,0 +1,172 @@
+@@@ RANGE
+function drawWorld(t) {
+@@@ TO
+function drawAura(c, t) {
+@@@ WITH
+function drawWorld(t) {
+  const c = CW;
+  c.setTransform(1, 0, 0, 1, 0, 0);
+  c.clearRect(0, 0, CV_W.width, CV_W.height);
+  backStep();
+  /* 舞台：裁到舞台窗口内再套镜头变换 —— 推拉镜头时绝不会盖住库房 / 长卷 / 任务中心 */
+  deckApply(c);
+  c.save();
+  c.beginPath(); c.rect(SW.x, SW.y, SW.w, SW.h); c.clip();
+  camApply(c);
+  drawWarp(c, t);
+  drawNetwork(c, t);
+  drawDial(c, t);
+  drawMonitor(c, t);
+  drawBeam(c, t);
+  c.restore();
+  /* 长卷：固定在甲板坐标 */
+  deckApply(c);
+  drawScroll(c, t);
+}
+function drawAura(c, t) {
+@@@ END
+@@@ REPLACE
+  const run = Pipe.state === 'running' ? 1 : 0.55;
+@@@ WITH
+  const run = Pipe.live() ? 1 : 0.55;
+@@@ END
+@@@ REPLACE
+burst(q.x, q.y, 10, { sp: 70, life: 0.8, sz: 2.4, col: p.col }); }
+@@@ WITH
+burstS(q.x, q.y, 10, { sp: 70, life: 0.8, sz: 2.4, col: p.col }); }
+@@@ END
+@@@ RANGE
+function drawDial(c, t) {
+@@@ TO
+const BEAM = { sweep: 0 };
+@@@ WITH
+function dialTicks() {
+  const steps = [5, 10, 15, 20, 30, 60, 120, 180, 300, 600];
+  const st = steps.find((s) => DUR / s <= 5.5) || 900;
+  const out = [];
+  for (let s = 0; s < DUR - st * 0.45; s += st) out.push(s);
+  out.push(DUR);
+  return out;
+}
+function drawDial(c, t) {
+  const m = L.mon, cx = m.cx, cy = m.cy, k = L.dk, R0 = L.dialR;
+  const g = (26 * Math.PI) / 180, a0 = -Math.PI / 2 + g, a1 = Math.PI * 1.5 - g, span = a1 - a0;
+  const prog = Pipe.prog(), tx = P.text;
+  c.save();
+  c.lineCap = 'butt';
+  c.strokeStyle = hexA(tx, P.light ? 0.2 : 0.13); c.lineWidth = 1; c.beginPath(); c.arc(cx, cy, R0, a0, a1); c.stroke();
+  const R1 = R0 + 11 * k;
+  const rot = DIAL.rot;
+  for (let i = 0; i < 180; i++) {
+    const a = a0 + ((((i / 180) * span + rot) % span) + span) % span;
+    const major = i % 15 === 0, mid = i % 5 === 0;
+    const len = (major ? 10 : mid ? 6 : 3.5) * k;
+    c.strokeStyle = hexA(major ? P.gold : tx, major ? 0.55 : mid ? 0.26 : 0.13); c.lineWidth = major ? 1.2 : 0.8;
+    c.beginPath(); c.moveTo(cx + Math.cos(a) * R1, cy + Math.sin(a) * R1); c.lineTo(cx + Math.cos(a) * (R1 + len), cy + Math.sin(a) * (R1 + len)); c.stroke();
+  }
+  const R2 = R0 + 30 * k;
+  c.lineWidth = 3 * k; c.strokeStyle = hexA(tx, P.light ? 0.12 : 0.07); c.beginPath(); c.arc(cx, cy, R2, a0, a1); c.stroke();
+  if (prog > 0.001) {
+    const ae = a0 + span * prog, failed = Pipe.status === 'failed', col = failed ? P.cinna : Pipe.status === 'stopped' ? hexA(tx, 0.5) : P.gold;
+    c.lineWidth = 9 * k; c.strokeStyle = failed ? hexA(P.cinna, 0.16) : hexA(P.gold, 0.14); c.beginPath(); c.arc(cx, cy, R2, a0, ae); c.stroke(); c.lineWidth = 3 * k; c.strokeStyle = col; c.globalAlpha = 0.95; c.beginPath(); c.arc(cx, cy, R2, a0, ae); c.stroke(); c.globalAlpha = 1;
+    const hx = cx + Math.cos(ae) * R2, hy = cy + Math.sin(ae) * R2; c.drawImage(TEX.dot, hx - 10 * k, hy - 10 * k, 20 * k, 20 * k); c.fillStyle = failed ? '#FFD8CC' : '#FFF4D8'; c.beginPath(); c.arc(hx, hy, 2.2 * k, 0, TAU); c.fill();
+  }
+  const R3 = R0 + 50 * k, fs = Math.max(10, 15 * k);
+  c.font = `${Math.round(fs)}px KaiTi, STKaiti, serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
+  PHASES.forEach((p, j) => {
+    const a = a0 + span * ((j + 0.5) / 5), x = cx + Math.cos(a) * R3, y = cy + Math.sin(a) * R3;
+    const st = Pipe.phaseState(j);
+    if (st === 'run') { c.drawImage(TEX.dot, x - 20 * k, y - 20 * k, 40 * k, 40 * k); }
+    c.fillStyle = st === 'run' ? P.gold2 : st === 'done' ? P.ok : st === 'err' ? '#E0583A' : st === 'pause' ? P.gold : hexA(tx, 0.32);
+    c.fillText(p.ch, x, y + 1);
+    const b = a0 + span * (j / 5); if (j > 0) { c.fillStyle = hexA(P.gold, 0.5); c.beginPath(); c.arc(cx + Math.cos(b) * R3, cy + Math.sin(b) * R3, 1.5, 0, TAU); c.fill(); }
+  });
+  const R4 = R0 + 68 * k, beat = Pipe.beatIdx();
+  for (let i = 0; i < 32; i++) {
+    const a = a0 + span * ((i + 0.5) / 32), on = beat >= 0 && i === beat % 32, strong = i % 4 === 0;
+    c.fillStyle = on ? P.gold2 : hexA(strong ? P.gold : tx, strong ? 0.42 : 0.16);
+    const r = (on ? 2.6 : strong ? 1.6 : 1.1) * Math.max(0.8, k);
+    c.beginPath(); c.arc(cx + Math.cos(a) * R4, cy + Math.sin(a) * R4, r, 0, TAU); c.fill();
+    if (on) c.drawImage(TEX.dot, cx + Math.cos(a) * R4 - 9, cy + Math.sin(a) * R4 - 9, 18, 18);
+  }
+  const ft = clamp(filmT() / DUR, 0, 1), an = a0 + span * ft, pr1 = R1 - 2 * k;
+  c.fillStyle = P.cinna;
+  c.beginPath(); c.moveTo(cx + Math.cos(an) * pr1, cy + Math.sin(an) * pr1); c.lineTo(cx + Math.cos(an - 0.03) * (pr1 - 9 * k), cy + Math.sin(an - 0.03) * (pr1 - 9 * k)); c.lineTo(cx + Math.cos(an + 0.03) * (pr1 - 9 * k), cy + Math.sin(an + 0.03) * (pr1 - 9 * k)); c.closePath(); c.fill();
+  c.font = `${Math.max(8, Math.round(9 * k))}px Consolas, monospace`; c.fillStyle = hexA(tx, 0.34);
+  dialTicks().forEach((s) => { const a = a0 + span * (s / DUR), r = R1 + 19 * k; c.fillText(fmtMS(s), cx + Math.cos(a) * r, cy + Math.sin(a) * r); });
+  c.restore();
+}
+const DIAL = { rot: 0 };
+function drawMonitor(c, t) {
+  const m = L.mon;
+  c.save();
+  if (TEX.shadow) c.drawImage(TEX.shadow, m.x - 46, m.y - 34, m.w + 92, m.h + 92);
+  c.fillStyle = '#050403'; c.fillRect(m.x, m.y, m.w, m.h);
+  monRender(t);
+  c.drawImage(MON.cv, m.x, m.y, m.w, m.h);
+  c.strokeStyle = hexA(Pipe.status === 'failed' ? P.cinna : P.gold, 0.5); c.lineWidth = 1; c.strokeRect(m.x - 0.5, m.y - 0.5, m.w + 1, m.h + 1);
+  c.strokeStyle = hexA(P.text, 0.08); c.strokeRect(m.x - 4.5, m.y - 4.5, m.w + 9, m.h + 9);
+  const b = 16 * L.dk + 4; c.strokeStyle = P.gold; c.lineWidth = 1.6;
+  [[m.x - 5, m.y - 5, 1, 1], [m.x + m.w + 5, m.y - 5, -1, 1], [m.x - 5, m.y + m.h + 5, 1, -1], [m.x + m.w + 5, m.y + m.h + 5, -1, -1]].forEach(([x, y, sx, sy]) => { c.beginPath(); c.moveTo(x + sx * b, y); c.lineTo(x, y); c.lineTo(x, y + sy * b); c.stroke(); });
+  /* 监视器标头：左「预览监视」+ 模式名，右侧信息右对齐；宽度不足时依次省略，绝不重叠 */
+  const fs = Math.max(9, Math.round(10.5 * L.dk)), y = m.y - 9, gap = fs * 0.9;
+  c.textBaseline = 'bottom';
+  c.font = `${fs}px Consolas, "Microsoft YaHei UI", monospace`;
+  const rightW = MON.right ? Math.min(c.measureText(MON.right).width, m.w * 0.5) : 0;
+  const recW = FILM.playing || MON.mode === 'video' ? 12 : 0;
+  let x = m.x, room = m.w - rightW - recW - gap;
+  const pre = '预览监视 · MONITOR', preW = c.measureText(pre).width;
+  c.font = `${Math.round(fs * 1.18)}px KaiTi, STKaiti, serif`;
+  const lblW = c.measureText(MON.label).width;
+  if (preW + gap + lblW <= room) { c.font = `${fs}px Consolas, "Microsoft YaHei UI", monospace`; c.textAlign = 'left'; c.fillStyle = hexA(P.text, 0.5); c.fillText(pre, x, y); x += preW + gap; room -= preW + gap; }
+  c.font = `${Math.round(fs * 1.18)}px KaiTi, STKaiti, serif`; c.textAlign = 'left'; c.fillStyle = P.gold2; c.fillText(fitText(c, MON.label, room), x, y + 1);
+  if (MON.right) { c.font = `${fs}px Consolas, "Microsoft YaHei UI", monospace`; c.textAlign = 'right'; c.fillStyle = hexA(P.text, 0.5); c.fillText(fitText(c, MON.right, m.w * 0.5), m.x + m.w, y); }
+  if (recW) { c.fillStyle = P.cinna; c.beginPath(); c.arc(m.x + m.w - rightW - 9, y - fs * 0.42, 3, 0, TAU); c.fill(); }
+  c.restore();
+}
+function drawBeam(c, t) {
+  const y = L.beamY, x0 = L.beamX0, x1 = L.beamX1, k = L.tiny ? 0.8 : 1;
+  c.save();
+  c.fillStyle = 'rgba(0,0,0,.3)'; c.fillRect(x0 + 8, y + 6 * k, x1 - x0 - 16, 5 * k);
+  const g = c.createLinearGradient(0, y - 6 * k, 0, y + 6 * k); g.addColorStop(0, mixHex(P.lac[0], '#8A6A44', 0.25)); g.addColorStop(0.45, P.lac[0]); g.addColorStop(1, P.lac[1]);
+  c.fillStyle = g; c.fillRect(x0, y - 5 * k, x1 - x0, 10 * k);
+  c.fillStyle = hexA(P.gold, 0.75); c.fillRect(x0, y - 5 * k, x1 - x0, 1);
+  c.fillStyle = hexA(P.gold, 0.32); c.fillRect(x0, y + 5 * k - 1, x1 - x0, 1);
+  for (let x = x0 + 14, i = 0; x < x1 - 14; x += 9, i++) { c.fillStyle = hexA(P.gold, i % 6 === 0 ? 0.5 : 0.14); c.fillRect(x, y - (i % 6 === 0 ? 2.5 : 1.2) * k, 0.9, (i % 6 === 0 ? 5 : 2.4) * k); }
+  if (BEAM.sweep > 0) {
+    const u = 1 - BEAM.sweep, sx = lerp(x0, x1, u), sg = c.createLinearGradient(sx - 120, 0, sx + 40, 0);
+    sg.addColorStop(0, hexA(P.gold2, 0)); sg.addColorStop(0.8, hexA(P.gold2, 0.75)); sg.addColorStop(1, hexA(P.gold2, 0));
+    c.fillStyle = sg; c.fillRect(sx - 120, y - 5 * k, 160, 10 * k);
+  }
+  if (Pipe.running()) { const sx = x0 + ((t * 120) % Math.max(1, x1 - x0)); const sg = c.createLinearGradient(sx - 60, 0, sx, 0); sg.addColorStop(0, hexA(P.gold2, 0)); sg.addColorStop(1, hexA(P.gold2, 0.35)); c.fillStyle = sg; c.fillRect(sx - 60, y - 5 * k, 60, 2.5 * k); }
+  const cap = (x) => { const r = 9 * k; const cg = c.createRadialGradient(x - r * 0.3, y - r * 0.3, 0, x, y, r); cg.addColorStop(0, '#FFF1C8'); cg.addColorStop(0.45, P.light ? '#B8862C' : '#D4A64A'); cg.addColorStop(1, '#5A3E14'); c.fillStyle = cg; c.beginPath(); c.arc(x, y, r, 0, TAU); c.fill(); c.strokeStyle = 'rgba(40,24,6,.6)'; c.lineWidth = 1; c.beginPath(); c.arc(x, y, r * 0.55, 0, TAU); c.stroke(); };
+  cap(x0); cap(x1);
+  AGENTS.forEach((a) => drawSeal(c, L.ag[a.id].x, y, a, t));
+  c.restore();
+}
+function drawSeal(c, x, y, a, t) {
+  const s = L.tiny ? 24 : 30, st = a.status, f = a.flash, foc = CAM.focus === a.id || (CAM.mode !== 'overview' && !CAM.focus && Pipe.active === a.id);
+  if (st === 'run' || f > 0.02 || foc) {
+    const r = s * (1.5 + 0.25 * Math.sin(t * 5)) * (1 + f * 0.6), gl = st === 'err' ? '#E0583A' : a.glaze;
+    const g = c.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, hexA(gl, 0.42 * Math.max(st === 'run' ? 1 : 0, f, foc ? 0.7 : 0))); g.addColorStop(1, hexA(gl, 0));
+    c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2);
+  }
+  c.save(); c.translate(x, y);
+  if (st === 'err') c.translate(Math.sin(t * 50) * 1.2, 0);
+  const g = c.createLinearGradient(-s / 2, -s / 2, s / 2, s / 2); g.addColorStop(0, mixHex(a.glaze, '#FFFFFF', 0.2)); g.addColorStop(1, mixHex(a.glaze, '#000000', 0.3));
+  c.fillStyle = g; roundRect(c, -s / 2, -s / 2, s, s, 3); c.fill();
+  c.strokeStyle = 'rgba(22,14,8,.55)'; c.lineWidth = 1; roundRect(c, -s / 2 + 2.5, -s / 2 + 2.5, s - 5, s - 5, 2); c.stroke();
+  c.fillStyle = '#1A110A'; c.font = `${Math.round(s * 0.6)}px KaiTi, STKaiti, serif`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(a.ch, 0, 1);
+  const veil = (al) => { c.fillStyle = P.light ? `rgba(241,233,215,${al})` : `rgba(10,9,7,${al})`; roundRect(c, -s / 2, -s / 2, s, s, 3); c.fill(); };
+  if (st === 'idle') veil(0.42);
+  if (st === 'queued') { veil(0.3); c.strokeStyle = hexA(P.gold, 0.7); c.lineWidth = 1; c.setLineDash([2.5, 3]); c.lineDashOffset = -t * 6; c.beginPath(); c.arc(0, 0, s * 0.78, 0, TAU); c.stroke(); c.setLineDash([]); }
+  if (st === 'skip') { veil(0.62); c.strokeStyle = hexA(P.text, 0.35); c.lineWidth = 1; c.beginPath(); c.moveTo(-s / 2 + 3, s / 2 - 3); c.lineTo(s / 2 - 3, -s / 2 + 3); c.stroke(); }
+  if (st === 'stop') { veil(0.5); c.fillStyle = hexA(P.text, 0.75); c.beginPath(); c.arc(s / 2, -s / 2, 5, 0, TAU); c.fill(); c.fillStyle = P.light ? '#fff' : '#0E0D0B'; c.fillRect(s / 2 - 2, -s / 2 - 2, 4, 4); }
+  if (st === 'run') { c.strokeStyle = P.gold2; c.lineWidth = 1.3; c.beginPath(); c.arc(0, 0, s * 0.82, t * 3, t * 3 + 1.6); c.stroke(); c.beginPath(); c.arc(0, 0, s * 0.82, t * 3 + Math.PI, t * 3 + Math.PI + 1.0); c.stroke(); }
+  if (st === 'pause') { c.strokeStyle = hexA(P.gold2, 0.8); c.lineWidth = 1.3; c.beginPath(); c.arc(0, 0, s * 0.82, -0.4, 1.2); c.stroke(); c.fillStyle = P.gold2; c.beginPath(); c.arc(s / 2, -s / 2, 5, 0, TAU); c.fill(); c.fillStyle = '#1A110A'; c.fillRect(s / 2 - 2.4, -s / 2 - 2.4, 1.6, 4.8); c.fillRect(s / 2 + 0.8, -s / 2 - 2.4, 1.6, 4.8); }
+  if (st === 'done') { c.fillStyle = P.ok; c.beginPath(); c.arc(s / 2, -s / 2, 5, 0, TAU); c.fill(); c.strokeStyle = P.light ? '#fff' : '#0E0D0B'; c.lineWidth = 1.4; c.beginPath(); c.moveTo(s / 2 - 2.4, -s / 2); c.lineTo(s / 2 - 0.6, -s / 2 + 1.8); c.lineTo(s / 2 + 2.4, -s / 2 - 1.8); c.stroke(); }
+  if (st === 'err') { c.strokeStyle = `rgba(224,88,58,${0.5 + 0.5 * Math.sin(t * 14)})`; c.lineWidth = 2; roundRect(c, -s / 2 - 4, -s / 2 - 4, s + 8, s + 8, 4); c.stroke(); }
+  c.restore();
+}
+const BEAM = { sweep: 0 };
+@@@ END

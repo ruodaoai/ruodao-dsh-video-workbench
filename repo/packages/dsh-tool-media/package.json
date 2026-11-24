@@ -1,0 +1,8 @@
+{
+  "name": "@dsh-video/tool-media",
+  "version": "0.2.0",
+  "description": "Asset import (images/videos/music/sfx), procedural SFX/BGM, audio mixing, AI video planner and one-click production pipeline for DSH Video Workbench",
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.js"
+}

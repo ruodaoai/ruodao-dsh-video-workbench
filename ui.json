@@ -1,0 +1,41 @@
+{
+  "route": "dsh-video-workbench",
+  "label": "AI 视频工作台",
+  "description": "双引擎 AI 视频全链路工作台：AI Agent 作战大屏（三套皮肤）、人物库与画风、AI 画面自检、影核广场模板、参考视频拆解复刻、节拍卡点、多引擎配音、云端生图（自动关联若道模型与本地号池）。",
+  "icon": "Clapperboard",
+  "version": "0.6.2",
+  "author": "Merziller",
+  "mode": "web",
+  "entry": "web/index.html",
+  "permissions": [
+    "storage",
+    "process",
+    "network",
+    "clipboard"
+  ],
+  "window": {
+    "width": 1560,
+    "height": 960,
+    "title": "AI 视频全链路工作台"
+  },
+  "capabilities": [
+    "storage",
+    "network",
+    "clipboard",
+    "local-service",
+    "mcp-tools",
+    "video-render",
+    "tts",
+    "beat-sync",
+    "cloud-media"
+  ],
+  "tags": [
+    "AI视频",
+    "视频创作",
+    "Remotion",
+    "节拍卡点",
+    "配音",
+    "生图"
+  ],
+  "screenshots": []
+}

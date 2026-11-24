@@ -1,0 +1,7 @@
+@@@ REPLACE
+.vp-foot{flex:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 2px 0;border-top:1px solid var(--hair);margin-top:4px;font-size:12px;color:var(--t3)}
+@@@ WITH
+.vp-foot{flex:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 2px 0;border-top:1px solid var(--hair);margin-top:4px;font-size:12px;color:var(--t3)}
+.vp-foot span{white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.vp-foot .btn{flex:none}
+@@@ END

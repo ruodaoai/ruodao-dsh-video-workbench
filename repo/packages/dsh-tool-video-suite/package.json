@@ -1,0 +1,8 @@
+{
+  "name": "@dsh-video/tool-video-suite",
+  "version": "0.1.0",
+  "description": "Dual-Engine (HTML/GSAP & Remotion) Video Suite for DSH: video_lint, video_snapshot (3x3 grid), and video_render",
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.js"
+}

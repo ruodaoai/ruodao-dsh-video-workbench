@@ -1,0 +1,41 @@
+@@@ REPLACE
+.pn-t i{font:9.5px/1 var(--mono);font-style:normal;letter-spacing:.16em;color:var(--t3);white-space:nowrap}
+@@@ WITH
+.pn-t i{font:9.5px/1 var(--mono);font-style:normal;letter-spacing:.16em;color:var(--t3);white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.pn-h>.btn,.pn-h>.ibtn{margin-left:auto;flex:none}
+.pn-h>.pn-t{flex:0 1 auto}
+@@@ END
+@@@ REPLACE
+.tc-ctrl{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:6px;padding:0 12px 10px}
+.tc-ctrl .btn{padding:0 6px}
+@@@ WITH
+.tc-ctrl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:0 12px 10px}
+.tc-ctrl .btn{padding:0 4px;min-width:0;gap:4px}
+.tc-ctrl .btn span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+#tasks.narrow .tc-ctrl .btn svg{display:none}
+#tasks.narrow .tc-phases div span{font-size:12px}
+#tasks.narrow .pn-t i{display:none}
+@@@ END
+@@@ REPLACE
+.meters{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:6px;margin-top:8px}
+@@@ WITH
+.meters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:8px}
+@@@ END
+@@@ REPLACE
+  $('#tcPhases').innerHTML = PHASES.map((p, i) => `<div data-ph="${i}" title="${p.name}"><i></i><span>${p.ch} ${p.short}</span></div>`).join('');
+@@@ WITH
+  $('#tcPhases').innerHTML = PHASES.map((p, i) => `<div data-ph="${i}" title="${p.name}"><i></i><span><b class="ph-ch">${p.ch}</b><b class="ph-sh"> ${p.short}</b></span></div>`).join('');
+@@@ END
+@@@ REPLACE
+  const t = $('#tasks'); t.style.left = L.tasks.x + 'px'; t.style.top = L.tasks.y + 'px'; t.style.width = L.tasks.w + 'px'; t.style.height = L.tasks.h + 'px';
+@@@ WITH
+  const t = $('#tasks'); t.style.left = L.tasks.x + 'px'; t.style.top = L.tasks.y + 'px'; t.style.width = L.tasks.w + 'px'; t.style.height = L.tasks.h + 'px';
+  t.classList.toggle('narrow', L.tasks.w < 290);
+@@@ END
+@@@ INSERT_BEFORE
+/* 隐藏的浮层一律 visibility:hidden（不止 opacity），保证屏幕阅读器与重叠检查都看不到它们 */
+@@@ TEXT
+.ph-ch,.ph-sh{font-weight:400}
+#tasks.narrow .ph-sh{display:none}
+.tc-phases div{min-width:0}
+@@@ END

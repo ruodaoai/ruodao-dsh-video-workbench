@@ -1,0 +1,8 @@
+{
+  "name": "@dsh-video/preset-video",
+  "version": "0.1.0",
+  "description": "DSH Agent Preset `视频制作模式` (video-maker) with 3-stage confirmation workflow, Voice Pack AI matching, and Windows 11 rules",
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.js"
+}

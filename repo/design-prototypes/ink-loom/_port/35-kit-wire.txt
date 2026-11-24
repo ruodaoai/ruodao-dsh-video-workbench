@@ -1,0 +1,299 @@
+@@@ REPLACE
+      <hr>
+      <button data-skin="classic" role="menuitemradio" aria-checked="false" aria-label="经典作战大屏"><i class="sk-sw" style="background:#94A3B8"></i><span class="mt">经典</span><em>CLASSIC</em></button>
+    </div>
+@@@ WITH
+    </div>
+@@@ END
+@@@ REPLACE
+    <button class="lamp" id="lpLlm" data-panel="llm"><i></i><em>LLM</em><b>—</b></button>
+    <button class="lamp" id="lpTts" data-panel="tts"><i></i><em>配音</em><b>—</b></button>
+@@@ WITH
+    <button class="lamp" id="lpLlm" data-panel="keys" data-tab="llm"><i></i><em>LLM</em><b>—</b></button>
+    <button class="lamp" id="lpTts" data-panel="keys" data-tab="tts"><i></i><em>配音</em><b>—</b></button>
+@@@ END
+@@@ REPLACE
+    <button class="ibtn" id="btnSet" data-panel="llm" title="设置 · 模型与密钥" aria-label="设置：模型与密钥"><svg><use href="#i-gear"/></svg></button>
+@@@ WITH
+    <button class="ibtn" id="btnSet" data-panel="keys" title="设置 · 模型与密钥" aria-label="设置：模型与密钥"><svg><use href="#i-gear"/></svg></button>
+@@@ END
+@@@ REPLACE
+  box.innerHTML = rows.map(([p, n, ok, lb]) => `<button class="eng-r${ok ? '' : ' bad'}" data-panel="${p}" title=
+@@@ WITH
+  box.innerHTML = rows.map(([p, n, ok, lb]) => `<button class="eng-r${ok ? '' : ' bad'}" data-panel="${p === 'llm' || p === 'tts' ? 'keys' : p}"${p === 'llm' || p === 'tts' ? ` data-tab="${p}"` : ''} title=
+@@@ END
+@@@ REPLACE
+ref.onclick = () => { closeModal(); act('openScene', { sceneId: s.id }); };
+@@@ WITH
+ref.onclick = () => { closeModal(); openKit('studio', { step: 'scenes', sceneId: s.id }); };
+@@@ END
+@@@ RANGE
+  help: { t: '快捷键', en: 'SHORTCUTS', w: 620, build(b) {
+@@@ TO
+  } },
+};
+@@@ WITH
+};
+@@@ END
+@@@ REPLACE
+  if (!hasProject()) { toast('请先新建或打开一个视频工程', '卷', '新建工程', () => act('newProject', {}), true); return; }
+  const total = files.reduce
+@@@ WITH
+  if (!hasProject()) { toast('请先新建或打开一个视频工程', '卷', '新建工程', () => openKit('newProject'), true); return; }
+  const total = files.reduce
+@@@ END
+@@@ REPLACE
+  if (!hasProject()) { toast('请先新建或打开一个视频工程', '卷', '新建工程', () => act('newProject', {}), true); return; }
+  const st = Pipe.status;
+@@@ WITH
+  if (!hasProject()) { toast('请先新建或打开一个视频工程', '卷', '新建工程', () => openKit('newProject'), true); return; }
+  const st = Pipe.status;
+@@@ END
+@@@ REPLACE
+  /* 任何 data-panel 按钮（百宝格、经折、引擎页、空状态…）→ 宿主面板 */
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-panel]'); if (!b || b.classList.contains('dis')) return;
+    e.preventDefault(); closeMenus();
+    act('openPanel', { panel: b.dataset.panel });
+  });
+@@@ WITH
+  /* 任何 data-panel 按钮（百宝格、经折、引擎页、状态灯、空状态…）→ 皮肤内原生面板（PK 面板内核） */
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-panel]'); if (!b || b.classList.contains('dis')) return;
+    e.preventDefault(); closeMenus();
+    openKit(b.dataset.panel, b.dataset.tab ? { tab: b.dataset.tab } : {});
+  });
+@@@ END
+@@@ REPLACE
+    if (b.dataset.new != null) act('newProject', {});
+@@@ WITH
+    if (b.dataset.new != null) openKit('newProject');
+@@@ END
+@@@ REPLACE
+  $('#modeTabs').onclick = (e) => { const b = e.target.closest('.slip'); if (!b || b.dataset.panel) return; closeModal(); closeFolio(); };
+@@@ WITH
+  $('#modeTabs').onclick = (e) => { const b = e.target.closest('.slip'); if (!b || b.dataset.panel) return; closeModal(); closeFolio(); if (window.PK && PK.closeAll) PK.closeAll(); syncModeTabs(); };
+@@@ END
+@@@ REPLACE
+  $('#busyPill').onclick = () => act('openPanel', { panel: 'tasks' });
+  $('#onboard').addEventListener('click', (e) => { const b = e.target.closest('[data-ob]'); if (!b) return; act(b.dataset.ob === 'new' ? 'newProject' : 'openPanel', b.dataset.ob === 'new' ? {} : { panel: 'projects' }); });
+@@@ WITH
+  $('#busyPill').onclick = () => openKit('tasks');
+  $('#onboard').addEventListener('click', (e) => { const b = e.target.closest('[data-ob]'); if (!b) return; openKit(b.dataset.ob === 'new' ? 'newProject' : 'projects'); });
+@@@ END
+@@@ REPLACE
+    if (row === 'shot' || row === 'sub') { const i = sceneIx(t0); if (i >= 0 && CLIP[i] && CLIP[i].st > 0) { act('openScene', { sceneId: SCENES[i].id }); return; } }
+@@@ WITH
+    if (row === 'shot' || row === 'sub') { const i = sceneIx(t0); if (i >= 0 && CLIP[i] && CLIP[i].st > 0) { openKit('studio', { step: 'scenes', sceneId: SCENES[i].id }); return; } }
+@@@ END
+@@@ REPLACE
+  $('#tasks').addEventListener('click', (e) => { if (e.target.closest('#tcMore')) act('openPanel', { panel: 'tasks' }); });
+@@@ WITH
+  $('#tasks').addEventListener('click', (e) => { if (e.target.closest('#tcMore')) openKit('tasks'); });
+@@@ END
+@@@ REPLACE
+  document.addEventListener('keydown', (e) => {
+    const k = e.key;
+    if (k === 'Escape') { escape(); return; }
+@@@ WITH
+  document.addEventListener('keydown', (e) => {
+    /* 原生面板（PK）打开时，作战大屏的全局快捷键一律不响应（面板自己处理 Esc / Tab） */
+    if (window.PK && PK.isOpenAny && PK.isOpenAny()) return;
+    const k = e.key;
+    if (k === 'Escape') { escape(); return; }
+@@@ END
+@@@ REPLACE
+    else if (k === '?') openModal('help');
+  });
+}
+@@@ WITH
+    else if (k === 'b' || k === 'B') openBrief();
+    else if (k === '?') openKit('help');
+  });
+}
+@@@ END
+@@@ REPLACE
+const TOOLS = [['影', '影核广场', 'TEMPLATES', 'plaza'], ['精', '分步精修', 'REFINE', 'studio'], ['任', '任务中心', 'TASKS', 'tasks'], ['提', '提词器', 'PROMPTER', 'teleprompter'], ['像', '数字人', 'AVATAR', 'avatar'], ['声', '配音中心', 'VOICES', 'voices'], ['云', '云端媒体', 'CLOUD', 'cloud'], ['算', '算力体检', 'HARDWARE', 'hardware'], ['发', '发布导出', 'EXPORT', 'export'], ['史', '分镜历史', 'HISTORY', 'history'], ['模', '大模型', 'LLM', 'llm'], ['音', '配音引擎', 'TTS', 'tts']];
+function buildTiles() { $('#tiles').innerHTML = TOOLS.map(([c, n, en, m]) => `<button class="tile" data-panel="${m}" aria-label="${n}"><span>${c}</span><b>${n}</b><em>${en}</em></button>`).join(''); }
+@@@ WITH
+/* 工坊百宝格：全部原生面板（PK 面板内核）。固定顺序 + 内核里新注册的其它面板自动补在后面 */
+const TOOLS = [['精', '分步精修', 'REFINE', 'studio'], ['影', '影核广场', 'TEMPLATES', 'plaza'], ['任', '任务中心', 'TASKS', 'tasks'], ['摹', '参考复刻', 'REFERENCE', 'reference'], ['提', '提词器', 'PROMPTER', 'teleprompter'], ['像', '数字人', 'AVATAR', 'avatar'], ['声', '配音中心', 'VOICES', 'voices'], ['云', '云端媒体', 'CLOUD', 'cloud'], ['印', '品牌套件', 'BRAND', 'brand'], ['发', '发布导出', 'EXPORT', 'export'], ['史', '版本历史', 'HISTORY', 'history'], ['卷', '视频工程', 'PROJECTS', 'projects'], ['算', '算力体检', 'HARDWARE', 'hardware'], ['钥', '模型与密钥', 'KEYS', 'keys'], ['问', '使用帮助', 'HELP', 'help']];
+function buildTiles() {
+  const known = new Set(TOOLS.map((t) => t[3]));
+  const extra = window.PK && PK.catalog ? PK.catalog().filter((d) => !known.has(d.id)).map((d) => [SEAL_CH[d.id] || String(d.title || '面').slice(0, 1), d.title, String(d.en || d.id).split('·')[0].trim().toUpperCase(), d.id]) : [];
+  const list = TOOLS.concat(extra), sig = list.map((t) => t[3]).join(',');
+  const box = $('#tiles'); if (!box || box.dataset.sig === sig) return; box.dataset.sig = sig;
+  box.innerHTML = list.map(([c, n, en, m]) => `<button class="tile" data-panel="${esc(m)}" aria-label="${esc(n)}" title="${esc(n)}"><span>${esc(c)}</span><b>${esc(n)}</b><em>${esc(en)}</em></button>`).join('');
+}
+@@@ END
+@@@ REPLACE
+  if (!res.ok) {
+    toast(`${ACT_CN[r.action] || r.action}失败：${res.error || '未知错误'}`, '误', null, null, true);
+@@@ WITH
+  if (!res.ok) {
+    /* 未配置大模型：面板内核会弹「设置 · 模型与密钥」并给出带按钮的提示，这里不再重复报错 */
+    if (m.code !== 'need-llm') toast(`${ACT_CN[r.action] || r.action}失败：${res.error || '未知错误'}`, '误', null, null, true);
+@@@ END
+@@@ REPLACE
+const SKINS = [['nova-deck', 'A', '星舰剪辑甲板'], ['ink-loom', 'B', '墨韵织机'], ['prism-lab', 'C', '棱镜实验室'], ['classic', '经', '经典作战大屏']];
+@@@ WITH
+const SKINS = [['nova-deck', 'A', '星舰剪辑甲板'], ['ink-loom', 'B', '墨韵织机'], ['prism-lab', 'C', '棱镜实验室']];
+@@@ END
+@@@ REPLACE
+function toast(msg, ch = '织', actLabel, actFn, warn) {
+  const box = $('#toasts'), t = mk('div', 'toast' + (warn ? ' warn' : ''));
+  t.setAttribute('role', warn ? 'alert' : 'status');
+  const ic = mk('i'); ic.textContent = ch; t.appendChild(ic);
+  const sp = mk('span'); sp.textContent = String(msg == null ? '' : msg); t.appendChild(sp);
+  if (actLabel) { const b = mk('button', 'btn xs gold'); b.textContent = actLabel; b.setAttribute('aria-label', actLabel); b.onclick = () => { try { actFn(); } finally { t.remove(); } }; t.appendChild(b); }
+  const x = mk('button', 't-x', '<svg><use href="#i-x"/></svg>'); x.setAttribute('aria-label', '关闭提示'); x.onclick = () => t.remove(); t.appendChild(x);
+  box.appendChild(t);
+  while (box.children.length > 3) box.firstChild.remove();
+  setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 420); }, actLabel ? 7000 : warn ? 6000 : 3600);
+}
+@@@ WITH
+/* 吐司：作战大屏与原生面板（PK.toast 经 PK.configure 路由到这里）共用同一种「印章便笺」样式 */
+function toast(msg, ch = '织', actLabel, actFn, warn) {
+  return toastX({ text: msg, ch, warn, action: actLabel ? { label: actLabel, onClick: actFn } : null });
+}
+function toastX(o) {
+  const box = $('#toasts'); if (!box) return;
+  const warn = !!o.warn, t = mk('div', 'toast' + (warn ? ' warn' : '') + (o.level ? ' lv-' + o.level : ''));
+  t.setAttribute('role', warn ? 'alert' : 'status');
+  const ic = mk('i'); ic.textContent = o.ch || '织'; ic.setAttribute('aria-hidden', 'true'); t.appendChild(ic);
+  const body = mk('span', 't-b');
+  if (o.title) { const tt = mk('b', 't-t'); tt.textContent = String(o.title); body.appendChild(tt); }
+  const sp = mk('span', 't-m'); sp.textContent = String(o.text == null ? '' : o.text); body.appendChild(sp);
+  let timer = 0;
+  const close = () => { clearTimeout(timer); if (!t.isConnected) return; t.classList.add('out'); setTimeout(() => t.remove(), 380); };
+  if (o.action || o.detail) {
+    const row = mk('span', 't-a');
+    if (o.action && o.action.label) { const b = mk('button', 'btn xs gold'); b.textContent = o.action.label; b.setAttribute('aria-label', o.action.label); b.onclick = () => { close(); try { const r = o.action.onClick && o.action.onClick(); if (r && r.catch) r.catch((err) => toastX({ text: String((err && err.message) || err), ch: '误', warn: true })); } catch (err) { toastX({ text: String((err && err.message) || err), ch: '误', warn: true }); } }; row.appendChild(b); }
+    if (o.detail) { const pre = mk('pre', 't-d'); pre.hidden = true; pre.textContent = String(o.detail); const db = mk('button', 'btn xs'); db.textContent = '技术细节'; db.onclick = () => { pre.hidden = !pre.hidden; db.textContent = pre.hidden ? '技术细节' : '收起细节'; clearTimeout(timer); }; row.appendChild(db); body.appendChild(row); body.appendChild(pre); }
+    else body.appendChild(row);
+  }
+  t.appendChild(body);
+  const x = mk('button', 't-x', '<svg><use href="#i-x"/></svg>'); x.setAttribute('aria-label', '关闭提示'); x.onclick = close; t.appendChild(x);
+  box.appendChild(t);
+  while (box.children.length > 4) box.firstChild.remove();
+  const ms = o.timeout != null ? o.timeout : o.action ? 7000 : o.level === 'error' ? 12000 : warn ? 6000 : 3600;
+  const arm = () => { clearTimeout(timer); if (ms > 0) timer = setTimeout(close, ms); };
+  t.addEventListener('mouseenter', () => clearTimeout(timer)); t.addEventListener('mouseleave', arm);
+  arm();
+}
+@@@ END
+@@@ REPLACE
+let RAF = 0, FRAME_ERR = 0, LOWSPEC = false;
+function frame(now) {
+  RAF = 0;
+  if (document.hidden) return; /* 页面隐藏：停掉渲染循环，visibilitychange 时恢复 */
+  RAF = requestAnimationFrame(frame);
+  const cap = window.__cap != null ? window.__cap : LOWSPEC ? (FPS_CAP ? Math.min(FPS_CAP, 30) : 30) : FPS_CAP;
+@@@ WITH
+let RAF = 0, FRAME_ERR = 0, LOWSPEC = false;
+/* 原生面板盖住大屏时降低织机渲染负载：弹窗 / 抽屉 / 经折后面的舞台隔着毛玻璃，≤12fps 缓缓流动就够（省 GPU，
+   也让软件渲染 / 低配机上的毛玻璃不再每帧重算）；整屏工作台（分步精修）只跑逻辑、每秒 6 帧 */
+let KIT_LOAD = 0;
+function frame(now) {
+  RAF = 0;
+  if (document.hidden) return; /* 页面隐藏：停掉渲染循环，visibilitychange 时恢复 */
+  RAF = requestAnimationFrame(frame);
+  const base = window.__cap != null ? window.__cap : LOWSPEC ? (FPS_CAP ? Math.min(FPS_CAP, 30) : 30) : FPS_CAP;
+  const cap = KIT_LOAD === 2 ? 6 : KIT_LOAD === 1 ? Math.min(base || 12, 12) : base;
+@@@ END
+@@@ REPLACE
+  const H = window.__halt || 0;
+  if (!(H & 1)) drawWorld(SIM.t);
+  if (!(H & 2)) drawFx(SIM.t);
+  drawMinimap(); uiTick();
+@@@ WITH
+  const H = window.__halt || 0;
+  if (KIT_LOAD === 2) { uiTick(); return; }
+  if (!(H & 1)) drawWorld(SIM.t);
+  if (!(H & 2)) drawFx(SIM.t);
+  drawMinimap(); uiTick();
+@@@ END
+@@@ INSERT_BEFORE
+/* ══════════════ 28. 启动：先画空织机，再握手 dsh-vw/ready，等宿主推送真实状态 ══════════════ */
+@@@ TEXT
+/* ══════════════ 27c. 原生面板内核（PK）接线：所有入口都在皮肤内打开原生面板，不再交给宿主 / 经典界面 ══════════════ */
+const SEAL_CH = { studio: '精', tasks: '任', plaza: '影', keys: '钥', voices: '声', cloud: '云', avatar: '像', hardware: '算', teleprompter: '提', reference: '摹', brand: '印', export: '发', history: '史', projects: '卷', newProject: '新', help: '问', kitchen: '样' };
+const MODE_PANELS = ['studio', 'plaza', 'tasks'];
+function openKit(id, args) {
+  closeMenus();
+  if (!window.PK || !PK.open) { toast('面板内核未加载，请刷新页面后重试', '断', null, null, true); return null; }
+  try { return PK.open(String(id || ''), args || {}); } catch (e) { toast('打开面板失败：' + ((e && e.message) || e), '误', null, null, true); return null; }
+}
+/* 主屏「创意需求」题签 → 大号编辑器（模板 / AI 润色 / 保存并一键出片） */
+function openBrief() {
+  if (!window.PK || !PK.editTopic) { openFolio(true); return; }
+  sendTopic();
+  closeMenus();
+  PK.editTopic({
+    value: String(DIR.topic || ''),
+    onSaved: (v) => {
+      v = String(v == null ? '' : v);
+      DIR.topic = v; PENDING.topic = { v, until: performance.now() + 3000 };
+      const ta = $('#foTopic'); if (ta && document.activeElement !== ta) { ta.value = v; growTopic(); }
+      syncCapsule();
+    },
+  });
+}
+function syncModeTabs() {
+  let on = 'war';
+  if (window.PK && PK.frames) { const st = PK.frames.stack; for (let i = st.length - 1; i >= 0; i--) { if (MODE_PANELS.includes(st[i].id)) { on = st[i].id; break; } } }
+  $$('#modeTabs .slip').forEach((b) => { const k = b.dataset.panel || b.dataset.mode; const yes = k === on; b.classList.toggle('on', yes); if (yes) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+}
+function kitFrameLoad() {
+  const st = window.PK && PK.frames ? PK.frames.stack : [];
+  const next = !st.length ? (FOLIO_OPEN ? 1 : 0) : st.some((f) => f.kind === 'workspace') ? 2 : 1;
+  if (next !== KIT_LOAD) { KIT_LOAD = next; LAST = performance.now(); }
+}
+/* 面板打开时：页眉朱印（每个面板一个字）、「保存并一键出片」用朱砂印按钮 —— 只做装饰，不改面板逻辑 */
+function inkFrameDecor(f) {
+  try {
+    const el = f && f.el; if (!el) return;
+    const head = el.querySelector('.pk-frame-h'); if (!head) return;
+    const editor = el.classList.contains('pk-editor');
+    const tt = (el.querySelector('.pk-frame-t') || {}).textContent || '';
+    const ch = SEAL_CH[f.id] || (editor ? (/创意|需求|主题/.test(tt) ? '题' : '书') : f.kind === 'dialog' ? (el.classList.contains('pk-confirm') ? '确' : '问') : String(tt).trim().slice(0, 1) || '墨');
+    let seal = head.querySelector('.pk-frame-idx, .pk-frame-ico');
+    if (!seal) { seal = document.createElement('span'); seal.className = 'pk-frame-idx'; head.insertBefore(seal, head.firstChild); }
+    seal.classList.add('ink-seal'); seal.textContent = ch; seal.setAttribute('aria-hidden', 'true');
+    if (editor) {
+      el.classList.toggle('ink-brief', ch === '题');
+      requestAnimationFrame(() => { el.querySelectorAll('.pk-frame-f .pk-btn').forEach((b) => { if (/一键出片/.test(b.textContent || '')) b.classList.add('is-seal'); }); });
+    }
+  } catch (e) { /* 装饰失败不影响面板 */ }
+}
+function bindKit() {
+  if (!window.PK || !PK.configure) { console.warn('[墨韵织机] 面板内核 kit.js 未加载'); return; }
+  PK.configure({
+    skin: SKIN_ID,
+    frames: { studio: 'workspace', projects: 'drawer' },
+    shortcuts: [['R', '一键出片 / 继续织造'], ['空格', '播放 / 暂停预览'], ['B', '题写创意需求（大号编辑器）'], ['P', '展开经折（出片参数）'], ['Esc', '关闭弹窗；回到全景'], ['1 / 2 / 3', '镜头：全景 / 跟随 / 近景'], ['T', '墨色主题'], ['+ / −', '长卷缩放'], ['F', '长卷整卷适配'], ['Ctrl + 滚轮', '在长卷上缩放；滚轮平移'], ['点击工匠', '镜头聚焦该 Agent；再次点击回到全景'], ['点击镜头轨', '在分步精修中打开该幕'], ['Ctrl + Enter', '在大号编辑器里保存'], ['?', '本帮助']],
+    toast(text, level, o) {
+      o = o || {};
+      const lv = level === 'ok' ? 'success' : String(level || 'info');
+      toastX({ text, title: o.title, detail: o.detail, action: o.action, timeout: o.timeout, level: lv, warn: lv === 'error' || lv === 'warn', ch: lv === 'success' ? '成' : lv === 'error' ? '误' : lv === 'warn' ? '警' : '讯' });
+      return true;
+    },
+    onPanelOpen: () => syncModeTabs(),
+    onPanelClose: () => syncModeTabs(),
+  });
+  /* 吐司容器挪进面板层：打开面板时也在最上层，且只有一种样式 */
+  try { const root = PK.root(), ts = $('#toasts'); if (root && ts && ts.parentNode !== root) root.appendChild(ts); } catch (e) { /* ignore */ }
+  PK.on('frame-open', (f) => { inkFrameDecor(f); kitFrameLoad(); closeMenus(); hideTip(); });
+  PK.on('frame-close', () => { kitFrameLoad(); syncModeTabs(); });
+  PK.on('panels-changed', () => buildTiles());
+  buildTiles();
+}
+@@@ END
+@@@ REPLACE
+  bindUI();
+  uiRunState();
+@@@ WITH
+  bindUI();
+  bindKit();
+  uiRunState();
+@@@ END

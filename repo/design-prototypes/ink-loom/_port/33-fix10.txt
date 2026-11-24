@@ -1,0 +1,39 @@
+@@@ REPLACE
+function trimLog() {
+  const box = $('#logList'); if (!box) return;
+  const top = box.scrollTop - 0.5, bot = box.scrollTop + box.clientHeight + 0.5;
+  for (const p of box.children) { const y0 = p.offsetTop, y1 = y0 + p.offsetHeight, v = y0 >= top && y1 <= bot ? '' : 'hidden'; if (p.style.visibility !== v) p.style.visibility = v; }
+}
+@@@ WITH
+function trimLog() {
+  const box = $('#logList'); if (!box) return;
+  const rows = box.children;
+  /* 贴底时：让最后一行贴住底边，第一行完整可见的位置自然上移；不贴底时保持用户位置 */
+  if (LOGV.stick && rows.length) {
+    const bot = box.scrollHeight, view = box.clientHeight;
+    let firstTop = bot;
+    for (let i = rows.length - 1; i >= 0; i--) { const y0 = rows[i].offsetTop; if (bot - y0 <= view + 0.5) firstTop = y0; else break; }
+    box.scrollTop = Math.max(0, firstTop);
+  }
+  const top = box.scrollTop - 0.5, bot2 = box.scrollTop + box.clientHeight + 0.5;
+  for (const p of rows) { const y0 = p.offsetTop, y1 = y0 + p.offsetHeight, v = y0 >= top && y1 <= bot2 ? '' : 'hidden'; if (p.style.visibility !== v) p.style.visibility = v; }
+}
+@@@ END
+@@@ REPLACE
+.log{position:relative;flex:1;min-height:0;overflow-y:auto;
+@@@ WITH
+.log{position:relative;flex:1;min-height:0;overflow-y:auto;overflow-anchor:none;
+@@@ END
+@@@ REPLACE
+  if (stick) box.scrollTop = box.scrollHeight;
+  trimLog();
+@@@ WITH
+  LOGV.stick = stick;
+  if (stick) box.scrollTop = box.scrollHeight;
+  trimLog();
+@@@ END
+@@@ REPLACE
+  lg.addEventListener('scroll', () => { LOGV.stick = lg.scrollTop + lg.clientHeight >= lg.scrollHeight - 24;
+@@@ WITH
+  lg.addEventListener('scroll', () => { const last = lg.lastElementChild; LOGV.stick = !last || last.offsetTop + last.offsetHeight <= lg.scrollTop + lg.clientHeight + 1;
+@@@ END

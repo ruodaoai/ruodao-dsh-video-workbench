@@ -1,0 +1,101 @@
+@@@ RANGE
+/* ── 示例工程数据（内联自 _shared/sample-project.json） ── */
+@@@ TO
+];
+'use strict';
+@@@ WITH
+/* ── 工程数据：全部来自宿主推送的 WarRoomState（BRIDGE.md §3）；此处仅为空的初始值 ── */
+let PROJECT = { dir: '', title: '', genre: '', style: '', bpm: null, dur: 30, fps: 30, w: 1920, h: 1080, engine: 'remotion', quality: '1080p', aspect: '16:9', drops: [] };
+let BEATS = []; /* [t, strong(0|1)] */
+'use strict';
+@@@ END
+@@@ RANGE
+/* ══════════════ 1. 数据 ══════════════ */
+@@@ TO
+/* ══════════════ 3. 主题 ══════════════ */
+@@@ WITH
+/* ══════════════ 1. 数据（由宿主状态重建：rebuildTimeline / rebuildAssets） ══════════════ */
+let DUR = 30;
+let SCENES = [];
+let SFX_ALL = [];
+let DROPS = [];
+const NO_SCENE = { i: 0, n: 1, id: '', title: '', t0: 0, dur: 30, t1: 30, mode: 'clean', sub: '', sfx: [], moodKey: 'dusk', seed: 11, tab: 'rider', thumb: '' };
+function sceneAt(t) {
+  if (!SCENES.length) return NO_SCENE;
+  if (t <= 0) return SCENES[0];
+  let lo = 0, hi = SCENES.length - 1;
+  while (lo < hi) { const m = (lo + hi + 1) >> 1; if (SCENES[m].t0 <= t) lo = m; else hi = m - 1; }
+  return SCENES[lo];
+}
+
+/* 8 位工匠 —— 釉色取自传统瓷釉（织机上的排列顺序 ≠ 宿主数组顺序，一律按 id 对应） */
+const AGENTS = [
+  { id: 'reference', name: '参考复刻', en: 'REFERENCE', ch: '摹', glaze: '#C98049', glazeName: '柿釉' },
+  { id: 'director', name: '策划导演', en: 'DIRECTOR', ch: '策', glaze: '#DDB458', glazeName: '鸡油黄' },
+  { id: 'cloud', name: '云端生成', en: 'CLOUD GEN', ch: '云', glaze: '#C9D9DC', glazeName: '月白' },
+  { id: 'editor', name: '素材剪辑', en: 'EDITOR', ch: '剪', glaze: '#86B6CB', glazeName: '天青' },
+  { id: 'audio', name: '配音混音', en: 'AUDIO', ch: '音', glaze: '#D27D8A', glazeName: '胭脂水' },
+  { id: 'motion', name: '动效编程', en: 'MOTION CODER', ch: '码', glaze: '#3FA6A2', glazeName: '孔雀蓝' },
+  { id: 'avatar', name: '数字人', en: 'AVATAR', ch: '像', glaze: '#A880B6', glazeName: '窑变紫' },
+  { id: 'qa', name: '质检渲染', en: 'QA · RENDER', ch: '检', glaze: '#A6B87C', glazeName: '豆青' },
+];
+const AG = {};
+AGENTS.forEach((a, i) => { Object.assign(a, { i, status: 'idle', task: '待命', prog: 0, flash: 0, handled: 0, busy: 0 }); AG[a.id] = a; });
+/* 视觉状态：宿主 8 种状态 → 织机 8 种状态 */
+const ST_OF = { idle: 'idle', queued: 'queued', running: 'run', paused: 'pause', done: 'done', failed: 'err', stopped: 'stop', skipped: 'skip' };
+const ST_CN = { idle: '待命', queued: '候场', run: '织造', pause: '暂停', done: '完成', err: '异常', stop: '已停', skip: '未参与' };
+
+/* 协同网络（side: 1 墨线垂于梁下；-1 拱于梁上） */
+const EDGES = [
+  ['reference', 'director', -1], ['director', 'cloud', 1], ['director', 'editor', 1], ['director', 'audio', 1],
+  ['cloud', 'editor', -1], ['editor', 'audio', 1], ['editor', 'motion', 1], ['audio', 'motion', 1],
+  ['motion', 'avatar', -1], ['motion', 'qa', 1], ['audio', 'avatar', 1], ['qa', 'director', 1],
+].map(([a, b, side], k) => ({ a, b, side, k, heat: 0, pts: null }));
+const edgeOf = (a, b) => EDGES.find((e) => (e.a === a && e.b === b) || (e.a === b && e.b === a));
+
+/* 素材（宿主 assets → 库房条目；art = 无缩略图时的程序化画芯） */
+let ASSETS = [];
+let AS = {};
+
+const SFXK = {
+  heavy_impact: { g: '撞', c: '#E0583A', n: '重击' }, slash_sweep: { g: '唰', c: '#E8DFC8', n: '横扫' },
+  horse_gallop: { g: '蹄', c: '#C99A5B', n: '马蹄' }, war_drum: { g: '鼓', c: '#D4A64A', n: '战鼓' },
+  blade_whoosh: { g: '刃', c: '#AFC0C6', n: '刃风' }, metal_clash: { g: '铿', c: '#D8B878', n: '兵刃' },
+  metal_clash_hi: { g: '铮', c: '#EAD9A6', n: '高频' }, metal_clash_heavy: { g: '砰', c: '#E0583A', n: '重撞' },
+  whoosh: { g: '呼', c: '#AFC0C6', n: '呼啸' }, impact: { g: '撞', c: '#E0583A', n: '撞击' }, pop: { g: '啵', c: '#E8DFC8', n: '弹出' },
+  chime: { g: '铃', c: '#EAD9A6', n: '铃音' }, riser: { g: '升', c: '#D4A64A', n: '上扬' }, drum: { g: '鼓', c: '#D4A64A', n: '鼓点' },
+  click: { g: '嗒', c: '#C9D9DC', n: '点击' }, hit: { g: '击', c: '#D8B878', n: '打击' }, gallop: { g: '蹄', c: '#C99A5B', n: '马蹄' },
+};
+const SFX_GUESS = [[/impact|boom|thud|slam|heavy/i, 'impact'], [/clash|metal|sword|blade|steel/i, 'metal_clash'], [/whoosh|swish|swoosh|sweep|slash|wind/i, 'whoosh'], [/gallop|horse|hoof/i, 'gallop'], [/drum|kick|beat/i, 'drum'], [/pop|bubble/i, 'pop'], [/chime|bell|ding|ring/i, 'chime'], [/rise|riser|swell|build/i, 'riser'], [/click|tick|type|key/i, 'click'], [/hit|punch|snap/i, 'hit']];
+const SFXK_CACHE = new Map();
+function sfxK(type) {
+  const t = String(type || '');
+  if (SFXK[t]) return SFXK[t];
+  let k = SFXK_CACHE.get(t);
+  if (!k) { const g = SFX_GUESS.find(([re]) => re.test(t)); k = g ? SFXK[g[1]] : { g: '音', c: '#D4A64A', n: t.slice(0, 14) || '音效' }; SFXK_CACHE.set(t, k); }
+  return k;
+}
+const BROCADE = {
+  clean: { base: '#34433F', hi: '#86B0A2', name: '静' },
+  cavalry: { base: '#6A4524', hi: '#DDA75C', name: '骑' },
+  'clash-flurry': { base: '#742818', hi: '#E46A45', name: '战' },
+  'single-clash': { base: '#5A1F31', hi: '#D46A84', name: '击' },
+  'drop-impact': { base: '#7A5818', hi: '#F2CB62', name: '落' },
+};
+
+/* ══════════════ 2. 出片参数（宿主 director / options；折子与胶囊只呈现并派发 setDirector） ══════════════ */
+let DIR = { topic: '', engine: 'remotion', creationMode: 'ai-coded', aspectRatio: '16:9', quality: '1080p', fps: 30, durationMode: 'auto', targetDurationSec: 120, narrationMode: 'tts', bgmMode: 'llm-coded', pacingMode: 'auto', style: 'cinematic', voiceId: 'auto', avatarEnabled: false, avatarLayout: 'pip-br' };
+let OPTV = { engines: [], creationModes: [], aspectRatios: [], qualities: [], narrationModes: [], bgmModes: [], pacingModes: [], styles: [], voices: [{ value: 'auto', label: 'AI 自动匹配' }], avatarLayouts: [] };
+const optLbl = (list, v) => { const o = (list || []).find((x) => String(x.value) === String(v)); return o ? String(o.label) : v == null || v === '' ? '—' : String(v); };
+const shortLbl = (s) => String(s).split(/[·（(]/)[0].trim();
+function capsuleText() {
+  const d = DIR;
+  const seg = [d.aspectRatio === 'auto' ? 'AI 画幅' : d.aspectRatio, optLbl(OPTV.qualities, d.quality), (d.fps || 30) + 'fps', shortLbl(optLbl(OPTV.engines, d.engine)), shortLbl(optLbl(OPTV.narrationModes, d.narrationMode)), shortLbl(optLbl(OPTV.pacingModes, d.pacingMode)), shortLbl(optLbl(OPTV.styles, d.style))];
+  if (d.avatarEnabled) seg.push('数字人');
+  return seg.filter((x) => x && x !== '—').join(' · ');
+}
+const totalFrames = () => Math.max(1, Math.round(DUR * (PROJECT.fps || 30)));
+const renderLabel = () => `${PROJECT.engine === 'html' ? 'HTML5' : 'Remotion'} ${PROJECT.quality || '1080p'}${PROJECT.fps || 30}`;
+
+/* ══════════════ 3. 主题 ══════════════ */
+@@@ END

@@ -1,0 +1,82 @@
+@@@ REPLACE
+.pics{display:grid;grid-template-columns:1fr 1fr;gap:6px 8px}
+.pic{flex-direction:column;align-items:stretch;gap:3px;padding:4px 4px 3px}
+@@@ WITH
+.pics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 8px}
+.pic{flex-direction:column;align-items:stretch;gap:3px;padding:4px 4px 3px;min-width:0}
+@@@ END
+@@@ REPLACE
+.sheet9{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@@@ WITH
+.sheet9{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@@@ END
+@@@ REPLACE
+.sheet9 span{position:absolute;left:6px;bottom:5px;font:10px var(--mono);color:#F2E9D8;text-shadow:0 1px 3px #000}
+.sheet9 b{position:absolute;right:6px;top:5px;font:400 12px var(--kai);color:#F2E9D8;text-shadow:0 1px 3px #000}
+@@@ WITH
+.sheet9 .sh-pic>span{position:absolute;left:6px;bottom:5px;font:10px var(--mono);color:#F2E9D8;text-shadow:0 1px 3px #000}
+.sheet9 .sh-pic>b{position:absolute;right:6px;top:5px;font:400 12px var(--kai);color:#F2E9D8;text-shadow:0 1px 3px #000}
+.sheet9 .sh-cap .sh-t,.sheet9 .sh-cap .sh-n{position:static}
+@@@ END
+@@@ REPLACE
+body.noproj #monHit{display:none}
+@@@ WITH
+body.noproj #monHit{display:none}
+#monFull{position:absolute;display:grid;place-items:center;padding:0;border-radius:4px;border:1px solid var(--gl2);background:rgba(var(--bg-rgb),.62);color:var(--gold2);opacity:.84;cursor:pointer;transition:opacity var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+#monFull:hover,#monFull:focus-visible{opacity:1;box-shadow:var(--glow);outline:none}
+#monFull svg{width:14px;height:14px}
+body.noproj #monFull{display:none}
+@@@ END
+@@@ REPLACE
+    <button id="monHit" aria-label="播放 / 暂停预览（空格）"></button>
+@@@ WITH
+    <button id="monHit" aria-label="播放 / 暂停预览（空格）"></button>
+    <button id="monFull" title="全屏观看成片（V）" aria-label="全屏观看成片" style="visibility:hidden"><svg><use href="#i-expand"/></svg></button>
+@@@ END
+@@@ REPLACE
+  const mh = $('#monHit'); if (mh) setRect(mh, { x: L.mon.x, y: L.mon.y, w: L.mon.w, h: L.mon.h });
+@@@ WITH
+  const mh = $('#monHit'); if (mh) setRect(mh, { x: L.mon.x, y: L.mon.y, w: L.mon.w, h: L.mon.h });
+  /* 监视器右下角「全屏观看」（右上角留给成片钤印）：跟随镜头（同在 #plane 里），成片在册时才显示（见 cullStage） */
+  const mf = $('#monFull'); if (mf) { const fs = L.tiny ? 24 : 28, fp = L.tiny ? 4 : 6; setRect(mf, { x: L.mon.x + L.mon.w - fs - fp, y: L.mon.y + L.mon.h - fs - fp, w: fs, h: fs }); }
+@@@ END
+@@@ REPLACE
+  setStyle($('#monCtl'), 'visibility', mon && hasProject() ? '' : 'hidden', 'mcv');
+@@@ WITH
+  setStyle($('#monCtl'), 'visibility', mon && hasProject() ? '' : 'hidden', 'mcv');
+  const fullOn = hasProject() && PREVIEW.hasMp4 && !!PREVIEW.url && ok(m.x + m.w - 40, m.y + m.h - 40, m.x + m.w, m.y + m.h);
+  setStyle($('#monFull'), 'visibility', fullOn ? '' : 'hidden', 'mfv');
+@@@ END
+@@@ INSERT_BEFORE
+/* 一键出片 / 继续：R 键与按钮共用 */
+@@@ TEXT
+/* 全屏观看：成片铺满整个窗口（面板内核 PK.cinema，再按 F 进入真正的全屏）；关闭后监视器从同一时刻继续 */
+function openCinema() {
+  if (!hasProject()) { toast('请先新建或打开一个视频工程', '卷', '新建工程', () => openKit('newProject'), true); return; }
+  if (!PREVIEW.hasMp4 || !PREVIEW.url) { toast(Pipe.live() ? '织造进行中 · 出片完成后即可全屏观看' : '还没有成片 · 一键出片完成后即可全屏观看', '片'); return; }
+  if (!window.PK || typeof PK.cinema !== 'function') { toast('面板内核未加载，请刷新页面后重试', '断', null, null, true); return; }
+  const at = vidOK() ? VID.el.currentTime || 0 : 0;
+  if (FILM.playing) toggleFilm();
+  PK.cinema({
+    src: PREVIEW.url, poster: PREVIEW.poster || '', title: PROJECT.title || '成片', sub: `${PREVIEW.dur ? fmtT(PREVIEW.dur) + ' · ' : ''}${PROJECT.w}×${PROJECT.h}`, startAt: at,
+    onClose: ({ time }) => { seekPreview(time * (DUR / Math.max(0.01, vidDur()))); },
+  });
+}
+@@@ END
+@@@ REPLACE
+$('#monHit').onclick = () => { if (!Pipe.live() || FILM.user || vidOK()) toggleFilm(); };
+@@@ WITH
+$('#monHit').onclick = () => { if (!Pipe.live() || FILM.user || vidOK()) toggleFilm(); };
+  $('#monFull').onclick = openCinema; $('#monHit').addEventListener('dblclick', () => { if (PREVIEW.hasMp4) openCinema(); });
+@@@ END
+@@@ REPLACE
+    else if (k === 'f' || k === 'F') tlFit();
+@@@ WITH
+    else if (k === 'f' || k === 'F') tlFit();
+    else if (k === 'v' || k === 'V') openCinema();
+@@@ END
+@@@ REPLACE
+['F', '长卷整卷适配'], ['Ctrl + 滚轮'
+@@@ WITH
+['F', '长卷整卷适配'], ['V', '全屏观看成片'], ['Ctrl + 滚轮'
+@@@ END

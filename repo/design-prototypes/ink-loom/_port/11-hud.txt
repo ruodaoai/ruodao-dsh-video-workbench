@@ -1,0 +1,167 @@
+@@@ RANGE
+/* ══════════════ 19. HUD 刷新（只在数值变化时写 DOM） ══════════════ */
+@@@ TO
+/* ══════════════ 22. 参数折子（经折装） ══════════════ */
+@@@ WITH
+/* ══════════════ 19. HUD 刷新（只在数值变化时写 DOM） ══════════════ */
+const UIC = {};
+function setTxt(id, v) { v = String(v == null ? '' : v); if (UIC[id] === v) return; UIC[id] = v; const e = document.getElementById(id); if (e) e.textContent = v; }
+function setTitle(id, v) { v = String(v == null ? '' : v); if (UIC['ti:' + id] === v) return; UIC['ti:' + id] = v; const e = document.getElementById(id); if (e) e.title = v; }
+function setStyle(e, k, v, key) { if (!e || UIC[key] === v) return; UIC[key] = v; e.style[k] = v; }
+const CIRC = ['①', '②', '③', '④', '⑤'];
+const runIdShort = () => (Pipe.runId ? 'R-' + String(Pipe.runId).replace(/^run[-_]?/i, '').slice(-6).toUpperCase() : '—');
+const hasProject = () => !!(STATE && STATE.project);
+function uiRunState() {
+  const st = Pipe.status, live = Pipe.live(), pz = st === 'paused', hasP = hasProject();
+  const b = $('#btnRun');
+  b.classList.toggle('busy', st === 'running');
+  b.classList.toggle('dis', !hasP);
+  const lbl = !hasP ? '一键出片' : st === 'queued' ? '候场中' : st === 'running' ? `织造中 ${Math.round(Pipe.pv)}%` : pz ? '继续织造' : st === 'completed' ? '再织一卷' : st === 'failed' || st === 'stopped' ? '重新出片' : '一键出片';
+  setTxt('runLbl', lbl);
+  setTxt('runSub', !hasP ? 'RUN · 先开工程' : st === 'queued' ? 'QUEUED · 调度中' : st === 'running' ? `${runIdShort()} · WEAVING` : pz ? 'RESUME · 断点接续' : st === 'completed' ? 'RUN AGAIN · 重新出片' : 'RUN · 八工开织');
+  b.setAttribute('aria-label', lbl + '（R）');
+  const q = (a) => $(`.tc-ctrl [data-act="${a}"]`);
+  q('start').classList.toggle('dis', !hasP || live);
+  q('pause').classList.toggle('dis', !(st === 'running' || pz));
+  q('stop').classList.toggle('dis', !live);
+  q('retry').classList.toggle('dis', !(st === 'failed' || st === 'stopped' || st === 'completed'));
+  q('pause').querySelector('span').textContent = pz ? '继续' : '暂停';
+  q('pause').querySelector('use').setAttribute('href', pz ? '#i-play' : '#i-pause');
+  q('pause').setAttribute('aria-label', pz ? '继续织造' : '暂停织造');
+  document.body.classList.toggle('paused', pz);
+  document.body.classList.toggle('noproj', !hasP);
+  document.body.classList.toggle('failed', st === 'failed');
+  setTxt('runId', Pipe.runId ? runIdShort() : '');
+}
+function phaseHead() {
+  const st = Pipe.status, a = AG[Pipe.active], j = a ? PHASE_IX[a.id] : undefined;
+  if (!hasProject()) return ['候', '待命 · 未开工程'];
+  if (st === 'none') return PREVIEW.hasMp4 ? ['成', '成片在册'] : ['候', '待命 · 未开织'];
+  if (st === 'queued') return ['候', '排队候场'];
+  if (st === 'completed') return ['成', '成片就绪'];
+  if (st === 'stopped') return ['止', '已停止'];
+  if (st === 'failed') return ['断', a ? `${a.name} · 中断` : '织造中断'];
+  if (a) return [a.ch, (j != null ? CIRC[j] + ' ' : '') + a.name + (st === 'paused' ? ' · 暂停' : '')];
+  return ['织', '织造中'];
+}
+function uiTick() {
+  const st = Pipe.status, live = Pipe.live(), pr = Pipe.prog(), pct = Math.round(pr * 100), hasP = hasProject();
+  setTxt('hPct', String(pct).padStart(2, '0'));
+  setTxt('tcPct', String(pct));
+  setStyle($('#ringFg'), 'strokeDashoffset', (213.6 * (1 - pr)).toFixed(1), 'ring');
+  const act = AG[Pipe.active];
+  const nAs = ASSETS.filter((a) => !a.staged).length, nSt = ASSETS.length - nAs;
+  let hs, hsub;
+  if (!hasP) { hs = '待命 · 未开工程'; hsub = '新建或打开工程即可开织'; }
+  else if (st === 'none') { hs = PREVIEW.hasMp4 ? '成片在册 · 八工就位' : '待命 · 八工就位'; hsub = `素材 ${nAs} 项${nSt ? ` · ${nSt} 项云端待确认` : ''}${SCENES.length ? ` · ${SCENES.length} 幕` : ''}`; }
+  else if (st === 'queued') { hs = '候场 · 排队调度'; hsub = Pipe.msg || '已进入织造队列'; }
+  else if (live) { hs = `${act ? act.name : '织机'} · ${st === 'paused' ? '暂停' : '织造中'}`; hsub = (act && act.task) || Pipe.msg || '织造中'; }
+  else if (st === 'completed') { hs = '成片就绪 · 已钤印'; hsub = `final.mp4 · ${fmtT(PREVIEW.dur || DUR)} · ${PROJECT.w}×${PROJECT.h}`; }
+  else if (st === 'failed') { hs = `${act ? act.name : '织机'} · 织造中断`; hsub = Pipe.error || Pipe.msg || '执行失败'; }
+  else { hs = '已停止 · 织机归位'; hsub = Pipe.msg || '可重试或重新出片'; }
+  setTxt('hState', hs); setTxt('hSub', hsub); setTitle('hSub', hsub); setTitle('hState', hs);
+  const [k, nm] = phaseHead();
+  setTxt('tcPhK', k); setTxt('tcPhName', nm); setTitle('tcPhName', nm);
+  const sub = !hasP ? '新建或打开工程后，点「一键出片」，八位工匠将把素材织成成片。' : st === 'none' ? (PREVIEW.hasMp4 ? '本工程已有成片，可直接播放预览，或调整参数后再织一卷。' : '点「一键出片」，八位工匠将把素材织成成片。') : st === 'failed' ? (Pipe.error || Pipe.msg || '执行失败，可点「重试」。') : (act && live ? act.task : '') || Pipe.msg || (st === 'completed' ? '成片已写入 output/final.mp4，可导出发布包。' : '');
+  setTxt('tcPhSub', sub); setTitle('tcPhSub', sub);
+  const el = Pipe.elapsed + (st === 'running' ? Math.max(0, (Date.now() - Pipe.elapsedAt) / 1000) : 0);
+  setTxt('tcEl', Pipe.runId ? fmtMS(el) : '00:00');
+  setTxt('tcEta', st === 'running' && Pipe.pv >= 3 ? fmtMS((el * (100 - Pipe.pv)) / Pipe.pv) : st === 'completed' ? '00:00' : '--:--');
+  let done = 0; PHASES.forEach((p) => { if (AG[p.key].status === 'done') done++; });
+  setTxt('tcStage', `${Pipe.status === 'none' ? (PREVIEW.hasMp4 ? 5 : 0) : done} / 5`);
+  PHASES.forEach((p, i) => {
+    const a = AG[p.key], s = Pipe.status === 'none' ? (PREVIEW.hasMp4 ? 'done' : 'idle') : a.status, d = $(`#tcPhases [data-ph="${i}"]`);
+    if (!d) return;
+    const cls = s === 'run' ? 'on' : s === 'done' ? 'ok' : s === 'err' ? 'err' : s === 'pause' ? 'on pz' : s === 'skip' ? 'skip' : s === 'stop' ? 'stop' : '';
+    if (UIC['phc' + i] !== cls) { UIC['phc' + i] = cls; d.className = cls; }
+    setStyle(d.querySelector('i'), 'width', Math.round((s === 'done' ? 1 : LV[p.key]) * 100) + '%', 'ph' + i);
+  });
+  const ftot = totalFrames(), fr = st === 'completed' || (st === 'none' && PREVIEW.hasMp4) ? ftot : QA.frames;
+  setTxt('mFrames', `${fr} / ${ftot}`); setStyle($('#mFramesB'), 'width', Math.round((fr / ftot) * 100) + '%', 'mfb');
+  const bRev = Math.round(TLS.beatRev * BEATS.length);
+  setTxt('mBpm', PROJECT.bpm ? `${PROJECT.bpm} BPM` : BEATS.length ? `${BEATS.length} 拍` : '—'); setStyle($('#mBpmB'), 'width', (BEATS.length ? Math.round((bRev / BEATS.length) * 100) : 0) + '%', 'mbb');
+  let sfxN = 0; for (let i = 0; i < SFX_ALL.length; i++) if (TLS.sfxDrop[i] >= -1) sfxN++;
+  setTxt('mSfx', SFX_ALL.length ? `${sfxN} / ${SFX_ALL.length}` : '—'); setStyle($('#mSfxB'), 'width', (SFX_ALL.length ? Math.round((sfxN / SFX_ALL.length) * 100) : 0) + '%', 'msb');
+  if (st === 'running') setTxt('runLbl', `织造中 ${Math.round(Pipe.pv)}%`);
+  AGENTS.forEach((a) => {
+    if (!a.dirty) return; a.dirty = false;
+    a.el.dataset.st = a.status; a.elSt.textContent = ST_CN[a.status] || '待命'; a.elTask.textContent = '· ' + (a.task || '—'); a.elBar.style.width = Math.round(clamp(a.prog, 0, 1) * 100) + '%';
+    a.el.title = `${a.name} · ${ST_CN[a.status] || ''}${a.task ? '\n' + a.task : ''}`;
+  });
+  const ft = filmT(), dur = vidOK() && (MON.mode === 'video' || FILM.playing) ? vidDur() : DUR, tshow = vidOK() && (MON.mode === 'video' || FILM.playing) ? VID.el.currentTime : ft;
+  setTxt('mcTime', `${fmtT(tshow)} / ${fmtT(dur)}`);
+  const u = clamp(tshow / Math.max(0.01, dur), 0, 1) * 100;
+  setStyle($('#mcBar i'), 'width', u.toFixed(2) + '%', 'mcb'); setStyle($('#mcBar b'), 'left', u.toFixed(2) + '%', 'mcb2');
+  const pl = FILM.playing ? '#i-pause' : '#i-play';
+  if (UIC.mcp !== pl) { UIC.mcp = pl; $('#mcPlay use').setAttribute('href', pl); $('#tlPlay use').setAttribute('href', pl); $('#mcPlay').setAttribute('aria-label', FILM.playing ? '暂停预览' : '播放预览'); }
+  const mu = VID.el && !VID.el.muted ? '#i-vol' : '#i-mute';
+  if (UIC.mute !== mu) { UIC.mute = mu; $('#mcMute use').setAttribute('href', mu); $('#mcMute').setAttribute('aria-label', mu === '#i-vol' ? '静音' : '取消静音'); }
+  $('#mcMute').classList.toggle('dis', !vidOK());
+  setTxt('tlTc', (PH.work ? '织 ' : '') + fmtT(PH.t));
+  setTxt('mmMode', CAM.focus ? AG[CAM.focus].name : CAM.mode === 'close' ? '近景' : '跟随');
+  cullStage();
+}
+/* 镜头推近时，舞台窗口外的工位标签 / 监视器控制条隐藏（不让被裁掉的文字与其它面板重叠） */
+function cullStage() {
+  const vis = (x0, y0, x1, y1) => { const a = toScreen(x0, y0), b = toScreen(x1, y1); return a.x >= SW.x - 1 && a.y >= SW.y - 1 && b.x <= SW.x + SW.w + 1 && b.y <= SW.y + SW.h + 1; };
+  AGENTS.forEach((a) => { const p = L.ag[a.id], on = vis(p.x - L.agSp / 2 + 3, L.beamY - 24, p.x + L.agSp / 2 - 3, L.lblY + L.lblH); setStyle(a.el, 'visibility', on ? '' : 'hidden', 'stv' + a.id); });
+  const m = L.mon, mon = vis(m.x, m.y + m.h + 4, m.x + m.w, m.y + m.h + (L.tiny ? 6 : 10) + 28);
+  setStyle($('#monCtl'), 'visibility', mon && hasProject() ? '' : 'hidden', 'mcv');
+}
+
+/* ══════════════ 20. 镜头焦点：谁在干活就跟谁（只推拉中央织机舞台） ══════════════ */
+function focusPoint() {
+  if (CAM.focus) { const h = L.ag[CAM.focus]; return { x: h.x, y: h.y + (L.tiny ? 34 : 46), s: 1.75 }; }
+  const st = Pipe.status, id = Pipe.active, a = AG[id];
+  if (Pipe.live()) {
+    if (!a || st === 'queued') return { x: SW.cx, y: L.beamY + 110, s: 1.22 };
+    if (a.status === 'err') return { x: L.ag[id].x, y: L.ag[id].y + 50, s: 1.85 };
+    if (id === 'director' && TLS.beatRev >= 1) return { x: L.mon.cx, y: L.mon.cy - 12, s: 1.34 };
+    if (id === 'audio' || id === 'motion' || id === 'qa') return { x: L.mon.cx, y: L.mon.cy - 12, s: 1.36 };
+    if (id === 'editor' && curFlight()) return { x: L.ag.editor.x, y: L.ag.editor.y + 70, s: 1.36 };
+    const h = L.ag[id]; return h ? { x: h.x, y: h.y + (L.tiny ? 40 : 56), s: 1.6 } : { x: SW.cx, y: SW.cy, s: 1.2 };
+  }
+  if (st === 'failed' && L.ag[id]) return { x: L.ag[id].x, y: L.ag[id].y + 50, s: 1.7 };
+  if (st === 'completed' || PREVIEW.hasMp4) return { x: L.mon.cx, y: L.mon.cy + 18, s: 1.26 };
+  return { x: SW.cx + Math.sin(SIM.t * 0.07) * SW.w * 0.2, y: L.beamY + 150, s: 1.32 };
+}
+function setCam(m, auto) {
+  CAM.mode = m; CAM.auto = !!auto;
+  if (m === 'overview') CAM.focus = null;
+  $$('#camSeg button').forEach((b) => { b.classList.toggle('on', b.dataset.cam === m); b.setAttribute('aria-checked', b.dataset.cam === m ? 'true' : 'false'); });
+  document.body.classList.toggle('cam-on', m !== 'overview');
+  TLV.manual = false; $('#tlFit').classList.add('on');
+  syncFocusCls();
+}
+function focusAgent(id) {
+  if (CAM.focus === id) { setCam('overview'); return; }
+  CAM.focus = id;
+  if (CAM.mode === 'overview') setCam('close');
+  CAM.auto = false;
+  syncFocusCls();
+}
+function syncFocusCls() { AGENTS.forEach((a) => { a.el.classList.toggle('focus', CAM.focus === a.id); a.el.classList.toggle('dim', !!CAM.focus && CAM.focus !== a.id); }); }
+
+/* ══════════════ 21. 提示 / 吐司 ══════════════ */
+const TIP = $('#tip');
+function showTip(html, x, y) {
+  TIP.innerHTML = html; TIP.classList.add('on');
+  const r = TIP.getBoundingClientRect(); let tx = x + 16, ty = y + 16;
+  if (tx + r.width > innerWidth - 8) tx = x - r.width - 16; if (ty + r.height > innerHeight - 8) ty = y - r.height - 16;
+  TIP.style.left = Math.max(4, tx) + 'px'; TIP.style.top = Math.max(4, ty) + 'px';
+}
+const hideTip = () => TIP.classList.remove('on');
+function toast(msg, ch = '织', actLabel, actFn, warn) {
+  const box = $('#toasts'), t = mk('div', 'toast' + (warn ? ' warn' : ''));
+  t.setAttribute('role', warn ? 'alert' : 'status');
+  const ic = mk('i'); ic.textContent = ch; t.appendChild(ic);
+  const sp = mk('span'); sp.textContent = String(msg == null ? '' : msg); t.appendChild(sp);
+  if (actLabel) { const b = mk('button', 'btn xs gold'); b.textContent = actLabel; b.setAttribute('aria-label', actLabel); b.onclick = () => { try { actFn(); } finally { t.remove(); } }; t.appendChild(b); }
+  const x = mk('button', 't-x', '<svg><use href="#i-x"/></svg>'); x.setAttribute('aria-label', '关闭提示'); x.onclick = () => t.remove(); t.appendChild(x);
+  box.appendChild(t);
+  while (box.children.length > 3) box.firstChild.remove();
+  setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 420); }, actLabel ? 7000 : warn ? 6000 : 3600);
+}
+
+/* ══════════════ 22. 参数折子（经折装） ══════════════ */
+@@@ END

@@ -1,0 +1,880 @@
+{
+  "title": "数据榜单与行业洞察 · 商业指标节奏叙事",
+  "aspectRatio": "16:9",
+  "fps": 30,
+  "quality": "1080p",
+  "engine": "html",
+  "style": "emerald",
+  "genre": "data-story",
+  "genreLabel": "数据榜单与商业指标动效",
+  "narrationMode": "tts-beat-sync",
+  "pacingMode": "balanced",
+  "subtitleStyle": "cinematic",
+  "totalDurationSec": 26.7,
+  "totalDurationInFrames": 801,
+  "audioProfile": {
+    "genreKey": "data-story",
+    "profileName": "数据榜单与商业洞察声场",
+    "beatCutIntensity": "medium",
+    "blitzAllowed": true,
+    "minBeatMultiple": 1,
+    "cameraBeatIntensity": 0.3,
+    "targetLufs": -14.3,
+    "bgmDuckRatio": 2.9,
+    "sfxBoostVoice": 1.08,
+    "sfxBoostMv": 1.32,
+    "bgmVolVoice": 0.38,
+    "bgmVolMv": 0.76,
+    "sfxPalette": {
+      "opener": [
+        "counter",
+        "shine"
+      ],
+      "drop": [
+        "sub_drop",
+        "stamp"
+      ],
+      "action": [
+        "counter",
+        "whoosh"
+      ],
+      "data": [
+        "counter",
+        "tick"
+      ],
+      "neutral": [
+        "card",
+        "tick"
+      ],
+      "internal": [
+        "counter",
+        "tick",
+        "chime"
+      ],
+      "preCut": [
+        "riser",
+        "swoosh"
+      ]
+    }
+  },
+  "bgm": {
+    "enabled": true,
+    "mode": "auto",
+    "bpm": 116,
+    "beats": [
+      {
+        "time": 0,
+        "strong": true,
+        "index": 0
+      },
+      {
+        "time": 0.5172,
+        "strong": false,
+        "index": 1
+      },
+      {
+        "time": 1.0345,
+        "strong": false,
+        "index": 2
+      },
+      {
+        "time": 1.5517,
+        "strong": false,
+        "index": 3
+      },
+      {
+        "time": 2.069,
+        "strong": true,
+        "index": 4
+      },
+      {
+        "time": 2.5862,
+        "strong": false,
+        "index": 5
+      },
+      {
+        "time": 3.1034,
+        "strong": false,
+        "index": 6
+      },
+      {
+        "time": 3.6207,
+        "strong": false,
+        "index": 7
+      },
+      {
+        "time": 4.1379,
+        "strong": true,
+        "index": 8
+      },
+      {
+        "time": 4.6552,
+        "strong": false,
+        "index": 9
+      },
+      {
+        "time": 5.1724,
+        "strong": false,
+        "index": 10
+      },
+      {
+        "time": 5.6897,
+        "strong": false,
+        "index": 11
+      },
+      {
+        "time": 6.2069,
+        "strong": true,
+        "index": 12
+      },
+      {
+        "time": 6.7241,
+        "strong": false,
+        "index": 13
+      },
+      {
+        "time": 7.2414,
+        "strong": false,
+        "index": 14
+      },
+      {
+        "time": 7.7586,
+        "strong": false,
+        "index": 15
+      },
+      {
+        "time": 8.2759,
+        "strong": true,
+        "index": 16
+      },
+      {
+        "time": 8.7931,
+        "strong": false,
+        "index": 17
+      },
+      {
+        "time": 9.3103,
+        "strong": false,
+        "index": 18
+      },
+      {
+        "time": 9.8276,
+        "strong": false,
+        "index": 19
+      },
+      {
+        "time": 10.3448,
+        "strong": true,
+        "index": 20
+      },
+      {
+        "time": 10.8621,
+        "strong": false,
+        "index": 21
+      },
+      {
+        "time": 11.3793,
+        "strong": false,
+        "index": 22
+      },
+      {
+        "time": 11.8966,
+        "strong": false,
+        "index": 23
+      },
+      {
+        "time": 12.4138,
+        "strong": true,
+        "index": 24
+      },
+      {
+        "time": 12.931,
+        "strong": false,
+        "index": 25
+      },
+      {
+        "time": 13.4483,
+        "strong": false,
+        "index": 26
+      },
+      {
+        "time": 13.9655,
+        "strong": false,
+        "index": 27
+      },
+      {
+        "time": 14.4828,
+        "strong": true,
+        "index": 28
+      },
+      {
+        "time": 15,
+        "strong": false,
+        "index": 29
+      },
+      {
+        "time": 15.5172,
+        "strong": false,
+        "index": 30
+      },
+      {
+        "time": 16.0345,
+        "strong": false,
+        "index": 31
+      },
+      {
+        "time": 16.5517,
+        "strong": true,
+        "index": 32
+      },
+      {
+        "time": 17.069,
+        "strong": false,
+        "index": 33
+      },
+      {
+        "time": 17.5862,
+        "strong": false,
+        "index": 34
+      },
+      {
+        "time": 18.1034,
+        "strong": false,
+        "index": 35
+      },
+      {
+        "time": 18.6207,
+        "strong": true,
+        "index": 36
+      },
+      {
+        "time": 19.1379,
+        "strong": false,
+        "index": 37
+      },
+      {
+        "time": 19.6552,
+        "strong": false,
+        "index": 38
+      },
+      {
+        "time": 20.1724,
+        "strong": false,
+        "index": 39
+      },
+      {
+        "time": 20.6897,
+        "strong": true,
+        "index": 40
+      },
+      {
+        "time": 21.2069,
+        "strong": false,
+        "index": 41
+      },
+      {
+        "time": 21.7241,
+        "strong": false,
+        "index": 42
+      },
+      {
+        "time": 22.2414,
+        "strong": false,
+        "index": 43
+      },
+      {
+        "time": 22.7586,
+        "strong": true,
+        "index": 44
+      },
+      {
+        "time": 23.2759,
+        "strong": false,
+        "index": 45
+      },
+      {
+        "time": 23.7931,
+        "strong": false,
+        "index": 46
+      },
+      {
+        "time": 24.3103,
+        "strong": false,
+        "index": 47
+      },
+      {
+        "time": 24.8276,
+        "strong": true,
+        "index": 48
+      },
+      {
+        "time": 25.3448,
+        "strong": false,
+        "index": 49
+      },
+      {
+        "time": 25.8621,
+        "strong": false,
+        "index": 50
+      },
+      {
+        "time": 26.3793,
+        "strong": false,
+        "index": 51
+      },
+      {
+        "time": 26.8966,
+        "strong": true,
+        "index": 52
+      },
+      {
+        "time": 27.4138,
+        "strong": false,
+        "index": 53
+      },
+      {
+        "time": 27.931,
+        "strong": false,
+        "index": 54
+      },
+      {
+        "time": 28.4483,
+        "strong": false,
+        "index": 55
+      }
+    ]
+  },
+  "referenceStyle": {
+    "sourceName": "影核广场:数据榜单与行业洞察 · 商业指标节奏叙事",
+    "title": "数据榜单与行业洞察 · 商业指标节奏叙事",
+    "genre": "data-story",
+    "genreLabel": "数据榜单与商业指标动效",
+    "style": "emerald",
+    "narrationMode": "tts-beat-sync",
+    "durationSec": 26.7,
+    "shotCount": 6,
+    "avgShotSec": 4.45,
+    "bpm": 116,
+    "visualStyle": "8 镜商业/数据榜单模板：数字滚动翻牌 + 仪表盘脉冲卡片 + 对比指标墙 + 机械计数/印章音效与 116 BPM 轻快卡点，适用于财报拆解、行业排行与增长复盘。",
+    "colorPalette": {
+      "background": "#071413",
+      "primary": "#10B981",
+      "accent": "#F59E0B",
+      "highlight": "#ECFDF5"
+    },
+    "vfxSignature": [
+      "动态滚动计数器",
+      "指标仪表盘脉冲",
+      "多维对比光带",
+      "印章定格高光"
+    ],
+    "transitionSignature": [
+      "slash-wipe",
+      "zoom-punch",
+      "light-wipe",
+      "iris-circle"
+    ],
+    "subtitleStyle": "cinematic",
+    "pacingSignature": {
+      "targetShotCount": 6,
+      "avgShotSec": 4.45,
+      "bpm": 116,
+      "recommendedPacingMode": "balanced"
+    },
+    "replicationPrompt": "采用黑金翡翠现代财经数据视觉，大字号等宽滚动数字为核心锚点；节奏锁定 116 BPM，数字揭晓处触发 counter 与 stamp 音效，按【震撼总盘数字→TOP 榜单分段揭示→核心增速对比→关键趋势结论】展开。"
+  },
+  "scenes": [
+    {
+      "id": "scene-01",
+      "index": 1,
+      "title": "2026 开源 AI 工具增长全景",
+      "narration": "过去 12 个月，全球本地开源 AI 工作流项目活跃度暴涨 340%，彻底改写创作格局。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.2,
+      "durationInFrames": 126,
+      "startFrame": 0,
+      "startSec": 0,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "过去 12 个月，全球本地开源 AI 工作流项目活跃度暴涨 340%，彻底改写创作格局",
+          "startSec": 0,
+          "endSec": 4.2,
+          "startFrame": 0,
+          "endFrame": 126
+        }
+      ],
+      "subtitleText": "过去 12 个月，全球本地开源 AI 工作流项目活跃度暴涨 340%，彻底改写创作格局。",
+      "subChunks": [
+        "过去 12 个月，全球本地开源 AI 工作流项目活跃度暴涨 340%，彻底改写创作格局。"
+      ],
+      "accentWords": [
+        "暴涨 340%"
+      ],
+      "highlights": [
+        "开源生态",
+        "年度爆发"
+      ],
+      "layout": "3d-stage-opener",
+      "threePreset": "floating-monoliths",
+      "transition": "cut",
+      "kicker": "PART 01",
+      "visualBlueprint": "2026 开源 AI 工具增长全景",
+      "speechRate": 1.05,
+      "endSec": 4.2,
+      "endFrame": 126,
+      "sfxCues": [
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0,
+          "volume": 0.79,
+          "pan": 0
+        },
+        {
+          "type": "shine",
+          "path": "audio/sfx/shine.wav",
+          "offsetSec": 0.02,
+          "volume": 0.63,
+          "pan": 0
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 2.069,
+          "volume": 0.67,
+          "pan": 0.2
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 3.78,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "过去 十二 个月，全球本地开源 AI 工作流项目活跃度，暴涨 百分之三百四十，彻底改写创作格局。",
+      "ttsNarrationRef": "过去 12 个月，全球本地开源 AI 工作流项目活跃度暴涨 340%，彻底改写创作格局。"
+    },
+    {
+      "id": "scene-02",
+      "index": 2,
+      "title": "TOP 1：本地多智能体编排",
+      "narration": "增速排名第一的是跨智能体 MCP 工具链，开发者单周下载量突破 1800 万次。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.4,
+      "durationInFrames": 132,
+      "startFrame": 126,
+      "startSec": 4.2,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "增速排名第一的是跨智能体 MCP 工具链，开发者单周下载量突破 1800 万次",
+          "startSec": 0,
+          "endSec": 4.4,
+          "startFrame": 0,
+          "endFrame": 132
+        }
+      ],
+      "subtitleText": "增速排名第一的是跨智能体 MCP 工具链，开发者单周下载量突破 1800 万次。",
+      "subChunks": [
+        "增速排名第一的是跨智能体 MCP 工具链，开发者单周下载量突破 1800 万次。"
+      ],
+      "accentWords": [
+        "排名第一",
+        "1800 万次"
+      ],
+      "highlights": [
+        "MCP 协议",
+        "多 Agent 协作"
+      ],
+      "layout": "mosaic-pulse-wall",
+      "threePreset": "orbital-core",
+      "transition": "slash-wipe",
+      "counterTarget": 1800,
+      "kicker": "PART 02",
+      "visualBlueprint": "TOP 1：本地多智能体编排",
+      "speechRate": 1.05,
+      "endSec": 8.6,
+      "endFrame": 258,
+      "sfxCues": [
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0,
+          "volume": 0.77,
+          "pan": 0.16
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.012,
+          "volume": 0.68,
+          "pan": 0
+        },
+        {
+          "type": "tick",
+          "path": "audio/sfx/tick.wav",
+          "offsetSec": 2.007,
+          "volume": 0.67,
+          "pan": -0.2
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 3.98,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "增速排名第一的是跨智能体 MCP 工具链，开发者单周下载量突破 一千八百 万次。",
+      "ttsNarrationRef": "增速排名第一的是跨智能体 MCP 工具链，开发者单周下载量突破 1800 万次。"
+    },
+    {
+      "id": "scene-03",
+      "index": 3,
+      "title": "TOP 2：零成本本地音视频生成",
+      "narration": "紧随其后的是本地离线渲染与声音克隆工具，帮助创作者将单条成片成本压缩 92%。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.4,
+      "durationInFrames": 132,
+      "startFrame": 258,
+      "startSec": 8.6,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "紧随其后的是本地离线渲染与声音克隆工具，帮助创作者将单条成片成本压缩 92%",
+          "startSec": 0,
+          "endSec": 4.4,
+          "startFrame": 0,
+          "endFrame": 132
+        }
+      ],
+      "subtitleText": "紧随其后的是本地离线渲染与声音克隆工具，帮助创作者将单条成片成本压缩 92%。",
+      "subChunks": [
+        "紧随其后的是本地离线渲染与声音克隆工具，帮助创作者将单条成片成本压缩 92%。"
+      ],
+      "accentWords": [
+        "压缩 92%"
+      ],
+      "highlights": [
+        "双引擎渲染",
+        "零 API 成本"
+      ],
+      "layout": "metric-dashboard",
+      "threePreset": "orbital-core",
+      "transition": "zoom-punch",
+      "counterTarget": 92,
+      "kicker": "PART 03",
+      "visualBlueprint": "TOP 2：零成本本地音视频生成",
+      "speechRate": 1.05,
+      "endSec": 13,
+      "endFrame": 390,
+      "sfxCues": [
+        {
+          "type": "sub_drop",
+          "path": "audio/sfx/sub_drop.wav",
+          "offsetSec": 0,
+          "volume": 0.83,
+          "pan": 0
+        },
+        {
+          "type": "stamp",
+          "path": "audio/sfx/stamp.wav",
+          "offsetSec": 0.015,
+          "volume": 0.58,
+          "pan": 0.12
+        },
+        {
+          "type": "chime",
+          "path": "audio/sfx/chime.wav",
+          "offsetSec": 1.745,
+          "volume": 0.67,
+          "pan": 0.2
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 3.814,
+          "volume": 0.67,
+          "pan": -0.2
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 3.98,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "紧随其后的是本地离线渲染与声音克隆工具，帮助创作者将单条成片成本压缩 百分之九十二。",
+      "ttsNarrationRef": "紧随其后的是本地离线渲染与声音克隆工具，帮助创作者将单条成片成本压缩 92%。"
+    },
+    {
+      "id": "scene-04",
+      "index": 4,
+      "title": "效率对比：传统剪辑 vs AI 管线",
+      "narration": "从素材整理、配音混音到 1080p 渲染，全自动流水线把 6 小时工期压缩至 12 分钟。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.6,
+      "durationInFrames": 138,
+      "startFrame": 390,
+      "startSec": 13,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "从素材整理、配音混音到 1080p 渲染，全自动流水线把 6 小时工期压缩至 12 分钟",
+          "startSec": 0,
+          "endSec": 4.6,
+          "startFrame": 0,
+          "endFrame": 138
+        }
+      ],
+      "subtitleText": "从素材整理、配音混音到 1080p 渲染，全自动流水线把 6 小时工期压缩至 12 分钟。",
+      "subChunks": [
+        "从素材整理、配音混音到 1080p 渲染，全自动流水线把 6 小时工期压缩至 12 分钟。"
+      ],
+      "accentWords": [
+        "6 小时",
+        "12 分钟"
+      ],
+      "highlights": [
+        "30x 效率跃迁",
+        "一键发布包"
+      ],
+      "layout": "workflow-steps",
+      "threePreset": "orbital-core",
+      "transition": "light-wipe",
+      "kicker": "PART 04",
+      "visualBlueprint": "效率对比：传统剪辑 vs AI 管线",
+      "speechRate": 1.05,
+      "endSec": 17.6,
+      "endFrame": 528,
+      "sfxCues": [
+        {
+          "type": "tick",
+          "path": "audio/sfx/tick.wav",
+          "offsetSec": 0,
+          "volume": 0.72,
+          "pan": 0
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.02,
+          "volume": 0.52,
+          "pan": -0.1
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 1.483,
+          "volume": 0.67,
+          "pan": -0.2
+        },
+        {
+          "type": "tick",
+          "path": "audio/sfx/tick.wav",
+          "offsetSec": 3.552,
+          "volume": 0.67,
+          "pan": 0.2
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 4.18,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "从素材整理、配音混音到 一零八零p 渲染，全自动流水线把 六 小时工期压缩至 十二 分钟。",
+      "ttsNarrationRef": "从素材整理、配音混音到 1080p 渲染，全自动流水线把 6 小时工期压缩至 12 分钟。"
+    },
+    {
+      "id": "scene-05",
+      "index": 5,
+      "title": "硬件门槛下探：8GB 轻薄本可用",
+      "narration": "借助自适应低配保护与纯 CPU 语音引擎，超过 78% 的普通办公电脑也能流畅出片。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.5,
+      "durationInFrames": 135,
+      "startFrame": 528,
+      "startSec": 17.6,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "借助自适应低配保护与纯 CPU 语音引擎，超过 78% 的普通办公电脑也能流畅出片",
+          "startSec": 0,
+          "endSec": 4.5,
+          "startFrame": 0,
+          "endFrame": 135
+        }
+      ],
+      "subtitleText": "借助自适应低配保护与纯 CPU 语音引擎，超过 78% 的普通办公电脑也能流畅出片。",
+      "subChunks": [
+        "借助自适应低配保护与纯 CPU 语音引擎，超过 78% 的普通办公电脑也能流畅出片。"
+      ],
+      "accentWords": [
+        "78%",
+        "普通办公电脑"
+      ],
+      "highlights": [
+        "低配保护",
+        "0 显存可用"
+      ],
+      "layout": "hud-telemetry-dashboard",
+      "threePreset": "orbital-core",
+      "transition": "iris-circle",
+      "counterTarget": 78,
+      "kicker": "PART 05",
+      "visualBlueprint": "硬件门槛下探：8GB 轻薄本可用",
+      "speechRate": 1.05,
+      "endSec": 22.1,
+      "endFrame": 663,
+      "sfxCues": [
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 0,
+          "volume": 0.68,
+          "pan": -0.1
+        },
+        {
+          "type": "tick",
+          "path": "audio/sfx/tick.wav",
+          "offsetSec": 1.021,
+          "volume": 0.67,
+          "pan": 0.2
+        },
+        {
+          "type": "chime",
+          "path": "audio/sfx/chime.wav",
+          "offsetSec": 3.09,
+          "volume": 0.67,
+          "pan": -0.2
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 4.08,
+          "volume": 0.56,
+          "pan": 0,
+          "d": 0.42
+        }
+      ],
+      "ttsText": "借助自适应低配保护与纯 CPU 语音引擎，超过 百分之七十八 的普通办公电脑，也能流畅出片。",
+      "ttsNarrationRef": "借助自适应低配保护与纯 CPU 语音引擎，超过 78% 的普通办公电脑也能流畅出片。"
+    },
+    {
+      "id": "scene-06",
+      "index": 6,
+      "title": "核心结论：一人即影视工作室",
+      "narration": "当双引擎渲染、全品类音效与开放模板广场融合，每个创作者都能拥有专属 AI 制片厂。",
+      "emotion": "自信明快",
+      "role": "narrator",
+      "voiceId": "auto",
+      "voiceLocked": false,
+      "voiceMatchReason": "",
+      "visualPrompt": "",
+      "durationSec": 4.6,
+      "durationInFrames": 138,
+      "startFrame": 663,
+      "startSec": 22.1,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "当双引擎渲染、全品类音效与开放模板广场融合，每个创作者都能拥有专属 AI 制片厂",
+          "startSec": 0,
+          "endSec": 4.6,
+          "startFrame": 0,
+          "endFrame": 138
+        }
+      ],
+      "subtitleText": "当双引擎渲染、全品类音效与开放模板广场融合，每个创作者都能拥有专属 AI 制片厂。",
+      "subChunks": [
+        "当双引擎渲染、全品类音效与开放模板广场融合，每个创作者都能拥有专属 AI 制片厂。"
+      ],
+      "accentWords": [
+        "一人即影视工作室"
+      ],
+      "highlights": [
+        "开放蓝图",
+        "持续进化"
+      ],
+      "layout": "radial-climax",
+      "threePreset": "orbital-core",
+      "transition": "zoom-punch",
+      "kicker": "PART 06",
+      "visualBlueprint": "核心结论：一人即影视工作室",
+      "speechRate": 1.05,
+      "endSec": 26.7,
+      "endFrame": 801,
+      "sfxCues": [
+        {
+          "type": "stamp",
+          "path": "audio/sfx/stamp.wav",
+          "offsetSec": 0,
+          "volume": 0.83,
+          "pan": 0
+        },
+        {
+          "type": "sub_drop",
+          "path": "audio/sfx/sub_drop.wav",
+          "offsetSec": 0.015,
+          "volume": 0.58,
+          "pan": 0.12
+        },
+        {
+          "type": "chime",
+          "path": "audio/sfx/chime.wav",
+          "offsetSec": 0.659,
+          "volume": 0.67,
+          "pan": -0.2
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 2.728,
+          "volume": 0.67,
+          "pan": 0.2
+        }
+      ],
+      "ttsText": "当双引擎渲染、全品类音效与开放模板广场融合，每个创作者都能拥有专属 AI 制片厂。",
+      "ttsNarrationRef": "当双引擎渲染、全品类音效与开放模板广场融合，每个创作者都能拥有专属 AI 制片厂。"
+    }
+  ],
+  "width": 1920,
+  "height": 1080,
+  "voiceMode": "auto",
+  "defaultVoiceId": "auto",
+  "updatedAt": "2026-11-19T19:13:29.234Z"
+}

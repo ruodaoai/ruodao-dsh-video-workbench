@@ -1,0 +1,34 @@
+
+/* ---------- C · spectral timeline ---------- */
+#timeline{transition:box-shadow 90ms linear}
+.tl-head{display:flex;align-items:center;gap:14px;padding:7px 12px 6px;border-bottom:1px solid var(--ink);flex:none;min-width:0}
+.tl-head .pt{flex:0 1 auto}
+.tl-tc{font-family:var(--mono);font-size:12px;letter-spacing:.01em;white-space:nowrap;color:var(--ink3);flex:none}
+.tl-tc b{font-size:15px;color:var(--ink);font-weight:600;letter-spacing:0}
+.tl-stats{display:flex;gap:12px;white-space:nowrap;min-width:0;overflow:hidden}
+.tl-stats span{font-size:12px;color:var(--ink3);flex:none}
+.tl-stats b{color:var(--ink);font-weight:600;font-family:var(--mono)}
+/* the row is exactly the body height (minmax(0,1fr)): the label column is sized FROM the canvas height, so an auto row would
+   keep a stale, too-tall height after the viewport shrinks and push A2/A3 below the panel */
+.tl-body{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:100px minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+.tl-labels{display:flex;flex-direction:column;border-right:1px solid var(--rule2);min-width:0;min-height:0;overflow:hidden}
+.tl-lab{display:flex;align-items:center;gap:7px;padding:0 9px;border-bottom:1px solid var(--rule);min-height:0;overflow:hidden;min-width:0}
+.tl-lab .cd{font-family:var(--mono);font-size:12px;font-weight:700;width:20px;flex:none;line-height:1.2}
+.tl-lab .tx{display:flex;flex-direction:column;gap:1px;min-width:0}
+.tl-lab .nm{font-size:12.5px;font-weight:600;white-space:nowrap;line-height:1.2}
+.tl-lab .en{font-family:var(--mono);font-size:12px;line-height:1.2;letter-spacing:.01em;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl-lab.ruler{justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--ink3);letter-spacing:.02em;padding:0 8px}
+.tl-cv{position:relative;min-width:0;cursor:crosshair}
+#tlCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.zoom{display:flex;align-items:center;gap:8px;flex:none}
+.zoom .zl{font-size:12px;color:var(--ink3)}
+.tick{position:relative;height:38px;cursor:pointer;touch-action:none;min-width:200px}
+.tick .ln{position:absolute;left:8px;right:8px;top:9px;height:2px;background:var(--rule2)}
+.tick .fl{position:absolute;left:8px;top:9px;height:2px;background:var(--ink);transition:width var(--t2) var(--ease)}
+.tick .tk{position:absolute;top:4px;width:1px;height:12px;background:var(--ink3);transform:translateX(-.5px)}
+.tick .tl{position:absolute;top:21px;font-size:12px;color:var(--ink3);transform:translateX(-50%);white-space:nowrap}
+.tick .tl.on{color:var(--ink);font-weight:700}
+.tick span.tl:first-of-type{transform:translateX(-8px)}
+.tick span.tl:last-of-type{transform:translateX(calc(-100% + 8px))}
+.tick .th{position:absolute;top:1px;width:10px;height:18px;margin-left:-5px;background:var(--ink);border-radius:2px;box-shadow:0 0 0 3px var(--glass3);transition:left var(--t2) var(--ease)}
+.tick.small{height:22px;min-width:120px}

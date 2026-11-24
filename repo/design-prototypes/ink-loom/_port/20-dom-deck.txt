@@ -1,0 +1,120 @@
+@@@ RANGE
+<div id="backdrop"><canvas id="cvBack"></canvas></div>
+@@@ TO
+<div id="scrim"></div>
+@@@ WITH
+<div id="backdrop"><canvas id="cvBack"></canvas></div>
+<canvas id="cvWorld"></canvas>
+<!-- 甲板：库房与长卷固定不动（镜头不推拉它们） -->
+<div id="deck">
+  <section id="vault" class="panel" aria-label="素材仓">
+    <header class="pn-h">
+      <div class="pn-t"><b>素材仓</b><i>ASSET VAULT</i></div>
+      <button class="btn xs" id="btnImport" title="导入素材" aria-label="导入素材"><svg><use href="#i-import"/></svg>导入</button>
+    </header>
+    <nav class="v-tabs" id="vTabs" aria-label="素材分类">
+      <button class="on" data-f="all" aria-label="全部素材">全部<em></em></button><button data-f="image" aria-label="图片">画<em></em></button><button data-f="video" aria-label="视频与笔记">卷<em></em></button><button data-f="audio" aria-label="音频">丝<em></em></button><button data-f="cloud" aria-label="云端待确认">云<em></em></button>
+    </nav>
+    <div class="v-list" id="vList"></div>
+    <label class="drop" id="dropZone" tabindex="0" role="button" aria-label="拖入素材或点击导入"><svg><use href="#i-spool"/></svg><span>拖入素材 · 或点击导入</span><input type="file" id="fileIn" multiple tabindex="-1" aria-hidden="true"></label>
+  </section>
+  <section id="scroll" class="panel" aria-label="多轨时间轴">
+    <header class="tl-h" id="tlHead">
+      <div class="pn-t"><b>长卷</b><i>MULTI-TRACK SCROLL</i></div>
+      <span class="tl-stat" id="tlStat"></span>
+      <div class="tl-tools">
+        <button class="ibtn sm" id="tlPlay" title="播放 / 暂停预览（空格）" aria-label="播放预览"><svg><use href="#i-play"/></svg></button>
+        <span class="tl-tc" id="tlTc">00:00.00</span>
+        <div class="seg sm" role="group" aria-label="长卷缩放"><button id="tlZo" title="缩小（-）" aria-label="缩小长卷">−</button><button id="tlFit" class="on" title="整卷适配（F）" aria-label="整卷适配">整卷</button><button id="tlZi" title="放大（+）" aria-label="放大长卷">＋</button></div>
+        <label class="chk"><input type="checkbox" id="tlSnap" checked><span>吸附拍点</span></label>
+      </div>
+    </header>
+    <div class="tl-labels" id="tlLabels"></div>
+    <div class="tl-hit" id="tlHit" aria-label="长卷：点击镜头在分步精修中打开，点击空白处定位预览"></div>
+  </section>
+</div>
+<!-- 舞台窗口：镜头只在这里推拉（超出部分裁掉，绝不压住库房 / 长卷 / 任务中心） -->
+<div id="stageWin">
+  <div id="plane">
+    <div id="stations"></div>
+    <div id="monCtl">
+      <button class="mc-play" id="mcPlay" title="播放 / 暂停预览（空格）" aria-label="播放预览"><svg><use href="#i-play"/></svg></button>
+      <div class="mc-bar" id="mcBar" role="slider" aria-label="预览进度"><i></i><b></b></div>
+      <span class="mc-time" id="mcTime">00:00.00 / 00:00.00</span>
+      <button class="mc-play mc-mute dis" id="mcMute" title="静音 / 取消静音" aria-label="取消静音"><svg><use href="#i-mute"/></svg></button>
+      <button class="mc-btn" id="mc9" title="3×3 抽帧" aria-label="九宫抽帧">九宫抽帧</button>
+    </div>
+  </div>
+</div>
+<canvas id="cvFx"></canvas>
+<div id="dof"></div>
+<div id="vignette"></div>
+
+<!-- ═══════════════ HUD ═══════════════ -->
+<div id="hero">
+  <div class="h-row"><b class="h-cn">墨韵织机</b><span class="h-en">INK LOOM<em>AGENT WAR ROOM</em></span></div>
+  <div class="h-big"><b id="hPct">00</b><em>%</em><div class="h-state"><span id="hState">待命 · 八工就位</span><i id="hSub">等待宿主推送工程</i></div></div>
+</div>
+<div id="cmd">
+  <button class="capsule" id="capsule" title="创意主题与出片参数（P）" aria-label="创意主题与出片参数"><svg class="fan"><use href="#i-fan"/></svg><span id="capTxt" class="ph">写下创意主题 · 点此展开经折</span><em>经折</em></button>
+  <button class="run" id="btnRun" title="一键出片（R）" aria-label="一键出片（R）"><span class="run-seal"><b>出</b><b>片</b></span><span class="run-txt"><b id="runLbl">一键出片</b><i id="runSub">RUN · 八工开织</i></span></button>
+</div>
+<div id="onboard" hidden>
+  <div class="ob-seal" aria-hidden="true">卷</div>
+  <b class="ob-t">尚未打开工程</b>
+  <p class="ob-p">新建一个视频工程，或打开已有工程，八位工匠即刻就位，把素材一梭一梭织成成片。</p>
+  <div class="ob-btns"><button class="btn seal" data-ob="new" aria-label="新建工程"><svg><use href="#i-plus"/></svg>新建工程</button><button class="btn gold" data-ob="open" aria-label="打开工程"><svg><use href="#i-grid"/></svg>打开工程</button></div>
+</div>
+<div id="waiting" hidden><b>墨韵织机</b><span>等待宿主推送工程状态…</span></div>
+
+<aside id="tasks" class="panel" aria-label="任务中心">
+  <div class="tc-body">
+    <header class="pn-h">
+      <div class="pn-t"><b>任务中心</b><i>TASK CENTER</i></div>
+      <span class="run-id mono" id="runId"></span>
+    </header>
+    <div class="tc-top">
+      <div class="tc-ring">
+        <svg viewBox="0 0 80 80" aria-hidden="true"><circle class="bg" cx="40" cy="40" r="34"/><g id="ringPh"></g><circle class="fg" id="ringFg" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="213.6"/></svg>
+        <div class="tc-pct"><b><span id="tcPct">0</span><em>%</em></b></div>
+      </div>
+      <div class="tc-ph">
+        <div class="k"><span id="tcPhK">候</span><b id="tcPhName">待命 · 未开织</b></div>
+        <p id="tcPhSub">点「一键出片」，八位工匠将把素材织成成片。</p>
+      </div>
+    </div>
+    <div class="tc-times">
+      <div><em>已用时</em><b id="tcEl">00:00</b></div>
+      <div><em>预计剩余</em><b id="tcEta">--:--</b></div>
+      <div><em>阶段</em><b id="tcStage">0 / 5</b></div>
+    </div>
+    <div class="tc-phases" id="tcPhases"></div>
+    <div class="tc-ctrl">
+      <button class="btn seal sm" data-act="start" aria-label="开始出片"><svg><use href="#i-play"/></svg><span>开始</span></button>
+      <button class="btn sm dis" data-act="pause" aria-label="暂停织造"><svg><use href="#i-pause"/></svg><span>暂停</span></button>
+      <button class="btn sm dis" data-act="stop" aria-label="停止织造"><svg><use href="#i-stop"/></svg><span>停止</span></button>
+      <button class="btn sm dis" data-act="retry" aria-label="重试"><svg><use href="#i-retry"/></svg><span>重试</span></button>
+    </div>
+    <section class="tc-sec tc-ag">
+      <h4 class="sec-h">八工<em>AGENTS</em><button class="lnk" id="tcMore" aria-label="打开宿主任务中心">运行记录</button></h4>
+      <ul class="ag8" id="ag8"></ul>
+      <div class="meters">
+        <div class="meter"><em>渲染帧</em><b id="mFrames">0 / 0</b><div class="mb"><i id="mFramesB"></i></div></div>
+        <div class="meter"><em>节拍</em><b id="mBpm">—</b><div class="mb"><i id="mBpmB"></i></div></div>
+        <div class="meter"><em>音效</em><b id="mSfx">—</b><div class="mb"><i id="mSfxB"></i></div></div>
+      </div>
+    </section>
+    <section class="tc-sec tc-log">
+      <h4 class="sec-h">实时日志<em>LIVE LOG</em></h4>
+      <div class="log" id="logList" role="log" aria-live="polite"></div>
+    </section>
+  </div>
+</aside>
+
+<div id="minimap"><canvas id="mmCv"></canvas><span>取景 VIEWFINDER<b id="mmMode">跟随</b></span></div>
+<div id="pauseInk"><b>停</b><span>已暂停 · R 继续织造</span></div>
+<div id="toasts"></div>
+<div id="tip"></div>
+<div id="scrim"></div>
+<div id="vpick" class="menu" role="listbox" aria-label="选择主讲音色"><input class="vq" id="vpQ" type="search" placeholder="搜索音色" aria-label="搜索音色"><div class="vlist" id="vpList"></div><div class="vp-foot"><span id="vpN"></span><button class="btn xs" data-panel="voices" aria-label="打开配音中心">配音中心</button></div></div>
+@@@ END

@@ -1,0 +1,93 @@
+{
+  "id": "tech-launch-keynote",
+  "order": 2,
+  "name": "科技旗舰发布会 · 双引擎 3D 动效宣传片",
+  "category": "product-promo",
+  "genre": "product-promo",
+  "genreLabel": "科技旗舰发布会 · 双引擎 3D 动效宣传片",
+  "style": "tech",
+  "engine": "remotion",
+  "narrationMode": "tts-beat-sync",
+  "pacingMode": "balanced",
+  "subtitleStyle": "pill",
+  "aspectRatio": "9:16",
+  "fps": 30,
+  "shotCount": 22,
+  "durationSec": 80.5,
+  "avgShotSec": 3.66,
+  "bpm": 118,
+  "description": "22 镜科技旗舰发布会模板：Remotion + Three.js 3D 空间开场、数据脉冲墙、工作流演示与科技质感卡点音效，一键替换任意开源项目或商业产品发布。",
+  "tags": [
+    "科技发布会",
+    "3D 动效",
+    "产品宣传片",
+    "Remotion 4.x",
+    "118 BPM"
+  ],
+  "colorPalette": {
+    "background": "#070B16",
+    "primary": "#2563EB",
+    "accent": "#F59E0B",
+    "highlight": "#FFF7DF"
+  },
+  "vfxSignature": [],
+  "transitionSignature": [
+    "cut",
+    "slash-wipe",
+    "block-wipe",
+    "glitch-cut",
+    "light-wipe"
+  ],
+  "replicationPrompt": "",
+  "audioProfile": {
+    "genreKey": "code-animation",
+    "profileName": "代码与架构演进精密声场",
+    "beatCutIntensity": "gentle",
+    "blitzAllowed": false,
+    "minBeatMultiple": 2,
+    "cameraBeatIntensity": 0.12,
+    "targetLufs": -14.8,
+    "bgmDuckRatio": 3.2,
+    "sfxBoostVoice": 0.92,
+    "sfxBoostMv": 1.18,
+    "bgmVolVoice": 0.34,
+    "bgmVolMv": 0.72,
+    "sfxPalette": {
+      "opener": [
+        "radar",
+        "chime"
+      ],
+      "drop": [
+        "glitch",
+        "shine"
+      ],
+      "action": [
+        "typing",
+        "radar"
+      ],
+      "data": [
+        "counter",
+        "tick"
+      ],
+      "neutral": [
+        "click",
+        "swoosh"
+      ],
+      "internal": [
+        "typing",
+        "radar",
+        "lock"
+      ],
+      "preCut": [
+        "swoosh",
+        "riser"
+      ]
+    }
+  },
+  "author": "Merziller",
+  "plaza": "影核广场 · CinePulse Hub",
+  "coverFile": "cover.png",
+  "updatedAt": "2026-11-19T19:13:21.053Z",
+  "previewFile": "preview.mp4",
+  "previewDurationSec": 14.23
+}

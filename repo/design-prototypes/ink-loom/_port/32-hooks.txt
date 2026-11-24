@@ -1,0 +1,6 @@
+@@@ REPLACE
+Pipe, CAM, SW, L, AG, setCam, openFolio, closeFolio, openModal, closeModal, applyState, act, focus: focusAgent, theme: applyTheme };
+@@@ WITH
+Pipe, CAM, SW, L, AG, setCam, openFolio, closeFolio, openModal, closeModal, applyState, act, importFiles, focus: focusAgent, theme: applyTheme,
+    sceneXY(i) { const s = SCENES[i]; if (!s) return null; return { x: tX(s.t0 + s.dur / 2), y: L.topH + L.rows.shot.c }; } };
+@@@ END

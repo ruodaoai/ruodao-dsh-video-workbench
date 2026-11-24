@@ -1,0 +1,40 @@
+@@@ INSERT_BEFORE
+const TOOLS = [['影', '影核广场', 'TEMPLATES', 'plaza'],
+@@@ TEXT
+function toggleMenu(el, e) { if (e) e.stopPropagation(); const was = el.classList.contains('open') || el.classList.contains('on'); closeMenus(); if (!was) el.classList.add(el.classList.contains('menu') ? 'on' : 'open'); return !was; }
+function bindTop() {
+  /* 任何 data-panel 按钮（百宝格、经折、引擎页、空状态…）→ 宿主面板 */
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-panel]'); if (!b || b.classList.contains('dis')) return;
+    e.preventDefault(); closeMenus();
+    act('openPanel', { panel: b.dataset.panel });
+  });
+  $('#hostBack').onclick = () => act('backToChat', {});
+  $('#projDD .dd-btn').onclick = (e) => { toggleMenu($('#projDD'), e); };
+  $('#projMenu').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    closeMenus();
+    if (b.dataset.new != null) act('newProject', {});
+    else if (b.dataset.dir != null) { if (!STATE || !STATE.project || b.dataset.dir !== STATE.project.dir) act('selectProject', { dir: b.dataset.dir }); }
+  });
+  $('#modeTabs').onclick = (e) => { const b = e.target.closest('.slip'); if (!b || b.dataset.panel) return; closeModal(); closeFolio(); };
+  $('#skinDD .dd-btn').onclick = (e) => { toggleMenu($('#skinDD'), e); };
+  $('#skinMenu').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-skin]'); if (!b) return;
+    closeMenus();
+    if (b.dataset.skin === SKIN_ID) return;
+    act('setSkin', { skin: b.dataset.skin });
+  });
+  $('#btnTools').onclick = (e) => toggleMenu($('#toolsMenu'), e);
+  $('#btnTheme').onclick = (e) => toggleMenu($('#themePop'), e);
+  $('#thCards').onclick = (e) => { const c = e.target.closest('.th-card'); if (!c) return; applyTheme(c.dataset.th); TEX.vig = null; try { localStorage.setItem('dshvw.ink-loom.theme', c.dataset.th); } catch (x) { /* ignore */ } };
+  $('#busyPill').onclick = () => act('openPanel', { panel: 'tasks' });
+  $('#onboard').addEventListener('click', (e) => { const b = e.target.closest('[data-ob]'); if (!b) return; act(b.dataset.ob === 'new' ? 'newProject' : 'openPanel', b.dataset.ob === 'new' ? {} : { panel: 'projects' }); });
+  document.addEventListener('click', (e) => { if (!e.target.closest('.dd, .sel, #toolsMenu, #themePop, #btnTools, #btnTheme')) closeMenus(); });
+}
+@@@ END
+@@@ REPLACE
+function closeMenus() { $$('.dd.open, .sel.open').forEach((e) => e.classList.remove('open')); $$('#toolsMenu, #themePop').forEach((e) => e.classList.remove('on')); }
+@@@ WITH
+function closeMenus() { $$('.dd.open, .sel.open').forEach((e) => e.classList.remove('open')); $$('#toolsMenu, #themePop').forEach((e) => e.classList.remove('on')); $$('.dd-btn[aria-expanded]').forEach((b) => b.setAttribute('aria-expanded', 'false')); }
+@@@ END

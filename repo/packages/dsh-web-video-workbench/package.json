@@ -1,0 +1,23 @@
+{
+  "name": "@dsh-video/web-video-workbench",
+  "version": "0.1.0",
+  "description": "Three-column HTML/Remotion Video Workbench WebUI & API plugin for DeepSeek Harness",
+  "license": "MIT",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  }
+}

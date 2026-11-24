@@ -1,0 +1,30 @@
+@@@ RANGE
+<div id="folio" aria-hidden="true">
+@@@ TO
+<div class="menu" id="themePop"><h4 class="sec-h">主题<em>THEME</em></h4><div class="th-cards" id="thCards"></div></div>
+@@@ WITH
+<div id="folio" aria-hidden="true" role="dialog" aria-label="经折：创意主题与出片参数">
+  <div class="fo-card">
+    <div class="fo-head">
+      <div class="pn-t"><b>经折</b><i>BRIEF · RENDER PARAMETERS</i></div>
+      <span class="fo-sum" id="foSum"></span>
+      <button class="ibtn" data-fclose title="收起（Esc）" aria-label="收起经折"><svg><use href="#i-x"/></svg></button>
+    </div>
+    <div class="fo-brief">
+      <label for="foTopic"><span>创意主题</span><em>BRIEF</em></label>
+      <textarea id="foTopic" rows="2" maxlength="8000" placeholder="写下视频的主题、叙事与风格要求，例如：霍去病少年封狼居胥，90 BPM 战歌卡点，剪影水墨风" aria-label="创意主题"></textarea>
+      <div class="fo-bbtns"><button class="btn sm" id="foPolish" aria-label="AI 润色创意主题"><svg><use href="#i-wand"/></svg>AI 润色</button><button class="btn seal sm" id="foRun" aria-label="按此主题一键出片"><svg><use href="#i-play"/></svg>一键出片</button></div>
+    </div>
+    <div class="fo-pages" id="foPages"></div>
+    <div class="fo-foot">
+      <span class="hint">改动即时同步宿主 · 运行中修改将在下次出片生效</span>
+      <button class="btn gold sm" data-fclose aria-label="收起经折">收起经折</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 通用弹窗 / 百宝格 / 主题 ═══════════════ -->
+<div id="modal"><div class="m-card panel" role="dialog" aria-labelledby="mTitle"><header class="pn-h"><div class="pn-t"><b id="mTitle"></b><i id="mEn"></i></div><button class="ibtn m-x" data-mclose title="关闭（Esc）" aria-label="关闭"><svg><use href="#i-x"/></svg></button></header><div class="m-body" id="mBody"></div></div></div>
+<div class="menu" id="toolsMenu"><h4 class="sec-h">工坊百宝格<em>TOOLS · 宿主面板</em></h4><div class="tiles" id="tiles"></div></div>
+<div class="menu" id="themePop"><h4 class="sec-h">墨色<em>THEME</em></h4><div class="th-cards" id="thCards"></div></div>
+@@@ END

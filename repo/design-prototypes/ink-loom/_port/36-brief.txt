@@ -1,0 +1,198 @@
+@@@ INSERT_AFTER
+  <symbol id="i-trash" viewBox="0 0 16 16"><path d="M3 4.5h10M6.4 4.5V3h3.2v1.5M4.4 4.5l.7 9h5.8l.7-9" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></symbol>
+@@@ TEXT
+  <symbol id="i-pen" viewBox="0 0 16 16"><path d="M10.6 2.4l3 3-7.9 7.9-3.6.6.6-3.6z" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M9.2 3.8l3 3" stroke="currentColor" stroke-width="1.1"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 16 16"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+@@@ END
+@@@ RANGE
+<div id="cmd">
+@@@ TO
+</div>
+<div id="onboard" hidden>
+@@@ WITH
+<div id="cmd">
+  <button class="brief" id="brief" title="需求输入：点击打开大号编辑器（B）" aria-label="需求输入：点击写下你想要的视频（B）">
+    <span class="br-h"><b class="br-seal" aria-hidden="true">题</b><b class="br-cn">需求输入</b><i class="br-en">BRIEF · 创意需求</i><span class="br-fill"></span><em class="br-n" id="briefN">未填写</em><span class="br-pen"><svg><use href="#i-pen"/></svg><span id="briefPen">点此输入</span></span></span>
+    <span class="br-txt ph" id="briefTxt">写下你想要的视频：主题、时长、风格、节奏、配乐……一句话也能出片</span>
+  </button>
+  <div class="cmd-r">
+    <button class="run" id="btnRun" title="一键出片（R）" aria-label="一键出片（R）"><span class="run-seal"><b>出</b><b>片</b></span><span class="run-txt"><b id="runLbl">一键出片</b><i id="runSub">RUN · 八工开织</i></span></button>
+    <button class="capsule" id="capsule" title="出片参数（P）" aria-label="经折：出片参数（P）"><svg class="fan"><use href="#i-fan"/></svg><span id="capTxt">经折 · 出片参数</span></button>
+  </div>
+</div>
+<div id="onboard" hidden>
+@@@ END
+@@@ RANGE
+    <div class="fo-brief">
+@@@ TO
+    <div class="fo-pages" id="foPages"></div>
+@@@ WITH
+    <div class="fo-brief">
+      <label for="foTopic"><span>需求输入</span><em>BRIEF · 创意主题</em></label>
+      <div class="fo-ta"><textarea id="foTopic" rows="2" maxlength="8000" placeholder="写下视频的主题、叙事与风格要求，例如：霍去病少年封狼居胥，90 BPM 战歌卡点，剪影水墨风" aria-label="需求输入（创意主题）"></textarea><button class="ibtn sm fo-exp" id="foExpand" title="放大编辑（完整显示全部内容 · 灵感模板 · AI 润色）" aria-label="放大编辑需求"><svg><use href="#i-expand"/></svg></button><em class="fo-n" id="foN" aria-hidden="true"></em></div>
+      <div class="fo-bbtns"><button class="btn sm" id="foPolish" aria-label="AI 润色创意主题"><svg><use href="#i-wand"/></svg>AI 润色</button><button class="btn seal sm" id="foRun" aria-label="按此主题一键出片"><svg><use href="#i-play"/></svg>一键出片</button></div>
+    </div>
+    <div class="fo-pages" id="foPages"></div>
+@@@ END
+@@@ REPLACE
+  L.cmdH = tiny ? 34 : 40;
+@@@ WITH
+  L.cmdH = tiny ? 68 : compact ? 74 : 77; /* 题签（创意需求两行预览）+ 出片按钮 / 经折按钮 */
+@@@ END
+@@@ REPLACE
+  const cmd = $('#cmd'); cmd.style.left = L.stage.cx + 'px'; cmd.style.top = L.topH + L.cmdY + 'px'; cmd.style.maxWidth = Math.max(200, L.stage.w - 16) + 'px';
+@@@ WITH
+  const cmd = $('#cmd'); cmd.style.left = L.stage.cx + 'px'; cmd.style.top = L.topH + L.cmdY + 'px'; cmd.style.maxWidth = Math.max(200, L.stage.w - 16) + 'px';
+  cmd.style.width = Math.round(Math.max(200, Math.min(L.stage.w - 16, L.tiny ? 760 : 880))) + 'px'; R.setProperty('--cmd-h', L.cmdH + 'px');
+@@@ END
+@@@ REPLACE
+function syncCapsule() {
+  const t = String(DIR.topic || '').trim();
+  const cap = $('#capTxt'); cap.textContent = t || '写下创意主题 · 点此展开经折'; cap.classList.toggle('ph', !t);
+  $('#capsule').title = (t ? '创意主题：' + t + '\n' : '') + '出片参数：' + capsuleText() + '\n（P 展开经折）';
+}
+@@@ WITH
+const BRIEF_PH = '写下你想要的视频：主题、时长、风格、节奏、配乐……一句话也能出片';
+function syncCapsule(draft) {
+  setTitle('capsule', '出片参数：' + capsuleText() + '\n（点击或按 P 展开经折）');
+  syncBrief(draft);
+}
+/* 主屏题签：创意需求的两行预览 + 字数（全文在 title 与大号编辑器里） */
+function syncBrief(draft) {
+  const raw = String(draft != null ? draft : DIR.topic || ''), t = raw.trim(), n = Array.from(raw).length;
+  setTxt('briefTxt', t ? raw.replace(/\s+/g, ' ').trim() : BRIEF_PH);
+  const el = $('#briefTxt'); if (el) el.classList.toggle('ph', !t);
+  setTxt('briefN', t ? `${n} 字` : '未填写');
+  setTxt('briefPen', t ? '放大编辑' : '点此输入');
+  const bb = $('#brief'); if (bb) bb.classList.toggle('empty', !t);
+  setTitle('brief', t ? `需求输入（${n} 字）：\n${raw.length > 600 ? raw.slice(0, 600) + '…' : raw}\n\n点击打开大号编辑器查看 / 修改全文（B）` : '需求输入（B）：写下你想要的视频——主题、时长、风格、节奏、配乐都可以写');
+}
+/* 经折里的需求输入框：随内容自动增高（上限约 0.36 屏，再多在框内滚动，或点 ⤢ 打开大号编辑器看全文） */
+function growTopic() {
+  const ta = $('#foTopic'); if (!ta) return;
+  const max = Math.max(110, Math.round((innerHeight || 800) * 0.36));
+  ta.style.height = 'auto';
+  const h = ta.scrollHeight + 2;
+  ta.style.height = Math.min(h, max) + 'px';
+  ta.style.overflowY = h > max ? 'auto' : 'hidden';
+  const nEl = $('#foN'); if (nEl) nEl.textContent = `${Array.from(ta.value).length} / 8000`;
+}
+@@@ END
+@@@ REPLACE
+  if (ta && document.activeElement !== ta && performance.now() - BRIEF.editedAt > 800 && ta.value !== DIR.topic) ta.value = DIR.topic || '';
+}
+@@@ WITH
+  if (ta && document.activeElement !== ta && performance.now() - BRIEF.editedAt > 800 && ta.value !== DIR.topic) { ta.value = DIR.topic || ''; growTopic(); }
+}
+@@@ END
+@@@ REPLACE
+  $('#scrim').classList.add('on'); FOLIO_OPEN = true;
+  syncFolio();
+@@@ WITH
+  $('#scrim').classList.add('on'); FOLIO_OPEN = true;
+  syncFolio(); growTopic();
+@@@ END
+@@@ REPLACE
+  if (!topic && !SCENES.length) { openFolio(true); toast('先写下创意主题，再点「一键出片」', '题'); return; }
+@@@ WITH
+  if (!topic && !SCENES.length) { openBrief(); toast('先写下创意需求，再点「一键出片」', '题'); return; }
+@@@ END
+@@@ REPLACE
+  $('#capsule').onclick = () => openFolio(true);
+@@@ WITH
+  $('#capsule').onclick = () => openFolio();
+  $('#brief').onclick = () => openBrief();
+@@@ END
+@@@ REPLACE
+  ta.addEventListener('input', () => { BRIEF.editedAt = performance.now(); clearTimeout(BRIEF.timer); BRIEF.timer = setTimeout(sendTopic, 400); syncCapsuleDraft(); });
+@@@ WITH
+  ta.addEventListener('input', () => { BRIEF.editedAt = performance.now(); clearTimeout(BRIEF.timer); BRIEF.timer = setTimeout(sendTopic, 400); syncCapsuleDraft(); growTopic(); });
+  $('#foExpand').onclick = (e) => { e.stopPropagation(); openBrief(); };
+@@@ END
+@@@ REPLACE
+function syncCapsuleDraft() { const ta = $('#foTopic'), t = ta ? ta.value.trim() : ''; const cap = $('#capTxt'); cap.textContent = t || '写下创意主题 · 点此展开经折'; cap.classList.toggle('ph', !t); }
+@@@ WITH
+function syncCapsuleDraft() { const ta = $('#foTopic'); syncBrief(ta ? ta.value : null); }
+@@@ END
+@@@ REPLACE
+  fitTasks(); trimVault();
+  TEX.vig = null;
+}
+@@@ WITH
+  fitTasks(); trimVault(); growTopic();
+  TEX.vig = null;
+}
+@@@ END
+@@@ INSERT_BEFORE
+</style>
+@@@ TEXT
+/* ═════════ 主屏题签：创意需求（手卷式两行预览 · 点击进大号编辑器）+ 出片 / 经折 ═════════ */
+#cmd{align-items:stretch;gap:12px}
+#cmd .cmd-r{display:flex;flex-direction:column;gap:4px;flex:none;height:var(--cmd-h,76px)}
+#cmd .cmd-r .run{flex:1 1 auto;height:auto;min-height:0}
+#cmd .cmd-r .capsule{flex:none;justify-content:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font:400 12.5px/1 var(--kai);letter-spacing:.1em;color:var(--gold2);white-space:nowrap}
+#cmd .cmd-r .capsule .fan{width:13px;height:13px}
+#cmd .cmd-r .capsule span{max-width:none;overflow:visible}
+.brief{--br-fs:13px;--br-lh:1.55;--br-top:29px;position:relative;flex:1 1 auto;min-width:0;height:var(--cmd-h,77px);display:flex;flex-direction:column;gap:4px;padding:6px 16px 6px 17px;text-align:left;font-size:var(--br-fs);border-radius:3px;border:1px solid var(--gl);
+  background:var(--fiber),repeating-linear-gradient(180deg,transparent 0 calc(var(--br-fs) * var(--br-lh) - 1px),rgba(var(--gold-rgb),.08) calc(var(--br-fs) * var(--br-lh) - 1px) calc(var(--br-fs) * var(--br-lh))),linear-gradient(180deg,rgba(var(--paper-rgb),.97),rgba(var(--paper-rgb),.9));
+  background-size:auto,100% calc(100% - var(--br-top)),auto;background-repeat:repeat,no-repeat,no-repeat;background-position:0 0,0 var(--br-top),0 0;
+  box-shadow:var(--shadow-s),inset 0 1px 0 rgba(255,236,200,.04);transition:box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+.brief::before,.brief::after{content:"";position:absolute;top:-5px;bottom:-5px;width:8px;border-radius:2px;pointer-events:none;
+  background:linear-gradient(var(--gold),var(--gold)) 50% 0/100% 3px no-repeat,linear-gradient(var(--gold),var(--gold)) 50% 100%/100% 3px no-repeat,linear-gradient(90deg,var(--lac2),var(--lac1) 45%,var(--lac2));box-shadow:0 2px 6px rgba(0,0,0,.45)}
+.brief::before{left:-5px}.brief::after{right:-5px}
+.brief:hover,.brief:focus-visible{border-color:var(--gl2);box-shadow:var(--glow),var(--shadow-s)}
+.brief:active{transform:translateY(1px)}
+.br-h{display:flex;align-items:center;gap:7px;min-width:0;height:18px;flex:none}
+.br-seal{display:grid;place-items:center;width:18px;height:18px;border-radius:2px;background:var(--cinna);color:#FFF1E2;font:400 12px/1 var(--kai);box-shadow:inset 0 0 0 1px rgba(255,236,214,.45),inset 0 0 0 2px var(--cinna);flex:none}
+.br-cn{font:400 15px/1 var(--kai);letter-spacing:.14em;color:var(--gold2);white-space:nowrap;flex:none}
+.br-en{font:8.5px/1 var(--mono);font-style:normal;letter-spacing:.16em;color:var(--t3);white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.br-fill{flex:1 1 8px;min-width:8px;height:1px;background:linear-gradient(90deg,var(--hair2),transparent)}
+.br-n{flex:none;font:10.5px/1 var(--mono);font-style:normal;color:var(--t3);white-space:nowrap}
+.br-pen{flex:none;display:inline-flex;align-items:center;gap:4px;height:18px;padding:0 8px;border-radius:9px;border:1px solid var(--gl);font-size:11px;color:var(--gold2);white-space:nowrap;background:rgba(var(--gold-rgb),.07);transition:all var(--dur) var(--ease)}
+.br-pen svg{width:10px;height:10px}
+.brief:hover .br-pen{border-color:var(--gl2);background:rgba(var(--gold-rgb),.16)}
+.br-txt{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;flex:1 1 auto;min-height:0;font:var(--br-fs)/var(--br-lh) var(--sans);color:var(--text);overflow-wrap:anywhere;word-break:normal;letter-spacing:.01em}
+.br-txt.ph{color:var(--t3)}
+body.compact .brief{--br-fs:12px}
+body.tiny .brief{--br-fs:12px;--br-lh:1.5;--br-top:25px;padding:5px 13px 5px 14px;gap:3px}
+body.tiny .br-h{height:16px;gap:6px}
+body.tiny .br-seal{width:16px;height:16px;font-size:11px}
+body.tiny .br-cn{font-size:13px;letter-spacing:.1em}
+body.tiny .br-en{display:none}
+body.tiny .br-pen{height:16px;padding:0 6px}
+body.tiny .br-pen span{display:none}
+body.tiny #cmd{gap:9px}
+body.tiny #cmd .cmd-r .capsule{height:22px;font-size:12px;padding:0 8px}
+body.tiny #cmd .cmd-r .run{height:auto}
+body[data-theme=paper] .br-seal{color:#FFF6E4}
+body.noproj .brief{opacity:.82}
+/* 还没写需求：题签金边呼吸 + 「点此输入」金签，一眼就知道从这里开始 */
+.brief.empty{border-color:var(--gl2);animation:briefCall 2.8s var(--ease) infinite}
+@keyframes briefCall{0%,100%{box-shadow:var(--shadow-s),0 0 0 0 rgba(var(--gold-rgb),0)}50%{box-shadow:var(--shadow-s),0 0 0 3px rgba(var(--gold-rgb),.16),0 0 22px rgba(var(--gold-rgb),.24)}}
+.brief.empty .br-pen{background:linear-gradient(180deg,var(--gold2),var(--gold));border-color:var(--gold2);color:#1C150C}
+body[data-theme=paper] .brief.empty .br-pen{color:#FFF6E4}
+body.low .brief.empty,.brief.empty:hover,.brief.empty:focus-visible{animation:none}
+@media (prefers-reduced-motion:reduce){.brief.empty{animation:none}}
+/* ═════════ 经折：创意主题自动增高 + ⤢ 放大编辑；参数选项完整显示（允许换行，不再截断） ═════════ */
+.fo-ta{position:relative;min-width:0;display:flex;flex-direction:column}
+#foTopic{display:block;min-height:62px;max-height:none;resize:none;overflow:hidden;padding:8px 40px 8px 10px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+.fo-exp{position:absolute;right:5px;top:5px;background:rgba(var(--paper-rgb),.85)}
+/* 字数放在框下方（与面板内核一致），不压住正在输入的文字 */
+.fo-n{align-self:flex-end;margin-top:3px;font:10.5px/1 var(--mono);font-style:normal;color:var(--t3);pointer-events:none}
+.fo-card{display:flex;flex-direction:column;max-height:calc(100vh - var(--top-h) - 70px)}
+.fo-head,.fo-brief,.fo-foot{flex:none}
+.fo-pages{flex:1 1 auto;min-height:0;max-height:none}
+.tag-s{height:auto;min-height:26px;padding:4px 9px 4px 15px;white-space:normal;line-height:1.35;text-align:left}
+.tag-s span{overflow:visible;text-overflow:clip;white-space:normal;overflow-wrap:anywhere}
+.sel-btn{height:auto;min-height:28px;padding:4px 9px}
+.sel-btn span{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.35}
+.seal-tg .tx-a{white-space:normal;overflow:visible;text-overflow:clip}
+.eng-r{height:auto;min-height:28px;padding:4px 8px}
+.eng-r em{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.35}
+#vpick .vlist button .mt{white-space:normal;overflow-wrap:anywhere}
+@media (max-width:1500px){
+  .fo-pages{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .leaf:nth-child(3n){border-right:0}
+  .leaf:nth-child(n+4){border-top:1px solid var(--hair)}
+}
+@@@ END

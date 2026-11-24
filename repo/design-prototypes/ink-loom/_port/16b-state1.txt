@@ -1,0 +1,96 @@
+@@@ INSERT_BEFORE
+/* ══════════════ 28. 启动 ══════════════ */
+@@@ TEXT
+/* ── 状态 → 织机数据 ── */
+const num = (v, d = 0) => { const n = Number(v); return Number.isFinite(n) ? n : d; };
+const arr = (v) => (Array.isArray(v) ? v : []);
+function sizeTxt(a) { if (a.width && a.height) return `${a.width}×${a.height}`; return ''; }
+function rebuildTimeline(S) {
+  const tl = S.timeline || {}, p = S.project;
+  const scenes = arr(tl.scenes).slice(0, 400);
+  const sig = JSON.stringify([p ? p.dir : '', num(tl.totalSec), scenes.map((s) => [s.id, num(s.startSec), num(s.durationSec), s.title, s.subtitle, s.thumbUrl, !!s.hasVoice, arr(s.sfx).length, !!s.locked]), arr(tl.beats).length, arr(tl.drops).join(','), arr(tl.music).map((m) => [m.name, m.startSec, m.endSec])]);
+  if (sig === TL.sig) return false;
+  const changedRun = TL.sig === '' ? true : JSON.parse(TL.sig)[0] !== (p ? p.dir : '');
+  TL.sig = sig;
+  let end = 0;
+  SCENES = scenes.map((s, i) => {
+    const t0 = Math.max(0, num(s.startSec)), dur = Math.max(0.05, num(s.durationSec, 1)), t1 = +(t0 + dur).toFixed(3);
+    end = Math.max(end, t1);
+    return { i, n: i + 1, id: String(s.id || 'scene-' + (i + 1)), title: String(s.title || `第 ${i + 1} 幕`), t0, dur, t1, sub: String(s.subtitle || ''), thumb: String(s.thumbUrl || ''), hasVoice: !!s.hasVoice, locked: !!s.locked, sfx: arr(s.sfx).slice(0, 40).map((f) => ({ type: String(f.type || 'sfx'), t: num(f.t) })).filter((f) => f.t >= 0) };
+  });
+  DUR = Math.max(5, num(tl.totalSec) > 0 ? num(tl.totalSec) : 0, end, num(p && p.durationSec));
+  BEATS = arr(tl.beats).slice(0, 600).map((b) => [num(b.t, -1), b.strong ? 1 : 0]).filter((b) => b[0] >= 0 && b[0] <= DUR + 0.5).sort((a, b) => a[0] - b[0]);
+  DROPS = arr(tl.drops).map((d) => num(d, -1)).filter((d) => d >= 0 && d <= DUR + 0.5).sort((a, b) => a - b).slice(0, 40);
+  MUSIC = arr(tl.music).slice(0, 8).map((m) => ({ name: String(m.name || '配乐'), t0: clamp(num(m.startSec), 0, DUR), t1: clamp(num(m.endSec, DUR) > 0 ? num(m.endSec, DUR) : DUR, 0, DUR) })).filter((m) => m.t1 - m.t0 > 0.05);
+  SFX_ALL = [];
+  SCENES.forEach((s) => s.sfx.forEach((f) => SFX_ALL.push({ type: f.type, t: f.t, sc: s.i })));
+  SFX_ALL.sort((a, b) => a.t - b.t);
+  if (SFX_ALL.length > 1500) SFX_ALL.length = 1500;
+  SCENE_IX = {}; SCENES.forEach((s) => (SCENE_IX[s.id] = s.i));
+  decorateScenes();
+  CLIP = SCENES.map(() => ({ st: 0, fx: -9, landed: false }));
+  TLS.sfxDrop = new Float32Array(SFX_ALL.length).fill(-2); TLS.dropMark = DROPS.map(() => -2);
+  buildEnvelopes();
+  buildAtlas();
+  CODE_CACHE.key = '';
+  if (!TLV.manual || changedRun) { TLV.manual = false; TLV.a0 = -0.6; TLV.a1 = DUR + 0.6; if (changedRun) { TLV.v0 = TLV.a0; TLV.v1 = TLV.a1; } }
+  FILM.t = clamp(FILM.t, 0, DUR);
+  return true;
+}
+const ART_OF = { image: (i) => ['qilian', 'cavalry', 'tents', 'altar', 'hexi'][i % 5], video: () => 'refvid', host_video: () => 'refvid', music: () => 'spoolGold', voice: () => 'spoolRouge', sfx: () => 'spoolJade', note: () => 'note', other: () => 'note', audio: () => 'spoolJade' };
+function rebuildAssets(S) {
+  const list = arr(S.assets).slice(0, 500), stg = arr(S.staging).slice(0, 60);
+  const sig = JSON.stringify([list.map((a) => [a.id, a.kind, a.name, a.url, a.thumbUrl, a.durationSec, a.width, a.height, arr(a.usedBySceneIds).join(',')]), stg.map((s) => [s.id, s.kind, s.name, s.url, s.thumbUrl, s.provider])]);
+  if (sig === TL.asig) return false;
+  TL.asig = sig;
+  const old = AS;
+  ASSETS = []; AS = {};
+  list.forEach((a, i) => {
+    const kind = String(a.kind || 'other'), key = 'a:' + String(a.id || i);
+    const meta = [kind === 'image' ? sizeTxt(a) : '', num(a.durationSec) > 0 ? fmtT(num(a.durationSec)).replace(/\.\d+$/, '') : '', /video/.test(kind) ? sizeTxt(a) : ''].filter(Boolean).join(' · ') || KIND_CN[kind] || '';
+    const o = { key, id: String(a.id || ''), kind, name: String(a.name || a.id || '未命名素材'), url: String(a.url || ''), thumb: String(a.thumbUrl || (kind === 'image' ? a.url || '' : '')), meta, used: arr(a.usedBySceneIds).map(String), staged: false, art: ART_OF[kind] ? ART_OF[kind](i) : 'note', woven: old[key] ? old[key].woven : '' };
+    ASSETS.push(o); AS[key] = o;
+  });
+  stg.forEach((s, i) => {
+    const kind = s.kind === 'audio' ? 'music' : s.kind === 'video' ? 'video' : 'image', key = 's:' + String(s.id || i);
+    const o = { key, sid: String(s.id || ''), id: '', kind, name: String(s.name || '云端生成结果'), url: String(s.url || ''), thumb: String(s.thumbUrl || (kind === 'image' ? s.url || '' : '')), meta: String(s.provider || '云端生成'), prompt: String(s.prompt || ''), used: [], staged: true, art: kind === 'music' ? 'spoolJade' : kind === 'video' ? 'refvid' : 'hexi' };
+    ASSETS.push(o); AS[key] = o;
+  });
+  TEX.art = new Proxy({}, { get(t, k) { if (typeof k !== 'string') return undefined; if (!(k in t)) { const A = AS[k]; if (!A) return undefined; t[k] = makeArtTex(A); } return t[k]; } });
+  SCENE_ASSET = SCENES.map(() => null);
+  ASSETS.forEach((A) => { if (A.staged || !/^(image|video|host_video)$/.test(A.kind)) return; A.used.forEach((sid) => { const i = SCENE_IX[sid]; if (i != null && !SCENE_ASSET[i]) SCENE_ASSET[i] = A; }); });
+  return true;
+}
+function relinkSceneAssets() {
+  SCENE_ASSET = SCENES.map(() => null);
+  ASSETS.forEach((A) => { if (A.staged || !/^(image|video|host_video)$/.test(A.kind)) return; A.used.forEach((sid) => { const i = SCENE_IX[sid]; if (i != null && !SCENE_ASSET[i]) SCENE_ASSET[i] = A; }); });
+}
+/* 「已织」角标：只表示当前工程中被分镜引用（或本轮刚被织入）的素材，徽章放在名称行末尾，不压住任何文字 */
+function syncUsedBadges(force) {
+  ASSETS.forEach((A) => {
+    if (!A.el || A.staged) return;
+    const on = A.used.length > 0 || (A.woven && A.woven === Pipe.runId);
+    if (!force && A.el.dataset.used === (on ? '1' : '0')) return;
+    A.el.dataset.used = on ? '1' : '0';
+    A.el.classList.toggle('used', on);
+    const b = A.el.querySelector('.used-b');
+    if (b) { b.hidden = !on; b.textContent = on ? (A.used.length > 1 ? `织 ${A.used.length}` : '已织') : ''; b.title = on ? `被 ${A.used.length || 1} 个镜头引用` : ''; }
+  });
+}
+function applyDirector(d, force) {
+  const now = performance.now();
+  Object.keys(d || {}).forEach((k) => {
+    const pend = PENDING[k];
+    if (!force && pend) { if (String(d[k]) === String(pend.v) || now > pend.until) delete PENDING[k]; else return; }
+    if (k === 'topic' && !force) { const ta = $('#foTopic'); if (ta && (document.activeElement === ta || now - BRIEF.editedAt < 800)) return; }
+    DIR[k] = d[k];
+  });
+  DIR.fps = num(DIR.fps, 30) || 30; DIR.targetDurationSec = clamp(num(DIR.targetDurationSec, 120), 15, 600);
+}
+function applyOptions(o) {
+  const pick = (k) => arr(o && o[k]).filter((x) => x && x.value != null).map((x) => ({ value: x.value, label: String(x.label == null ? x.value : x.label) }));
+  ['engines', 'creationModes', 'aspectRatios', 'qualities', 'narrationModes', 'bgmModes', 'pacingModes', 'styles', 'avatarLayouts'].forEach((k) => (OPTV[k] = pick(k)));
+  const v = pick('voices').slice(0, 3000); OPTV.voices = v.length ? v : [{ value: 'auto', label: 'AI 自动匹配' }];
+  if (!LOCAL_OPTS.fpsOpts.some((x) => String(x.value) === String(DIR.fps))) LOCAL_OPTS.fpsOpts.push({ value: DIR.fps, label: DIR.fps + ' fps' });
+}
+@@@ END

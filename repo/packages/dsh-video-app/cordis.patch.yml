@@ -1,0 +1,8 @@
+plugins:
+  - path: '@deepseek-ai/dsh-web-app'
+  - path: ../dsh-tool-local-tts/index.js
+  - path: ../dsh-tool-avatar/index.js
+  - path: ../dsh-tool-video-suite/index.js
+  - path: ../dsh-tool-media/index.js
+  - path: ../dsh-preset-video/index.js
+  - path: ../dsh-web-video-workbench/lib/index.js

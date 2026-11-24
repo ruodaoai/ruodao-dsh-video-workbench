@@ -1,0 +1,148 @@
+{
+  "id": "history-epic-beat",
+  "order": 1,
+  "name": "历史高燃卡点 · 赭金剪影战神史诗（霍去病同款）",
+  "category": "history-theater",
+  "genre": "history-theater",
+  "genreLabel": "历史剪影高燃卡点动画",
+  "style": "cinematic",
+  "engine": "remotion",
+  "narrationMode": "subtitle-mv",
+  "pacingMode": "dynamic",
+  "subtitleStyle": "cinematic",
+  "aspectRatio": "16:9",
+  "fps": 30,
+  "shotCount": 53,
+  "durationSec": 123.3,
+  "avgShotSec": 2.33,
+  "bpm": 90,
+  "description": "53 镜纯音乐高燃历史卡点模板（免配音旁白）：赭金逆光日轮、汉军骑兵冲锋、国号赤旗、红黑战局推进地图、弯月刀光与冲击波特效，90 BPM 精准 0.5~4 拍快切 + 193 处 48kHz 战斗打击音效，一键替换为任意历史名将/帝王题材。",
+  "tags": [
+    "历史高燃",
+    "纯音乐卡点",
+    "53 镜快剪",
+    "90 BPM",
+    "剪影骑兵地图"
+  ],
+  "colorPalette": {
+    "background": "#140F13",
+    "primary": "#B65330",
+    "accent": "#D8B365",
+    "highlight": "#FFF0BC"
+  },
+  "visualStyle": "16:9 二维矢量剪影剧场：黑色人物与建筑压前景，赭红天空与紫灰远山分层铺陈，巨大落日、放射光束与横向扁云构成视觉锚点，辅以暗角、细粒子和轻雾，整体庄严而具漫画战斗感。",
+  "characterDesign": "人物以黑色实心二维剪影呈现，圆头或简化侧脸，不刻画五官；通过冠冕、发髻、披风、甲胄、兵器和旗帜区分主角、将士与骑兵。近景主角放大，远景军阵缩小并规律复制，以尺度、遮挡和地平线形成纵深。动作采用分件骨骼摆动与关键姿态切换，挥兵、冲锋、扬旗和马匹奔跑强调清晰轮廓；城池、营帐等建筑同样剪影化，地图、竹简与功绩牌保留纸、木、竹的简化纹理。",
+  "vfxSignature": [
+    "日轮光晕与扇形放射光束，配合橙红至紫灰天空的分层渐变",
+    "兵器交击处的白金放射火星、短促斩击亮线与少量红色命中粒子",
+    "跨画面的金色斜向剑光与落点亮斑，强调骑兵冲锋的方向和力量",
+    "稀疏浮尘、夜空星点与地表薄雾，结合前中后景差速移动制造空间"
+  ],
+  "transitionSignature": [
+    "slash-wipe",
+    "flash-cut",
+    "zoom-punch"
+  ],
+  "shotFormula": [
+    {
+      "phase": "时代与人物登场",
+      "pctRange": "0%~10%",
+      "archetype": "hero-stand",
+      "visualMotif": "逆光日轮下主角剪影登场，配一幅时代或地域地图点题；镜头缓慢推近，建立人物与舞台。",
+      "transition": "zoom-punch"
+    },
+    {
+      "phase": "崛起与首战",
+      "pctRange": "10%~25%",
+      "archetype": "duel-confront",
+      "visualMotif": "近景交战者、中景旗手、远景军阵横列；兵刃接触点迸出火星，旗号与字幕变化串联事件，保持横向舞台构图。",
+      "transition": "slash-wipe"
+    },
+    {
+      "phase": "连续征战与动作递进",
+      "pctRange": "25%~40%",
+      "archetype": "cavalry-rush",
+      "visualMotif": "骑兵沿横向冲锋，近处战马放大掠过、远处队列低速平移；斜向金色剑光切穿画面，形成方向与力量感。",
+      "transition": "flash-cut"
+    },
+    {
+      "phase": "战局高潮",
+      "pctRange": "40%~55%",
+      "archetype": "strategic-map",
+      "visualMotif": "红黑战局推进地图与决战交锋交替出现，高潮段 0.5~1 拍短切，命中瞬间短促推近再拉回全景。",
+      "transition": "slash-wipe"
+    },
+    {
+      "phase": "荣耀或命运转折",
+      "pctRange": "55%~70%",
+      "archetype": "hero-stand",
+      "visualMotif": "暖橙或紫灰天空下群像沿中央通道收束，前景巨大主角剪影压画；镜头放缓，让称号或转折成为重点。",
+      "transition": "zoom-punch"
+    },
+    {
+      "phase": "功业总结",
+      "pctRange": "70%~85%",
+      "archetype": "bamboo-slips",
+      "visualMotif": "深色背景中央悬置竹简或功绩牌，关键词逐条亮起，留足阅读时间。",
+      "transition": "flash-cut"
+    },
+    {
+      "phase": "终章余韵",
+      "pctRange": "85%~100%",
+      "archetype": "hero-stand",
+      "visualMotif": "落日远山前主角背影或孤骑远去，光束渐暗，收于点题大字。",
+      "transition": "zoom-punch"
+    }
+  ],
+  "replicationPrompt": "二维剪影历史高燃卡点风格。人物、军阵、战马与城池全部是黑色实心二维剪影，不画五官，用冠冕、发髻、披风、甲胄、兵器和旗帜区分身份；分件骨骼动画、循环步态与前中后景差速平移，禁止写实三维与塑料质感。背景用赭红夕照、紫灰远山、扁平横云、巨大日轮与扇形放射光束，辅以暗角、细粒子和薄雾。交锋时只在兵刃接触点迸出白金火星、斜向金色剑光与少量红色粒子。纯音乐卡点：镜头切在配乐节拍上，常规镜 2~4 拍，高潮段穿插 0.5~1 拍的短切，叙述与总结镜头放慢、留足阅读时间；转场以斩切、亮闪与短促推近为主，两次亮闪至少间隔 0.5 秒。底部单行粗宋体米白字幕，朱红标人名与转折，金黄标地名、称号与关键词。",
+  "audioProfile": {
+    "profileName": "朔风铁骑·汉旌雷鼓",
+    "sampleRateHz": 48000,
+    "beatCutIntensity": "high",
+    "cameraBeatIntensity": 0.95,
+    "targetLufs": -14.5,
+    "bgmDuckRatio": 2.6,
+    "duckingEnabled": false,
+    "voiceTrackEnabled": false,
+    "sfxMix": "保留原BGM起音与高潮结构 音效短促叠加 不以旁白触发压低配乐",
+    "sfxPalette": {
+      "opener": [
+        "hit",
+        "shimmer_swell"
+      ],
+      "drop": [
+        "sub_drop",
+        "crash_cym",
+        "hit"
+      ],
+      "action": [
+        "whoosh",
+        "slash",
+        "swoosh"
+      ],
+      "data": [
+        "counter",
+        "tick",
+        "stamp"
+      ],
+      "neutral": [
+        "whoosh",
+        "pop_soft"
+      ],
+      "internal": [
+        "sparkle",
+        "bell_warm"
+      ],
+      "preCut": [
+        "riser",
+        "suck"
+      ]
+    }
+  },
+  "author": "Merziller",
+  "plaza": "影核广场 · CinePulse Hub",
+  "coverFile": "cover.png",
+  "updatedAt": "2026-11-19T19:50:19.576Z",
+  "previewFile": "preview.mp4",
+  "previewDurationSec": 15.33
+}

@@ -1,0 +1,163 @@
+@@@ RANGE
+/* ══════════════ 16. 梭子 · 飞行 · 粒子（前景层） ══════════════ */
+@@@ TO
+const PARTS = [];
+function burst(x, y, n, o = {}) {
+@@@ WITH
+/* ══════════════ 16. 梭子 · 飞行 · 粒子（前景层） ══════════════ */
+/* 梭子静止时活在舞台坐标（随镜头推拉）；起飞后切到甲板坐标，可以飞越库房与长卷 */
+const SH = {};
+AGENTS.forEach((a) => (SH[a.id] = { a, x: 0, y: 0, vx: 0, vy: 0, ang: 0, fl: null, dx: 0, dy: 0, dvx: 0, dvy: 0, sc: 1, trail: [], tok: null, hook: null }));
+function shInit() { AGENTS.forEach((a) => { const h = L.ag[a.id]; Object.assign(SH[a.id], { x: h.x, y: h.y, vx: 0, vy: 0, ang: 0, fl: null, tok: null, hook: null, trail: [] }); }); }
+const inSW = (p, m = 0) => p.x >= SW.x - m && p.x <= SW.x + SW.w + m && p.y >= SW.y - m && p.y <= SW.y + SW.h + m;
+function shDeck(s) { if (s.fl) return { x: s.dx, y: s.dy, sc: s.sc }; const p = toScreen(s.x, s.y); return { x: p.x, y: p.y, sc: CAM.s }; }
+const homeDeck = (id) => toScreen(L.ag[id].x, L.ag[id].y);
+function shDesired(a, t) {
+  const h = L.ag[a.id];
+  let x = h.x, y = h.y, ang = 0;
+  if (a.status === 'run') { const ph = t * TAU * 0.75 + a.i; x += Math.sin(ph) * 15; y += -Math.abs(Math.cos(ph)) * 4 + 2; ang = Math.cos(ph) * 0.14; }
+  else if (a.status === 'err') { x += Math.sin(t * 38) * 2.2; ang = Math.sin(t * 30) * 0.06; }
+  else if (a.status === 'skip' || a.status === 'stop') { y += 3; ang = 0.03; }
+  else { const sw = Math.sin(t * 0.9 + a.i * 1.7); x += sw * 1.8; y += Math.sin(t * 1.3 + a.i) * 1.2; ang = sw * 0.045; }
+  return { x, y, ang };
+}
+function shUpdate(dt, t) {
+  if (dt <= 0) return;
+  AGENTS.forEach((a) => {
+    const s = SH[a.id];
+    if (s.fl) {
+      const p = flightPose(s.fl);
+      s.dvx = (p.x - s.dx) / dt; s.dvy = (p.y - s.dy) / dt; s.dx = p.x; s.dy = p.y; s.sc = p.sc;
+      const ta = clamp((s.dvx || 0) * 0.0007, -0.45, 0.45);
+      s.ang += (ta - s.ang) * (1 - Math.exp(-dt * 10));
+      if (Math.hypot(s.dvx, s.dvy) > 90 && !LOWSPEC) s.trail.push({ x: s.dx, y: s.dy, t });
+    } else {
+      const d = shDesired(a, t), k = 46, dd = 2 * Math.sqrt(k);
+      s.vx += (k * (d.x - s.x) - dd * s.vx) * dt; s.vy += (k * (d.y - s.y) - dd * s.vy) * dt;
+      s.x += s.vx * dt; s.y += s.vy * dt;
+      let da = d.ang - s.ang; if (!Number.isFinite(da)) { s.ang = 0; da = 0; } while (da > Math.PI) da -= TAU; while (da < -Math.PI) da += TAU; s.ang += da * (1 - Math.exp(-dt * 8));
+    }
+    while (s.trail.length && t - s.trail[0].t > 0.6) s.trail.shift();
+    if (s.tok) {
+      const o = s.tok, P0 = shDeck(s);
+      if (o.mode === 'hang') {
+        const hx = P0.x, hy = P0.y + (L.tiny ? 26 : 32), k = 30, d = 4.2;
+        o.vx += (k * (hx - o.x) - d * o.vx) * dt; o.vy += (k * (hy - o.y) - d * o.vy + 60) * dt; o.x += o.vx * dt; o.y += o.vy * dt;
+      } else if (o.mode === 'merge') { const u = clamp((t - o.m0) / 0.3, 0, 1); o.x = lerp(o.mx, o.tx, E.out(u)); o.y = lerp(o.my, o.ty, E.out(u)); o.sc = lerp(1, 0.3, u); o.al = 1 - u; if (u >= 1) s.tok = null; }
+    }
+  });
+}
+function drawShuttle(c, s, t, x, y, sc) {
+  const a = s.a, L0 = L.tiny ? 46 : 58, W0 = L.tiny ? 11 : 14, active = a.status === 'run' || s.fl;
+  c.save(); c.translate(x, y); if (sc !== 1) c.scale(sc, sc); c.rotate(s.ang || 0);
+  if (active || CAM.focus === a.id) { const r = L0 * 0.95; c.globalAlpha = 0.5 + 0.2 * Math.sin(t * 6); c.drawImage(TEX.dot, -r, -r * 0.6, r * 2, r * 1.2); c.globalAlpha = 1; }
+  if (a.status === 'skip' || a.status === 'stop') c.globalAlpha = 0.55;
+  c.fillStyle = 'rgba(0,0,0,.35)'; c.beginPath(); c.ellipse(1.5, 4, L0 * 0.46, W0 * 0.34, 0, 0, TAU); c.fill();
+  const body = () => { c.beginPath(); c.moveTo(-L0 / 2, 0); c.bezierCurveTo(-L0 * 0.28, -W0 * 0.66, L0 * 0.28, -W0 * 0.66, L0 / 2, 0); c.bezierCurveTo(L0 * 0.28, W0 * 0.66, -L0 * 0.28, W0 * 0.66, -L0 / 2, 0); c.closePath(); };
+  const g = c.createLinearGradient(0, -W0 / 2, 0, W0 / 2); g.addColorStop(0, '#5A4430'); g.addColorStop(0.35, '#2A1E14'); g.addColorStop(1, '#0E0A07');
+  body(); c.fillStyle = g; c.fill();
+  c.save(); c.scale(0.74, 0.5); body(); c.restore(); c.fillStyle = hexA(a.status === 'err' ? '#E0583A' : a.glaze, 0.92); c.fill();
+  c.fillStyle = '#0B0806'; roundRect(c, -L0 * 0.15, -W0 * 0.2, L0 * 0.3, W0 * 0.4, 2); c.fill();
+  c.strokeStyle = P.light ? '#B8862C' : '#D4A64A'; c.lineWidth = 0.8;
+  for (let i = 0; i < 4; i++) { const xx = -L0 * 0.11 + i * L0 * 0.073; c.beginPath(); c.moveTo(xx, -W0 * 0.16); c.lineTo(xx + 1.2, W0 * 0.16); c.stroke(); }
+  const tip = (sx) => { c.fillStyle = '#E8C67A'; c.beginPath(); c.moveTo(sx * L0 / 2, 0); c.lineTo(sx * (L0 / 2 - 7), -2.2); c.lineTo(sx * (L0 / 2 - 7), 2.2); c.closePath(); c.fill(); };
+  tip(1); tip(-1);
+  c.strokeStyle = 'rgba(255,240,210,.28)'; c.lineWidth = 0.8; c.beginPath(); c.moveTo(-L0 * 0.3, -W0 * 0.38); c.quadraticCurveTo(0, -W0 * 0.55, L0 * 0.3, -W0 * 0.38); c.stroke();
+  c.restore();
+}
+function drawFx(t) {
+  const c = CF;
+  c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, CV_F.width, CV_F.height);
+  const H = window.__halt || 0;
+  /* 第一层：舞台（裁切 + 镜头）—— 静止的梭子、丝线、成片钤印 */
+  deckApply(c); c.save(); c.beginPath(); c.rect(SW.x, SW.y, SW.w, SW.h); c.clip();
+  camApply(c);
+  const sy0 = L.beamY + (L.tiny ? 12 : 15);
+  if (!(H & 32)) AGENTS.forEach((a) => {
+    const s = SH[a.id]; if (s.fl) return;
+    const h = L.ag[a.id], dx = s.x - h.x, dy = s.y - h.y, far = Math.hypot(dx, dy) > 30;
+    c.strokeStyle = far ? hexA(P.gold, 0.32) : hexA(P.gold, a.status === 'skip' ? 0.22 : 0.5); c.lineWidth = far ? 0.8 : 0.9;
+    c.beginPath(); c.moveTo(h.x, sy0);
+    if (far) c.quadraticCurveTo((h.x + s.x) / 2, Math.max(sy0, s.y) + Math.min(160, Math.hypot(dx, dy) * 0.18), s.x, s.y); else c.lineTo(s.x, s.y - 2);
+    c.stroke();
+  });
+  if (!(H & 8)) AGENTS.forEach((a) => { const s = SH[a.id]; if (!s.fl) drawShuttle(c, s, t, s.x, s.y, 1); });
+  drawStamp(c, t);
+  c.restore();
+  /* 第二层：甲板（不裁切）—— 飞行中的梭子、钩线、素材卡、墨晕、粒子 */
+  deckApply(c);
+  if (!(H & 32)) AGENTS.forEach((a) => {
+    const s = SH[a.id]; if (!s.fl) return;
+    const h = L.ag[a.id], p0 = toScreen(h.x, sy0); if (!inSW(p0)) return;
+    const dx = s.dx - p0.x, dy = s.dy - p0.y;
+    c.strokeStyle = hexA(P.gold, 0.32); c.lineWidth = 0.8;
+    c.beginPath(); c.moveTo(p0.x, p0.y); c.quadraticCurveTo((p0.x + s.dx) / 2, Math.max(p0.y, s.dy) + Math.min(160, Math.hypot(dx, dy) * 0.18), s.dx, s.dy); c.stroke();
+  });
+  AGENTS.forEach((a) => {
+    const s = SH[a.id]; if (s.trail.length < 2) return;
+    for (let pass = 0; pass < 2; pass++) {
+      c.lineCap = 'round';
+      for (let i = 1; i < s.trail.length; i++) {
+        const p0 = s.trail[i - 1], p1 = s.trail[i], age = (t - p1.t) / 0.6;
+        c.strokeStyle = pass ? hexA(P.gold2, 0.75 * (1 - age)) : hexA(P.gold, 0.16 * (1 - age));
+        c.lineWidth = pass ? 2.2 * (1 - age) + 0.3 : 9 * (1 - age);
+        c.beginPath(); c.moveTo(p0.x, p0.y); c.lineTo(p1.x, p1.y); c.stroke();
+      }
+    }
+  });
+  drawBlooms(c, t);
+  AGENTS.forEach((a) => {
+    const s = SH[a.id], hk = s.hook;
+    if (hk) {
+      const P0 = shDeck(s), sc = P0.sc;
+      const tail = { x: P0.x - Math.cos(s.ang) * 22 * sc, y: P0.y - Math.sin(s.ang) * 22 * sc + 4 * sc };
+      if (s.fl || inSW(tail)) {
+        let S = hk, u = hk.u == null ? 1 : hk.u;
+        if (hk.listen) { S = assetAnchor(hk.key); u = E.out(clamp((SIM.t - hk.t0) / 0.5, 0, 1)); }
+        const end = s.tok ? { x: s.tok.x, y: s.tok.y - 10 } : { x: lerp(tail.x, S.x, u), y: lerp(tail.y, S.y, u) };
+        const mx = (tail.x + end.x) / 2, my = (tail.y + end.y) / 2 + Math.hypot(end.x - tail.x, end.y - tail.y) * 0.12 * (1 - u * 0.5);
+        c.strokeStyle = hexA(P.gold2, hk.listen ? 0.7 : 0.9); c.lineWidth = 1.1;
+        if (hk.listen) { c.setLineDash([5, 4]); c.lineDashOffset = -t * 24; }
+        c.beginPath(); c.moveTo(tail.x, tail.y); c.quadraticCurveTo(mx, my, end.x, end.y); c.stroke();
+        c.setLineDash([]);
+        if (!s.tok) c.drawImage(TEX.dot, end.x - 8, end.y - 8, 16, 16);
+      }
+    }
+    if (s.tok) drawToken(c, s.tok, t);
+  });
+  if (!(H & 8)) AGENTS.forEach((a) => { const s = SH[a.id]; if (s.fl) drawShuttle(c, s, t, s.dx, s.dy, s.sc); });
+  drawParts(c);
+  if (!(H & 4) && !LOWSPEC) drawMotes(c, t);
+}
+function drawToken(c, o, t) {
+  const A = AS[o.key]; if (!A) return;
+  const w = (L.tiny ? 48 : 62) * (o.sc || 1), h = w * 0.5625, al = o.al == null ? 1 : o.al;
+  c.save(); c.globalAlpha = al; c.translate(o.x, o.y);
+  const sway = clamp((o.vx || 0) * 0.0016, -0.5, 0.5); c.rotate(sway);
+  c.drawImage(TEX.dot, -w * 0.9, -h * 1.2, w * 1.8, h * 2.4);
+  c.fillStyle = 'rgba(0,0,0,.45)'; c.fillRect(-w / 2 + 2, 3, w, h);
+  const im = imgOf(A.thumb) || (TEX.art && TEX.art[o.key]);
+  if (im) drawCover(c, im, -w / 2, 0, w, h); else { c.fillStyle = '#222'; c.fillRect(-w / 2, 0, w, h); }
+  c.strokeStyle = P.gold2; c.lineWidth = 1; c.strokeRect(-w / 2 + 0.5, 0.5, w - 1, h - 1);
+  c.fillStyle = '#E8C67A'; c.fillRect(-w / 2 - 2, -2, w + 4, 2.4);
+  if (o.sc == null || o.sc > 0.8) { c.font = `${L.tiny ? 11 : 12}px "Microsoft YaHei UI", sans-serif`; c.textAlign = 'center'; c.textBaseline = 'top'; const nm = fitText(c, A.name, 150); const tw = c.measureText(nm).width + 8; c.fillStyle = 'rgba(0,0,0,.66)'; c.fillRect(-tw / 2, h + 3, tw, 16); c.fillStyle = '#F4EBDA'; c.fillText(nm, 0, h + 5); }
+  c.restore();
+}
+const PARTS = [];
+function burstS(x, y, n, o = {}) { const p = toScreen(x, y); if (!inSW(p, 24)) return; const k = Math.min(1.8, CAM.s); burst(p.x, p.y, n, Object.assign({}, o, { sp: (o.sp || 120) * k, sz: (o.sz || 3) * k })); }
+function burst(x, y, n, o = {}) {
+  if (LOWSPEC) n = Math.ceil(n * 0.35);
+@@@ END
+@@@ REPLACE
+const MOTES = Array.from({ length: 46 }, (_, i) => ({ x: hash(i * 3 + 1), y: hash(i * 7 + 2), r: 0.6 + hash(i * 11) * 2.2, s: 0.2 + hash(i * 5) * 0.8, ph: hash(i * 13) * TAU }));
+function drawMotes(c, t) {
+  for (const m of MOTES) {
+    const x = ((m.x * L.pw * 1.2 + t * 6 * m.s) % (L.pw * 1.2)) - L.pw * 0.1, y = m.y * L.ph + Math.sin(t * 0.4 + m.ph) * 14;
+    const r = m.r * (CAM.mode === 'overview' ? 1 : 2.4);
+@@@ WITH
+const MOTES = Array.from({ length: 46 }, (_, i) => ({ x: hash(i * 3 + 1), y: hash(i * 7 + 2), r: 0.6 + hash(i * 11) * 2.2, s: 0.2 + hash(i * 5) * 0.8, ph: hash(i * 13) * TAU }));
+function drawMotes(c, t) {
+  for (const m of MOTES) {
+    const x = ((m.x * L.pw * 1.2 + t * 6 * m.s) % (L.pw * 1.2)) - L.pw * 0.1, y = m.y * L.ph + Math.sin(t * 0.4 + m.ph) * 14;
+    const r = m.r * (CAM.mode === 'overview' ? 1 : 1.7);
+@@@ END

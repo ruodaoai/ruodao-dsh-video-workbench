@@ -1,0 +1,62 @@
+@@@ INSERT_BEFORE
+/* ══════════════ 28. 启动 ══════════════ */
+@@@ TEXT
+/* ── 顶栏：返回 / 工程 / 页签 / 忙碌 / 状态灯 / 皮肤 —— 全部来自宿主状态 ── */
+const SKINS = [['nova-deck', 'A', '星舰剪辑甲板'], ['ink-loom', 'B', '墨韵织机'], ['prism-lab', 'C', '棱镜实验室'], ['classic', '经', '经典作战大屏']];
+const CHROME = { projSig: '', skin: '' };
+function relTime(iso) {
+  const t = Date.parse(iso); if (!Number.isFinite(t)) return '';
+  const d = (Date.now() - t) / 1000;
+  if (d < 90) return '刚刚'; if (d < 3600) return Math.round(d / 60) + ' 分钟前'; if (d < 86400) return Math.round(d / 3600) + ' 小时前'; if (d < 86400 * 30) return Math.round(d / 86400) + ' 天前';
+  return new Date(t).toLocaleDateString('zh-CN');
+}
+function syncChrome(S) {
+  const dsh = S.host === 'dsh';
+  const back = $('#hostBack'); if (back.hidden === dsh) { back.hidden = !dsh; $('#hostCap').classList.toggle('solo', !dsh); fitTopbar(); }
+  /* 工程选择器 */
+  const p = S.project, title = p ? String(p.title || '未命名工程') : '未打开工程';
+  setTxt('projName', title); setTitle('projBtn', p ? `当前工程：${title}（点击切换）` : '新建或打开一个工程');
+  $('#projBtn').setAttribute('aria-label', p ? `当前工程：${title}，点击切换工程` : '未打开工程，点击新建或打开');
+  const projs = arr(S.projects).slice(0, 200);
+  const sig = JSON.stringify([p ? p.dir : '', projs.map((x) => [x.dir, x.title, x.hasMp4, x.updatedAt])]);
+  if (sig !== CHROME.projSig) {
+    CHROME.projSig = sig;
+    const cur = p ? p.dir : '';
+    $('#projMenu').innerHTML = (projs.length ? projs.map((x) => `<button data-dir="${esc(x.dir)}" class="${x.dir === cur ? 'on' : ''}" title="${esc(x.title)}${x.dir === cur ? '（当前）' : ''}" aria-label="切换到工程 ${esc(x.title)}"><span class="mt">${esc(x.title || '未命名工程')}</span><em>${x.dir === cur ? '当前' : x.hasMp4 ? '已出片' : esc(relTime(x.updatedAt) || '草稿')}</em></button>`).join('') : '<p class="m-empty">还没有工程</p>') + `<hr><button data-new aria-label="新建工程"><svg><use href="#i-plus"/></svg><span class="mt">新建工程…</span></button><button data-panel="projects" aria-label="管理全部工程"><svg><use href="#i-grid"/></svg><span class="mt">管理全部工程</span></button>`;
+  }
+  /* 忙碌 */
+  const busy = String(S.busy || '').trim(), bp = $('#busyPill');
+  if (bp.hidden === !!busy) { bp.hidden = !busy; fitTopbar(); }
+  setTxt('busyTxt', busy); setTitle('busyPill', busy ? busy + '（点击打开任务中心）' : '');
+  bp.setAttribute('aria-label', busy ? '宿主忙碌：' + busy : '');
+  /* 状态灯 */
+  const s = S.status || {};
+  const lampSet = (id, ok, warn, label, tip) => { const e = document.getElementById(id); if (!e) return; const cls = ok ? 'lamp' : warn ? 'lamp busy' : 'lamp err'; if (e.className !== cls) e.className = cls; const b = e.querySelector('b'); const v = String(label || '—'); if (b.textContent !== v) b.textContent = v; e.title = tip; e.setAttribute('aria-label', tip); };
+  lampSet('lpLlm', s.llm && s.llm.configured, false, s.llm && s.llm.label, `LLM 大模型：${(s.llm && s.llm.label) || '未配置'} · 点击设置`);
+  lampSet('lpTts', s.tts && s.tts.ready, true, s.tts && s.tts.label, `配音引擎：${(s.tts && s.tts.label) || '—'}${s.tts && s.tts.ready ? ' · 就绪' : ' · 未就绪'} · 点击设置`);
+  const gl = (s.gpu && s.gpu.label) || '—', low = !!S.lowSpec;
+  lampSet('lpGpu', !/CPU/.test(gl), true, gl + (low ? ' · 低配' : ''), `GPU 算力：${gl}${low ? ' · 低配保护已开启' : ''} · 点击打开算力体检`);
+  lampSet('lpLip', s.lipsync && s.lipsync.ready, true, s.lipsync && s.lipsync.label, `口型引擎：${(s.lipsync && s.lipsync.label) || '—'} · 点击打开数字人`);
+  /* 皮肤 */
+  if (CHROME.skin !== S.skin) {
+    CHROME.skin = S.skin;
+    $$('#skinMenu [data-skin]').forEach((b) => { const on = b.dataset.skin === SKIN_ID; b.classList.toggle('on', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); });
+  }
+  /* 页签计数 */
+  const c = S.counts || {};
+  setTxt('plazaN', num(c.plazaTemplates) > 0 ? String(num(c.plazaTemplates)) : '');
+  /* 无工程：引导卡 */
+  const ob = $('#onboard'); const show = !p;
+  if (ob.hidden === show) ob.hidden = !show;
+  document.body.classList.toggle('noproj', !p);
+}
+/* 顶栏宽度不足时依次收起：状态灯文字 → 品牌字 → 页签英文/计数 → 镜头文字 → 状态灯 → 工程名缩短（永不重叠） */
+function fitTopbar() {
+  const tb = $('#topbar'); if (!tb) return;
+  const steps = ['tb-1', 'tb-2', 'tb-3', 'tb-4', 'tb-5', 'tb-6'];
+  steps.forEach((s) => tb.classList.remove(s));
+  const over = () => tb.scrollWidth > tb.clientWidth + 1 || $('#tbFill').getBoundingClientRect().width < 4;
+  for (const s of steps) { if (!over()) break; tb.classList.add(s); }
+}
+function showWaiting(on) { const w = $('#waiting'); if (w) w.hidden = !on; }
+@@@ END

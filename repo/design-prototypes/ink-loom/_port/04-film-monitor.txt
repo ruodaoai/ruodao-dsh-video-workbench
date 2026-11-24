@@ -1,0 +1,292 @@
+@@@ RANGE
+const MOOD_R = [[1, 3, 'dusk'],
+@@@ TO
+const SCENE_ART = {};
+@@@ WITH
+/* 镜头气质：由真实音效类型推断（重击 → 落、兵刃 → 战、马蹄 → 骑），色调随工程风格 */
+const MOOD_SETS = { cinematic: ['dusk', 'battle', 'gold', 'night', 'dawn'], energetic: ['battle', 'gold', 'dusk'], documentary: ['dawn', 'snow', 'night', 'dusk'], tech: ['night', 'dawn', 'snow'], warm: ['gold', 'dawn', 'dusk'], emerald: ['dawn', 'night', 'snow'] };
+const TABS = ['rider', 'figure', 'banner', 'gate', 'tower', 'army', 'road', 'lake', 'altar', 'beacon', 'statue'];
+function sceneMode(s) {
+  const ty = s.sfx.map((f) => String(f.type)).join(' ');
+  if (/heavy_impact|impact|boom|slam/i.test(ty)) return s.dur < 1.4 ? 'drop-impact' : 'single-clash';
+  if (/metal_clash|clash|sword|blade/i.test(ty)) return s.sfx.length >= 3 ? 'clash-flurry' : 'single-clash';
+  if (/gallop|horse|hoof/i.test(ty)) return 'cavalry';
+  return 'clean';
+}
+function decorateScenes() {
+  const set = MOOD_SETS[PROJECT.style] || MOOD_SETS.cinematic, salt = (PROJECT.title || '').length * 3 + 1;
+  SCENES.forEach((s) => {
+    s.mode = sceneMode(s); s.seed = s.n * 37 + 11;
+    s.moodKey = /clash/.test(s.mode) ? 'battle' : set[Math.floor(hash(Math.floor(s.n / 3) * 7 + salt) * set.length) % set.length];
+    s.tab = TABS[Math.floor(hash(s.n * 13 + salt) * TABS.length) % TABS.length];
+  });
+}
+/* 图片缓存（宿主提供的同源缩略图 / 海报）：加载完成前返回 null，绘制侧自动回退到水墨程序画 */
+const IMGS = new Map();
+let onImgReady = () => {};
+function imgOf(url) {
+  if (!url) return null;
+  let e = IMGS.get(url);
+  if (!e) {
+    if (IMGS.size > 360) { for (const k of IMGS.keys()) { IMGS.delete(k); if (IMGS.size <= 300) break; } }
+    const im = new Image(); im.decoding = 'async'; e = { im, ok: false, err: false };
+    im.onload = () => { e.ok = im.naturalWidth > 0; if (e.ok) { try { onImgReady(url); } catch (x) { /* ignore */ } } };
+    im.onerror = () => { e.err = true; };
+    im.src = url; IMGS.set(url, e);
+  }
+  return e.ok ? e.im : null;
+}
+const srcWH = (im) => [im.naturalWidth || im.videoWidth || im.width || 0, im.naturalHeight || im.videoHeight || im.height || 0];
+function drawCover(c, im, x, y, w, h) { const [iw, ih] = srcWH(im); if (!(iw > 0 && ih > 0 && w > 0 && h > 0)) return; const s = Math.max(w / iw, h / ih), sw = w / s, sh = h / s; c.drawImage(im, (iw - sw) / 2, (ih - sh) / 2, sw, sh, x, y, w, h); }
+function containRect(aw, ah, x, y, w, h) { if (!(aw > 0 && ah > 0)) return { x, y, w, h }; const s = Math.min(w / aw, h / ah); const cw = aw * s, ch = ah * s; return { x: x + (w - cw) / 2, y: y + (h - ch) / 2, w: cw, h: ch }; }
+function drawContain(c, im, x, y, w, h) { const [iw, ih] = srcWH(im); if (!(iw > 0 && ih > 0)) return; const r = containRect(iw, ih, x, y, w, h); c.drawImage(im, r.x, r.y, r.w, r.h); }
+function fitText(c, s, maxW) {
+  s = String(s == null ? '' : s);
+  if (!s || maxW <= 0) return '';
+  if (c.measureText(s).width <= maxW) return s;
+  let lo = 0, hi = s.length;
+  while (lo < hi) { const m = (lo + hi + 1) >> 1; if (c.measureText(s.slice(0, m) + '…').width <= maxW) lo = m; else hi = m - 1; }
+  return lo ? s.slice(0, lo) + '…' : '';
+}
+@@@ END
+@@@ RANGE
+function renderFilm(c, w, h, t, o = {}) {
+@@@ TO
+function particlesFilm(c, w, h, t, m, k) {
+@@@ WITH
+function renderFilm(c, w, h, t, o = {}) {
+  if (!(w > 2 && h > 2)) return;
+  const s = o.scene || sceneAt(t), lt = clamp(t - s.t0, 0, Math.max(0, s.dur)), m = MOODS[s.moodKey] || MOODS.dusk, k = w / 480;
+  const im = o.noThumb ? null : imgOf(s.thumb);
+  c.save();
+  if (im) {
+    c.fillStyle = '#050403'; c.fillRect(0, 0, w, h);
+    const z = 1 + 0.045 * (s.dur > 0 ? lt / s.dur : 0);
+    c.save(); c.translate(w / 2, h / 2); c.scale(z, z); drawCover(c, im, -w / 2, -h / 2, w, h); c.restore();
+    filmTail(c, w, h, t, s, lt, k, o);
+    c.restore();
+    return;
+  }
+  let shx = 0, shy = 0;
+  for (const f of s.sfx) { const d = t - f.t; if (d >= 0 && d < 0.32) { const a = Math.exp(-d * 13) * (/heavy|impact/.test(f.type) ? 7 : 3) * k; shx += (hash(Math.round(f.t * 1000)) - 0.5) * 2 * a; shy += (hash(Math.round(f.t * 1000) + 7) - 0.5) * 2 * a; } }
+  c.translate(shx, shy);
+  const g = c.createLinearGradient(0, 0, 0, h); g.addColorStop(0, m.sky[0]); g.addColorStop(0.58, m.sky[1]); g.addColorStop(1, m.sky[2]);
+  c.fillStyle = g; c.fillRect(-16, -16, w + 32, h + 32);
+  const u = s.dur > 0 ? lt / s.dur : 0;
+  /* 日 / 月 */
+  const sx = w * (0.6 + 0.12 * Math.sin(s.seed)) - u * w * 0.03, sy = h * m.sunY, sr = h * m.sunR;
+  const sg = c.createRadialGradient(sx, sy, sr * 0.4, sx, sy, sr * 4.2); sg.addColorStop(0, hexA(m.sun, 0.42)); sg.addColorStop(1, hexA(m.sun, 0)); c.fillStyle = sg; c.fillRect(sx - sr * 4.2, sy - sr * 4.2, sr * 8.4, sr * 8.4);
+  c.fillStyle = m.sun; c.beginPath(); c.arc(sx, sy, sr, 0, TAU); c.fill();
+  if (m.p === 'star') { c.fillStyle = 'rgba(230,236,245,.75)'; for (let i = 0; i < 46; i++) { const x = hash(i * 3 + s.n) * w, y = hash(i * 7 + 1) * h * 0.5, tw = 0.5 + 0.5 * Math.sin(t * 3 + i); c.globalAlpha = 0.25 + 0.6 * tw * hash(i); c.fillRect(x, y, 1.2 * k, 1.2 * k); } c.globalAlpha = 1; }
+  /* 山峦（视差平移） */
+  const pan = (s.mode === 'cavalry' ? 1 : 0.28) * lt * 60 * k;
+  ridge(c, w, h, h * 0.6, h * 0.17, 1.5, s.seed, pan * 0.25, m.layers[0], 0.95, s.moodKey === 'snow');
+  mistBand(c, w, h * 0.6, h * 0.08, m.mist, 0.2);
+  ridge(c, w, h, h * 0.72, h * 0.12, 2.3, s.seed + 5, pan * 0.55, m.layers[1], 1, false);
+  mistBand(c, w, h * 0.73, h * 0.06, m.mist, 0.14);
+  if (s.tab === 'lake' && !/clash|cavalry/.test(s.mode)) {
+    const wy = h * 0.74; const lg = c.createLinearGradient(0, wy, 0, h); lg.addColorStop(0, m.sky[2]); lg.addColorStop(1, m.sky[1]); c.fillStyle = lg; c.fillRect(-12, wy, w + 24, h - wy + 12);
+    c.globalAlpha = 0.45; c.fillStyle = m.sun; c.beginPath(); c.ellipse(sx, wy + (wy - sy) * 0.25, sr * 0.9, sr * 0.3, 0, 0, TAU); c.fill(); c.globalAlpha = 1;
+    c.strokeStyle = hexA(m.sun, 0.35); c.lineWidth = 1 * k; for (let i = 0; i < 14; i++) { const y = wy + 4 + i * (h - wy) / 14, x = ((hash(i) * w + t * 12 * k) % (w + 60)) - 30; c.beginPath(); c.moveTo(x, y); c.lineTo(x + 26 * k * (0.5 + hash(i + 9)), y); c.stroke(); }
+  }
+  /* 主体 */
+  c.fillStyle = INK; c.strokeStyle = INK;
+  const gy = h * 0.82;
+  drawSubject(c, w, h, s, lt, t, m, k, gy);
+  /* 近景地面 */
+  if (s.tab !== 'lake' || /clash|cavalry/.test(s.mode)) ridge(c, w, h, h * 0.93, h * 0.06, 3.4, s.seed + 9, pan, m.layers[2], 1, false);
+  /* 粒子 */
+  particlesFilm(c, w, h, t, m, k);
+  /* 冲击类特效 */
+  if (s.mode === 'drop-impact') {
+    const f = Math.exp(-lt * 5.5); c.fillStyle = `rgba(255,246,228,${0.85 * f})`; c.fillRect(-16, -16, w + 32, h + 32);
+    const rr = E.out(clamp(lt / 0.6, 0, 1)) * w * 0.6; c.strokeStyle = `rgba(10,8,6,${0.7 * (1 - clamp(lt / 0.9, 0, 1))})`; c.lineWidth = 18 * k * (1 - clamp(lt / 0.9, 0, 1)) + 1; c.beginPath(); c.arc(w / 2, h * 0.52, rr, 0, TAU); c.stroke();
+    const ch = (s.title || '影')[0], sc = lerp(2.3, 1, E.out(clamp(lt / 0.22, 0, 1)));
+    c.save(); c.translate(w / 2, h * 0.5); c.scale(sc, sc); c.font = `${Math.max(8, Math.round(h * 0.34))}px KaiTi, STKaiti, serif`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = 'rgba(200,54,29,.92)'; c.fillText(ch, 0, 0); c.restore();
+  }
+  for (const f of s.sfx) {
+    const d = t - f.t;
+    if (d < 0 || d > 0.26) continue;
+    if (/whoosh|slash|sweep/.test(f.type)) {
+      const a = 1 - d / 0.26, r = h * 0.42, a0 = -2.3 + hash(Math.round(f.t * 100)) * 0.8, sp = 1.7 * E.out(clamp(d / 0.12, 0, 1));
+      const gg = c.createLinearGradient(w / 2 - r, h / 2 - r, w / 2 + r, h / 2 + r); gg.addColorStop(0, 'rgba(255,255,255,0)'); gg.addColorStop(0.6, `rgba(255,248,230,${a})`); gg.addColorStop(1, `rgba(255,210,120,${a})`);
+      c.strokeStyle = gg; c.lineWidth = 5 * k * a + 1; c.lineCap = 'round'; c.beginPath(); c.arc(w / 2, h * 0.62, r, a0, a0 + sp); c.stroke();
+    } else if (/clash|metal/.test(f.type)) {
+      const a = 1 - d / 0.26, cx = w * 0.5, cy = h * 0.52, n = /heavy/.test(f.type) ? 16 : 9;
+      c.strokeStyle = `rgba(255,220,150,${a})`; c.lineWidth = 1.3 * k;
+      for (let i = 0; i < n; i++) { const an = hash(i * 13 + Math.round(f.t * 100)) * TAU, r0 = d * 140 * k, r1 = r0 + 14 * k * (0.4 + hash(i)); c.beginPath(); c.moveTo(cx + Math.cos(an) * r0, cy + Math.sin(an) * r0); c.lineTo(cx + Math.cos(an) * r1, cy + Math.sin(an) * r1); c.stroke(); }
+      const fg = c.createRadialGradient(cx, cy, 0, cx, cy, 40 * k); fg.addColorStop(0, `rgba(255,240,200,${0.8 * a})`); fg.addColorStop(1, 'rgba(255,200,120,0)'); c.fillStyle = fg; c.fillRect(cx - 40 * k, cy - 40 * k, 80 * k, 80 * k);
+    }
+  }
+  /* 暗角 */
+  const vg = c.createRadialGradient(w / 2, h * 0.52, h * 0.3, w / 2, h * 0.52, w * 0.72); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.55)'); c.fillStyle = vg; c.fillRect(-16, -16, w + 32, h + 32);
+  c.translate(-shx, -shy);
+  filmTail(c, w, h, t, s, lt, k, o);
+  c.restore();
+}
+function filmTail(c, w, h, t, s, lt, k, o) {
+  /* 字幕（真实字幕文本，超宽截断） */
+  if (o.sub !== false && s.sub) {
+    const fa = Math.min(inv(0, 0.14, lt), inv(s.dur, s.dur - 0.14, lt));
+    if (fa > 0.01) {
+      c.globalAlpha = fa; const fs = Math.max(9, Math.round(h * 0.06));
+      c.font = `${fs}px KaiTi, STKaiti, serif`; c.textAlign = 'center'; c.textBaseline = 'alphabetic';
+      const txt = fitText(c, s.sub, w * 0.9);
+      c.fillStyle = 'rgba(0,0,0,.7)'; c.fillText(txt, w / 2 + 1.2 * k, h * 0.9 + 1.6 * k); c.fillStyle = '#F4EBDA'; c.fillText(txt, w / 2, h * 0.9); c.globalAlpha = 1;
+    }
+  }
+  if (o.ui) {
+    const fs = Math.max(8, Math.round(h * 0.036));
+    c.font = `${fs}px Consolas, monospace`; c.textAlign = 'left'; c.textBaseline = 'top'; c.fillStyle = 'rgba(244,235,218,.75)';
+    c.fillText(`SC ${String(s.n).padStart(2, '0')}/${Math.max(1, SCENES.length)}`, 12 * k, 10 * k);
+    c.font = `${Math.round(fs * 1.25)}px KaiTi, STKaiti, serif`; c.fillStyle = 'rgba(244,235,218,.9)'; c.fillText(fitText(c, s.title, w * 0.62), 12 * k, 10 * k + fs * 1.35);
+    c.fillStyle = 'rgba(200,54,29,.9)'; c.fillRect(w - 22 * k, 10 * k, 12 * k, 12 * k);
+  }
+  if (TEX.grain && o.grain !== false && !LOWSPEC) { c.globalAlpha = P.light ? 0.06 : 0.08; c.drawImage(TEX.grain, -(hash(Math.floor(t * 24)) * 64), -(hash(Math.floor(t * 24) + 3) * 64), w + 128, h + 128); c.globalAlpha = 1; }
+}
+function particlesFilm(c, w, h, t, m, k) {
+@@@ END
+@@@ RANGE
+const ATLAS = { cv: null, cw: 128, ch: 72, cols: 8 };
+@@@ TO
+/* ══════════════ 10. 画布与镜头 ══════════════ */
+@@@ WITH
+const ATLAS = { cv: null, cw: 128, ch: 72, cols: 8 };
+function buildAtlas() {
+  const n = SCENES.length;
+  if (!n) { ATLAS.cv = null; return; }
+  const { cw, ch, cols } = ATLAS, rows = Math.ceil(n / cols);
+  const cv = document.createElement('canvas'); cv.width = cw * cols; cv.height = ch * rows;
+  const c = cv.getContext('2d');
+  SCENES.forEach((s, i) => { c.save(); c.translate((i % cols) * cw, Math.floor(i / cols) * ch); c.beginPath(); c.rect(0, 0, cw, ch); c.clip(); renderFilm(c, cw, ch, s.t0 + Math.min(s.dur * 0.55, Math.max(0, s.dur - 0.05)), { sub: false, grain: false, scene: s, noThumb: true }); c.restore(); });
+  ATLAS.cv = cv;
+}
+/* 把分镜卡（真实缩略图优先，否则水墨图集格）画进任意矩形，按目标比例裁切 */
+function drawSceneCard(c, i, x, y, w, h) {
+  const s = SCENES[i]; if (!s || !(w > 1 && h > 1)) return;
+  const im = imgOf(s.thumb);
+  if (im) { drawCover(c, im, x, y, w, h); return; }
+  if (!ATLAS.cv) return;
+  const sw0 = ATLAS.cw, sh0 = ATLAS.ch, ar = w / h;
+  let sw = sw0, sh = sh0; if (sw / sh > ar) sw = sh * ar; else sh = sw / ar;
+  c.drawImage(ATLAS.cv, (i % ATLAS.cols) * sw0 + (sw0 - sw) / 2, Math.floor(i / ATLAS.cols) * sh0 + (sh0 - sh) / 2, sw, sh, x, y, w, h);
+}
+function buildGrain() {
+  const cv = document.createElement('canvas'); cv.width = cv.height = 256;
+  const c = cv.getContext('2d'), d = c.createImageData(256, 256);
+  for (let i = 0; i < d.data.length; i += 4) { const v = (hash(i * 0.25 + 17) * 255) | 0; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
+  c.putImageData(d, 0, 0);
+  TEX.grain = cv;
+}
+/* 动效编程监视画面：按当前批次的真实分镜标题 / 字幕生成示意 TSX（进度由 motion Agent 进度驱动） */
+const CODE_CACHE = { key: '', lines: [] };
+const MOT_NB = () => clamp(Math.ceil(SCENES.length / 4), 1, 16);
+function codeLines(b, nb) {
+  const N = SCENES.length, key = b + '/' + nb + '/' + N + '/' + TL.sig;
+  if (CODE_CACHE.key === key) return CODE_CACHE.lines;
+  const p2 = (n) => String(n).padStart(2, '0'), q = (s) => JSON.stringify(String(s || '').slice(0, 26));
+  const i0 = Math.floor((b * N) / nb), i1 = Math.max(i0 + 1, Math.floor(((b + 1) * N) / nb));
+  const out = [`// Batch${p2(b + 1)}.tsx · 镜头 ${p2(i0 + 1)}–${p2(Math.min(N, i1))} · 动效编程（示意）`, "import {AbsoluteFill, useCurrentFrame, spring} from 'remotion';", "import {InkTitle, Subtitle, BeatFlash} from '../kit';", ''];
+  for (let i = i0; i < Math.min(N, i1); i++) {
+    const s = SCENES[i];
+    out.push(`export const Scene${p2(i + 1)}: React.FC = () => {`, '  const f = useCurrentFrame();', `  const enter = spring({frame: f, fps: ${PROJECT.fps || 30}, config: {damping: 14}});`, '  return (', '    <AbsoluteFill>', `      <InkTitle text=${q(s.title)} progress={enter} />`, s.sub ? `      <Subtitle text=${q(s.sub)} />` : '      <BeatFlash />', '    </AbsoluteFill>', '  );', '};', '');
+  }
+  if (!N) out.push('// 等待分镜…');
+  CODE_CACHE.key = key; CODE_CACHE.lines = out;
+  return out;
+}
+const TOK = /(\/\/.*$)|('[^']*'|"[^"]*")|\b(import|from|export|const|return|React\.FC)\b|\b(\d+(?:\.\d+)?)\b|(<\/?[A-Z][A-Za-z]*|\/>|(?<=\s)>$)/g;
+function drawCodeLine(c, line, x, y, cols) {
+  let last = 0, m;
+  TOK.lastIndex = 0;
+  const put = (txt, col) => { c.fillStyle = col; c.fillText(txt, x, y); x += c.measureText(txt).width; };
+  while ((m = TOK.exec(line))) {
+    if (m.index > last) put(line.slice(last, m.index), cols.base);
+    put(m[0], m[1] ? cols.cm : m[2] ? cols.str : m[3] ? cols.kw : m[4] ? cols.num : cols.tag);
+    last = m.index + m[0].length;
+    if (m[0].length === 0) TOK.lastIndex++;
+  }
+  if (last < line.length) put(line.slice(last), cols.base);
+}
+function renderCode(c, w, h, st) {
+  c.fillStyle = '#0C0B09'; c.fillRect(0, 0, w, h);
+  const N = SCENES.length, nb = MOT_NB(), b = clamp(st.batch, 0, nb - 1);
+  const lines = codeLines(b, nb);
+  const k = w / 520, fs = Math.max(7, 10.4 * k), lh = fs * 1.5, hb = 22 * k;
+  c.fillStyle = '#15130F'; c.fillRect(0, 0, w, hb);
+  c.font = `${Math.round(fs * 0.95)}px Consolas, monospace`; c.textBaseline = 'middle'; c.textAlign = 'left';
+  const bn = String(b + 1).padStart(2, '0');
+  c.fillStyle = '#1E1B16'; c.fillRect(6 * k, 3 * k, 110 * k, hb - 3 * k);
+  c.fillStyle = '#E8D9B0'; c.fillText(`Batch${bn}.tsx`, 14 * k, hb / 2 + 1);
+  const sq = Math.min(9 * k, (w * 0.42) / nb);
+  for (let i = 0; i < nb; i++) { c.fillStyle = i < b ? '#7FA99B' : i === b ? (st.err ? '#C8361D' : '#D4A64A') : 'rgba(255,255,255,.12)'; c.fillRect(w - (nb - i) * sq - 8 * k, hb / 2 - 3 * k, sq * 0.78, 6 * k); }
+  const gut = 30 * k, top = hb + 8 * k, vis = Math.max(1, Math.floor((h - top - 26 * k) / lh));
+  let acc = 0, lastLine = 0, partial = 0;
+  for (let i = 0; i < lines.length; i++) { const L0 = lines[i].length + 1; if (acc + L0 <= st.chars) { acc += L0; lastLine = i + 1; } else { partial = st.chars - acc; break; } }
+  lastLine = Math.min(lastLine, lines.length - 1);
+  const first = Math.max(0, lastLine - vis + 1);
+  const cols = { base: '#CFC6B2', kw: '#D4A64A', str: '#8FC1A9', num: '#D98A8F', tag: '#E9E2D0', cm: '#6E675A' };
+  c.font = `${fs}px Consolas, monospace`;
+  for (let i = first; i <= lastLine; i++) {
+    const y = top + (i - first) * lh + lh / 2;
+    let line = lines[i] || '';
+    if (i === lastLine && st.chars < 1e8) line = line.slice(0, Math.max(0, partial));
+    c.fillStyle = 'rgba(207,198,178,.28)'; c.textAlign = 'right'; c.fillText(String(i + 1), gut - 8 * k, y); c.textAlign = 'left';
+    drawCodeLine(c, line, gut + 4 * k, y, cols);
+    if (i === lastLine && !st.err && Math.floor(performance.now() / 420) % 2 === 0) { const cx = gut + 4 * k + c.measureText(line).width + 1; c.fillStyle = '#D4A64A'; c.fillRect(cx, y - fs * 0.6, 1.6 * k, fs * 1.2); }
+  }
+  const bh = (st.err ? 30 : 22) * k;
+  c.fillStyle = st.err ? 'rgba(40,12,8,.94)' : 'rgba(21,19,15,.96)'; c.fillRect(0, h - bh, w, bh);
+  c.font = `${Math.round(fs * 0.92)}px "Microsoft YaHei UI", Consolas, sans-serif`; c.textBaseline = 'middle'; c.textAlign = 'left';
+  c.fillStyle = st.err ? '#F08A70' : 'rgba(207,198,178,.6)';
+  c.fillText(fitText(c, st.err ? '✕ ' + (st.errText || '动效编程执行失败') : `动效编程 · 第 ${b + 1}/${nb} 批 · 已点亮 ${st.lit}/${N} 幕 · ${PROJECT.engine === 'html' ? 'HTML5' : 'Remotion'} · 示意`, w - 20 * k), 10 * k, h - bh / 2);
+}
+function renderListen(c, w, h, pr) {
+  c.fillStyle = P.light ? '#1A1611' : '#0D0C0A'; c.fillRect(0, 0, w, h);
+  const k = w / 520, mid = h * 0.56, amp = h * 0.24, x0 = 18 * k, x1 = w - 18 * k;
+  c.strokeStyle = 'rgba(237,227,207,.06)'; c.lineWidth = 1; for (let i = 0; i <= 10; i++) { const x = lerp(x0, x1, i / 10); c.beginPath(); c.moveTo(x, mid - amp - 6 * k); c.lineTo(x, mid + amp + 6 * k); c.stroke(); }
+  const rv = lerp(x0, x1, pr);
+  c.fillStyle = 'rgba(212,166,74,.75)';
+  for (let x = x0; x < rv; x += 2 * k) { const t = ((x - x0) / (x1 - x0)) * DUR, v = envMax(BGM_ENV, t - 0.2, t + 0.2) * amp; c.fillRect(x, mid - v, 1.3 * k, v * 2); }
+  c.fillStyle = 'rgba(237,227,207,.14)';
+  for (let x = rv; x < x1; x += 2 * k) { const t = ((x - x0) / (x1 - x0)) * DUR, v = envMax(BGM_ENV, t - 0.2, t + 0.2) * amp * 0.6; c.fillRect(x, mid - v, 1.3 * k, v * 2); }
+  BEATS.forEach(([tb, st]) => { const x = lerp(x0, x1, tb / DUR); if (x > rv) return; c.fillStyle = st ? 'rgba(242,213,146,.9)' : 'rgba(242,213,146,.32)'; c.fillRect(x, mid - amp - (st ? 12 : 7) * k, st ? 1.6 * k : 1 * k, (st ? 9 : 5) * k); });
+  DROPS.forEach((td, i) => { const x = lerp(x0, x1, td / DUR); if (x > rv) return; c.fillStyle = '#C8361D'; c.beginPath(); c.moveTo(x, mid + amp + 4 * k); c.lineTo(x - 5 * k, mid + amp + 12 * k); c.lineTo(x + 5 * k, mid + amp + 12 * k); c.closePath(); c.fill(); c.font = `${Math.max(8, Math.round(9 * k))}px KaiTi, serif`; c.textAlign = 'center'; c.fillText('落' + (i + 1), x, mid + amp + 22 * k); });
+  c.strokeStyle = '#F2D592'; c.lineWidth = 1.4 * k; c.beginPath(); c.moveTo(rv, mid - amp - 14 * k); c.lineTo(rv, mid + amp + 6 * k); c.stroke();
+  c.textAlign = 'left'; c.textBaseline = 'alphabetic'; c.fillStyle = '#F2D592'; c.font = `${Math.round(34 * k)}px KaiTi, serif`;
+  const bpmTxt = PROJECT.bpm ? String(PROJECT.bpm) : '—';
+  c.globalAlpha = clamp(pr * 3, 0.25, 1); c.fillText(bpmTxt, 18 * k, 46 * k); c.globalAlpha = 1;
+  c.fillStyle = 'rgba(237,227,207,.6)'; c.font = `${Math.max(8, Math.round(10 * k))}px Consolas, "Microsoft YaHei UI", monospace`; c.fillText('BPM · 节拍分析', 82 * k, 44 * k);
+  const rvT = pr * DUR, strong = BEATS.filter((b) => b[1] && b[0] <= rvT).length, drops = DROPS.filter((d) => d <= rvT).length;
+  c.fillText(fitText(c, `${BEATS.length ? '首拍 ' + BEATS[0][0].toFixed(3) + 's · ' : ''}强拍 ${strong} · 突降 ${drops}/${DROPS.length}`, w * 0.6), 18 * k, 62 * k);
+  c.textAlign = 'right'; c.fillText(fitText(c, MUSIC[0] ? MUSIC[0].name : '配乐分析', w * 0.36), w - 18 * k, 26 * k);
+}
+function boardGrid(N, w, h) {
+  let best = null;
+  for (let cols = 1; cols <= 12; cols++) { const rows = Math.ceil(N / cols), cw = w / cols, ch = h / rows, sc = Math.min(cw, (ch * 16) / 9); if (!best || sc > best.s + 0.01) best = { cols, rows, s: sc }; }
+  return best;
+}
+function renderBoard(c, w, h, n, t) {
+  c.fillStyle = '#0D0C0A'; c.fillRect(0, 0, w, h);
+  const N = SCENES.length, k = w / 520, hb = 22 * k, gap = 3 * k;
+  c.font = `${Math.max(8, Math.round(10 * k))}px Consolas, "Microsoft YaHei UI", monospace`; c.textBaseline = 'middle'; c.textAlign = 'left'; c.fillStyle = 'rgba(237,227,207,.7)';
+  c.fillText(fitText(c, `分镜 STORYBOARD · ${n}/${N} · ${PROJECT.w}×${PROJECT.h}`, w * 0.7), 8 * k, hb / 2 + 1);
+  c.textAlign = 'right'; c.fillStyle = '#D4A64A'; c.fillText('策划导演', w - 8 * k, hb / 2 + 1); c.textAlign = 'left';
+  if (!N) { c.textAlign = 'center'; c.fillStyle = 'rgba(237,227,207,.45)'; c.font = `${Math.max(10, Math.round(14 * k))}px KaiTi, serif`; c.fillText('策划导演正在拆解叙事 · 分镜即将落笔', w / 2, h / 2); return; }
+  const g = boardGrid(N, w - gap, h - hb - gap), cols = g.cols, rows = g.rows;
+  const cw = (w - gap * (cols + 1)) / cols, ch = (h - hb - gap * (rows + 1)) / rows;
+  for (let i = 0; i < N; i++) {
+    const x = gap + (i % cols) * (cw + gap), y = hb + gap + Math.floor(i / cols) * (ch + gap);
+    if (i < n) {
+      const age = clamp((n - i) / 3, 0, 1), sc = lerp(1.12, 1, E.out(age));
+      c.save(); c.translate(x + cw / 2, y + ch / 2); c.scale(sc, sc); c.globalAlpha = 0.35 + 0.65 * age;
+      drawSceneCard(c, i, -cw / 2, -ch / 2, cw, ch);
+      c.globalAlpha = 1; c.strokeStyle = i === n - 1 ? '#F2D592' : 'rgba(212,166,74,.35)'; c.lineWidth = i === n - 1 ? 1.5 : 0.8; c.strokeRect(-cw / 2, -ch / 2, cw, ch);
+      if (cw > 22 * k) { c.fillStyle = 'rgba(0,0,0,.55)'; c.fillRect(-cw / 2, -ch / 2, 15 * k, 9 * k); c.fillStyle = '#F2E9D8'; c.font = `${Math.max(6, Math.round(7 * k))}px Consolas, monospace`; c.fillText(String(i + 1).padStart(2, '0'), -cw / 2 + 2 * k, -ch / 2 + 4.8 * k); }
+      c.restore();
+    } else { c.strokeStyle = 'rgba(237,227,207,.12)'; c.setLineDash([3, 3]); c.lineWidth = 0.8; c.strokeRect(x + 0.5, y + 0.5, cw - 1, ch - 1); c.setLineDash([]); }
+  }
+}
+
+/* ══════════════ 10. 画布与镜头 ══════════════ */
+@@@ END

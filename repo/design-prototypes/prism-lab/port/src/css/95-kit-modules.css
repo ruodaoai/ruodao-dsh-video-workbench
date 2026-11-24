@@ -1,0 +1,220 @@
+
+/* =====================================================================================================================
+   PRISM LAB · panel-module hooks. The panel modules inject a little structural CSS of their own (61 分镜/交付 → .pk-sc-*
+   .pk-dl-* .pk-codev-* .pk-lb ; 80 任务/广场/参考/提词器 → .pk-ops-*) with rounded dashboard corners, dark navy media and
+   10.5–11.5 px captions. Here they get the lab language: square corners, ink rules, LabMono captions ≥ 12 px, spectral
+   colour codes, lime OK stamps, signal-orange alerts and the run button's orange disc. (#pk-root beats their selectors.)
+   ===================================================================================================================== */
+
+/* ---------------------------------------------------------------- 分镜精修 · the three-column bench */
+#pk-root .pk-sc-list,#pk-root .pk-sc-insp{background:var(--paper)}
+#pk-root .pk-sc-list{border-right:1px solid var(--rule2)}
+#pk-root .pk-sc-insp{border-left:1px solid var(--rule2)}
+#pk-root .pk-sc-colh{min-height:42px;padding:7px 12px;gap:8px;border-bottom:1px solid var(--ink);background:var(--solid)}
+#pk-root .pk-sc-colh-t{font:700 13.5px/1.3 var(--sans);letter-spacing:.02em;color:var(--ink)}
+#pk-root .pk-sc-list .pk-sc-scroll{padding:0 0 10px;gap:0}
+#pk-root .pk-sc-list .pk-item{padding:7px 8px 7px 6px}
+#pk-root .pk-sc-list .pk-item-thumb{width:58px}
+#pk-root .pk-sc-ic{border-radius:2px}
+#pk-root .pk-sc-ic.is-lock{color:#B86E00}
+#pk-root .pk-sc-ic.is-mute{color:var(--signal)}
+#pk-root .pk-sc-dot{border-radius:0;background:var(--signal)}
+#pk-root .pk-sc-dirtytxt{font:12px/1.4 var(--mono);color:var(--signal)}
+/* monitor: a ruled lab plate with the viewfinder's corner brackets around the (black) picture */
+#pk-root .pk-sc-monbar{padding:7px 12px;gap:6px;border-bottom:1px solid var(--rule2);background:var(--solid)}
+#pk-root .pk-sc-monbar .pk-seg-b,#pk-root .pk-sc-tlh .pk-seg-b{min-height:24px;padding:2px 9px;font-size:12px}
+#pk-root .pk-sc-tc{padding:5px 8px;border:1px solid var(--rule2);border-radius:var(--r1);background:var(--paper);color:var(--ink);font:600 12.5px/1 var(--mono);letter-spacing:.02em}
+#pk-root .pk-sc-iconon{color:var(--bg)!important;border-color:var(--ink)!important;background:var(--ink)!important}
+#pk-root .pk-sc-slot{margin:10px 12px 8px;border:1px solid var(--rule2);border-radius:0;background:var(--pl-hatch),var(--paper)}
+#pk-root .pk-sc-slot::before,#pk-root .pk-sc-slot::after{content:"";position:absolute;width:14px;height:14px;border:1.5px solid var(--ink);pointer-events:none;z-index:1}
+#pk-root .pk-sc-slot::before{left:5px;top:5px;border-right:0;border-bottom:0}
+#pk-root .pk-sc-slot::after{right:5px;bottom:5px;border-left:0;border-top:0}
+#pk-root .pk-sc-screenhost{border-radius:0}
+#pk-root .pk-sc-stage{border-radius:0;box-shadow:0 18px 40px -22px rgba(17,17,17,.75),0 0 0 1px #111}
+#pk-root .pk-sc-poster{color:#E8E7E1;font-size:13px;background:#0E0F11}
+#pk-root .pk-sc-poster .pk-btn{background:transparent;border-color:rgba(255,255,255,.35);color:#fff}
+#pk-root .pk-sc-poster .pk-btn:hover:not(:disabled){border-color:#fff;background:rgba(255,255,255,.08)}
+#pk-root .pk-sc-poster-c{border-radius:2px;background:rgba(14,15,17,.9);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);border-top:2px solid var(--signal)}
+#pk-root .pk-sc-poster-c b{font:700 14px/1.3 var(--sans);letter-spacing:.01em}
+#pk-root .pk-sc-legend{font-size:12px;gap:3px 12px;color:var(--ink2)}
+#pk-root .pk-sc-legend b{min-width:18px;height:18px;border:1px dashed #F2A900;border-radius:0;background:rgba(242,169,0,.14);color:var(--ink);font:600 12px/1 var(--mono)}
+#pk-root .pk-btn>img{border-radius:0!important}
+#pk-root .pk-sc-safe-b{border:1.5px dashed #F2A900;background:rgba(242,169,0,.12)}
+#pk-root .pk-sc-safe-b.is-danger{border-color:var(--signal);background:rgba(255,90,31,.16)}
+#pk-root .pk-sc-safe-b>span,#pk-root .pk-sc-notice,#pk-root .pk-sc-region-box>span{border-radius:2px;font:600 12px/1.45 var(--sans)}
+#pk-root .pk-sc-notice{background:rgba(17,17,17,.86);color:var(--lime)}
+#pk-root .pk-sc-region-box{border-color:var(--signal);background:rgba(255,90,31,.12)}
+#pk-root .pk-sc-region-box>span{top:-22px;background:var(--signal);color:#fff}
+#pk-root .pk-sc-monnote{margin:0 12px 6px}
+/* multi-track timeline = the main screen's spectral timeline: mono track codes, square clips, spectral clip stripes */
+#pk-root .pk-sc-tl{border-top:1px solid var(--ink);background:var(--solid)}
+#pk-root .pk-sc-tlh{padding:6px 12px;border-bottom:1px solid var(--rule2)}
+#pk-root .pk-sc-tlh-t{font:700 13px/1.3 var(--sans);letter-spacing:.02em}
+#pk-root .pk-sc-tracks{padding:8px 12px 10px;gap:5px;scrollbar-width:thin;scrollbar-color:var(--rule2) transparent}
+#pk-root .pk-sc-trk-l{width:84px;padding:0 8px 0 2px;background:var(--solid);border-right:1px solid var(--rule);font:700 12px/1.25 var(--mono);color:var(--ink)}
+#pk-root .pk-sc-trk-l small{font:500 12px/1.3 var(--sans);color:var(--ink3)}
+#pk-root .pk-sc-trk:nth-child(1) .pk-sc-trk-l{color:#2F37FF}
+#pk-root .pk-sc-trk:nth-child(2) .pk-sc-trk-l{color:var(--ink)}
+#pk-root .pk-sc-trk:nth-child(3) .pk-sc-trk-l{color:#FF5A1F}
+#pk-root .pk-sc-trk:nth-child(4) .pk-sc-trk-l{color:#6B2BFF}
+#pk-root .pk-sc-blk,#pk-root .pk-sc-sub,#pk-root .pk-sc-sfx{border:1px solid var(--rule2);border-radius:2px;background:var(--paper)}
+#pk-root .pk-sc-blk{--sc-c:#2F37FF;gap:4px;padding:6px 7px 5px;box-shadow:inset 0 3px 0 var(--sc-c);transition:border-color var(--t1),background var(--t1)}
+#pk-root .pk-sc-trk-b>.pk-sc-blk:nth-child(8n+1){--sc-c:#6B2BFF}
+#pk-root .pk-sc-trk-b>.pk-sc-blk:nth-child(8n+2){--sc-c:#2F37FF}
+#pk-root .pk-sc-trk-b>.pk-sc-blk:nth-child(8n+3){--sc-c:#0094FF}
+#pk-root .pk-sc-trk-b>.pk-sc-blk:nth-child(8n+4){--sc-c:#00B89C}
+#pk-root .pk-sc-trk-b>.pk-sc-blk:nth-child(8n+5){--sc-c:#4CBB17}
+#pk-root .pk-sc-trk-b>.pk-sc-blk:nth-child(8n+6){--sc-c:#F2A900}
+#pk-root .pk-sc-trk-b>.pk-sc-blk:nth-child(8n+7){--sc-c:#FF7A1A}
+#pk-root .pk-sc-trk-b>.pk-sc-blk:nth-child(8n+8){--sc-c:#F0284A}
+#pk-root .pk-sc-blk:hover{border-color:var(--ink)}
+#pk-root .pk-sc-blk.is-sel{border-color:var(--ink);background:var(--solid);box-shadow:inset 0 3px 0 var(--sc-c),inset 0 0 0 1px var(--ink)}
+#pk-root .pk-sc-blk.is-play{border-color:var(--signal)}
+#pk-root .pk-sc-blk.is-locked::after{border-radius:0;border:1px dashed #F2A900}
+#pk-root .pk-sc-blk-h img{border-radius:0;box-shadow:0 0 0 1px var(--rule2)}
+#pk-root .pk-sc-blk-n{font:500 12px/1.2 var(--mono);color:var(--ink3)}
+#pk-root .pk-sc-blk-t{font:600 12.5px/1.3 var(--sans)}
+#pk-root .pk-sc-tx{height:22px;padding:0 7px;border:1px solid var(--rule2);border-radius:2px;background:var(--solid);color:var(--ink2);font:500 12px/1 var(--mono)}
+#pk-root .pk-sc-tx:hover{border-color:var(--ink);color:var(--ink)}
+#pk-root .pk-sc-prog{height:2px;background:var(--pl-spec)}
+#pk-root .pk-sc-sub{padding:4px 8px;font-size:12px;color:var(--ink2)}
+#pk-root .pk-sc-sub.is-sel{border-color:var(--ink);color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+#pk-root .pk-sc-sfx{flex-wrap:wrap;align-content:center;row-gap:3px;padding:3px 5px;border-style:dashed}
+#pk-root .pk-sc-cue{height:22px;padding:0 6px;gap:4px;border:1px solid rgba(255,90,31,.45);border-radius:2px;background:rgba(255,90,31,.07);color:var(--ink);font:500 12px/1 var(--sans)}
+#pk-root .pk-sc-cue::before{content:"";width:5px;height:5px;background:var(--signal);transform:rotate(45deg);flex:none}
+#pk-root .pk-sc-cue:hover{border-color:var(--signal);background:rgba(255,90,31,.16)}
+#pk-root .pk-sc-cue-more{font:500 12px/1 var(--mono);color:var(--ink3)}
+#pk-root .pk-sc-cue-add{height:22px;border:1px dashed var(--rule2);border-radius:2px;color:var(--ink2);font:500 12px/1 var(--sans)}
+#pk-root .pk-sc-cue-add:hover{border-color:var(--ink);color:var(--ink)}
+#pk-root .pk-sc-bgm{gap:12px;padding:5px 10px;border:1px solid rgba(107,43,255,.35);border-radius:2px;background:rgba(107,43,255,.06);font-size:12.5px;color:var(--ink2)}
+#pk-root .pk-sc-bgm .pk-select{min-height:26px}
+/* inspector */
+#pk-root .pk-sc-insp .pk-tabs{padding:0 10px}
+#pk-root .pk-sc-pills .pk-btn{border-radius:var(--rp);font-size:12.5px}
+#pk-root .pk-sc-guard{gap:8px;padding:7px 10px;border:1px dashed var(--rule2);border-radius:var(--r1);background:var(--pl-hatch),var(--paper);font-size:12.5px;color:var(--ink2)}
+#pk-root .pk-sc-mitem{gap:8px;padding:6px;border:1px solid var(--rule2);border-radius:var(--r1);background:var(--solid)}
+#pk-root .pk-sc-mitem img,#pk-root .pk-sc-mitem .pk-sc-mph{border-radius:0;box-shadow:0 0 0 1px var(--rule2);background:var(--paper)}
+#pk-root .pk-sc-mitem b{font-size:12.5px;font-weight:600}
+#pk-root .pk-sc-mitem small{font:12px/1.4 var(--mono);color:var(--ink3)}
+#pk-root .pk-sc-cuerow>b{font-size:12.5px;font-weight:600}
+#pk-root .pk-sc-job{gap:6px;padding:8px 14px;border-bottom:1px solid var(--ink);background:var(--ink);color:var(--bg)}
+#pk-root .pk-sc-job-t{font:12.5px/1.45 var(--mono);color:var(--bg)}
+#pk-root .pk-sc-job .pk-meter-t{background:rgba(127,127,127,.4)}
+#pk-root .pk-sc-kv{gap:5px 12px;font-size:12.5px;color:var(--ink2)}
+#pk-root .pk-sc-kv>b{font:400 12px/1.5 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink3)}
+#pk-root .pk-sc-lockrow{gap:8px;padding:7px 9px;border:1px solid var(--rule2);border-radius:var(--r1);background:var(--solid)}
+#pk-root .pk-sc-lockrow.is-locked{border-color:#F2A900;box-shadow:inset 3px 0 0 #F2A900}
+#pk-root .pk-sc-lockrow b{font-size:12.5px;font-weight:600}
+#pk-root .pk-sc-lockrow small{font-size:12px;color:var(--ink3)}
+
+/* ---------------------------------------------------------------- 交付 */
+#pk-root .pk-dl{gap:16px}
+#pk-root .pk-dl .pk-sec{padding:12px 14px 14px;border:1px solid var(--rule2);border-top:1px solid var(--ink);border-radius:0;background:var(--solid)}
+#pk-root .pk-dl-player{border:1px solid var(--ink);border-radius:0}
+#pk-root .pk-dl-noplayer{min-height:200px;border:1px dashed var(--rule2);border-radius:var(--r1);background:var(--pl-hatch),var(--paper);color:var(--ink3);font-size:13px}
+#pk-root .pk-dl-check{gap:9px;padding:8px 10px;border:1px solid var(--rule2);border-radius:var(--r1);background:var(--solid)}
+#pk-root .pk-dl-check-i{width:18px;height:18px;border:1px solid var(--rule2);border-radius:2px;color:var(--ink3)}
+#pk-root .pk-dl-check.is-ok .pk-dl-check-i{background:var(--lime);border-color:#111;color:#111}
+#pk-root .pk-dl-check.is-err{border-color:var(--signal);box-shadow:inset 3px 0 0 var(--signal)}
+#pk-root .pk-dl-check.is-err .pk-dl-check-i{background:var(--signal);border-color:var(--signal);color:#fff}
+#pk-root .pk-dl-check.is-warn{border-color:#F2A900;box-shadow:inset 3px 0 0 #F2A900}
+#pk-root .pk-dl-check.is-warn .pk-dl-check-i{color:#B86E00;border-color:#F2A900}
+#pk-root .pk-dl-check-b>b{font-size:13px;font-weight:600}
+#pk-root .pk-dl-check-b>span{font:12px/1.55 var(--mono);color:var(--ink2)}
+#pk-root .pk-dl-fig img,#pk-root .pk-dl-snap{border:1px solid var(--ink);border-radius:0}
+#pk-root .pk-dl-fig figcaption{font:12px/1.4 var(--mono);letter-spacing:.03em;color:var(--ink3)}
+#pk-root .pk-dl-links a{color:var(--ultra);font-size:12.5px}
+#pk-root .pk-codev-files{border-right:1px solid var(--rule2);background:var(--paper)}
+#pk-root .pk-codev-f{border-radius:2px;font:12px/1.4 var(--mono);color:var(--ink2)}
+#pk-root .pk-codev-f small{font:12px/1.35 var(--sans);color:var(--ink3)}
+#pk-root .pk-codev-f:hover{background:rgba(127,127,127,.08)}
+#pk-root .pk-codev-f.is-on{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+#pk-root .pk-codev-f.is-on small{color:var(--bg);opacity:.7}
+#pk-root .pk-codev-h b{font:600 12.5px/1.4 var(--mono)}
+#pk-root .pk-lb img,#pk-root .pk-lb video{border:1px solid var(--ink);border-radius:0}
+#pk-root .pk-lb p{font-size:13px;color:var(--ink2)}
+
+/* ---------------------------------------------------------------- 任务中心 */
+#pk-root .pk-ops-big{font:800 34px/1 var(--sans);letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:var(--ink)}
+#pk-root .pk-ops-h3{font:700 15px/1.45 var(--sans);letter-spacing:.02em}
+#pk-root .pk-ops-sub{font-size:12px;color:var(--ink3)}
+#pk-root .pk-ops-runlist{gap:0;border-top:1px solid var(--rule2);scrollbar-width:thin;scrollbar-color:var(--rule2) transparent}
+#pk-root .pk-ops-agent{gap:5px;padding:8px 10px 9px;border:1px solid var(--rule2);border-radius:var(--r1);background:var(--solid);box-shadow:inset 0 3px 0 var(--rule2)}
+#pk-root .pk-ops-agent-h b{font-size:13px;font-weight:700}
+#pk-root .pk-ops-agent p{font-size:12px;line-height:1.5;color:var(--ink3)}
+#pk-root .pk-ops-agent.is-running{border-color:var(--ink);box-shadow:inset 0 3px 0 var(--ultra)}
+#pk-root .pk-ops-agent.is-done{box-shadow:inset 0 3px 0 #4CBB17}
+#pk-root .pk-ops-agent.is-failed,#pk-root .pk-ops-agent.is-stopped{border-color:var(--signal);box-shadow:inset 0 3px 0 var(--signal)}
+#pk-root .pk-ops-step{gap:6px 12px;padding:9px 12px;border:1px solid var(--rule2);border-radius:var(--r1);background:var(--solid)}
+#pk-root .pk-ops-step.is-running{border-color:var(--ink);box-shadow:inset 3px 0 0 var(--ultra)}
+#pk-root .pk-ops-step.is-failed,#pk-root .pk-ops-step.is-stopped{border-color:var(--signal);box-shadow:inset 3px 0 0 var(--signal)}
+#pk-root .pk-ops-step-n{min-width:24px;height:24px;border:1px solid var(--rule2);border-radius:2px;background:transparent;font:600 12px/1 var(--mono);color:var(--ink3)}
+#pk-root .pk-ops-step.is-running .pk-ops-step-n{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+#pk-root .pk-ops-step.is-done .pk-ops-step-n{background:var(--lime);border-color:#111;color:#111}
+#pk-root .pk-ops-msg{font-size:12.5px;color:var(--ink2)}
+#pk-root .pk-ops-msg.is-err{color:var(--signal)}
+#pk-root .pk-ops-log .pk-log-l em{max-width:7em}
+/* ---------------------------------------------------------------- 影核广场 (the prototype's .tpl cards) */
+#pk-root .pk-ops-cover{background:#111}
+#pk-root .pk-ops-cover-ph{color:rgba(255,255,255,.5)}
+#pk-root .pk-ops-cover-play{width:40px;height:40px;margin:-20px 0 0 -20px;background:var(--signal);color:#fff;box-shadow:0 10px 22px -10px rgba(0,0,0,.7)}
+#pk-root .pk-ops-cover-play svg{width:15px;height:15px}
+#pk-root .pk-ops-cover-len{right:6px;bottom:6px;padding:1px 6px;border-radius:2px;background:rgba(17,17,17,.84);color:#F2F1EC;font:500 12px/1.5 var(--mono);letter-spacing:.03em}
+#pk-root .pk-ops-cover-src{right:6px;top:6px;padding:1px 6px;border:1px solid #111;border-radius:2px;background:var(--lime);color:#111;font:600 12px/1.35 var(--mono);letter-spacing:.03em}
+#pk-root .pk-ops-meta{font:400 12px/1.55 var(--mono);letter-spacing:.02em;color:var(--ink3)}
+#pk-root .pk-ops-body{font-size:13px;line-height:1.7;color:var(--ink2)}
+#pk-root .pk-ops-player{border:1px solid var(--ink);border-radius:0;background:#000}
+#pk-root .pk-ops-ov{background:rgba(17,17,17,.82);color:#F2F1EC;font-size:13px}
+#pk-root .pk-ops-ov.is-tap{background:rgba(17,17,17,.3)}
+#pk-root .pk-ops-sw{gap:6px;padding:1px 7px 1px 3px;border:1px solid var(--rule2);border-radius:2px;background:var(--solid);font:500 12px/1.6 var(--mono);color:var(--ink2)}
+#pk-root .pk-ops-sw>i{width:9px;height:14px;border-radius:1px}
+#pk-root .pk-ops-md{border-top:1px solid var(--ink)}
+/* ---------------------------------------------------------------- 参考复刻 (prototype A/B compare: ink frame, signal divider) */
+#pk-root .pk-ops-sheet{border:1px solid var(--ink);border-radius:0;background:#111}
+#pk-root .pk-ops-stats .pk-stat-v{font-size:22px}
+#pk-root .pk-ops-cuts{height:30px;border:1px solid var(--rule2);border-radius:0;background:var(--pl-hatch),var(--paper)}
+#pk-root .pk-ops-cuts>i{background:var(--ink);opacity:.75}
+#pk-root .pk-ops-cuts>i.is-drop{background:var(--signal);opacity:1}
+#pk-root .pk-ops-axis{font:400 12px/1.4 var(--mono);color:var(--ink3)}
+#pk-root .pk-ops-fx{padding:8px 10px;border:1px solid var(--rule2);border-radius:var(--r1);background:var(--solid)}
+#pk-root .pk-ops-fx>b{font-size:13px;font-weight:600}
+#pk-root .pk-ops-fx>span{font:500 12px/1.6 var(--mono);color:var(--ultra)}
+#pk-root .pk-ops-fx>p{font-size:12.5px}
+#pk-root .pk-ops-cmp{padding:6px;border:1px solid var(--ink);border-radius:0;background:#111}
+#pk-root .pk-ops-cmp.is-curtain{padding:0}
+#pk-root .pk-ops-pane,#pk-root .pk-ops-cmp.is-curtain .pk-ops-pane{border-radius:0}
+#pk-root .pk-ops-tagv{padding:1px 7px;border-radius:2px;background:rgba(17,17,17,.84);color:#F2F1EC;font:600 12px/1.6 var(--mono);letter-spacing:.03em}
+#pk-root .pk-ops-tagv.is-r{background:var(--lime);color:#111}
+#pk-root .pk-ops-div{background:var(--signal);box-shadow:0 0 10px rgba(255,90,31,.8)}
+#pk-root .pk-ops-knob{width:26px;height:26px;margin:-13px 0 0 -13px;background:var(--signal);color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.45)}
+#pk-root .pk-ops-perr{background:rgba(17,17,17,.84);color:#FFB79A;font-size:13px}
+#pk-root .pk-ops-transport{gap:10px;padding:7px 12px;border:1px solid var(--rule2);border-radius:var(--r1);background:var(--solid)}
+#pk-root .pk-ops-clock{font:600 12.5px/1 var(--mono);color:var(--ink)}
+/* ---------------------------------------------------------------- 提词器 (prototype: ink camera plate, dark prompter, Kai script, signal read line) */
+#pk-root .pk-ops-vf{border:1px solid var(--ink);border-radius:0;background:#111}
+#pk-root .pk-ops-vf.is-rec{border-color:var(--signal);box-shadow:0 0 0 2px rgba(255,90,31,.3)}
+#pk-root .pk-ops-vf-empty{background:#111;color:#C8C7C0}
+#pk-root .pk-ops-vf-empty>b{color:#F2F1EC;font-size:13.5px}
+#pk-root .pk-ops-vf-empty.is-err>b{color:#FFB79A}
+#pk-root .pk-ops-vf-empty .pk-btn{background:transparent;border-color:rgba(255,255,255,.35);color:#fff}
+#pk-root .pk-ops-vf-empty .pk-btn--primary{background:var(--signal);border-color:var(--signal)}
+#pk-root .pk-ops-pwrap{border:1px solid var(--ink);border-radius:0;background:#111}
+#pk-root .pk-ops-vf>.pk-ops-pwrap{border-color:rgba(255,255,255,.2);background:transparent}
+#pk-root .pk-ops-pbox{color:#F2F1EC;font-family:var(--kai)}
+#pk-root .pk-ops-readline{border-top:1px solid var(--signal);border-bottom:1px solid var(--signal);background:rgba(255,90,31,.07)}
+#pk-root .pk-ops-rec{left:10px;bottom:10px;padding:3px 10px;border-radius:2px;background:var(--signal);font:600 12.5px/1.25 var(--mono)}
+#pk-root .pk-ops-rec>i{border-radius:50%}
+#pk-root .pk-ops-count{background:rgba(17,17,17,.7)}
+#pk-root .pk-ops-count>b{font-family:var(--sans);font-weight:800;letter-spacing:-.06em;color:var(--lime)}
+#pk-root .pk-ops-vu{gap:10px;padding:7px 12px;border:1px solid var(--rule2);border-radius:var(--r1);background:var(--solid)}
+#pk-root .pk-ops-vu>span{font-size:12.5px;font-weight:600}
+#pk-root .pk-ops-vu-t{height:6px;border-radius:0;background:var(--pl-track)}
+#pk-root .pk-ops-vu-t>i{border-radius:0;background:#4CBB17}
+#pk-root .pk-ops-vu-t>i.is-hot{background:var(--signal)}
+#pk-root .pk-ops-vu>b{font:600 12px/1 var(--mono)}
+#pk-root .pk-ops-take{gap:10px;padding:12px 14px;border:1px solid #F2A900;border-left-width:3px;border-radius:var(--r1);background:rgba(242,169,0,.07)}
+#pk-root .pk-ops-take video{border:1px solid var(--ink);border-radius:0}
+@media (max-height:700px){
+  #pk-root .pk-sc-colh,#pk-root .pk-sc-monbar{min-height:0;padding-top:5px;padding-bottom:5px}
+  #pk-root .pk-sc-slot{margin:6px 10px}
+}

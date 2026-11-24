@@ -1,0 +1,7179 @@
+{
+  "version": "promo-plan/1",
+  "genre": "ui-tutorial",
+  "genreLabel": "亮色界面软件全流程实操教程",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "totalDurationSec": 239.5,
+  "totalDurationInFrames": 7185,
+  "safeZone": {
+    "platform": "universal",
+    "platformLabel": "全平台通用安全框",
+    "orientation": "landscape",
+    "width": 1920,
+    "height": 1080,
+    "safeInsets": {
+      "top": 0.06,
+      "bottom": 0.13,
+      "left": 0.05,
+      "right": 0.08
+    },
+    "subtitleBottomPct": 0.13,
+    "subtitleBottomPx": 140,
+    "safePaddingPx": {
+      "top": 65,
+      "bottom": 140,
+      "left": 96,
+      "right": 154
+    },
+    "obstructions": [
+      {
+        "id": "uni-l-top",
+        "label": "顶部安全边界",
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.06,
+        "tone": "warn",
+        "px": {
+          "x": 0,
+          "y": 0,
+          "w": 1920,
+          "h": 65
+        }
+      },
+      {
+        "id": "uni-l-bottom",
+        "label": "底部播放条/文案遮挡区",
+        "x": 0,
+        "y": 0.87,
+        "w": 1,
+        "h": 0.13,
+        "tone": "danger",
+        "px": {
+          "x": 0,
+          "y": 940,
+          "w": 1920,
+          "h": 140
+        }
+      }
+    ]
+  },
+  "resolvedShots": [
+    {
+      "id": "scene-01",
+      "index": 1,
+      "title": "从新建工程开始",
+      "narration": "打开 DSH，先建一个视频工程。",
+      "emotion": "欢快热情",
+      "role": "host",
+      "voiceId": "pack-热门音色-一天青年",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 一天青年 [匹配度 99% — 高清晰参考时长(20.1s) + 青年活力声线 + 全片主讲连贯音色]",
+      "visualPrompt": "card-fan-opener 空间动态编排 · assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+      "audioFile": "",
+      "durationSec": 3.5,
+      "durationInFrames": 105,
+      "startFrame": 0,
+      "startSec": 0,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "# DSH Video Workbench 全量实操",
+          "startSec": 0,
+          "endSec": 6.429,
+          "startFrame": 0,
+          "endFrame": 193
+        },
+        {
+          "index": 2,
+          "text": "教程知识手册 (v0.3.6)",
+          "startSec": 6.429,
+          "endSec": 9.49,
+          "startFrame": 192,
+          "endFrame": 285
+        }
+      ],
+      "subtitleText": "# DSH Video Workbench 全量实操 教程知识手册 (v0.3.6)",
+      "subChunks": [
+        "打开 DSH 先建一个视频工程"
+      ],
+      "subtitleLine": "DSH视频工作台实操",
+      "voiceEmotion": "欢快热情",
+      "speechRate": 1.11,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "科技前沿",
+      "layout": "freeform-stage",
+      "threePreset": "orbital-core",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "3d-depth+sweep",
+      "highlights": [
+        "工程管理"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "科技前沿"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 24,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "fanMedia": [
+        {
+          "assetId": "video-01-demo-drawer-new-project-473d",
+          "path": "assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+          "originalPath": "assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+          "webPath": "assets/.web/video-01-demo-drawer-new-project-473d.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01a-ui-warroom-light-9353",
+          "path": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "originalPath": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01b-ui-drawer-open-8ece",
+          "path": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "originalPath": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01c-ui-new-project-modal-57a0",
+          "path": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "originalPath": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-02-demo-hardware-lowspec-2caf",
+          "path": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "originalPath": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "webPath": "assets/.web/video-02-demo-hardware-lowspec-2caf.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-02a-ui-hardware-modal-5c43",
+          "path": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "originalPath": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-03-demo-warroom-cards-polish-1bae",
+          "path": "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+          "originalPath": "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+          "webPath": "assets/.web/video-03-demo-warroom-cards-polish-1bae.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        }
+      ],
+      "media": [
+        {
+          "path": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "poolMedia": [
+        {
+          "assetId": "video-01-demo-drawer-new-project-473d",
+          "path": "assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+          "originalPath": "assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+          "webPath": "assets/.web/video-01-demo-drawer-new-project-473d.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01a-ui-warroom-light-9353",
+          "path": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "originalPath": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01b-ui-drawer-open-8ece",
+          "path": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "originalPath": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01c-ui-new-project-modal-57a0",
+          "path": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "originalPath": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-02-demo-hardware-lowspec-2caf",
+          "path": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "originalPath": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "webPath": "assets/.web/video-02-demo-hardware-lowspec-2caf.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-02a-ui-hardware-modal-5c43",
+          "path": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "originalPath": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-03-demo-warroom-cards-polish-1bae",
+          "path": "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+          "originalPath": "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+          "webPath": "assets/.web/video-03-demo-warroom-cards-polish-1bae.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-04-demo-step1-assets-teleprompter-e5e2",
+          "path": "assets/videos/video-04-demo-step1-assets-teleprompter-e5e2.mp4",
+          "originalPath": "assets/videos/video-04-demo-step1-assets-teleprompter-e5e2.mp4",
+          "webPath": "assets/.web/video-04-demo-step1-assets-teleprompter-e5e2.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-04a-ui-step1-assets-5e58",
+          "path": "assets/images/image-04a-ui-step1-assets-5e58.png",
+          "originalPath": "assets/images/image-04a-ui-step1-assets-5e58.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-04b-ui-teleprompter-f4dd",
+          "path": "assets/images/image-04b-ui-teleprompter-f4dd.png",
+          "originalPath": "assets/images/image-04b-ui-teleprompter-f4dd.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-05-demo-step2-llm-tts-0ac5",
+          "path": "assets/videos/video-05-demo-step2-llm-tts-0ac5.mp4",
+          "originalPath": "assets/videos/video-05-demo-step2-llm-tts-0ac5.mp4",
+          "webPath": "assets/.web/video-05-demo-step2-llm-tts-0ac5.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05a-ui-step2-director-77ba",
+          "path": "assets/images/image-05a-ui-step2-director-77ba.png",
+          "originalPath": "assets/images/image-05a-ui-step2-director-77ba.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05b-ui-tts-engines-98bc",
+          "path": "assets/images/image-05b-ui-tts-engines-98bc.png",
+          "originalPath": "assets/images/image-05b-ui-tts-engines-98bc.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05c-ui-llm-protocols-12f5",
+          "path": "assets/images/image-05c-ui-llm-protocols-12f5.png",
+          "originalPath": "assets/images/image-05c-ui-llm-protocols-12f5.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-06-demo-step3-monitor-refine-a842",
+          "path": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4",
+          "originalPath": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4",
+          "webPath": "assets/.web/video-06-demo-step3-monitor-refine-a842.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-06a-ui-step3-monitor-cf2e",
+          "path": "assets/images/image-06a-ui-step3-monitor-cf2e.png",
+          "originalPath": "assets/images/image-06a-ui-step3-monitor-cf2e.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-07-demo-step4-qa-tasks-4d33",
+          "path": "assets/videos/video-07-demo-step4-qa-tasks-4d33.mp4",
+          "originalPath": "assets/videos/video-07-demo-step4-qa-tasks-4d33.mp4",
+          "webPath": "assets/.web/video-07-demo-step4-qa-tasks-4d33.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-07a-ui-step4-qa-de19",
+          "path": "assets/images/image-07a-ui-step4-qa-de19.png",
+          "originalPath": "assets/images/image-07a-ui-step4-qa-de19.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-07b-ui-task-center-610a",
+          "path": "assets/images/image-07b-ui-task-center-610a.png",
+          "originalPath": "assets/images/image-07b-ui-task-center-610a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.62,
+          "pan": 0
+        },
+        {
+          "type": "shimmer_swell",
+          "path": "audio/sfx/shimmer_swell.wav",
+          "offsetSec": 0.04,
+          "volume": 0.45,
+          "pan": 0
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 0.16,
+          "volume": 0.44,
+          "pan": -0.22
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 0.34,
+          "volume": 0.44,
+          "pan": 0.18
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 0.52,
+          "volume": 0.44,
+          "pan": -0.14
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.85,
+          "volume": 0.46,
+          "pan": 0.15
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 8.97,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 9.29,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "# DSH Video Workbench 全量实操，教程知识手册 (v零点三.六)",
+      "ttsNarrationRef": "# DSH Video Workbench 全量实操教程知识手册 (v0.3.6)",
+      "voiceName": "一天青年",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "视频工程"
+      ],
+      "visualBlueprint": "作战大屏全幅停帧，标题落在经核验的空白处，随即让出视线，接顶栏操作实录。",
+      "motionNotes": "作战大屏全幅停帧，标题落在经核验的空白处，随即让出视线，接顶栏操作实录。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "AI 作战大屏",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-02",
+      "index": 2,
+      "title": "打开抽屉并输入工程名",
+      "narration": "点顶栏的工程管理入口，打开左侧抽屉。点新建视频工程，再在弹窗里输入项目名称。",
+      "emotion": "温和亲切",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "app-focus-shot 空间动态编排 · assets/images/image-01a-ui-warroom-light-9353.png",
+      "audioFile": "",
+      "durationSec": 11,
+      "durationInFrames": 330,
+      "startFrame": 105,
+      "startSec": 3.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "## 1. 插件定位与 100% 全题材自由编码",
+          "startSec": 0,
+          "endSec": 5.95,
+          "startFrame": 0,
+          "endFrame": 179
+        }
+      ],
+      "subtitleText": "## 1. 插件定位与 100% 全题材自由编码",
+      "subChunks": [
+        "点顶栏的工程管理入口",
+        "打开左侧抽屉",
+        "点新建视频工程",
+        "再在弹窗里输入项目名称"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "温和亲切",
+      "speechRate": 1.08,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 2 幕",
+      "layout": "freeform-stage",
+      "threePreset": "cyber-terrain",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "sparks+shockwave",
+      "highlights": [
+        "打开抽屉",
+        "输入名称"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 2 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 48,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTitle": "工程管理",
+      "windowTheme": "light",
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.46,
+          "z": 1.06
+        },
+        {
+          "t": 0.55,
+          "fx": 0.36,
+          "fy": 0.32,
+          "z": 1.92
+        },
+        {
+          "t": 2.6,
+          "fx": 0.45,
+          "fy": 0.42,
+          "z": 1.75
+        }
+      ],
+      "media": [
+        {
+          "path": "assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+          "width": 1920,
+          "height": 1080,
+          "type": "video",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.14,
+          "volume": 0.45,
+          "pan": -0.16
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.48,
+          "pan": 0.14
+        },
+        {
+          "type": "lock",
+          "path": "audio/sfx/lock.wav",
+          "offsetSec": 1.5,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 5.43,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 5.75,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "## 一. 插件定位与 百分之一百 全，题材自由编码",
+      "ttsNarrationRef": "## 1. 插件定位与 100% 全题材自由编码",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "工程管理",
+        "项目名称"
+      ],
+      "visualBlueprint": "全幅播放抽屉展开和名称输入；定位环只跟随核实后的实录动作，输入完成后停帧。",
+      "motionNotes": "全幅播放抽屉展开和名称输入；定位环只跟随核实后的实录动作，输入完成后停帧。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-03",
+      "index": 3,
+      "title": "从列表切换已有工程",
+      "narration": "如果要接着做旧项目，不必再新建。在工程抽屉里找到原来的项目，切回对应工作区。",
+      "emotion": "温和亲切",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "workflow-steps 空间动态编排 · assets/images/image-01b-ui-drawer-open-8ece.png",
+      "audioFile": "",
+      "durationSec": 8.5,
+      "durationInFrames": 255,
+      "startFrame": 435,
+      "startSec": 14.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "DeepSeek Harness (DSH) 生态",
+          "startSec": 0,
+          "endSec": 5.829,
+          "startFrame": 0,
+          "endFrame": 175
+        },
+        {
+          "index": 2,
+          "text": "内的多智能体 AI 视频全链路工作台",
+          "startSec": 5.829,
+          "endSec": 10.492,
+          "startFrame": 174,
+          "endFrame": 315
+        },
+        {
+          "index": 3,
+          "text": "（内置 25 个 Cordis 工具）",
+          "startSec": 10.492,
+          "endSec": 14.28,
+          "startFrame": 314,
+          "endFrame": 429
+        }
+      ],
+      "subtitleText": "DeepSeek Harness (DSH) 生态 内的多智能体 AI 视频全链路工作台 （内置 25 个 Cordis 工具）",
+      "subChunks": [
+        "如果要接着做旧项目 不必再新建",
+        "在工程抽屉里找到原来的项目",
+        "切回对应工作区"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "温和亲切",
+      "speechRate": 1.08,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 3 幕",
+      "layout": "freeform-stage",
+      "threePreset": "particle-vortex",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "halftone+glitch",
+      "highlights": [
+        "历史工程",
+        "工作区切换"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 3 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 72,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "steps": [
+        {
+          "title": "第 3 幕",
+          "desc": "聚合图文视听",
+          "img": "assets/images/image-01b-ui-drawer-open-8ece.png"
+        },
+        {
+          "title": "声画同步",
+          "desc": "自动节奏分镜",
+          "img": "assets/images/image-01b-ui-drawer-open-8ece.png"
+        },
+        {
+          "title": "节奏转场",
+          "desc": "高清成片交付",
+          "img": "assets/images/image-01b-ui-drawer-open-8ece.png"
+        }
+      ],
+      "windowTheme": "light",
+      "media": [
+        {
+          "assetId": "image-01b-ui-drawer-open-8ece",
+          "path": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "originalPath": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "hold",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.24,
+          "volume": 0.44,
+          "pan": -0.2
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 1.02,
+          "volume": 0.44,
+          "pan": 0.2
+        },
+        {
+          "type": "shine",
+          "path": "audio/sfx/shine.wav",
+          "offsetSec": 1.8,
+          "volume": 0.4,
+          "pan": 0
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 13.76,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 14.08,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- DeepSeek Harness (DSH) 生态，内的多智能体 AI 视频全链路工作台（，内置 二十五 个 Cordis 工具）",
+      "ttsNarrationRef": "- DeepSeek Harness (DSH) 生态内的多智能体 AI 视频全链路工作台（内置 25 个 Cordis 工具）",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "原来的项目"
+      ],
+      "visualBlueprint": "用抽屉展开截图全幅回看列表，不标具体项目行，不重演点击，让观众认清切换入口。",
+      "motionNotes": "用抽屉展开截图全幅回看列表，不标具体项目行，不重演点击，让观众认清切换入口。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "工程抽屉",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-04",
+      "index": 4,
+      "title": "提交前核对工程名",
+      "narration": "提交前，先核对名称。想继续就确认创建；如果只是打开看看，点取消即可返回。",
+      "emotion": "重点强调",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "split-wipe-compare 空间动态编排 · assets/images/image-01c-ui-new-project-modal-57a0.png",
+      "audioFile": "",
+      "durationSec": 8.5,
+      "durationInFrames": 255,
+      "startFrame": 690,
+      "startSec": 23,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "4-Agent 全自动协同",
+          "startSec": 0,
+          "endSec": 3.483,
+          "startFrame": 0,
+          "endFrame": 105
+        },
+        {
+          "index": 2,
+          "text": "策划导演 Agent -> 素材剪辑",
+          "startSec": 3.483,
+          "endSec": 7.599,
+          "startFrame": 104,
+          "endFrame": 228
+        },
+        {
+          "index": 3,
+          "text": "Agent -> 配音混音 Agent -> 动",
+          "startSec": 7.599,
+          "endSec": 12.348,
+          "startFrame": 227,
+          "endFrame": 371
+        },
+        {
+          "index": 4,
+          "text": "效质检与 MP4 导出 Agent",
+          "startSec": 12.348,
+          "endSec": 16.78,
+          "startFrame": 370,
+          "endFrame": 504
+        }
+      ],
+      "subtitleText": "4-Agent 全自动协同 策划导演 Agent -> 素材剪辑 Agent -> 配音混音 Agent -> 动 效质检与 MP4 导出 Agent",
+      "subChunks": [
+        "提交前 先核对名称",
+        "想继续就确认创建",
+        "如果只是打开看看",
+        "点取消即可返回"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "重点强调",
+      "speechRate": 1.06,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 4 幕",
+      "layout": "freeform-stage",
+      "threePreset": "floating-monoliths",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "grid+scan",
+      "highlights": [
+        "核对名称",
+        "确认或取消"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 4 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 96,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "media": [
+        {
+          "assetId": "image-01c-ui-new-project-modal-57a0",
+          "path": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "originalPath": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "hold",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 0.24,
+          "volume": 0.48,
+          "pan": -0.15
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 1.55,
+          "volume": 0.45,
+          "pan": 0.18
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 16.26,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 16.58,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 四-Agent 全自动协同：策划导演 Agent -> 素材剪辑 Agent ，-> 配音混音 Agent -> 动效质检与 ，MP四 导出 Agent",
+      "ttsNarrationRef": "- 4-Agent 全自动协同：策划导演 Agent -> 素材剪辑 Agent -> 配音混音 Agent -> 动效质检与 MP4 导出 Agent",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "先核对名称",
+        "确认创建"
+      ],
+      "visualBlueprint": "新建工程弹窗全幅停帧，保留原有输入状态，不叠加新名称，也不合成创建成功提示。",
+      "motionNotes": "新建工程弹窗全幅停帧，保留原有输入状态，不叠加新名称，也不合成创建成功提示。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "新建视频工程",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-05",
+      "index": 5,
+      "title": "打开算力体检",
+      "narration": "点顶栏的算力状态，先看本机的 CPU、内存和显卡。担心渲染时卡住，可以切到强制低配保护。",
+      "emotion": "温和亲切",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "metric-dashboard 空间动态编排 · assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+      "audioFile": "",
+      "durationSec": 11,
+      "durationInFrames": 330,
+      "startFrame": 945,
+      "startSec": 31.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "双引擎自由编程",
+          "startSec": 0,
+          "endSec": 2.104,
+          "startFrame": 0,
+          "endFrame": 64
+        },
+        {
+          "index": 2,
+          "text": "Remotion 4.x TSX (React +",
+          "startSec": 2.104,
+          "endSec": 7.514,
+          "startFrame": 63,
+          "endFrame": 226
+        },
+        {
+          "index": 3,
+          "text": "Three.js 3D + 动态 SVG) 与",
+          "startSec": 7.514,
+          "endSec": 12.023,
+          "startFrame": 225,
+          "endFrame": 361
+        },
+        {
+          "index": 4,
+          "text": "HyperFrames HTML5/Canvas +",
+          "startSec": 12.023,
+          "endSec": 18.636,
+          "startFrame": 360,
+          "endFrame": 560
+        },
+        {
+          "index": 5,
+          "text": "Three.js",
+          "startSec": 18.636,
+          "endSec": 20.74,
+          "startFrame": 559,
+          "endFrame": 623
+        }
+      ],
+      "subtitleText": "双引擎自由编程 Remotion 4.x TSX (React + Three.js 3D + 动态 SVG) 与 HyperFrames HTML5/Canvas + Three.js",
+      "subChunks": [
+        "点顶栏的算力状态",
+        "先看本机的 CPU 内存和显卡",
+        "担心渲染时卡住",
+        "可以切到强制低配保护"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "温和亲切",
+      "speechRate": 1.07,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 5 幕",
+      "layout": "freeform-stage",
+      "threePreset": "chrono-helix",
+      "transition": "light-wipe",
+      "kenBurns": "hold",
+      "vfx": "radial-speedlines",
+      "highlights": [
+        "本机实测",
+        "强制低配保护"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 5 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 120,
+      "counterLabel": "科技前沿",
+      "metrics": [
+        {
+          "value": "90+",
+          "label": "第 5 幕"
+        },
+        {
+          "value": "1080P",
+          "label": "声画同步"
+        },
+        {
+          "value": "60FPS",
+          "label": "节奏转场"
+        }
+      ],
+      "windowTheme": "light",
+      "media": [
+        {
+          "assetId": "video-02-demo-hardware-lowspec-2caf",
+          "path": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "originalPath": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "webPath": "assets/.web/video-02-demo-hardware-lowspec-2caf.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "hold",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "tick_burst",
+          "path": "audio/sfx/tick_burst.wav",
+          "offsetSec": 0.2,
+          "volume": 0.44,
+          "pan": -0.1
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.48,
+          "volume": 0.4,
+          "pan": 0,
+          "d": 0.65
+        },
+        {
+          "type": "ding",
+          "path": "audio/sfx/ding.wav",
+          "offsetSec": 1.75,
+          "volume": 0.42,
+          "pan": 0.14
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 20.22,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 20.54,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 双引擎自由编程：Remotion 四.x TSX (React + ，Three.js 三D + 动态 SVG) 与 ，HyperFrames HTML五/Canvas + ，Three.js",
+      "ttsNarrationRef": "- 双引擎自由编程：Remotion 4.x TSX (React + Three.js 3D + 动态 SVG) 与 HyperFrames HTML5/Canvas + Three.js",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "本机",
+        "强制低配保护"
+      ],
+      "visualBlueprint": "全幅跟随打开体检弹窗与切档动作，在实录选中态停留；不把后续切回误标为开启。",
+      "motionNotes": "全幅跟随打开体检弹窗与切档动作，在实录选中态停留；不把后续切回误标为开启。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.6296,
+          "fy": 0.0343,
+          "z": 1.45
+        },
+        {
+          "t": 0.88,
+          "fx": 0.6296,
+          "fy": 0.0343,
+          "z": 1.52
+        }
+      ],
+      "windowTitle": "算力体检",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-06",
+      "index": 6,
+      "title": "先对照最低配置",
+      "narration": "先看最低档：4 核 CPU、8 GB 内存。这是开启低配保护时的运行参考，不等于能流畅渲染 4K。",
+      "emotion": "重点强调",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "multi-window-trio 空间动态编排 · assets/images/image-02a-ui-hardware-modal-5c43.png",
+      "audioFile": "",
+      "durationSec": 10.5,
+      "durationInFrames": 315,
+      "startFrame": 1275,
+      "startSec": 42.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "100% 解除预设模板与题材分类枷锁",
+          "startSec": 0,
+          "endSec": 4.384,
+          "startFrame": 0,
+          "endFrame": 132
+        },
+        {
+          "index": 2,
+          "text": "内置 11 种常见题材参考起点 +",
+          "startSec": 4.384,
+          "endSec": 7.946,
+          "startFrame": 131,
+          "endFrame": 239
+        },
+        {
+          "index": 3,
+          "text": "任意自创体裁标签 (genreLabel)",
+          "startSec": 7.946,
+          "endSec": 12.878,
+          "startFrame": 238,
+          "endFrame": 387
+        },
+        {
+          "index": 4,
+          "text": "全链路透传 + freeform-stage",
+          "startSec": 12.878,
+          "endSec": 17.81,
+          "startFrame": 386,
+          "endFrame": 535
+        },
+        {
+          "index": 5,
+          "text": "自由舞台 不设题材与构图上限",
+          "startSec": 17.81,
+          "endSec": 21.37,
+          "startFrame": 534,
+          "endFrame": 642
+        }
+      ],
+      "subtitleText": "100% 解除预设模板与题材分类枷锁 内置 11 种常见题材参考起点 + 任意自创体裁标签 (genreLabel) 全链路透传 + freeform-stage 自由舞台 不设题材与构图上限",
+      "subChunks": [
+        "先看最低档 4 核 CPU 8 GB 内存",
+        "这是开启低配保护时的运行参考",
+        "不等于能流畅渲染 4K"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "重点强调",
+      "speechRate": 1.05,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 6 幕",
+      "layout": "freeform-stage",
+      "threePreset": "matrix-cubes",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "3d-depth+sweep",
+      "highlights": [
+        "4 核 CPU",
+        "8 GB 内存"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "不设题材与构图上限"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 6 幕"
+      },
+      "counterTarget": 144,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "media": [
+        {
+          "assetId": "image-02a-ui-hardware-modal-5c43",
+          "path": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "originalPath": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "hold",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.2,
+          "volume": 0.42,
+          "pan": -0.24
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.48,
+          "volume": 0.42,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.76,
+          "volume": 0.42,
+          "pan": 0.24
+        },
+        {
+          "type": "shimmer_swell",
+          "path": "audio/sfx/shimmer_swell.wav",
+          "offsetSec": 1.6,
+          "volume": 0.36,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 20.85,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 21.17,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 百分之一百 解除预设模板与题材分类枷锁：内置 十一 种常见题材参考起点 + 任意，自创体裁标签 (genreLabel) 全链，路透传 + freeform-stage 自由舞台，不设题材与构图上限",
+      "ttsNarrationRef": "- 100% 解除预设模板与题材分类枷锁：内置 11 种常见题材参考起点 + 任意自创体裁标签 (genreLabel) 全链路透传 + freeform-stage 自由舞台，不设题材与构图上限",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "最低档",
+        "运行参考"
+      ],
+      "visualBlueprint": "同章体检截图全幅停留，观众可同时对照本机检测结果与最低档配置，不重绘表格。",
+      "motionNotes": "同章体检截图全幅停留，观众可同时对照本机检测结果与最低档配置，不重绘表格。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "配置档位表",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-07",
+      "index": 7,
+      "title": "区分推荐档与 4K 档",
+      "narration": "推荐档看 8 核 CPU 和 16 GB 内存。要做 4K，再看 12 核以上、32 GB 以上的档位，并核对显存要求。",
+      "emotion": "温和亲切",
+      "role": "host",
+      "voiceId": "pack-热门音色-一天青年",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 一天青年 [匹配度 99% — 高清晰参考时长(20.1s) + 青年活力声线 + 全片主讲连贯音色]",
+      "visualPrompt": "mosaic-pulse-wall 空间动态编排 · assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+      "audioFile": "",
+      "durationSec": 11.5,
+      "durationInFrames": 345,
+      "startFrame": 1590,
+      "startSec": 53,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "像素级精准 UI 交互教程引擎",
+          "startSec": 0,
+          "endSec": 3.468,
+          "startFrame": 0,
+          "endFrame": 105
+        },
+        {
+          "index": 2,
+          "text": "支持真实操作录屏无裁切播放",
+          "startSec": 3.468,
+          "endSec": 6.936,
+          "startFrame": 104,
+          "endFrame": 209
+        },
+        {
+          "index": 3,
+          "text": "DOM 精确坐标锚点与多模态视觉识别定位",
+          "startSec": 6.936,
+          "endSec": 12.004,
+          "startFrame": 208,
+          "endFrame": 361
+        },
+        {
+          "index": 4,
+          "text": "零 PPT 死图感",
+          "startSec": 12.004,
+          "endSec": 13.87,
+          "startFrame": 360,
+          "endFrame": 417
+        }
+      ],
+      "subtitleText": "像素级精准 UI 交互教程引擎 支持真实操作录屏无裁切播放 DOM 精确坐标锚点与多模态视觉识别定位 零 PPT 死图感",
+      "subChunks": [
+        "推荐档看 8 核 CPU 和 16 GB 内存",
+        "要做 4K 再看 12 核以上",
+        "32 GB 以上的档位",
+        "并核对显存要求"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "温和亲切",
+      "speechRate": 1.05,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 7 幕",
+      "layout": "freeform-stage",
+      "threePreset": "orbital-core",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "sparks+shockwave",
+      "highlights": [
+        "推荐档",
+        "4K 档"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "零 PPT 死图感"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 7 幕"
+      },
+      "counterTarget": 168,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "poolMedia": [
+        {
+          "assetId": "video-01-demo-drawer-new-project-473d",
+          "path": "assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+          "originalPath": "assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+          "webPath": "assets/.web/video-01-demo-drawer-new-project-473d.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01a-ui-warroom-light-9353",
+          "path": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "originalPath": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01b-ui-drawer-open-8ece",
+          "path": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "originalPath": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01c-ui-new-project-modal-57a0",
+          "path": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "originalPath": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-02-demo-hardware-lowspec-2caf",
+          "path": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "originalPath": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "webPath": "assets/.web/video-02-demo-hardware-lowspec-2caf.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-02a-ui-hardware-modal-5c43",
+          "path": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "originalPath": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-03-demo-warroom-cards-polish-1bae",
+          "path": "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+          "originalPath": "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+          "webPath": "assets/.web/video-03-demo-warroom-cards-polish-1bae.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-04-demo-step1-assets-teleprompter-e5e2",
+          "path": "assets/videos/video-04-demo-step1-assets-teleprompter-e5e2.mp4",
+          "originalPath": "assets/videos/video-04-demo-step1-assets-teleprompter-e5e2.mp4",
+          "webPath": "assets/.web/video-04-demo-step1-assets-teleprompter-e5e2.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-04a-ui-step1-assets-5e58",
+          "path": "assets/images/image-04a-ui-step1-assets-5e58.png",
+          "originalPath": "assets/images/image-04a-ui-step1-assets-5e58.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-04b-ui-teleprompter-f4dd",
+          "path": "assets/images/image-04b-ui-teleprompter-f4dd.png",
+          "originalPath": "assets/images/image-04b-ui-teleprompter-f4dd.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-05-demo-step2-llm-tts-0ac5",
+          "path": "assets/videos/video-05-demo-step2-llm-tts-0ac5.mp4",
+          "originalPath": "assets/videos/video-05-demo-step2-llm-tts-0ac5.mp4",
+          "webPath": "assets/.web/video-05-demo-step2-llm-tts-0ac5.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05a-ui-step2-director-77ba",
+          "path": "assets/images/image-05a-ui-step2-director-77ba.png",
+          "originalPath": "assets/images/image-05a-ui-step2-director-77ba.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05b-ui-tts-engines-98bc",
+          "path": "assets/images/image-05b-ui-tts-engines-98bc.png",
+          "originalPath": "assets/images/image-05b-ui-tts-engines-98bc.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05c-ui-llm-protocols-12f5",
+          "path": "assets/images/image-05c-ui-llm-protocols-12f5.png",
+          "originalPath": "assets/images/image-05c-ui-llm-protocols-12f5.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-06-demo-step3-monitor-refine-a842",
+          "path": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4",
+          "originalPath": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4",
+          "webPath": "assets/.web/video-06-demo-step3-monitor-refine-a842.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-06a-ui-step3-monitor-cf2e",
+          "path": "assets/images/image-06a-ui-step3-monitor-cf2e.png",
+          "originalPath": "assets/images/image-06a-ui-step3-monitor-cf2e.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-07-demo-step4-qa-tasks-4d33",
+          "path": "assets/videos/video-07-demo-step4-qa-tasks-4d33.mp4",
+          "originalPath": "assets/videos/video-07-demo-step4-qa-tasks-4d33.mp4",
+          "webPath": "assets/.web/video-07-demo-step4-qa-tasks-4d33.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-07a-ui-step4-qa-de19",
+          "path": "assets/images/image-07a-ui-step4-qa-de19.png",
+          "originalPath": "assets/images/image-07a-ui-step4-qa-de19.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-07b-ui-task-center-610a",
+          "path": "assets/images/image-07b-ui-task-center-610a.png",
+          "originalPath": "assets/images/image-07b-ui-task-center-610a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "sub_drop",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.3,
+          "volume": 0.48,
+          "pan": 0.2
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.62,
+          "volume": 0.38,
+          "pan": 0,
+          "d": 0.7
+        },
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 1,
+          "volume": 0.42,
+          "pan": -0.22
+        },
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 1.28,
+          "volume": 0.42,
+          "pan": 0.22
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 13.35,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 13.67,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 像素级精准 UI 交互教程引擎：支持真实操作录屏无裁切播放、DOM 精确坐标锚点与多模态视觉识别定位，零 PPT 死图感",
+      "ttsNarrationRef": "- 像素级精准 UI 交互教程引擎：支持真实操作录屏无裁切播放、DOM 精确坐标锚点与多模态视觉识别定位，零 PPT 死图感",
+      "voiceName": "一天青年",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "推荐档",
+        "显存要求"
+      ],
+      "visualBlueprint": "延续体检弹窗的同一全幅画面，保留三档横向对照，规格读完后留出时间查看显存栏。",
+      "motionNotes": "延续体检弹窗的同一全幅画面，保留三档横向对照，规格读完后留出时间查看显存栏。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "配置档位表",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-08",
+      "index": 8,
+      "title": "按任务选择算力模式",
+      "narration": "日常先用智能自适应。机器吃紧，就选强制低配保护，给渲染减负；资源充足，再考虑全速性能。",
+      "emotion": "重点强调",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "app-focus-shot 空间动态编排 · assets/videos/video-04-demo-step1-assets-teleprompter-e5e2.mp4",
+      "audioFile": "",
+      "durationSec": 10,
+      "durationInFrames": 300,
+      "startFrame": 1935,
+      "startSec": 64.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "## 2. 电脑配置要求与低配电脑五重",
+          "startSec": 0,
+          "endSec": 4.464,
+          "startFrame": 0,
+          "endFrame": 134
+        },
+        {
+          "index": 2,
+          "text": "保护机制",
+          "startSec": 4.464,
+          "endSec": 5.74,
+          "startFrame": 133,
+          "endFrame": 173
+        }
+      ],
+      "subtitleText": "## 2. 电脑配置要求与低配电脑五重 保护机制",
+      "subChunks": [
+        "日常先用智能自适应",
+        "机器吃紧 就选强制低配保护",
+        "给渲染减负",
+        "资源充足 再考虑全速性能"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "重点强调",
+      "speechRate": 1.07,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 8 幕",
+      "layout": "freeform-stage",
+      "threePreset": "cyber-terrain",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "halftone+glitch",
+      "highlights": [
+        "智能自适应",
+        "强制低配保护",
+        "全速性能"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 8 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 192,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTitle": "算力模式",
+      "windowTheme": "light",
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.46,
+          "z": 1.06
+        },
+        {
+          "t": 0.55,
+          "fx": 0.36,
+          "fy": 0.32,
+          "z": 1.92
+        },
+        {
+          "t": 2.6,
+          "fx": 0.45,
+          "fy": 0.42,
+          "z": 1.75
+        }
+      ],
+      "media": [
+        {
+          "path": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.14,
+          "volume": 0.45,
+          "pan": -0.16
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.48,
+          "pan": 0.14
+        },
+        {
+          "type": "lock",
+          "path": "audio/sfx/lock.wav",
+          "offsetSec": 1.5,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 5.22,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 5.54,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "## 二. 电脑配置要求与低配电脑五重保护机制",
+      "ttsNarrationRef": "## 2. 电脑配置要求与低配电脑五重保护机制",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "智能自适应",
+        "给渲染减负"
+      ],
+      "visualBlueprint": "全幅保留三档模式选项，定位环轻描低配保护卡片，不加波纹、不改写实际选中状态。",
+      "motionNotes": "全幅保留三档模式选项，定位环轻描低配保护卡片，不加波纹、不改写实际选中状态。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-09",
+      "index": 9,
+      "title": "认识作战大屏的 3 张卡",
+      "narration": "作战大屏从左到右分 3 步：左边准备素材，中间告诉 AI 要做什么，右边选引擎和发车参数。",
+      "emotion": "欢快热情",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "workflow-steps 空间动态编排 · assets/images/image-04a-ui-step1-assets-5e58.png",
+      "audioFile": "",
+      "durationSec": 8.5,
+      "durationInFrames": 255,
+      "startFrame": 2235,
+      "startSec": 74.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "最低可运行配置（开启低配保护模式）",
+          "startSec": 0,
+          "endSec": 4.691,
+          "startFrame": 0,
+          "endFrame": 141
+        },
+        {
+          "index": 2,
+          "text": "4 核 CPU",
+          "startSec": 4.691,
+          "endSec": 6.255,
+          "startFrame": 140,
+          "endFrame": 188
+        },
+        {
+          "index": 3,
+          "text": "8 GB 内存（渲染时可用 ≥ 2.5 GB）",
+          "startSec": 6.255,
+          "endSec": 10.633,
+          "startFrame": 187,
+          "endFrame": 319
+        },
+        {
+          "index": 4,
+          "text": "核显或无独显均可运行",
+          "startSec": 10.633,
+          "endSec": 13.76,
+          "startFrame": 318,
+          "endFrame": 413
+        },
+        {
+          "index": 5,
+          "text": "3 GB 磁盘空间",
+          "startSec": 13.76,
+          "endSec": 15.95,
+          "startFrame": 412,
+          "endFrame": 479
+        }
+      ],
+      "subtitleText": "最低可运行配置（开启低配保护模式） 4 核 CPU 8 GB 内存（渲染时可用 ≥ 2.5 GB） 核显或无独显均可运行 3 GB 磁盘空间",
+      "subChunks": [
+        "作战大屏从左到右分 3 步",
+        "左边准备素材",
+        "中间告诉 AI 要做什么",
+        "右边选引擎和发车参数"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "欢快热情",
+      "speechRate": 1.1,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 9 幕",
+      "layout": "freeform-stage",
+      "threePreset": "particle-vortex",
+      "transition": "light-wipe",
+      "kenBurns": "hold",
+      "vfx": "grid+scan",
+      "highlights": [
+        "备料",
+        "需求",
+        "发车参数"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "核显或无独显均可运行"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "GB 磁盘空间"
+      },
+      "counterTarget": 216,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "steps": [
+        {
+          "title": "核显或无独显均可运行",
+          "desc": "聚合图文视听",
+          "img": "assets/images/image-04a-ui-step1-assets-5e58.png"
+        },
+        {
+          "title": "GB 磁盘空间",
+          "desc": "自动节奏分镜",
+          "img": "assets/images/image-04a-ui-step1-assets-5e58.png"
+        },
+        {
+          "title": "第 9 幕",
+          "desc": "高清成片交付",
+          "img": "assets/images/image-04a-ui-step1-assets-5e58.png"
+        }
+      ],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.24,
+          "volume": 0.44,
+          "pan": -0.2
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 1.02,
+          "volume": 0.44,
+          "pan": 0.2
+        },
+        {
+          "type": "shine",
+          "path": "audio/sfx/shine.wav",
+          "offsetSec": 1.8,
+          "volume": 0.4,
+          "pan": 0
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 15.43,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 15.75,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 最低可运行配置（开启低配保护模式）：四 核 CPU、八 GB 内存（渲染时可用 ≥ 二点五 GB）、核显或无独显均可运行、三 GB 磁盘空间",
+      "ttsNarrationRef": "- 最低可运行配置（开启低配保护模式）：4 核 CPU、8 GB 内存（渲染时可用 ≥ 2.5 GB）、核显或无独显均可运行、3 GB 磁盘空间",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "准备素材",
+        "发车参数"
+      ],
+      "visualBlueprint": "作战大屏全幅停帧，沿原界面从左到右读三卡，只在导航层更新进度，不重排卡片。",
+      "motionNotes": "作战大屏全幅停帧，沿原界面从左到右读三卡，只在导航层更新进度，不重排卡片。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "AI 作战大屏",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-10",
+      "index": 10,
+      "title": "写需求并润色提示词",
+      "narration": "在中间卡片写一句需求，再点 AI 一键润色提示词。润色后先看标题和要点，别把导演备注当成成片文案。",
+      "emotion": "重点强调",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "split-wipe-compare 空间动态编排 · assets/images/image-04b-ui-teleprompter-f4dd.png",
+      "audioFile": "",
+      "durationSec": 12,
+      "durationInFrames": 360,
+      "startFrame": 2490,
+      "startSec": 83,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "流畅推荐配置 8 核 CPU",
+          "startSec": 0,
+          "endSec": 3.479,
+          "startFrame": 0,
+          "endFrame": 105
+        },
+        {
+          "index": 2,
+          "text": "16 GB 内存",
+          "startSec": 3.479,
+          "endSec": 5.377,
+          "startFrame": 104,
+          "endFrame": 162
+        },
+        {
+          "index": 3,
+          "text": "NVIDIA 6–8 GB+ 显存（1080p 30",
+          "startSec": 5.377,
+          "endSec": 11.387,
+          "startFrame": 161,
+          "endFrame": 342
+        },
+        {
+          "index": 4,
+          "text": "/60fps + 本地 IndexTTS-2.5",
+          "startSec": 11.387,
+          "endSec": 16.764,
+          "startFrame": 341,
+          "endFrame": 503
+        },
+        {
+          "index": 5,
+          "text": "情感克隆）",
+          "startSec": 16.764,
+          "endSec": 18.03,
+          "startFrame": 502,
+          "endFrame": 541
+        }
+      ],
+      "subtitleText": "流畅推荐配置 8 核 CPU 16 GB 内存 NVIDIA 6–8 GB+ 显存（1080p 30 /60fps + 本地 IndexTTS-2.5 情感克隆）",
+      "subChunks": [
+        "在中间卡片写一句需求",
+        "再点 AI 一键润色提示词",
+        "润色后先看标题和要点",
+        "别把导演备注当成成片文案"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "重点强调",
+      "speechRate": 1.08,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 10 幕",
+      "layout": "freeform-stage",
+      "threePreset": "floating-monoliths",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "radial-speedlines",
+      "highlights": [
+        "输入需求",
+        "区分文案与导演备注"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "GB 内存"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 10 幕"
+      },
+      "counterTarget": 240,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+          "width": 1920,
+          "height": 1080,
+          "type": "video",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 0.24,
+          "volume": 0.48,
+          "pan": -0.15
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 1.55,
+          "volume": 0.45,
+          "pan": 0.18
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 17.51,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 17.83,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 流畅推荐配置：八 核 CPU、十六 GB 内存、NVIDIA 六–八 GB+ 显存（一零八零p， 三十/六十fps + 本地 IndexTTS-二，点五 情感克隆）",
+      "ttsNarrationRef": "- 流畅推荐配置：8 核 CPU、16 GB 内存、NVIDIA 6–8 GB+ 显存（1080p 30/60fps + 本地 IndexTTS-2.5 情感克隆）",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "一键润色",
+        "标题和要点"
+      ],
+      "visualBlueprint": "整段原速播放三卡录屏，保留真实输入与模式切换；可读的润色结果帧才停留复查。",
+      "motionNotes": "整段原速播放三卡录屏，保留真实输入与模式切换；可读的润色结果帧才停留复查。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "作战大屏实操",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-11",
+      "index": 11,
+      "title": "选择自由编码引擎",
+      "narration": "右侧可以选 Remotion 或 HTML5，两条路线都支持 Three.js。引擎决定怎么实现画面，不限制你做什么题材。",
+      "emotion": "温和亲切",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "metric-dashboard 空间动态编排 · assets/videos/video-05-demo-step2-llm-tts-0ac5.mp4",
+      "audioFile": "",
+      "durationSec": 10,
+      "durationInFrames": 300,
+      "startFrame": 2850,
+      "startSec": 95,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "4K 旗舰配置",
+          "startSec": 0,
+          "endSec": 2.079,
+          "startFrame": 0,
+          "endFrame": 63
+        },
+        {
+          "index": 2,
+          "text": "12 核+ CPU",
+          "startSec": 2.079,
+          "endSec": 4.158,
+          "startFrame": 62,
+          "endFrame": 125
+        },
+        {
+          "index": 3,
+          "text": "32 GB+ 内存",
+          "startSec": 4.158,
+          "endSec": 6.237,
+          "startFrame": 124,
+          "endFrame": 188
+        },
+        {
+          "index": 4,
+          "text": "NVIDIA RTX 8–16 GB+ 显存",
+          "startSec": 6.237,
+          "endSec": 11.78,
+          "startFrame": 187,
+          "endFrame": 354
+        }
+      ],
+      "subtitleText": "4K 旗舰配置 12 核+ CPU 32 GB+ 内存 NVIDIA RTX 8–16 GB+ 显存",
+      "subChunks": [
+        "右侧可以选 Remotion 或 HTML5",
+        "两条路线都支持 Three.js",
+        "引擎决定怎么实现画面",
+        "不限制你做什么题材"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "温和亲切",
+      "speechRate": 1.07,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 11 幕",
+      "layout": "freeform-stage",
+      "threePreset": "chrono-helix",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "3d-depth+sweep",
+      "highlights": [
+        "Remotion + Three.js 3D",
+        "HTML5 + Three.js"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "GB+ 内存"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 11 幕"
+      },
+      "counterTarget": 264,
+      "counterLabel": "科技前沿",
+      "metrics": [
+        {
+          "value": "198+",
+          "label": "GB+ 内存"
+        },
+        {
+          "value": "1080P",
+          "label": "第 11 幕"
+        },
+        {
+          "value": "60FPS",
+          "label": "声画同步"
+        }
+      ],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "tick_burst",
+          "path": "audio/sfx/tick_burst.wav",
+          "offsetSec": 0.2,
+          "volume": 0.44,
+          "pan": -0.1
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.48,
+          "volume": 0.4,
+          "pan": 0,
+          "d": 0.65
+        },
+        {
+          "type": "ding",
+          "path": "audio/sfx/ding.wav",
+          "offsetSec": 1.75,
+          "volume": 0.42,
+          "pan": 0.14
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 11.26,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 11.58,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 四K 旗舰配置：十二 核+ CPU、三十二 GB+ 内存、NVIDIA RTX 八–十六 GB+ 显存",
+      "ttsNarrationRef": "- 4K 旗舰配置：12 核+ CPU、32 GB+ 内存、NVIDIA RTX 8–16 GB+ 显存",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "Remotion",
+        "HTML5",
+        "不限制题材"
+      ],
+      "visualBlueprint": "回看同章大屏截图，轻描右卡可见的引擎入口，保留邻近选项，不标注视口外的启动按钮。",
+      "motionNotes": "回看同章大屏截图，轻描右卡可见的引擎入口，保留邻近选项，不标注视口外的启动按钮。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.7814,
+          "fy": 0.618,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.7814,
+          "fy": 0.618,
+          "z": 2.05
+        }
+      ],
+      "windowTitle": "发车参数",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-12",
+      "index": 12,
+      "title": "精修第 1 步：筛选素材",
+      "narration": "切到分步精修工作台，进入素材与提词拍。先按图片筛选，想看回整个素材库，就切回全部。",
+      "emotion": "欢快热情",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "multi-window-trio 空间动态编排 · assets/images/image-05a-ui-step2-director-77ba.png",
+      "audioFile": "",
+      "durationSec": 11,
+      "durationInFrames": 330,
+      "startFrame": 3150,
+      "startSec": 105,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "顶栏算力体检 / 高配畅享 / 低配",
+          "startSec": 0,
+          "endSec": 3.646,
+          "startFrame": 0,
+          "endFrame": 110
+        },
+        {
+          "index": 2,
+          "text": "保护弹窗随时切换三档模式",
+          "startSec": 3.646,
+          "endSec": 7.292,
+          "startFrame": 109,
+          "endFrame": 219
+        },
+        {
+          "index": 3,
+          "text": "智能自适应 (auto)",
+          "startSec": 7.292,
+          "endSec": 10.026,
+          "startFrame": 218,
+          "endFrame": 301
+        },
+        {
+          "index": 4,
+          "text": "强制低配保护 (safe)",
+          "startSec": 10.026,
+          "endSec": 13.064,
+          "startFrame": 300,
+          "endFrame": 392
+        },
+        {
+          "index": 5,
+          "text": "全速性能 (performance)",
+          "startSec": 13.064,
+          "endSec": 17.62,
+          "startFrame": 391,
+          "endFrame": 529
+        }
+      ],
+      "subtitleText": "顶栏算力体检 / 高配畅享 / 低配 保护弹窗随时切换三档模式 智能自适应 (auto) 强制低配保护 (safe) 全速性能 (performance)",
+      "subChunks": [
+        "切到分步精修工作台",
+        "进入素材与提词拍",
+        "先按图片筛选",
+        "想看回整个素材库 就切回全部"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "欢快热情",
+      "speechRate": 1.09,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 12 幕",
+      "layout": "freeform-stage",
+      "threePreset": "matrix-cubes",
+      "transition": "light-wipe",
+      "kenBurns": "hold",
+      "vfx": "sparks+shockwave",
+      "highlights": [
+        "图片筛选",
+        "查看全部"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "强制低配保护 (safe)"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 12 幕"
+      },
+      "counterTarget": 288,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/videos/video-04-demo-step1-assets-teleprompter-e5e2.mp4",
+          "width": 1920,
+          "height": 1080,
+          "type": "video",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.2,
+          "volume": 0.42,
+          "pan": -0.24
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.48,
+          "volume": 0.42,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.76,
+          "volume": 0.42,
+          "pan": 0.24
+        },
+        {
+          "type": "shimmer_swell",
+          "path": "audio/sfx/shimmer_swell.wav",
+          "offsetSec": 1.6,
+          "volume": 0.36,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 17.1,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 17.42,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 顶栏算力体检 / 高配畅享 / 低配，保护弹窗随时切换三档模式：智能自适应 (auto)、强制低配保护 (safe)、全速性能 (performance)",
+      "ttsNarrationRef": "- 顶栏「算力体检 / 高配畅享 / 低配保护」弹窗随时切换三档模式：智能自适应 (auto)、强制低配保护 (safe)、全速性能 (performance)",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "分步精修工作台",
+        "全部"
+      ],
+      "visualBlueprint": "原速播放工作台切换与素材筛选，保留后段拍摄棚动作，只在真实筛选结果帧做短停。",
+      "motionNotes": "原速播放工作台切换与素材筛选，保留后段拍摄棚动作，只在真实筛选结果帧做短停。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "素材与提词拍",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-13",
+      "index": 13,
+      "title": "检查素材是否齐备",
+      "narration": "这里可以管理图片、视频和背景音乐。确认要用的素材都在库里，再点下一步，进入导演声画配乐。",
+      "emotion": "温和亲切",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "mosaic-pulse-wall 空间动态编排 · assets/images/image-05b-ui-tts-engines-98bc.png",
+      "audioFile": "",
+      "durationSec": 9,
+      "durationInFrames": 270,
+      "startFrame": 3480,
+      "startSec": 116,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "强制低配保护五重策略",
+          "startSec": 0,
+          "endSec": 2.625,
+          "startFrame": 0,
+          "endFrame": 79
+        },
+        {
+          "index": 2,
+          "text": "Remotion 单并发渲染",
+          "startSec": 2.625,
+          "endSec": 6.038,
+          "startFrame": 78,
+          "endFrame": 182
+        },
+        {
+          "index": 3,
+          "text": "128 MB 轻量媒体缓存",
+          "startSec": 6.038,
+          "endSec": 8.926,
+          "startFrame": 181,
+          "endFrame": 268
+        },
+        {
+          "index": 4,
+          "text": "180 秒单帧超时放宽",
+          "startSec": 8.926,
+          "endSec": 11.551,
+          "startFrame": 267,
+          "endFrame": 347
+        },
+        {
+          "index": 5,
+          "text": "FFmpeg 限制线程防卡死",
+          "startSec": 11.551,
+          "endSec": 14.964,
+          "startFrame": 346,
+          "endFrame": 449
+        },
+        {
+          "index": 6,
+          "text": "720p/1080p 30fps 与 3D 粒子减",
+          "startSec": 14.964,
+          "endSec": 20.215,
+          "startFrame": 448,
+          "endFrame": 607
+        },
+        {
+          "index": 7,
+          "text": "载护航",
+          "startSec": 20.215,
+          "endSec": 21.003,
+          "startFrame": 606,
+          "endFrame": 631
+        },
+        {
+          "index": 8,
+          "text": "搭配 Windows 原生纯 CPU 语音免",
+          "startSec": 21.003,
+          "endSec": 25.729,
+          "startFrame": 630,
+          "endFrame": 772
+        },
+        {
+          "index": 9,
+          "text": "显卡即用",
+          "startSec": 25.729,
+          "endSec": 26.78,
+          "startFrame": 771,
+          "endFrame": 804
+        }
+      ],
+      "subtitleText": "强制低配保护五重策略 Remotion 单并发渲染 128 MB 轻量媒体缓存 180 秒单帧超时放宽 FFmpeg 限制线程防卡死 720p/1080p 30fps 与 3D 粒子减 载护航 搭配 Windows 原生纯 CPU 语音免 显卡即用",
+      "subChunks": [
+        "这里可以管理图片",
+        "视频和背景音乐",
+        "确认要用的素材都在库里 再点下一步",
+        "进入导演声画配乐"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "温和亲切",
+      "speechRate": 1.08,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 13 幕",
+      "layout": "freeform-stage",
+      "threePreset": "orbital-core",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "halftone+glitch",
+      "highlights": [
+        "图片",
+        "视频",
+        "背景音乐"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "MB 轻量媒体缓存"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "秒单帧超时放宽"
+      },
+      "counterTarget": 312,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/images/image-04a-ui-step1-assets-5e58.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "poolMedia": [
+        {
+          "assetId": "video-01-demo-drawer-new-project-473d",
+          "path": "assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+          "originalPath": "assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+          "webPath": "assets/.web/video-01-demo-drawer-new-project-473d.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01a-ui-warroom-light-9353",
+          "path": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "originalPath": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01b-ui-drawer-open-8ece",
+          "path": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "originalPath": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01c-ui-new-project-modal-57a0",
+          "path": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "originalPath": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-02-demo-hardware-lowspec-2caf",
+          "path": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "originalPath": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "webPath": "assets/.web/video-02-demo-hardware-lowspec-2caf.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-02a-ui-hardware-modal-5c43",
+          "path": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "originalPath": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-03-demo-warroom-cards-polish-1bae",
+          "path": "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+          "originalPath": "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+          "webPath": "assets/.web/video-03-demo-warroom-cards-polish-1bae.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-04-demo-step1-assets-teleprompter-e5e2",
+          "path": "assets/videos/video-04-demo-step1-assets-teleprompter-e5e2.mp4",
+          "originalPath": "assets/videos/video-04-demo-step1-assets-teleprompter-e5e2.mp4",
+          "webPath": "assets/.web/video-04-demo-step1-assets-teleprompter-e5e2.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-04a-ui-step1-assets-5e58",
+          "path": "assets/images/image-04a-ui-step1-assets-5e58.png",
+          "originalPath": "assets/images/image-04a-ui-step1-assets-5e58.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-04b-ui-teleprompter-f4dd",
+          "path": "assets/images/image-04b-ui-teleprompter-f4dd.png",
+          "originalPath": "assets/images/image-04b-ui-teleprompter-f4dd.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-05-demo-step2-llm-tts-0ac5",
+          "path": "assets/videos/video-05-demo-step2-llm-tts-0ac5.mp4",
+          "originalPath": "assets/videos/video-05-demo-step2-llm-tts-0ac5.mp4",
+          "webPath": "assets/.web/video-05-demo-step2-llm-tts-0ac5.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05a-ui-step2-director-77ba",
+          "path": "assets/images/image-05a-ui-step2-director-77ba.png",
+          "originalPath": "assets/images/image-05a-ui-step2-director-77ba.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05b-ui-tts-engines-98bc",
+          "path": "assets/images/image-05b-ui-tts-engines-98bc.png",
+          "originalPath": "assets/images/image-05b-ui-tts-engines-98bc.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05c-ui-llm-protocols-12f5",
+          "path": "assets/images/image-05c-ui-llm-protocols-12f5.png",
+          "originalPath": "assets/images/image-05c-ui-llm-protocols-12f5.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-06-demo-step3-monitor-refine-a842",
+          "path": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4",
+          "originalPath": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4",
+          "webPath": "assets/.web/video-06-demo-step3-monitor-refine-a842.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-06a-ui-step3-monitor-cf2e",
+          "path": "assets/images/image-06a-ui-step3-monitor-cf2e.png",
+          "originalPath": "assets/images/image-06a-ui-step3-monitor-cf2e.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-07-demo-step4-qa-tasks-4d33",
+          "path": "assets/videos/video-07-demo-step4-qa-tasks-4d33.mp4",
+          "originalPath": "assets/videos/video-07-demo-step4-qa-tasks-4d33.mp4",
+          "webPath": "assets/.web/video-07-demo-step4-qa-tasks-4d33.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-07a-ui-step4-qa-de19",
+          "path": "assets/images/image-07a-ui-step4-qa-de19.png",
+          "originalPath": "assets/images/image-07a-ui-step4-qa-de19.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-07b-ui-task-center-610a",
+          "path": "assets/images/image-07b-ui-task-center-610a.png",
+          "originalPath": "assets/images/image-07b-ui-task-center-610a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "sub_drop",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.3,
+          "volume": 0.48,
+          "pan": 0.2
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.62,
+          "volume": 0.38,
+          "pan": 0,
+          "d": 0.7
+        },
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 1,
+          "volume": 0.42,
+          "pan": -0.22
+        },
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 1.28,
+          "volume": 0.42,
+          "pan": 0.22
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 26.26,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 26.58,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 强制低配保护五重策略：Remotion 单并发渲染、一百二十八 MB 轻量媒体缓存、一百八十 秒单帧超时放宽、FFmpeg 限制线程防卡死、七二零p/一零八零p 三十fps 与 三D ，粒子减载护航，搭配 Windows 原生纯 CPU 语音免显卡即用",
+      "ttsNarrationRef": "- 强制低配保护五重策略：Remotion 单并发渲染、128 MB 轻量媒体缓存、180 秒单帧超时放宽、FFmpeg 限制线程防卡死、720p/1080p 30fps 与 3D 粒子减载护航，搭配 Windows 原生纯 CPU 语音免显卡即用",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "都在库里",
+        "下一步"
+      ],
+      "visualBlueprint": "素材页全幅停帧，先留时间查看列表，提到下一步时轻描右上角入口，不演示跳转。",
+      "motionNotes": "素材页全幅停帧，先留时间查看列表，提到下一步时轻描右上角入口，不演示跳转。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.9108,
+          "fy": 0.1485,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.9108,
+          "fy": 0.1485,
+          "z": 2.05
+        }
+      ],
+      "windowTitle": "素材库",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-14",
+      "index": 14,
+      "title": "打开提词器拍摄棚",
+      "narration": "需要真人口播时，展开提词器拍摄棚，可以先生成提词稿，再调滚动速度。已经拍好的视频，也可以直接上传。",
+      "emotion": "温和亲切",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "app-focus-shot 空间动态编排 · assets/images/image-05c-ui-llm-protocols-12f5.png",
+      "audioFile": "",
+      "durationSec": 10,
+      "durationInFrames": 300,
+      "startFrame": 3750,
+      "startSec": 125,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "## 3. 亮色工作台全功能实操流程",
+          "startSec": 0,
+          "endSec": 4.07,
+          "startFrame": 0,
+          "endFrame": 123
+        },
+        {
+          "index": 2,
+          "text": "从新建工程到任务调度）",
+          "startSec": 4.07,
+          "endSec": 7.2,
+          "startFrame": 122,
+          "endFrame": 216
+        }
+      ],
+      "subtitleText": "## 3. 亮色工作台全功能实操流程 从新建工程到任务调度）",
+      "subChunks": [
+        "需要真人口播时",
+        "展开提词器拍摄棚",
+        "可以先生成提词稿",
+        "再调滚动速度",
+        "已经拍好的视频",
+        "也可以直接上传"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "温和亲切",
+      "speechRate": 1.08,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 14 幕",
+      "layout": "freeform-stage",
+      "threePreset": "cyber-terrain",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "grid+scan",
+      "highlights": [
+        "口播提词稿",
+        "本机视频上传"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 14 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 336,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTitle": "提词器拍摄棚",
+      "windowTheme": "light",
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.46,
+          "z": 1.06
+        },
+        {
+          "t": 0.55,
+          "fx": 0.36,
+          "fy": 0.32,
+          "z": 1.92
+        },
+        {
+          "t": 2.6,
+          "fx": 0.45,
+          "fy": 0.42,
+          "z": 1.75
+        }
+      ],
+      "media": [
+        {
+          "path": "assets/images/image-04b-ui-teleprompter-f4dd.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.14,
+          "volume": 0.45,
+          "pan": -0.16
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.48,
+          "pan": 0.14
+        },
+        {
+          "type": "lock",
+          "path": "audio/sfx/lock.wav",
+          "offsetSec": 1.5,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 6.68,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 7,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "## 三. 亮色工作台全功能实操流程（从，新建工程到任务调度）",
+      "ttsNarrationRef": "## 3. 亮色工作台全功能实操流程（从新建工程到任务调度）",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "提词稿",
+        "直接上传"
+      ],
+      "visualBlueprint": "全幅停在展开后的真实拍摄棚，轻描提词稿入口，保留原有上传区域，不合成摄像画面。",
+      "motionNotes": "全幅停在展开后的真实拍摄棚，轻描提词稿入口，保留原有上传区域，不合成摄像画面。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-15",
+      "index": 15,
+      "title": "精修第 2 步：找到模型与配音入口",
+      "narration": "进入导演声画配乐。顶栏的 AI 模型管语言模型接入，旁边的配音入口管语音引擎，两个设置分开检查。",
+      "emotion": "重点强调",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "workflow-steps 空间动态编排 · assets/videos/video-06-demo-step3-monitor-refine-a842.mp4",
+      "audioFile": "",
+      "durationSec": 11,
+      "durationInFrames": 330,
+      "startFrame": 4050,
+      "startSec": 135,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "工程管理（01",
+          "startSec": 0,
+          "endSec": 1.68,
+          "startFrame": 0,
+          "endFrame": 51
+        },
+        {
+          "index": 2,
+          "text": "demo-drawer-new-project.mp4 /",
+          "startSec": 1.68,
+          "endSec": 8.12,
+          "startFrame": 50,
+          "endFrame": 244
+        },
+        {
+          "index": 3,
+          "text": "01a / 01b）",
+          "startSec": 8.12,
+          "endSec": 9.8,
+          "startFrame": 243,
+          "endFrame": 294
+        },
+        {
+          "index": 4,
+          "text": "点击顶栏左侧切换或管理视频工程滑出",
+          "startSec": 9.8,
+          "endSec": 14.56,
+          "startFrame": 294,
+          "endFrame": 437
+        },
+        {
+          "index": 5,
+          "text": "工程抽屉",
+          "startSec": 14.56,
+          "endSec": 15.68,
+          "startFrame": 436,
+          "endFrame": 471
+        },
+        {
+          "index": 6,
+          "text": "点+ 新建视频工程输入项目名并确认创建",
+          "startSec": 15.68,
+          "endSec": 20.44,
+          "startFrame": 470,
+          "endFrame": 614
+        },
+        {
+          "index": 7,
+          "text": "随时切换多项目工作区",
+          "startSec": 20.44,
+          "endSec": 23.24,
+          "startFrame": 613,
+          "endFrame": 698
+        }
+      ],
+      "subtitleText": "工程管理（01 demo-drawer-new-project.mp4 / 01a / 01b） 点击顶栏左侧切换或管理视频工程滑出 工程抽屉 点+ 新建视频工程输入项目名并确认创建 随时切换多项目工作区",
+      "subChunks": [
+        "进入导演声画配乐",
+        "顶栏的 AI 模型管语言模型接入",
+        "旁边的配音入口管语音引擎",
+        "两个设置分开检查"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "重点强调",
+      "speechRate": 1.08,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 15 幕",
+      "layout": "freeform-stage",
+      "threePreset": "particle-vortex",
+      "transition": "light-wipe",
+      "kenBurns": "hold",
+      "vfx": "radial-speedlines",
+      "highlights": [
+        "语言模型",
+        "语音引擎"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "随时切换多项目工作区"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 15 幕"
+      },
+      "counterTarget": 360,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "steps": [
+        {
+          "title": "随时切换多项目工作区",
+          "desc": "聚合图文视听",
+          "img": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4"
+        },
+        {
+          "title": "第 15 幕",
+          "desc": "自动节奏分镜",
+          "img": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4"
+        },
+        {
+          "title": "声画同步",
+          "desc": "高清成片交付",
+          "img": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4"
+        }
+      ],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/videos/video-05-demo-step2-llm-tts-0ac5.mp4",
+          "width": 1920,
+          "height": 1080,
+          "type": "video",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.24,
+          "volume": 0.44,
+          "pan": -0.2
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 1.02,
+          "volume": 0.44,
+          "pan": 0.2
+        },
+        {
+          "type": "shine",
+          "path": "audio/sfx/shine.wav",
+          "offsetSec": 1.8,
+          "volume": 0.4,
+          "pan": 0
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 22.72,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 23.04,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 工程管理（一-，demo-drawer-new-project.mp四 / ，一a / 一b）：点击顶栏左侧切换或管理视频工程滑出工程抽屉，点+ 新建视频工程输入项目名并确认创建，随时切换多项目工作区",
+      "ttsNarrationRef": "- 工程管理（01-demo-drawer-new-project.mp4 / 01a / 01b）：点击顶栏左侧「切换或管理视频工程」滑出工程抽屉，点「+ 新建视频工程」输入项目名并确认创建，随时切换多项目工作区",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "AI 模型",
+        "配音入口"
+      ],
+      "visualBlueprint": "全幅原速播放模型与配音面板的真实开合，在第一个可读面板和最后状态分别短停。",
+      "motionNotes": "全幅原速播放模型与配音面板的真实开合，在第一个可读面板和最后状态分别短停。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "导演声画配乐",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-16",
+      "index": 16,
+      "title": "设定风格与配音节奏",
+      "narration": "回到导演设置，核对润色后的需求，再定画面风格和配音。音色决定听起来是谁在讲，情绪和语速决定这段怎么讲。",
+      "emotion": "温和亲切",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "split-wipe-compare 空间动态编排 · assets/images/image-06a-ui-step3-monitor-cf2e.png",
+      "audioFile": "",
+      "durationSec": 10.5,
+      "durationInFrames": 315,
+      "startFrame": 4380,
+      "startSec": 146,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "算力体检与低配保护（02",
+          "startSec": 0,
+          "endSec": 2.971,
+          "startFrame": 0,
+          "endFrame": 90
+        },
+        {
+          "index": 2,
+          "text": "demo-hardware-lowspec.mp4 /",
+          "startSec": 2.971,
+          "endSec": 8.914,
+          "startFrame": 89,
+          "endFrame": 268
+        },
+        {
+          "index": 3,
+          "text": "02a）",
+          "startSec": 8.914,
+          "endSec": 9.724,
+          "startFrame": 267,
+          "endFrame": 292
+        },
+        {
+          "index": 4,
+          "text": "点击顶栏算力按钮查看本机 CPU/内存",
+          "startSec": 9.724,
+          "endSec": 14.316,
+          "startFrame": 291,
+          "endFrame": 430
+        },
+        {
+          "index": 5,
+          "text": "/显卡实测与配置档位表",
+          "startSec": 14.316,
+          "endSec": 17.017,
+          "startFrame": 429,
+          "endFrame": 511
+        },
+        {
+          "index": 6,
+          "text": "一键开启强制低配保护防卡死",
+          "startSec": 17.017,
+          "endSec": 20.53,
+          "startFrame": 510,
+          "endFrame": 616
+        }
+      ],
+      "subtitleText": "算力体检与低配保护（02 demo-hardware-lowspec.mp4 / 02a） 点击顶栏算力按钮查看本机 CPU/内存 /显卡实测与配置档位表 一键开启强制低配保护防卡死",
+      "subChunks": [
+        "回到导演设置",
+        "核对润色后的需求",
+        "再定画面风格和配音",
+        "音色决定听起来是谁在讲",
+        "情绪和语速决定这段怎么讲"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "温和亲切",
+      "speechRate": 1.07,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 16 幕",
+      "layout": "freeform-stage",
+      "threePreset": "floating-monoliths",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "3d-depth+sweep",
+      "highlights": [
+        "画面风格",
+        "音色",
+        "情绪与语速"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 16 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 384,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/images/image-05a-ui-step2-director-77ba.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 0.24,
+          "volume": 0.48,
+          "pan": -0.15
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 1.55,
+          "volume": 0.45,
+          "pan": 0.18
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 20.01,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 20.33,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 算力体检与低配保护（二-，demo-hardware-lowspec.mp四 / 二，a）：点击顶栏算力按钮查看本机 CPU/内存/，显卡实测与配置档位表，一键开启强制低配保护防卡死",
+      "ttsNarrationRef": "- 算力体检与低配保护（02-demo-hardware-lowspec.mp4 / 02a）：点击顶栏算力按钮查看本机 CPU/内存/显卡实测与配置档位表，一键开启「强制低配保护」防卡死",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "音色",
+        "情绪和语速"
+      ],
+      "visualBlueprint": "导演设置页全幅停帧，原样保留需求与声画选项，靠口播引导阅读，不模拟参数变化。",
+      "motionNotes": "导演设置页全幅停帧，原样保留需求与声画选项，靠口播引导阅读，不模拟参数变化。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "导演设置",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-17",
+      "index": 17,
+      "title": "选择模型协议并测试",
+      "narration": "可以跟随 DSH 客户端，也可以自定义接入。自定义时，先按服务选择协议，再用测试连接确认是否可用。",
+      "emotion": "重点强调",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "metric-dashboard 空间动态编排 · assets/videos/video-07-demo-step4-qa-tasks-4d33.mp4",
+      "audioFile": "",
+      "durationSec": 11,
+      "durationInFrames": 330,
+      "startFrame": 4695,
+      "startSec": 156.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "AI 作战大屏三卡协同（03",
+          "startSec": 0,
+          "endSec": 3.66,
+          "startFrame": 0,
+          "endFrame": 110
+        },
+        {
+          "index": 2,
+          "text": "demo-warroom-cards-polish.mp4",
+          "startSec": 3.66,
+          "endSec": 11.285,
+          "startFrame": 109,
+          "endFrame": 339
+        },
+        {
+          "index": 3,
+          "text": "/ 01a）",
+          "startSec": 11.285,
+          "endSec": 12.2,
+          "startFrame": 338,
+          "endFrame": 366
+        }
+      ],
+      "subtitleText": "AI 作战大屏三卡协同（03 demo-warroom-cards-polish.mp4 / 01a）",
+      "subChunks": [
+        "可以跟随 DSH 客户端",
+        "也可以自定义接入",
+        "自定义时 先按服务选择协议",
+        "再用测试连接确认是否可用"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "重点强调",
+      "speechRate": 1.06,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 17 幕",
+      "layout": "freeform-stage",
+      "threePreset": "chrono-helix",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "sparks+shockwave",
+      "highlights": [
+        "OpenAI",
+        "Anthropic",
+        "Responses",
+        "Gemini"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 17 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 408,
+      "counterLabel": "科技前沿",
+      "metrics": [
+        {
+          "value": "306+",
+          "label": "第 17 幕"
+        },
+        {
+          "value": "1080P",
+          "label": "声画同步"
+        },
+        {
+          "value": "60FPS",
+          "label": "节奏转场"
+        }
+      ],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/images/image-05c-ui-llm-protocols-12f5.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "tick_burst",
+          "path": "audio/sfx/tick_burst.wav",
+          "offsetSec": 0.2,
+          "volume": 0.44,
+          "pan": -0.1
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.48,
+          "volume": 0.4,
+          "pan": 0,
+          "d": 0.65
+        },
+        {
+          "type": "ding",
+          "path": "audio/sfx/ding.wav",
+          "offsetSec": 1.75,
+          "volume": 0.42,
+          "pan": 0.14
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 11.68,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 12,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- AI 作战大屏三卡协同（三-，demo-warroom-cards-polish.mp四 ，/ 一a）：",
+      "ttsNarrationRef": "- AI 作战大屏三卡协同（03-demo-warroom-cards-polish.mp4 / 01a）：",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "按服务选择协议",
+        "测试连接"
+      ],
+      "visualBlueprint": "全幅保留四协议配置弹窗，读完选项后轻描测试连接按钮，不播放虚构的成功反馈。",
+      "motionNotes": "全幅保留四协议配置弹窗，读完选项后轻描测试连接按钮，不播放虚构的成功反馈。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.5955,
+          "fy": 0.8091,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.5955,
+          "fy": 0.8091,
+          "z": 2.05
+        }
+      ],
+      "windowTitle": "大模型配置",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-18",
+      "index": 18,
+      "title": "按机器条件选配音引擎",
+      "narration": "配音中心里有 IndexTTS-2.5 和 GPT-SoVITS。用 Windows 又没有独显时，可以考虑原生 CPU 语音。",
+      "emotion": "温和亲切",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "multi-window-trio 空间动态编排 · assets/images/image-07a-ui-step4-qa-de19.png",
+      "audioFile": "",
+      "durationSec": 11.5,
+      "durationInFrames": 345,
+      "startFrame": 5025,
+      "startSec": 167.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "左卡（1. 导入素材 / 极速备料）",
+          "startSec": 0,
+          "endSec": 3.728,
+          "startFrame": 0,
+          "endFrame": 112
+        },
+        {
+          "index": 2,
+          "text": "拖入图片 视频",
+          "startSec": 3.728,
+          "endSec": 5.762,
+          "startFrame": 111,
+          "endFrame": 173
+        },
+        {
+          "index": 3,
+          "text": "BGM 或打开提词器自拍",
+          "startSec": 5.762,
+          "endSec": 9.49,
+          "startFrame": 172,
+          "endFrame": 285
+        }
+      ],
+      "subtitleText": "左卡（1. 导入素材 / 极速备料） 拖入图片 视频 BGM 或打开提词器自拍",
+      "subChunks": [
+        "配音中心里有 IndexTTS-2.5 和",
+        "GPT-SoVITS",
+        "用 Windows 又没有独显时",
+        "可以考虑原生 CPU 语音"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "温和亲切",
+      "speechRate": 1.05,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 18 幕",
+      "layout": "freeform-stage",
+      "threePreset": "matrix-cubes",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "halftone+glitch",
+      "highlights": [
+        "IndexTTS-2.5",
+        "GPT-SoVITS",
+        "Windows 原生语音"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "视频"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "BGM 或打开提词器自拍"
+      },
+      "counterTarget": 432,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/images/image-05b-ui-tts-engines-98bc.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.2,
+          "volume": 0.42,
+          "pan": -0.24
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.48,
+          "volume": 0.42,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.76,
+          "volume": 0.42,
+          "pan": 0.24
+        },
+        {
+          "type": "shimmer_swell",
+          "path": "audio/sfx/shimmer_swell.wav",
+          "offsetSec": 1.6,
+          "volume": 0.36,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 8.97,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 9.29,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 左卡（一. 导入素材 / 极速备料）：拖入图片、视频、BGM 或打开提词器自拍",
+      "ttsNarrationRef": "- 左卡（1. 导入素材 / 极速备料）：拖入图片、视频、BGM 或打开提词器自拍",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "Windows",
+        "CPU 语音"
+      ],
+      "visualBlueprint": "配音中心保持全幅，三个引擎名称随口播依次读出，最后轻描 Windows 选项，不播放假试听。",
+      "motionNotes": "配音中心保持全幅，三个引擎名称随口播依次读出，最后轻描 Windows 选项，不播放假试听。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.8697,
+          "fy": 0.583,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.8697,
+          "fy": 0.583,
+          "z": 2.05
+        }
+      ],
+      "windowTitle": "多引擎配音中心",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-19",
+      "index": 19,
+      "title": "精修第 3 步：选中要改的一幕",
+      "narration": "打开监看台与改片，先切换分镜预览，找到要改的一幕。确认当前选中的分镜，再改语速或情绪。",
+      "emotion": "重点强调",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "mosaic-pulse-wall 空间动态编排 · assets/images/image-07b-ui-task-center-610a.png",
+      "audioFile": "",
+      "durationSec": 10.5,
+      "durationInFrames": 315,
+      "startFrame": 5370,
+      "startSec": 179,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "中卡（2. 告诉 AI 你想做什么视频）",
+          "startSec": 0,
+          "endSec": 3.931,
+          "startFrame": 0,
+          "endFrame": 118
+        },
+        {
+          "index": 2,
+          "text": "写一句简单需求点AI 一键润色提示词",
+          "startSec": 3.931,
+          "endSec": 8.705,
+          "startFrame": 117,
+          "endFrame": 262
+        },
+        {
+          "index": 3,
+          "text": "系统自动隔离观众标题/要点与 AI",
+          "startSec": 8.705,
+          "endSec": 12.917,
+          "startFrame": 261,
+          "endFrame": 388
+        },
+        {
+          "index": 4,
+          "text": "专用导演备注",
+          "startSec": 12.917,
+          "endSec": 14.602,
+          "startFrame": 387,
+          "endFrame": 439
+        },
+        {
+          "index": 5,
+          "text": "严禁指令词泄露到成片",
+          "startSec": 14.602,
+          "endSec": 17.41,
+          "startFrame": 438,
+          "endFrame": 523
+        }
+      ],
+      "subtitleText": "中卡（2. 告诉 AI 你想做什么视频） 写一句简单需求点AI 一键润色提示词 系统自动隔离观众标题/要点与 AI 专用导演备注 严禁指令词泄露到成片",
+      "subChunks": [
+        "打开监看台与改片",
+        "先切换分镜预览",
+        "找到要改的一幕",
+        "确认当前选中的分镜",
+        "再改语速或情绪"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "重点强调",
+      "speechRate": 1.08,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 19 幕",
+      "layout": "freeform-stage",
+      "threePreset": "orbital-core",
+      "transition": "light-wipe",
+      "kenBurns": "hold",
+      "vfx": "grid+scan",
+      "highlights": [
+        "切换预览",
+        "选定单幕"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "严禁指令词泄露到成片"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 19 幕"
+      },
+      "counterTarget": 456,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4",
+          "width": 1920,
+          "height": 1080,
+          "type": "video",
+          "motion": "hold"
+        }
+      ],
+      "poolMedia": [
+        {
+          "assetId": "video-01-demo-drawer-new-project-473d",
+          "path": "assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+          "originalPath": "assets/videos/video-01-demo-drawer-new-project-473d.mp4",
+          "webPath": "assets/.web/video-01-demo-drawer-new-project-473d.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01a-ui-warroom-light-9353",
+          "path": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "originalPath": "assets/images/image-01a-ui-warroom-light-9353.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01b-ui-drawer-open-8ece",
+          "path": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "originalPath": "assets/images/image-01b-ui-drawer-open-8ece.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-01c-ui-new-project-modal-57a0",
+          "path": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "originalPath": "assets/images/image-01c-ui-new-project-modal-57a0.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-02-demo-hardware-lowspec-2caf",
+          "path": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "originalPath": "assets/videos/video-02-demo-hardware-lowspec-2caf.mp4",
+          "webPath": "assets/.web/video-02-demo-hardware-lowspec-2caf.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-02a-ui-hardware-modal-5c43",
+          "path": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "originalPath": "assets/images/image-02a-ui-hardware-modal-5c43.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-03-demo-warroom-cards-polish-1bae",
+          "path": "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+          "originalPath": "assets/videos/video-03-demo-warroom-cards-polish-1bae.mp4",
+          "webPath": "assets/.web/video-03-demo-warroom-cards-polish-1bae.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-04-demo-step1-assets-teleprompter-e5e2",
+          "path": "assets/videos/video-04-demo-step1-assets-teleprompter-e5e2.mp4",
+          "originalPath": "assets/videos/video-04-demo-step1-assets-teleprompter-e5e2.mp4",
+          "webPath": "assets/.web/video-04-demo-step1-assets-teleprompter-e5e2.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-04a-ui-step1-assets-5e58",
+          "path": "assets/images/image-04a-ui-step1-assets-5e58.png",
+          "originalPath": "assets/images/image-04a-ui-step1-assets-5e58.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-04b-ui-teleprompter-f4dd",
+          "path": "assets/images/image-04b-ui-teleprompter-f4dd.png",
+          "originalPath": "assets/images/image-04b-ui-teleprompter-f4dd.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-05-demo-step2-llm-tts-0ac5",
+          "path": "assets/videos/video-05-demo-step2-llm-tts-0ac5.mp4",
+          "originalPath": "assets/videos/video-05-demo-step2-llm-tts-0ac5.mp4",
+          "webPath": "assets/.web/video-05-demo-step2-llm-tts-0ac5.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05a-ui-step2-director-77ba",
+          "path": "assets/images/image-05a-ui-step2-director-77ba.png",
+          "originalPath": "assets/images/image-05a-ui-step2-director-77ba.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05b-ui-tts-engines-98bc",
+          "path": "assets/images/image-05b-ui-tts-engines-98bc.png",
+          "originalPath": "assets/images/image-05b-ui-tts-engines-98bc.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-05c-ui-llm-protocols-12f5",
+          "path": "assets/images/image-05c-ui-llm-protocols-12f5.png",
+          "originalPath": "assets/images/image-05c-ui-llm-protocols-12f5.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-06-demo-step3-monitor-refine-a842",
+          "path": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4",
+          "originalPath": "assets/videos/video-06-demo-step3-monitor-refine-a842.mp4",
+          "webPath": "assets/.web/video-06-demo-step3-monitor-refine-a842.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-06a-ui-step3-monitor-cf2e",
+          "path": "assets/images/image-06a-ui-step3-monitor-cf2e.png",
+          "originalPath": "assets/images/image-06a-ui-step3-monitor-cf2e.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-right",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "video-07-demo-step4-qa-tasks-4d33",
+          "path": "assets/videos/video-07-demo-step4-qa-tasks-4d33.mp4",
+          "originalPath": "assets/videos/video-07-demo-step4-qa-tasks-4d33.mp4",
+          "webPath": "assets/.web/video-07-demo-step4-qa-tasks-4d33.webm",
+          "type": "video",
+          "role": "footage",
+          "width": 1920,
+          "height": 1080,
+          "motion": "zoom-in",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-07a-ui-step4-qa-de19",
+          "path": "assets/images/image-07a-ui-step4-qa-de19.png",
+          "originalPath": "assets/images/image-07a-ui-step4-qa-de19.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "pan-left",
+          "trimStartSec": 0
+        },
+        {
+          "assetId": "image-07b-ui-task-center-610a",
+          "path": "assets/images/image-07b-ui-task-center-610a.png",
+          "originalPath": "assets/images/image-07b-ui-task-center-610a.png",
+          "webPath": "",
+          "type": "image",
+          "role": "image",
+          "width": 3072,
+          "height": 1728,
+          "motion": "zoom-out",
+          "trimStartSec": 0
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "sub_drop",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.3,
+          "volume": 0.48,
+          "pan": 0.2
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.62,
+          "volume": 0.38,
+          "pan": 0,
+          "d": 0.7
+        },
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 1,
+          "volume": 0.42,
+          "pan": -0.22
+        },
+        {
+          "type": "card",
+          "path": "audio/sfx/card.wav",
+          "offsetSec": 1.28,
+          "volume": 0.42,
+          "pan": 0.22
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 16.89,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 17.21,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 中卡（二. 告诉 AI 你想做什么视频）：写一句简单需求点AI 一键润色提示词，系统自动隔离观众标题/要点与 AI 专用导演备注，严禁指令词泄露到成片",
+      "ttsNarrationRef": "- 中卡（2. 告诉 AI 你想做什么视频）：写一句简单需求点「AI 一键润色提示词」，系统自动隔离观众标题/要点与 AI 专用导演备注，严禁指令词泄露到成片",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "当前选中的分镜",
+        "再改"
+      ],
+      "visualBlueprint": "全幅播放分镜切换与精修操作，在真实选中态留帧供辨认，不添加虚构的参数变化。",
+      "motionNotes": "全幅播放分镜切换与精修操作，在真实选中态留帧供辨认，不添加虚构的参数变化。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "监看台与改片",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-20",
+      "index": 20,
+      "title": "回放检查画面与口播",
+      "narration": "用成片原画时间轴回看这一幕。除了听语速，还要看口播讲到关键点时，画面有没有跟上。",
+      "emotion": "温和亲切",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "app-focus-shot 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 9,
+      "durationInFrames": 270,
+      "startFrame": 5685,
+      "startSec": 189.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "右卡（3. 发车参数与一键出片）",
+          "startSec": 0,
+          "endSec": 3.765,
+          "startFrame": 0,
+          "endFrame": 113
+        },
+        {
+          "index": 2,
+          "text": "自由切换 Remotion + Three.js",
+          "startSec": 3.765,
+          "endSec": 9.726,
+          "startFrame": 112,
+          "endFrame": 292
+        },
+        {
+          "index": 3,
+          "text": "3D 与 HTML5 + Three.js 引擎",
+          "startSec": 9.726,
+          "endSec": 15.059,
+          "startFrame": 291,
+          "endFrame": 452
+        },
+        {
+          "index": 4,
+          "text": "画质帧率",
+          "startSec": 15.059,
+          "endSec": 16.314,
+          "startFrame": 451,
+          "endFrame": 490
+        },
+        {
+          "index": 5,
+          "text": "AI 写代码配乐 / 上传 BGM",
+          "startSec": 16.314,
+          "endSec": 20.079,
+          "startFrame": 489,
+          "endFrame": 603
+        },
+        {
+          "index": 6,
+          "text": "AI 真人配音 / 配音+踩拍 / 纯音乐",
+          "startSec": 20.079,
+          "endSec": 24.157,
+          "startFrame": 602,
+          "endFrame": 725
+        },
+        {
+          "index": 7,
+          "text": "卡点 (免 TTS)",
+          "startSec": 24.157,
+          "endSec": 26.039,
+          "startFrame": 724,
+          "endFrame": 782
+        },
+        {
+          "index": 8,
+          "text": "一键启动 AI 全自动出片",
+          "startSec": 26.039,
+          "endSec": 29.49,
+          "startFrame": 781,
+          "endFrame": 885
+        }
+      ],
+      "subtitleText": "右卡（3. 发车参数与一键出片） 自由切换 Remotion + Three.js 3D 与 HTML5 + Three.js 引擎 画质帧率 AI 写代码配乐 / 上传 BGM AI 真人配音 / 配音+踩拍 / 纯音乐 卡点 (免 TTS) 一键启动 AI 全自动出片",
+      "subChunks": [
+        "用成片原画时间轴回看这一幕",
+        "除了听语速 还要看口播讲到关键点时",
+        "画面有没有跟上"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "温和亲切",
+      "speechRate": 1.07,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 20 幕",
+      "layout": "freeform-stage",
+      "threePreset": "cyber-terrain",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "radial-speedlines",
+      "highlights": [
+        "时间轴回看",
+        "核对声画"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "画质帧率"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "一键启动 AI 全自动出片"
+      },
+      "counterTarget": 480,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTitle": "成片原画时间轴",
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.46,
+          "z": 1.06
+        },
+        {
+          "t": 0.55,
+          "fx": 0.36,
+          "fy": 0.32,
+          "z": 1.92
+        },
+        {
+          "t": 2.6,
+          "fx": 0.45,
+          "fy": 0.42,
+          "z": 1.75
+        }
+      ],
+      "media": [
+        {
+          "path": "assets/images/image-06a-ui-step3-monitor-cf2e.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "whoosh",
+          "path": "audio/sfx/whoosh.wav",
+          "offsetSec": 0.14,
+          "volume": 0.45,
+          "pan": -0.16
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.48,
+          "pan": 0.14
+        },
+        {
+          "type": "lock",
+          "path": "audio/sfx/lock.wav",
+          "offsetSec": 1.5,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 28.97,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 29.29,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 右卡（三. 发车参数与一键出片）：自由切换 Remotion + Three.js 三D， 与 HTML五 + Three.js 引擎、画质帧率、AI 写代码配乐 / 上传 BGM、AI 真人配音 / 配音+踩拍 / 纯音乐卡，点 (免 TTS)，一键启动 AI 全自动出片",
+      "ttsNarrationRef": "- 右卡（3. 发车参数与一键出片）：自由切换 Remotion + Three.js 3D 与 HTML5 + Three.js 引擎、画质帧率、AI 写代码配乐 / 上传 BGM、AI 真人配音 / 配音+踩拍 / 纯音乐卡点 (免 TTS)，一键启动 AI 全自动出片",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "时间轴",
+        "画面有没有跟上"
+      ],
+      "visualBlueprint": "监看台截图全幅停帧，轻描真实时间轴入口，保留原预览内容，不让截图假装播放。",
+      "motionNotes": "监看台截图全幅停帧，轻描真实时间轴入口，保留原预览内容，不让截图假装播放。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTheme": "light",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-21",
+      "index": 21,
+      "title": "用自然语言做局部改片",
+      "narration": "交给 AI 做局部改片时，先说清楚改哪一幕、改什么、哪些内容保持不变。改完回看对应分镜。",
+      "emotion": "重点强调",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "workflow-steps 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 9.5,
+      "durationInFrames": 285,
+      "startFrame": 5955,
+      "startSec": 198.5,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "分步精修第 1 步（04",
+          "startSec": 0,
+          "endSec": 2.41,
+          "startFrame": 0,
+          "endFrame": 73
+        },
+        {
+          "index": 2,
+          "text": "demo-step1-assets-teleprompter.mp4",
+          "startSec": 2.41,
+          "endSec": 10.444,
+          "startFrame": 72,
+          "endFrame": 314
+        },
+        {
+          "index": 3,
+          "text": "/ 04a / 04b）",
+          "startSec": 10.444,
+          "endSec": 12.051,
+          "startFrame": 313,
+          "endFrame": 362
+        },
+        {
+          "index": 4,
+          "text": "多格式分类管理与筛选",
+          "startSec": 12.051,
+          "endSec": 14.729,
+          "startFrame": 361,
+          "endFrame": 442
+        },
+        {
+          "index": 5,
+          "text": "内置可调词速的提词器自拍棚",
+          "startSec": 14.729,
+          "endSec": 18.21,
+          "startFrame": 441,
+          "endFrame": 547
+        },
+        {
+          "index": 6,
+          "text": "支持直接上传本机已录视频提取人声克隆",
+          "startSec": 18.21,
+          "endSec": 23.03,
+          "startFrame": 546,
+          "endFrame": 691
+        }
+      ],
+      "subtitleText": "分步精修第 1 步（04 demo-step1-assets-teleprompter.mp4 / 04a / 04b） 多格式分类管理与筛选 内置可调词速的提词器自拍棚 支持直接上传本机已录视频提取人声克隆",
+      "subChunks": [
+        "交给 AI 做局部改片时",
+        "先说清楚改哪一幕 改什么",
+        "哪些内容保持不变",
+        "改完回看对应分镜"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "重点强调",
+      "speechRate": 1.07,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 21 幕",
+      "layout": "freeform-stage",
+      "threePreset": "particle-vortex",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "3d-depth+sweep",
+      "highlights": [
+        "指定分镜",
+        "明确改动范围",
+        "改后回看"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "内置可调词速的提词器自拍棚"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 21 幕"
+      },
+      "counterTarget": 504,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "steps": [
+        {
+          "title": "内置可调词速的提词器自拍棚",
+          "desc": "聚合图文视听",
+          "img": ""
+        },
+        {
+          "title": "第 21 幕",
+          "desc": "自动节奏分镜",
+          "img": ""
+        },
+        {
+          "title": "声画同步",
+          "desc": "高清成片交付",
+          "img": ""
+        }
+      ],
+      "media": [
+        {
+          "path": "assets/images/image-06a-ui-step3-monitor-cf2e.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.24,
+          "volume": 0.44,
+          "pan": -0.2
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.62,
+          "volume": 0.44,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 1.02,
+          "volume": 0.44,
+          "pan": 0.2
+        },
+        {
+          "type": "shine",
+          "path": "audio/sfx/shine.wav",
+          "offsetSec": 1.8,
+          "volume": 0.4,
+          "pan": 0
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 22.51,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 22.83,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 分步精修第 一 步（四-demo-step，一-assets-teleprompter.mp四 / ，四a / 四b）：多格式分类管理与筛选，内置可调词速的提词器自拍棚，支持直接上传本机已录视频提取人声克隆",
+      "ttsNarrationRef": "- 分步精修第 1 步（04-demo-step1-assets-teleprompter.mp4 / 04a / 04b）：多格式分类管理与筛选，内置可调词速的提词器自拍棚，支持直接上传本机已录视频提取人声克隆",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "改哪一幕",
+        "保持不变"
+      ],
+      "visualBlueprint": "延续监看台全幅实屏，局部改片区域随原画一起保留，不添加示例输入或假改片结果。",
+      "motionNotes": "延续监看台全幅实屏，局部改片区域随原画一起保留，不添加示例输入或假改片结果。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTheme": "light",
+      "windowTitle": "单幕精修",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-22",
+      "index": 22,
+      "title": "精修第 4 步：先看质检",
+      "narration": "进入质检导出发布。先扫一遍九宫格抽帧，再看黑屏和响度报告。有异常先回去修，不急着导出。",
+      "emotion": "重点强调",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "split-wipe-compare 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 10,
+      "durationInFrames": 300,
+      "startFrame": 6240,
+      "startSec": 208,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "分步精修第 2 步（05",
+          "startSec": 0,
+          "endSec": 3.205,
+          "startFrame": 0,
+          "endFrame": 97
+        },
+        {
+          "index": 2,
+          "text": "demo-step2-llm-tts.mp4 / 05a",
+          "startSec": 3.205,
+          "endSec": 10.683,
+          "startFrame": 96,
+          "endFrame": 321
+        },
+        {
+          "index": 3,
+          "text": "/ 05b / 05c）",
+          "startSec": 10.683,
+          "endSec": 12.82,
+          "startFrame": 320,
+          "endFrame": 385
+        }
+      ],
+      "subtitleText": "分步精修第 2 步（05 demo-step2-llm-tts.mp4 / 05a / 05b / 05c）",
+      "subChunks": [
+        "进入质检导出发布",
+        "先扫一遍九宫格抽帧",
+        "再看黑屏和响度报告",
+        "有异常先回去修 不急着导出"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "重点强调",
+      "speechRate": 1.06,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 22 幕",
+      "layout": "freeform-stage",
+      "threePreset": "floating-monoliths",
+      "transition": "light-wipe",
+      "kenBurns": "hold",
+      "vfx": "sparks+shockwave",
+      "highlights": [
+        "抽帧",
+        "黑屏检查",
+        "响度检查"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "第 22 幕"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "声画同步"
+      },
+      "counterTarget": 528,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/images/image-07a-ui-step4-qa-de19.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 0.24,
+          "volume": 0.48,
+          "pan": -0.15
+        },
+        {
+          "type": "flip",
+          "path": "audio/sfx/flip.wav",
+          "offsetSec": 1.55,
+          "volume": 0.45,
+          "pan": 0.18
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 12.3,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 12.62,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 分步精修第 二 步（五-demo-step，二-llm-tts.mp四 / 五a / 五b / 五，c）：",
+      "ttsNarrationRef": "- 分步精修第 2 步（05-demo-step2-llm-tts.mp4 / 05a / 05b / 05c）：",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "九宫格抽帧",
+        "有异常先回去修"
+      ],
+      "visualBlueprint": "以质检页全幅截图说明检查顺序；现有 07 仅作入口参考，待补录真实报告出现过程。",
+      "motionNotes": "以质检页全幅截图说明检查顺序；现有 07 仅作入口参考，待补录真实报告出现过程。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "windowTitle": "质检导出发布",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-23",
+      "index": 23,
+      "title": "分清审片导出与高清成品",
+      "narration": "要快看一版，选 720P 快速审片导出。质检通过后，再渲染高清成品 MP4。交付前，打开导出文件检查一遍。",
+      "emotion": "温和亲切",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "metric-dashboard 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 11,
+      "durationInFrames": 330,
+      "startFrame": 6540,
+      "startSec": 218,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "通用四协议大模型配置",
+          "startSec": 0,
+          "endSec": 2.568,
+          "startFrame": 0,
+          "endFrame": 78
+        },
+        {
+          "index": 2,
+          "text": "支持跟随 DSH 客户端自动同步",
+          "startSec": 2.568,
+          "endSec": 6.163,
+          "startFrame": 77,
+          "endFrame": 185
+        },
+        {
+          "index": 3,
+          "text": "兼容 OpenAI Chat",
+          "startSec": 6.163,
+          "endSec": 9.244,
+          "startFrame": 184,
+          "endFrame": 278
+        },
+        {
+          "index": 4,
+          "text": "Anthropic Messages",
+          "startSec": 9.244,
+          "endSec": 13.609,
+          "startFrame": 277,
+          "endFrame": 409
+        },
+        {
+          "index": 5,
+          "text": "OpenAI Responses",
+          "startSec": 13.609,
+          "endSec": 17.461,
+          "startFrame": 408,
+          "endFrame": 524
+        },
+        {
+          "index": 6,
+          "text": "Google Gemini 四种协议",
+          "startSec": 17.461,
+          "endSec": 21.57,
+          "startFrame": 523,
+          "endFrame": 648
+        }
+      ],
+      "subtitleText": "通用四协议大模型配置 支持跟随 DSH 客户端自动同步 兼容 OpenAI Chat Anthropic Messages OpenAI Responses Google Gemini 四种协议",
+      "subChunks": [
+        "要快看一版 选 720P 快速审片导出",
+        "质检通过后 再渲染高清成品 MP4",
+        "交付前 打开导出文件检查一遍"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "温和亲切",
+      "speechRate": 1.06,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 23 幕",
+      "layout": "freeform-stage",
+      "threePreset": "chrono-helix",
+      "transition": "cut",
+      "kenBurns": "hold",
+      "vfx": "halftone+glitch",
+      "highlights": [
+        "720P 快速审片",
+        "高清成品 MP4"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "兼容 OpenAI Chat"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "第 23 幕"
+      },
+      "counterTarget": 552,
+      "counterLabel": "科技前沿",
+      "metrics": [
+        {
+          "value": "414+",
+          "label": "兼容 OpenAI Chat"
+        },
+        {
+          "value": "1080P",
+          "label": "第 23 幕"
+        },
+        {
+          "value": "60FPS",
+          "label": "声画同步"
+        }
+      ],
+      "media": [
+        {
+          "path": "assets/images/image-07a-ui-step4-qa-de19.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "hold"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "tick_burst",
+          "path": "audio/sfx/tick_burst.wav",
+          "offsetSec": 0.2,
+          "volume": 0.44,
+          "pan": -0.1
+        },
+        {
+          "type": "counter",
+          "path": "audio/sfx/counter.wav",
+          "offsetSec": 0.48,
+          "volume": 0.4,
+          "pan": 0,
+          "d": 0.65
+        },
+        {
+          "type": "ding",
+          "path": "audio/sfx/ding.wav",
+          "offsetSec": 1.75,
+          "volume": 0.42,
+          "pan": 0.14
+        },
+        {
+          "type": "riser",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 21.05,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 21.37,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 通用四协议大模型配置：支持跟随 DSH 客户端自动同步，兼容 OpenAI Chat、Anthropic Messages、OpenAI Responses、Google Gemini 四种协议",
+      "ttsNarrationRef": "- 通用四协议大模型配置：支持跟随 DSH 客户端自动同步，兼容 OpenAI Chat、Anthropic Messages、OpenAI Responses、Google Gemini 四种协议",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "快速审片",
+        "高清成品 MP4",
+        "打开导出文件"
+      ],
+      "visualBlueprint": "质检页全幅停帧对照两个导出入口，静帧不加点击声；完成状态和文件核对只用补录。",
+      "motionNotes": "质检页全幅停帧对照两个导出入口，静帧不加点击声；完成状态和文件核对只用补录。",
+      "recipe": "hold",
+      "fromScale": 1,
+      "toScale": 1.02,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.3435,
+          "fy": 0.6099,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.3435,
+          "fy": 0.6099,
+          "z": 2.05
+        }
+      ],
+      "windowTheme": "light",
+      "windowTitle": "导出选项",
+      "explicitZeroAsset": false
+    },
+    {
+      "id": "scene-24",
+      "index": 24,
+      "title": "在任务监控里定位异常",
+      "narration": "任务监控里可以看策划、剪辑、配音和渲染进度。遇到异常，先查失败节点，再看该任务能否重试。",
+      "emotion": "重点强调",
+      "role": "host",
+      "voiceId": "pack-热门音色-专业解说配音",
+      "voiceLocked": false,
+      "voiceMatchReason": "AI 自动匹配: [热门音色] 专业解说配音 [匹配度 96% — 高清晰参考时长(7.62s) + 高活力教程讲解音色]",
+      "visualPrompt": "multi-window-trio 动效排版与光影特效",
+      "audioFile": "",
+      "durationSec": 10.5,
+      "durationInFrames": 315,
+      "startFrame": 6870,
+      "startSec": 229,
+      "subtitles": [
+        {
+          "index": 1,
+          "text": "多引擎配音中心",
+          "startSec": 0,
+          "endSec": 1.877,
+          "startFrame": 0,
+          "endFrame": 57
+        },
+        {
+          "index": 2,
+          "text": "内置 IndexTTS-2.5",
+          "startSec": 1.877,
+          "endSec": 5.094,
+          "startFrame": 56,
+          "endFrame": 153
+        },
+        {
+          "index": 3,
+          "text": "GPT-SoVITS",
+          "startSec": 5.094,
+          "endSec": 7.507,
+          "startFrame": 152,
+          "endFrame": 226
+        },
+        {
+          "index": 4,
+          "text": "Windows 原生纯 CPU 中文语音（0",
+          "startSec": 7.507,
+          "endSec": 12.333,
+          "startFrame": 225,
+          "endFrame": 370
+        },
+        {
+          "index": 5,
+          "text": "显存开箱即用）",
+          "startSec": 12.333,
+          "endSec": 13.942,
+          "startFrame": 369,
+          "endFrame": 419
+        },
+        {
+          "index": 6,
+          "text": "并支持自由导入 OpenAI/HTTP/CLI",
+          "startSec": 13.942,
+          "endSec": 19.304,
+          "startFrame": 418,
+          "endFrame": 580
+        },
+        {
+          "index": 7,
+          "text": "（如 Edge-TTS Kokoro",
+          "startSec": 19.304,
+          "endSec": 23.057,
+          "startFrame": 579,
+          "endFrame": 692
+        },
+        {
+          "index": 8,
+          "text": "Fish Speech）模型",
+          "startSec": 23.057,
+          "endSec": 26.274,
+          "startFrame": 691,
+          "endFrame": 789
+        },
+        {
+          "index": 9,
+          "text": "AI 语义选音自动从 200+ 精品音色",
+          "startSec": 26.274,
+          "endSec": 30.563,
+          "startFrame": 788,
+          "endFrame": 917
+        },
+        {
+          "index": 10,
+          "text": "库挑选并驱动 8 维情绪向量与明快语速",
+          "startSec": 30.563,
+          "endSec": 35.12,
+          "startFrame": 916,
+          "endFrame": 1054
+        }
+      ],
+      "subtitleText": "多引擎配音中心 内置 IndexTTS-2.5 GPT-SoVITS Windows 原生纯 CPU 中文语音（0 显存开箱即用） 并支持自由导入 OpenAI/HTTP/CLI （如 Edge-TTS Kokoro Fish Speech）模型 AI 语义选音自动从 200+ 精品音色 库挑选并驱动 8 维情绪向量与明快语速",
+      "subChunks": [
+        "任务监控里可以看策划 剪辑",
+        "配音和渲染进度",
+        "遇到异常 先查失败节点",
+        "再看该任务能否重试"
+      ],
+      "subtitleLine": "",
+      "voiceEmotion": "重点强调",
+      "speechRate": 1.07,
+      "voiceLeadSec": 0.22,
+      "tailSec": 0.32,
+      "tag": "第 24 幕",
+      "layout": "freeform-stage",
+      "threePreset": "matrix-cubes",
+      "transition": "cut",
+      "kenBurns": "zoom-out",
+      "vfx": "grid+scan",
+      "highlights": [
+        "4-Agent 进度",
+        "异常任务",
+        "重试入口"
+      ],
+      "compareLeft": {
+        "label": "传统方案",
+        "text": "GPT-SoVITS"
+      },
+      "compareRight": {
+        "label": "智能重构",
+        "text": "Kokoro"
+      },
+      "counterTarget": 576,
+      "counterLabel": "科技前沿",
+      "metrics": [],
+      "windowTheme": "light",
+      "media": [
+        {
+          "path": "assets/images/image-07b-ui-task-center-610a.png",
+          "width": 3072,
+          "height": 1728,
+          "type": "image",
+          "motion": "zoom-out"
+        }
+      ],
+      "sfxCues": [
+        {
+          "type": "hit",
+          "path": "audio/sfx/hit.wav",
+          "offsetSec": 0,
+          "volume": 0.52,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.2,
+          "volume": 0.42,
+          "pan": -0.24
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.48,
+          "volume": 0.42,
+          "pan": 0
+        },
+        {
+          "type": "pop_soft",
+          "path": "audio/sfx/pop_soft.wav",
+          "offsetSec": 0.76,
+          "volume": 0.42,
+          "pan": 0.24
+        },
+        {
+          "type": "shimmer_swell",
+          "path": "audio/sfx/shimmer_swell.wav",
+          "offsetSec": 1.6,
+          "volume": 0.36,
+          "pan": 0
+        },
+        {
+          "type": "suck",
+          "path": "audio/sfx/riser.wav",
+          "offsetSec": 34.6,
+          "volume": 0.42,
+          "pan": 0,
+          "d": 0.52
+        },
+        {
+          "type": "swoosh",
+          "path": "audio/sfx/swoosh.wav",
+          "offsetSec": 34.92,
+          "volume": 0.46,
+          "pan": 0
+        }
+      ],
+      "ttsText": "- 多引擎配音中心：内置 IndexTTS-二点五、GPT-SoVITS、Windows 原生纯 CPU 中文语音（零 ，显存开箱即用），并支持自由导入 OpenAI/HTTP/CLI（，如 Edge-TTS、Kokoro、Fish Speech）模型；AI 语义选音自动从 二百+ 精品音色库，挑选并驱动 八 维情绪向量与明快语速",
+      "ttsNarrationRef": "- 多引擎配音中心：内置 IndexTTS-2.5、GPT-SoVITS、Windows 原生纯 CPU 中文语音（0 显存开箱即用），并支持自由导入 OpenAI/HTTP/CLI（如 Edge-TTS、Kokoro、Fish Speech）模型；AI 语义选音自动从 200+ 精品音色库挑选并驱动 8 维情绪向量与明快语速",
+      "voiceName": "专业解说配音",
+      "voiceCategory": "热门音色",
+      "accentWords": [
+        "失败节点",
+        "该任务"
+      ],
+      "visualBlueprint": "任务中心全幅标出真实重试入口，停在当前状态；不模拟已点击，也不预写恢复结果。",
+      "motionNotes": "任务中心全幅标出真实重试入口，停在当前状态；不模拟已点击，也不预写恢复结果。",
+      "recipe": "freeze_end",
+      "fromScale": 1.16,
+      "toScale": 1,
+      "cams": [
+        {
+          "t": 0,
+          "fx": 0.5,
+          "fy": 0.5,
+          "z": 1
+        },
+        {
+          "t": 0.35,
+          "fx": 0.6986,
+          "fy": 0.1426,
+          "z": 1.95
+        },
+        {
+          "t": 0.88,
+          "fx": 0.6986,
+          "fy": 0.1426,
+          "z": 2.05
+        }
+      ],
+      "cursors": [
+        {
+          "t": 0.1,
+          "fx": 0.5186,
+          "fy": 0.3026
+        },
+        {
+          "t": 0.44,
+          "fx": 0.6986,
+          "fy": 0.1426,
+          "click": true,
+          "label": "异常"
+        }
+      ],
+      "windowTitle": "任务监控",
+      "explicitZeroAsset": false
+    }
+  ],
+  "beats": [
+    {
+      "time": 0,
+      "strong": true
+    },
+    {
+      "time": 0.526,
+      "strong": false
+    },
+    {
+      "time": 1.053,
+      "strong": false
+    },
+    {
+      "time": 1.579,
+      "strong": false
+    },
+    {
+      "time": 2.105,
+      "strong": true
+    },
+    {
+      "time": 2.632,
+      "strong": false
+    },
+    {
+      "time": 3.158,
+      "strong": false
+    },
+    {
+      "time": 3.684,
+      "strong": false
+    },
+    {
+      "time": 4.211,
+      "strong": true
+    },
+    {
+      "time": 4.737,
+      "strong": false
+    },
+    {
+      "time": 5.263,
+      "strong": false
+    },
+    {
+      "time": 5.789,
+      "strong": false
+    },
+    {
+      "time": 6.316,
+      "strong": true
+    },
+    {
+      "time": 6.842,
+      "strong": false
+    },
+    {
+      "time": 7.368,
+      "strong": false
+    },
+    {
+      "time": 7.895,
+      "strong": false
+    },
+    {
+      "time": 8.421,
+      "strong": true
+    },
+    {
+      "time": 8.947,
+      "strong": false
+    },
+    {
+      "time": 9.474,
+      "strong": false
+    },
+    {
+      "time": 10,
+      "strong": false
+    },
+    {
+      "time": 10.526,
+      "strong": true
+    },
+    {
+      "time": 11.053,
+      "strong": false
+    },
+    {
+      "time": 11.579,
+      "strong": false
+    },
+    {
+      "time": 12.105,
+      "strong": false
+    },
+    {
+      "time": 12.632,
+      "strong": true
+    },
+    {
+      "time": 13.158,
+      "strong": false
+    },
+    {
+      "time": 13.684,
+      "strong": false
+    },
+    {
+      "time": 14.211,
+      "strong": false
+    },
+    {
+      "time": 14.737,
+      "strong": true
+    },
+    {
+      "time": 15.263,
+      "strong": false
+    },
+    {
+      "time": 15.789,
+      "strong": false
+    },
+    {
+      "time": 16.316,
+      "strong": false
+    },
+    {
+      "time": 16.842,
+      "strong": true
+    },
+    {
+      "time": 17.368,
+      "strong": false
+    },
+    {
+      "time": 17.895,
+      "strong": false
+    },
+    {
+      "time": 18.421,
+      "strong": false
+    },
+    {
+      "time": 18.947,
+      "strong": true
+    },
+    {
+      "time": 19.474,
+      "strong": false
+    },
+    {
+      "time": 20,
+      "strong": false
+    },
+    {
+      "time": 20.526,
+      "strong": false
+    },
+    {
+      "time": 21.053,
+      "strong": true
+    },
+    {
+      "time": 21.579,
+      "strong": false
+    },
+    {
+      "time": 22.105,
+      "strong": false
+    },
+    {
+      "time": 22.632,
+      "strong": false
+    },
+    {
+      "time": 23.158,
+      "strong": true
+    },
+    {
+      "time": 23.684,
+      "strong": false
+    },
+    {
+      "time": 24.211,
+      "strong": false
+    },
+    {
+      "time": 24.737,
+      "strong": false
+    },
+    {
+      "time": 25.263,
+      "strong": true
+    },
+    {
+      "time": 25.789,
+      "strong": false
+    },
+    {
+      "time": 26.316,
+      "strong": false
+    },
+    {
+      "time": 26.842,
+      "strong": false
+    },
+    {
+      "time": 27.368,
+      "strong": true
+    },
+    {
+      "time": 27.895,
+      "strong": false
+    },
+    {
+      "time": 28.421,
+      "strong": false
+    },
+    {
+      "time": 28.947,
+      "strong": false
+    },
+    {
+      "time": 29.474,
+      "strong": true
+    },
+    {
+      "time": 30,
+      "strong": false
+    },
+    {
+      "time": 30.526,
+      "strong": false
+    },
+    {
+      "time": 31.053,
+      "strong": false
+    },
+    {
+      "time": 31.579,
+      "strong": true
+    },
+    {
+      "time": 32.105,
+      "strong": false
+    },
+    {
+      "time": 32.632,
+      "strong": false
+    },
+    {
+      "time": 33.158,
+      "strong": false
+    },
+    {
+      "time": 33.684,
+      "strong": true
+    },
+    {
+      "time": 34.211,
+      "strong": false
+    },
+    {
+      "time": 34.737,
+      "strong": false
+    },
+    {
+      "time": 35.263,
+      "strong": false
+    },
+    {
+      "time": 35.789,
+      "strong": true
+    },
+    {
+      "time": 36.316,
+      "strong": false
+    },
+    {
+      "time": 36.842,
+      "strong": false
+    },
+    {
+      "time": 37.368,
+      "strong": false
+    },
+    {
+      "time": 37.895,
+      "strong": true
+    },
+    {
+      "time": 38.421,
+      "strong": false
+    },
+    {
+      "time": 38.947,
+      "strong": false
+    },
+    {
+      "time": 39.474,
+      "strong": false
+    },
+    {
+      "time": 40,
+      "strong": true
+    },
+    {
+      "time": 40.526,
+      "strong": false
+    },
+    {
+      "time": 41.053,
+      "strong": false
+    },
+    {
+      "time": 41.579,
+      "strong": false
+    },
+    {
+      "time": 42.105,
+      "strong": true
+    },
+    {
+      "time": 42.632,
+      "strong": false
+    },
+    {
+      "time": 43.158,
+      "strong": false
+    },
+    {
+      "time": 43.684,
+      "strong": false
+    },
+    {
+      "time": 44.211,
+      "strong": true
+    },
+    {
+      "time": 44.737,
+      "strong": false
+    },
+    {
+      "time": 45.263,
+      "strong": false
+    },
+    {
+      "time": 45.789,
+      "strong": false
+    },
+    {
+      "time": 46.316,
+      "strong": true
+    },
+    {
+      "time": 46.842,
+      "strong": false
+    },
+    {
+      "time": 47.368,
+      "strong": false
+    },
+    {
+      "time": 47.895,
+      "strong": false
+    },
+    {
+      "time": 48.421,
+      "strong": true
+    },
+    {
+      "time": 48.947,
+      "strong": false
+    },
+    {
+      "time": 49.474,
+      "strong": false
+    },
+    {
+      "time": 50,
+      "strong": false
+    },
+    {
+      "time": 50.526,
+      "strong": true
+    },
+    {
+      "time": 51.053,
+      "strong": false
+    },
+    {
+      "time": 51.579,
+      "strong": false
+    },
+    {
+      "time": 52.105,
+      "strong": false
+    },
+    {
+      "time": 52.632,
+      "strong": true
+    },
+    {
+      "time": 53.158,
+      "strong": false
+    },
+    {
+      "time": 53.684,
+      "strong": false
+    },
+    {
+      "time": 54.211,
+      "strong": false
+    },
+    {
+      "time": 54.737,
+      "strong": true
+    },
+    {
+      "time": 55.263,
+      "strong": false
+    },
+    {
+      "time": 55.789,
+      "strong": false
+    },
+    {
+      "time": 56.316,
+      "strong": false
+    },
+    {
+      "time": 56.842,
+      "strong": true
+    },
+    {
+      "time": 57.368,
+      "strong": false
+    },
+    {
+      "time": 57.895,
+      "strong": false
+    },
+    {
+      "time": 58.421,
+      "strong": false
+    },
+    {
+      "time": 58.947,
+      "strong": true
+    },
+    {
+      "time": 59.474,
+      "strong": false
+    },
+    {
+      "time": 60,
+      "strong": false
+    },
+    {
+      "time": 60.526,
+      "strong": false
+    },
+    {
+      "time": 61.053,
+      "strong": true
+    },
+    {
+      "time": 61.579,
+      "strong": false
+    },
+    {
+      "time": 62.105,
+      "strong": false
+    },
+    {
+      "time": 62.632,
+      "strong": false
+    },
+    {
+      "time": 63.158,
+      "strong": true
+    },
+    {
+      "time": 63.684,
+      "strong": false
+    },
+    {
+      "time": 64.211,
+      "strong": false
+    },
+    {
+      "time": 64.737,
+      "strong": false
+    },
+    {
+      "time": 65.263,
+      "strong": true
+    },
+    {
+      "time": 65.789,
+      "strong": false
+    },
+    {
+      "time": 66.316,
+      "strong": false
+    },
+    {
+      "time": 66.842,
+      "strong": false
+    },
+    {
+      "time": 67.368,
+      "strong": true
+    },
+    {
+      "time": 67.895,
+      "strong": false
+    },
+    {
+      "time": 68.421,
+      "strong": false
+    },
+    {
+      "time": 68.947,
+      "strong": false
+    },
+    {
+      "time": 69.474,
+      "strong": true
+    },
+    {
+      "time": 70,
+      "strong": false
+    },
+    {
+      "time": 70.526,
+      "strong": false
+    },
+    {
+      "time": 71.053,
+      "strong": false
+    },
+    {
+      "time": 71.579,
+      "strong": true
+    },
+    {
+      "time": 72.105,
+      "strong": false
+    },
+    {
+      "time": 72.632,
+      "strong": false
+    },
+    {
+      "time": 73.158,
+      "strong": false
+    },
+    {
+      "time": 73.684,
+      "strong": true
+    },
+    {
+      "time": 74.211,
+      "strong": false
+    },
+    {
+      "time": 74.737,
+      "strong": false
+    },
+    {
+      "time": 75.263,
+      "strong": false
+    },
+    {
+      "time": 75.789,
+      "strong": true
+    },
+    {
+      "time": 76.316,
+      "strong": false
+    },
+    {
+      "time": 76.842,
+      "strong": false
+    },
+    {
+      "time": 77.368,
+      "strong": false
+    },
+    {
+      "time": 77.895,
+      "strong": true
+    },
+    {
+      "time": 78.421,
+      "strong": false
+    },
+    {
+      "time": 78.947,
+      "strong": false
+    },
+    {
+      "time": 79.474,
+      "strong": false
+    },
+    {
+      "time": 80,
+      "strong": true
+    },
+    {
+      "time": 80.526,
+      "strong": false
+    },
+    {
+      "time": 81.053,
+      "strong": false
+    },
+    {
+      "time": 81.579,
+      "strong": false
+    },
+    {
+      "time": 82.105,
+      "strong": true
+    },
+    {
+      "time": 82.632,
+      "strong": false
+    },
+    {
+      "time": 83.158,
+      "strong": false
+    },
+    {
+      "time": 83.684,
+      "strong": false
+    },
+    {
+      "time": 84.211,
+      "strong": true
+    },
+    {
+      "time": 84.737,
+      "strong": false
+    },
+    {
+      "time": 85.263,
+      "strong": false
+    },
+    {
+      "time": 85.789,
+      "strong": false
+    },
+    {
+      "time": 86.316,
+      "strong": true
+    },
+    {
+      "time": 86.842,
+      "strong": false
+    },
+    {
+      "time": 87.368,
+      "strong": false
+    },
+    {
+      "time": 87.895,
+      "strong": false
+    },
+    {
+      "time": 88.421,
+      "strong": true
+    },
+    {
+      "time": 88.947,
+      "strong": false
+    },
+    {
+      "time": 89.474,
+      "strong": false
+    },
+    {
+      "time": 90,
+      "strong": false
+    },
+    {
+      "time": 90.526,
+      "strong": true
+    },
+    {
+      "time": 91.053,
+      "strong": false
+    },
+    {
+      "time": 91.579,
+      "strong": false
+    },
+    {
+      "time": 92.105,
+      "strong": false
+    },
+    {
+      "time": 92.632,
+      "strong": true
+    },
+    {
+      "time": 93.158,
+      "strong": false
+    },
+    {
+      "time": 93.684,
+      "strong": false
+    },
+    {
+      "time": 94.211,
+      "strong": false
+    },
+    {
+      "time": 94.737,
+      "strong": true
+    },
+    {
+      "time": 95.263,
+      "strong": false
+    },
+    {
+      "time": 95.789,
+      "strong": false
+    },
+    {
+      "time": 96.316,
+      "strong": false
+    },
+    {
+      "time": 96.842,
+      "strong": true
+    },
+    {
+      "time": 97.368,
+      "strong": false
+    },
+    {
+      "time": 97.895,
+      "strong": false
+    },
+    {
+      "time": 98.421,
+      "strong": false
+    },
+    {
+      "time": 98.947,
+      "strong": true
+    },
+    {
+      "time": 99.474,
+      "strong": false
+    },
+    {
+      "time": 100,
+      "strong": false
+    },
+    {
+      "time": 100.526,
+      "strong": false
+    },
+    {
+      "time": 101.053,
+      "strong": true
+    },
+    {
+      "time": 101.579,
+      "strong": false
+    },
+    {
+      "time": 102.105,
+      "strong": false
+    },
+    {
+      "time": 102.632,
+      "strong": false
+    },
+    {
+      "time": 103.158,
+      "strong": true
+    },
+    {
+      "time": 103.684,
+      "strong": false
+    },
+    {
+      "time": 104.211,
+      "strong": false
+    },
+    {
+      "time": 104.737,
+      "strong": false
+    },
+    {
+      "time": 105.263,
+      "strong": true
+    },
+    {
+      "time": 105.789,
+      "strong": false
+    },
+    {
+      "time": 106.316,
+      "strong": false
+    },
+    {
+      "time": 106.842,
+      "strong": false
+    },
+    {
+      "time": 107.368,
+      "strong": true
+    },
+    {
+      "time": 107.895,
+      "strong": false
+    },
+    {
+      "time": 108.421,
+      "strong": false
+    },
+    {
+      "time": 108.947,
+      "strong": false
+    },
+    {
+      "time": 109.474,
+      "strong": true
+    },
+    {
+      "time": 110,
+      "strong": false
+    },
+    {
+      "time": 110.526,
+      "strong": false
+    },
+    {
+      "time": 111.053,
+      "strong": false
+    },
+    {
+      "time": 111.579,
+      "strong": true
+    },
+    {
+      "time": 112.105,
+      "strong": false
+    },
+    {
+      "time": 112.632,
+      "strong": false
+    },
+    {
+      "time": 113.158,
+      "strong": false
+    },
+    {
+      "time": 113.684,
+      "strong": true
+    },
+    {
+      "time": 114.211,
+      "strong": false
+    },
+    {
+      "time": 114.737,
+      "strong": false
+    },
+    {
+      "time": 115.263,
+      "strong": false
+    },
+    {
+      "time": 115.789,
+      "strong": true
+    },
+    {
+      "time": 116.316,
+      "strong": false
+    },
+    {
+      "time": 116.842,
+      "strong": false
+    },
+    {
+      "time": 117.368,
+      "strong": false
+    },
+    {
+      "time": 117.895,
+      "strong": true
+    },
+    {
+      "time": 118.421,
+      "strong": false
+    },
+    {
+      "time": 118.947,
+      "strong": false
+    },
+    {
+      "time": 119.474,
+      "strong": false
+    },
+    {
+      "time": 120,
+      "strong": true
+    },
+    {
+      "time": 120.526,
+      "strong": false
+    },
+    {
+      "time": 121.053,
+      "strong": false
+    },
+    {
+      "time": 121.579,
+      "strong": false
+    },
+    {
+      "time": 122.105,
+      "strong": true
+    },
+    {
+      "time": 122.632,
+      "strong": false
+    },
+    {
+      "time": 123.158,
+      "strong": false
+    },
+    {
+      "time": 123.684,
+      "strong": false
+    },
+    {
+      "time": 124.211,
+      "strong": true
+    },
+    {
+      "time": 124.737,
+      "strong": false
+    },
+    {
+      "time": 125.263,
+      "strong": false
+    },
+    {
+      "time": 125.789,
+      "strong": false
+    },
+    {
+      "time": 126.316,
+      "strong": true
+    },
+    {
+      "time": 126.842,
+      "strong": false
+    },
+    {
+      "time": 127.368,
+      "strong": false
+    },
+    {
+      "time": 127.895,
+      "strong": false
+    },
+    {
+      "time": 128.421,
+      "strong": true
+    },
+    {
+      "time": 128.947,
+      "strong": false
+    },
+    {
+      "time": 129.474,
+      "strong": false
+    },
+    {
+      "time": 130,
+      "strong": false
+    },
+    {
+      "time": 130.526,
+      "strong": true
+    },
+    {
+      "time": 131.053,
+      "strong": false
+    },
+    {
+      "time": 131.579,
+      "strong": false
+    },
+    {
+      "time": 132.105,
+      "strong": false
+    },
+    {
+      "time": 132.632,
+      "strong": true
+    },
+    {
+      "time": 133.158,
+      "strong": false
+    },
+    {
+      "time": 133.684,
+      "strong": false
+    },
+    {
+      "time": 134.211,
+      "strong": false
+    },
+    {
+      "time": 134.737,
+      "strong": true
+    },
+    {
+      "time": 135.263,
+      "strong": false
+    },
+    {
+      "time": 135.789,
+      "strong": false
+    },
+    {
+      "time": 136.316,
+      "strong": false
+    },
+    {
+      "time": 136.842,
+      "strong": true
+    },
+    {
+      "time": 137.368,
+      "strong": false
+    },
+    {
+      "time": 137.895,
+      "strong": false
+    },
+    {
+      "time": 138.421,
+      "strong": false
+    },
+    {
+      "time": 138.947,
+      "strong": true
+    },
+    {
+      "time": 139.474,
+      "strong": false
+    },
+    {
+      "time": 140,
+      "strong": false
+    },
+    {
+      "time": 140.526,
+      "strong": false
+    },
+    {
+      "time": 141.053,
+      "strong": true
+    },
+    {
+      "time": 141.579,
+      "strong": false
+    },
+    {
+      "time": 142.105,
+      "strong": false
+    },
+    {
+      "time": 142.632,
+      "strong": false
+    },
+    {
+      "time": 143.158,
+      "strong": true
+    },
+    {
+      "time": 143.684,
+      "strong": false
+    },
+    {
+      "time": 144.211,
+      "strong": false
+    },
+    {
+      "time": 144.737,
+      "strong": false
+    },
+    {
+      "time": 145.263,
+      "strong": true
+    },
+    {
+      "time": 145.789,
+      "strong": false
+    },
+    {
+      "time": 146.316,
+      "strong": false
+    },
+    {
+      "time": 146.842,
+      "strong": false
+    },
+    {
+      "time": 147.368,
+      "strong": true
+    },
+    {
+      "time": 147.895,
+      "strong": false
+    },
+    {
+      "time": 148.421,
+      "strong": false
+    },
+    {
+      "time": 148.947,
+      "strong": false
+    },
+    {
+      "time": 149.474,
+      "strong": true
+    },
+    {
+      "time": 150,
+      "strong": false
+    },
+    {
+      "time": 150.526,
+      "strong": false
+    },
+    {
+      "time": 151.053,
+      "strong": false
+    },
+    {
+      "time": 151.579,
+      "strong": true
+    },
+    {
+      "time": 152.105,
+      "strong": false
+    },
+    {
+      "time": 152.632,
+      "strong": false
+    },
+    {
+      "time": 153.158,
+      "strong": false
+    },
+    {
+      "time": 153.684,
+      "strong": true
+    },
+    {
+      "time": 154.211,
+      "strong": false
+    },
+    {
+      "time": 154.737,
+      "strong": false
+    },
+    {
+      "time": 155.263,
+      "strong": false
+    },
+    {
+      "time": 155.789,
+      "strong": true
+    },
+    {
+      "time": 156.316,
+      "strong": false
+    },
+    {
+      "time": 156.842,
+      "strong": false
+    },
+    {
+      "time": 157.368,
+      "strong": false
+    },
+    {
+      "time": 157.895,
+      "strong": true
+    },
+    {
+      "time": 158.421,
+      "strong": false
+    },
+    {
+      "time": 158.947,
+      "strong": false
+    },
+    {
+      "time": 159.474,
+      "strong": false
+    },
+    {
+      "time": 160,
+      "strong": true
+    },
+    {
+      "time": 160.526,
+      "strong": false
+    },
+    {
+      "time": 161.053,
+      "strong": false
+    },
+    {
+      "time": 161.579,
+      "strong": false
+    },
+    {
+      "time": 162.105,
+      "strong": true
+    },
+    {
+      "time": 162.632,
+      "strong": false
+    },
+    {
+      "time": 163.158,
+      "strong": false
+    },
+    {
+      "time": 163.684,
+      "strong": false
+    },
+    {
+      "time": 164.211,
+      "strong": true
+    },
+    {
+      "time": 164.737,
+      "strong": false
+    },
+    {
+      "time": 165.263,
+      "strong": false
+    },
+    {
+      "time": 165.789,
+      "strong": false
+    },
+    {
+      "time": 166.316,
+      "strong": true
+    },
+    {
+      "time": 166.842,
+      "strong": false
+    },
+    {
+      "time": 167.368,
+      "strong": false
+    },
+    {
+      "time": 167.895,
+      "strong": false
+    },
+    {
+      "time": 168.421,
+      "strong": true
+    },
+    {
+      "time": 168.947,
+      "strong": false
+    },
+    {
+      "time": 169.474,
+      "strong": false
+    },
+    {
+      "time": 170,
+      "strong": false
+    },
+    {
+      "time": 170.526,
+      "strong": true
+    },
+    {
+      "time": 171.053,
+      "strong": false
+    },
+    {
+      "time": 171.579,
+      "strong": false
+    },
+    {
+      "time": 172.105,
+      "strong": false
+    },
+    {
+      "time": 172.632,
+      "strong": true
+    },
+    {
+      "time": 173.158,
+      "strong": false
+    },
+    {
+      "time": 173.684,
+      "strong": false
+    },
+    {
+      "time": 174.211,
+      "strong": false
+    },
+    {
+      "time": 174.737,
+      "strong": true
+    },
+    {
+      "time": 175.263,
+      "strong": false
+    },
+    {
+      "time": 175.789,
+      "strong": false
+    },
+    {
+      "time": 176.316,
+      "strong": false
+    },
+    {
+      "time": 176.842,
+      "strong": true
+    },
+    {
+      "time": 177.368,
+      "strong": false
+    },
+    {
+      "time": 177.895,
+      "strong": false
+    },
+    {
+      "time": 178.421,
+      "strong": false
+    },
+    {
+      "time": 178.947,
+      "strong": true
+    },
+    {
+      "time": 179.474,
+      "strong": false
+    },
+    {
+      "time": 180,
+      "strong": false
+    },
+    {
+      "time": 180.526,
+      "strong": false
+    },
+    {
+      "time": 181.053,
+      "strong": true
+    },
+    {
+      "time": 181.579,
+      "strong": false
+    },
+    {
+      "time": 182.105,
+      "strong": false
+    },
+    {
+      "time": 182.632,
+      "strong": false
+    },
+    {
+      "time": 183.158,
+      "strong": true
+    },
+    {
+      "time": 183.684,
+      "strong": false
+    },
+    {
+      "time": 184.211,
+      "strong": false
+    },
+    {
+      "time": 184.737,
+      "strong": false
+    },
+    {
+      "time": 185.263,
+      "strong": true
+    },
+    {
+      "time": 185.789,
+      "strong": false
+    },
+    {
+      "time": 186.316,
+      "strong": false
+    },
+    {
+      "time": 186.842,
+      "strong": false
+    },
+    {
+      "time": 187.368,
+      "strong": true
+    },
+    {
+      "time": 187.895,
+      "strong": false
+    },
+    {
+      "time": 188.421,
+      "strong": false
+    },
+    {
+      "time": 188.947,
+      "strong": false
+    },
+    {
+      "time": 189.474,
+      "strong": true
+    },
+    {
+      "time": 190,
+      "strong": false
+    },
+    {
+      "time": 190.526,
+      "strong": false
+    },
+    {
+      "time": 191.053,
+      "strong": false
+    },
+    {
+      "time": 191.579,
+      "strong": true
+    },
+    {
+      "time": 192.105,
+      "strong": false
+    },
+    {
+      "time": 192.632,
+      "strong": false
+    },
+    {
+      "time": 193.158,
+      "strong": false
+    },
+    {
+      "time": 193.684,
+      "strong": true
+    },
+    {
+      "time": 194.211,
+      "strong": false
+    },
+    {
+      "time": 194.737,
+      "strong": false
+    },
+    {
+      "time": 195.263,
+      "strong": false
+    },
+    {
+      "time": 195.789,
+      "strong": true
+    },
+    {
+      "time": 196.316,
+      "strong": false
+    },
+    {
+      "time": 196.842,
+      "strong": false
+    },
+    {
+      "time": 197.368,
+      "strong": false
+    },
+    {
+      "time": 197.895,
+      "strong": true
+    },
+    {
+      "time": 198.421,
+      "strong": false
+    },
+    {
+      "time": 198.947,
+      "strong": false
+    },
+    {
+      "time": 199.474,
+      "strong": false
+    },
+    {
+      "time": 200,
+      "strong": true
+    },
+    {
+      "time": 200.526,
+      "strong": false
+    },
+    {
+      "time": 201.053,
+      "strong": false
+    },
+    {
+      "time": 201.579,
+      "strong": false
+    },
+    {
+      "time": 202.105,
+      "strong": true
+    },
+    {
+      "time": 202.632,
+      "strong": false
+    },
+    {
+      "time": 203.158,
+      "strong": false
+    },
+    {
+      "time": 203.684,
+      "strong": false
+    },
+    {
+      "time": 204.211,
+      "strong": true
+    },
+    {
+      "time": 204.737,
+      "strong": false
+    },
+    {
+      "time": 205.263,
+      "strong": false
+    },
+    {
+      "time": 205.789,
+      "strong": false
+    },
+    {
+      "time": 206.316,
+      "strong": true
+    },
+    {
+      "time": 206.842,
+      "strong": false
+    },
+    {
+      "time": 207.368,
+      "strong": false
+    },
+    {
+      "time": 207.895,
+      "strong": false
+    },
+    {
+      "time": 208.421,
+      "strong": true
+    },
+    {
+      "time": 208.947,
+      "strong": false
+    },
+    {
+      "time": 209.474,
+      "strong": false
+    },
+    {
+      "time": 210,
+      "strong": false
+    },
+    {
+      "time": 210.526,
+      "strong": true
+    },
+    {
+      "time": 211.053,
+      "strong": false
+    },
+    {
+      "time": 211.579,
+      "strong": false
+    },
+    {
+      "time": 212.105,
+      "strong": false
+    },
+    {
+      "time": 212.632,
+      "strong": true
+    },
+    {
+      "time": 213.158,
+      "strong": false
+    },
+    {
+      "time": 213.684,
+      "strong": false
+    },
+    {
+      "time": 214.211,
+      "strong": false
+    },
+    {
+      "time": 214.737,
+      "strong": true
+    },
+    {
+      "time": 215.263,
+      "strong": false
+    },
+    {
+      "time": 215.789,
+      "strong": false
+    },
+    {
+      "time": 216.316,
+      "strong": false
+    },
+    {
+      "time": 216.842,
+      "strong": true
+    },
+    {
+      "time": 217.368,
+      "strong": false
+    },
+    {
+      "time": 217.895,
+      "strong": false
+    },
+    {
+      "time": 218.421,
+      "strong": false
+    },
+    {
+      "time": 218.947,
+      "strong": true
+    },
+    {
+      "time": 219.474,
+      "strong": false
+    },
+    {
+      "time": 220,
+      "strong": false
+    },
+    {
+      "time": 220.526,
+      "strong": false
+    },
+    {
+      "time": 221.053,
+      "strong": true
+    },
+    {
+      "time": 221.579,
+      "strong": false
+    },
+    {
+      "time": 222.105,
+      "strong": false
+    },
+    {
+      "time": 222.632,
+      "strong": false
+    },
+    {
+      "time": 223.158,
+      "strong": true
+    },
+    {
+      "time": 223.684,
+      "strong": false
+    },
+    {
+      "time": 224.211,
+      "strong": false
+    },
+    {
+      "time": 224.737,
+      "strong": false
+    },
+    {
+      "time": 225.263,
+      "strong": true
+    },
+    {
+      "time": 225.789,
+      "strong": false
+    },
+    {
+      "time": 226.316,
+      "strong": false
+    },
+    {
+      "time": 226.842,
+      "strong": false
+    },
+    {
+      "time": 227.368,
+      "strong": true
+    },
+    {
+      "time": 227.895,
+      "strong": false
+    },
+    {
+      "time": 228.421,
+      "strong": false
+    },
+    {
+      "time": 228.947,
+      "strong": false
+    },
+    {
+      "time": 229.474,
+      "strong": true
+    },
+    {
+      "time": 230,
+      "strong": false
+    },
+    {
+      "time": 230.526,
+      "strong": false
+    },
+    {
+      "time": 231.053,
+      "strong": false
+    },
+    {
+      "time": 231.579,
+      "strong": true
+    },
+    {
+      "time": 232.105,
+      "strong": false
+    },
+    {
+      "time": 232.632,
+      "strong": false
+    },
+    {
+      "time": 233.158,
+      "strong": false
+    },
+    {
+      "time": 233.684,
+      "strong": true
+    },
+    {
+      "time": 234.211,
+      "strong": false
+    },
+    {
+      "time": 234.737,
+      "strong": false
+    },
+    {
+      "time": 235.263,
+      "strong": false
+    },
+    {
+      "time": 235.789,
+      "strong": true
+    },
+    {
+      "time": 236.316,
+      "strong": false
+    },
+    {
+      "time": 236.842,
+      "strong": false
+    },
+    {
+      "time": 237.368,
+      "strong": false
+    },
+    {
+      "time": 237.895,
+      "strong": true
+    },
+    {
+      "time": 238.421,
+      "strong": false
+    },
+    {
+      "time": 238.947,
+      "strong": false
+    },
+    {
+      "time": 239.474,
+      "strong": false
+    }
+  ]
+}

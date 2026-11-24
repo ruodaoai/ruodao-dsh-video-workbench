@@ -1,0 +1,97 @@
+{
+  "id": "data-ranking-story",
+  "order": 5,
+  "name": "数据榜单与行业洞察 · 商业指标节奏叙事",
+  "category": "data-story",
+  "genre": "data-story",
+  "genreLabel": "数据榜单与商业指标动效",
+  "style": "emerald",
+  "engine": "html",
+  "narrationMode": "tts-beat-sync",
+  "pacingMode": "balanced",
+  "subtitleStyle": "cinematic",
+  "aspectRatio": "16:9",
+  "fps": 30,
+  "shotCount": 6,
+  "durationSec": 26.7,
+  "avgShotSec": 4.45,
+  "bpm": 116,
+  "description": "8 镜商业/数据榜单模板：数字滚动翻牌 + 仪表盘脉冲卡片 + 对比指标墙 + 机械计数/印章音效与 116 BPM 轻快卡点，适用于财报拆解、行业排行与增长复盘。",
+  "tags": [
+    "数据榜单",
+    "商业洞察",
+    "动态翻牌数字",
+    "计数音效",
+    "116 BPM"
+  ],
+  "colorPalette": {
+    "background": "#071413",
+    "primary": "#10B981",
+    "accent": "#F59E0B",
+    "highlight": "#ECFDF5"
+  },
+  "vfxSignature": [
+    "动态滚动计数器",
+    "指标仪表盘脉冲",
+    "多维对比光带",
+    "印章定格高光"
+  ],
+  "transitionSignature": [
+    "slash-wipe",
+    "zoom-punch",
+    "light-wipe",
+    "iris-circle"
+  ],
+  "replicationPrompt": "采用黑金翡翠现代财经数据视觉，大字号等宽滚动数字为核心锚点；节奏锁定 116 BPM，数字揭晓处触发 counter 与 stamp 音效，按【震撼总盘数字→TOP 榜单分段揭示→核心增速对比→关键趋势结论】展开。",
+  "audioProfile": {
+    "genreKey": "data-story",
+    "profileName": "数据榜单与商业洞察声场",
+    "beatCutIntensity": "medium",
+    "blitzAllowed": true,
+    "minBeatMultiple": 1,
+    "cameraBeatIntensity": 0.3,
+    "targetLufs": -14.3,
+    "bgmDuckRatio": 2.9,
+    "sfxBoostVoice": 1.08,
+    "sfxBoostMv": 1.32,
+    "bgmVolVoice": 0.38,
+    "bgmVolMv": 0.76,
+    "sfxPalette": {
+      "opener": [
+        "counter",
+        "shine"
+      ],
+      "drop": [
+        "sub_drop",
+        "stamp"
+      ],
+      "action": [
+        "counter",
+        "whoosh"
+      ],
+      "data": [
+        "counter",
+        "tick"
+      ],
+      "neutral": [
+        "card",
+        "tick"
+      ],
+      "internal": [
+        "counter",
+        "tick",
+        "chime"
+      ],
+      "preCut": [
+        "riser",
+        "swoosh"
+      ]
+    }
+  },
+  "author": "Merziller",
+  "plaza": "影核广场 · CinePulse Hub",
+  "coverFile": "cover.png",
+  "updatedAt": "2026-11-19T19:13:36.978Z",
+  "previewFile": "preview.mp4",
+  "previewDurationSec": 17.07
+}

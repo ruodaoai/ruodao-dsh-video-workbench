@@ -1,0 +1,159 @@
+/* =====================================================================
+   Port fixes — hidden layers use visibility (never just opacity) so their
+   text is truly gone; fixed-width corner blocks; compact modes.
+   ===================================================================== */
+.ph .en{text-overflow:ellipsis}
+.agentcard{visibility:hidden;transition:opacity var(--d2) var(--ez),transform var(--d2) var(--ez),visibility 0s linear var(--d2)}
+.agentcard.on{visibility:visible;transition:opacity var(--d2) var(--ez),transform var(--d2) var(--ez),visibility 0s}
+.agentcard .ac-task b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-weight:600}
+#hud.card .ch-mini{display:none}
+.ready{visibility:hidden;transition:opacity var(--d3) var(--ez),transform var(--d3) var(--ez),visibility 0s linear var(--d3)}
+.ready.on{visibility:visible;transition:opacity var(--d3) var(--ez),transform var(--d3) var(--ez),visibility 0s}
+#monitor.w-m .ready .xl{display:none}
+.dl.hid{opacity:0;visibility:hidden;pointer-events:none}
+#docklabels.min .dl{padding:4px 8px}
+#docklabels.min .dl .l1,#docklabels.min .dl .tk{display:none}
+#docklabels.min .dl .nm{margin-top:0}
+#tl-tip{visibility:hidden;transition:opacity var(--d1),transform var(--d1),visibility 0s linear var(--d1)}
+#tl-tip.on{visibility:visible;transition:opacity var(--d1),transform var(--d1),visibility 0s}
+#drawer{transition:transform .46s var(--ez),visibility 0s linear .46s}
+#drawer.on{transition:transform .46s var(--ez),visibility 0s}
+.pop{transition:opacity var(--d1) var(--ez),transform var(--d1) var(--ez)}
+
+/* corner blocks: fixed widths (layout solver measures them once per resize) */
+.st-phase{width:300px;max-width:none}
+.st-phase .ph-task{max-width:100%}
+.st-phase .ph-n{overflow:hidden}
+.st-tele{width:300px}
+.st-tele .row{display:block;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;line-height:20px}
+.st-tele .row>*{display:inline-block;vertical-align:middle;margin-left:10px}
+.st-tele .row>*:first-child{margin-left:0}
+.st-tele .row .led{margin-right:4px;vertical-align:0}
+.st-tele .net span{display:inline}
+@media (max-width:1500px),(max-height:940px){.st-phase{width:240px}.st-tele{width:250px}}
+@media (max-width:1340px),(max-height:780px){.st-phase{width:200px}.st-tele{width:214px}.st-tele .row .mu{display:none}}
+.st-phase.cmp{width:176px}
+.st-tele.cmp{width:200px}
+
+/* monitor chrome hides while the monitor is partly outside the stage view */
+#monitor.mon-clip .mon-top,#monitor.mon-clip .mon-bot,#monitor.mon-clip .ready,#monitor.mon-clip .mon-state{visibility:hidden}
+/* no project: porthole / monitor / labels / corners / summary yield to onboarding */
+#stage.noproj #monitor,#stage.noproj #docklabels,#stage.noproj .st-corner,#stage.noproj .summary,#stage.noproj .st-cam{display:none}
+.onboard .ob-nh{margin:0;font-size:12px;color:var(--amb)}
+.onboard .mu{color:rgba(var(--acc-rgb),.85)}
+
+/* strip */
+.st-cam{min-width:132px}
+
+/* cargo */
+.cg-filter.cmp .chip:not(.on) em{display:none}
+.cg-filter.cmp .chip{padding:0 6px}
+.cap.loaded .cm .us{display:none}
+.caps-empty span{display:block}
+
+/* mission / log */
+.log .lines{flex:none;display:flex;flex-direction:column;min-width:0}
+.log .ln{animation:none}
+.log .ln.nw{animation:lnin .35s var(--ez)}
+body.lite .log .ln.nw{animation:none}
+
+/* overlays */
+#toasts{top:calc(var(--top-h) + var(--gap) + var(--strip-h) + 10px)}
+.confirm-pop{width:268px}
+.pc p{margin:6px 8px 12px;font-size:12.5px;line-height:1.6;color:var(--ink);white-space:normal}
+.pc-a{display:flex;justify-content:flex-end;gap:6px;padding:0 4px 4px}
+.mnote{font-size:12px;color:var(--ink3);margin:14px 0 0;line-height:1.7;word-break:break-all}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips .chip{max-width:100%;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.player .pa{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink3)}
+.keys em{font-style:normal;color:var(--ink3);margin:0 2px}
+.prow.wide{align-items:flex-start}
+.prow.wide>label{padding-top:8px}
+.prow .ctl .btn.sm{flex:none}
+.sel{max-width:240px}
+
+/* patch-js-2 */
+#mission.rcmp .ro .tk{display:none}
+#mission.rcmp .ro.run .tk,#mission.rcmp .ro.err .tk{display:block}
+#mission.rcmp .ro{padding-top:3px;padding-bottom:3px}
+#mission.rcmp .ro .bar{height:18px}
+.tl-heads{width:124px}
+@media (max-width:1340px),(max-height:780px){.tl-heads{width:84px}}
+.cap .cm{font-size:12px;line-height:14px}
+
+/* patch-js-3 */
+.oc{visibility:hidden!important}
+.sec-roster{flex:none}
+.sec-log{flex:1 1 0;min-height:92px}
+.log{flex:1 1 0}
+#mission.tabbed .mc-sec{flex:1 1 0}
+#mission.tabbed .roster,#mission.tabbed .log{flex:1 1 0}
+@keyframes capnew{0%{opacity:0;transform:scale(.97);box-shadow:0 0 30px rgba(var(--acc-rgb),.8)}60%{opacity:1}100%{transform:none}}
+.ch-mini .mu{font:600 12px/1.2 var(--f-ui);letter-spacing:.04em;text-transform:none;color:var(--ink3)}
+
+/* patch-js-5 */
+#hud.mini-off .ch-mini{opacity:0!important;visibility:hidden!important}
+.summary .sum-text.none{display:none}
+.summary:has(.sum-text.none){padding-left:4px}
+
+/* patch-css-6 */
+.stg-h .en{text-overflow:ellipsis;white-space:nowrap}
+#cargo.tight .stg-h .en{display:none}
+@media (max-width:1500px),(max-height:940px){.stg-h .en{display:none}}
+.stg-h .n{font-size:12px}
+.stg .sm{font-size:12px;line-height:15px}
+.cap .cm>span:not(.ty){flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.onboard>.mu{font:600 12px/1.2 var(--f-ui);letter-spacing:.12em;text-transform:none}
+
+/* patch-js-8 */
+.stg .sa,.stg .sa .btn{flex:none}
+.stg .th[data-act]{cursor:pointer}
+.stg .th[data-act]:hover{box-shadow:inset 0 0 0 1px rgba(var(--acc-rgb),.7)}
+.rn .l2{display:none}
+#mission.narrow .rn .l4{display:none}
+#mission.narrow .rn .l2{display:inline}
+#mission.narrow .mc-opt .kbd{display:none}
+#mission.narrow .mc-tr .run .mu{display:none}
+.btn.run.busy .mu{display:none}
+.cap.grab{border-style:dashed;border-color:rgba(var(--acc-rgb),.85);box-shadow:0 0 22px rgba(var(--acc-rgb),.35)}
+.cap.grab>*{opacity:.22}
+
+/* patch-js-10 */
+.log-more{position:static;align-self:center;margin:-4px 0 8px}
+.sec-log>.log-more{flex:none}
+
+/* patch-css-11 */
+.cap .ld{max-width:42%}
+@media (max-width:1500px){.cap .ld{max-width:30%;padding:0 6px}.cap .cb{flex:1 1 auto;min-width:44px}}
+@media (max-width:1340px){.cap.loaded .ld{max-width:none;width:22px;padding:0;text-indent:-999px;overflow:hidden;position:relative;flex:none}.cap.loaded .ld::after{content:"✓";position:absolute;left:0;right:0;top:0;text-indent:0;text-align:center;font:700 12px/18px var(--f-ui)}}
+
+/* kit integration (session 3) — deck-side pieces */
+/* skin popovers (project / skin / tools menus) can open above a kit workspace → above #pk-root */
+.pop{z-index:9600}
+/* drawer · topic preview (opens the big editor) and the voice picker show their whole text */
+.dr-brief{width:100%;padding:8px 10px;border:1px solid var(--hair2);border-radius:8px;background:rgba(2,4,12,.7);--bf-lines:6;transition:border-color var(--d1),box-shadow var(--d1)}
+.dr-brief:hover{border-color:var(--hair3)}
+.dr-brief:focus-visible{border-color:var(--acc);box-shadow:0 0 0 3px rgba(var(--acc-rgb),.15)!important}
+.dr-bf-f{display:flex;align-items:center;gap:8px;width:100%;min-width:0}
+.dr-bf-f .sp{flex:1}
+.prow .sel{height:auto;min-height:30px;width:auto;max-width:none;flex:1 1 180px;padding:5px 30px 5px 10px;align-items:center}
+.prow .sel .sv{white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+.prow .sel::after{top:50%;margin-top:-5px}
+/* top bar: livery button folds into the tools menu on narrow screens */
+@media (max-width:1340px){.tb-theme{display:none}}
+.tools-pop .pi.soon span{color:var(--ink3)}
+.tools-pop .pi.soon em{color:var(--amb)}
+/* popover captions: readable CJK (≥ 12 px) with the HUD letter-spacing of the prototype */
+.pop .pl{font:600 12px/1.25 var(--f-ui);letter-spacing:.14em;color:var(--ink3)}
+/* the prototype's .inp (lost in the port): drawer number field (目标时长) */
+.inp{height:30px;padding:0 10px;border-radius:8px;border:1px solid var(--hair2);background:rgba(2,4,12,.72);color:var(--ink);font:500 12.5px var(--f-mono);outline:none;box-shadow:inset 0 1px 3px rgba(0,0,0,.35);transition:border-color var(--d1),box-shadow var(--d1),opacity var(--d1);user-select:text;caret-color:var(--acc)}
+.inp:hover:not(:disabled):not(:focus){border-color:var(--hair3)}
+.inp:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(var(--acc-rgb),.15),inset 0 1px 3px rgba(0,0,0,.35)}
+.inp:disabled{opacity:.42;cursor:not-allowed}
+.inp[type=number]{-moz-appearance:textfield}
+.inp[type=number]::-webkit-inner-spin-button{opacity:.5}
+.prow .unit{font-size:12px;color:var(--ink3)}
+/* drawer header overline: HUD Latin + readable CJK (same split as the kit frame headers) */
+.dr-ht .mu{display:flex;align-items:baseline;gap:0}
+.dr-ht .mu-cn{display:inline-flex;align-items:center;font:500 12px/1 var(--f-ui);letter-spacing:.04em;text-transform:none;color:var(--ink3)}
+.dr-ht .mu-cn::before{content:"";width:4px;height:4px;margin:0 8px 0 9px;border-radius:50%;background:rgba(var(--acc-rgb),.6)}

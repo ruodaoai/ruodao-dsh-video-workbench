@@ -1,0 +1,249 @@
+@@@ RANGE
+/* ══════════════ 4. 布局（平面坐标 = 去掉顶栏后的视口坐标，全景时与屏幕一致） ══════════════ */
+@@@ TO
+/* ══════════════ 7. 水墨影片渲染器（监视器内容，全部程序化） ══════════════ */
+@@@ WITH
+/* ══════════════ 4. 布局（平面坐标 = 去掉顶栏后的视口坐标；镜头只推拉中央织机舞台，库房 / 长卷 / 任务中心固定） ══════════════ */
+const L = { ag: {}, rows: {}, heroMeasured: 0 };
+function computeLayout() {
+  const vw = Math.max(innerWidth || 0, 960), vh = Math.max(innerHeight || 0, 560);
+  const tiny = vw < 1366 || vh < 780, compact = !tiny && (vw < 1640 || vh < 960);
+  document.body.classList.toggle('tiny', tiny);
+  document.body.classList.toggle('compact', compact);
+  const topH = tiny ? 44 : 52, pad = tiny ? 10 : compact ? 12 : 16;
+  const pw = vw, ph = vh - topH;
+  const leftW = Math.round(clamp(vw * 0.146, 206, 288)), rightW = Math.round(clamp(vw * 0.165, 236, 318));
+  const tlH = Math.round(clamp(ph * 0.258, 176, 268));
+  const heroH = L.heroMeasured || (tiny ? 70 : compact ? 98 : 114);
+  Object.assign(L, { vw, vh, pw, ph, topH, pad, tiny, compact, leftW, rightW, tlH, heroH });
+  L.vault = { x: pad, y: heroH, w: leftW, h: Math.max(140, ph - tlH - pad * 2 - heroH) };
+  L.tl = { x: pad, y: ph - pad - tlH, w: pw - pad * 2, h: tlH };
+  L.stage = { x: pad * 2 + leftW, y: 0, w: pw - leftW - rightW - pad * 4, h: ph - tlH - pad * 2 };
+  L.stage.cx = L.stage.x + L.stage.w / 2; L.stage.cy = L.stage.y + L.stage.h / 2;
+  L.tasks = { x: vw - pad - rightW, y: topH + pad, w: rightW, h: ph - tlH - pad * 3 };
+  L.cmdH = tiny ? 34 : 40;
+  L.cmdY = Math.round(pad * 0.7);
+  L.beamY = L.cmdY + L.cmdH + (tiny ? 26 : 40);
+  L.beamX0 = L.stage.x + 6; L.beamX1 = L.stage.x + L.stage.w - 6;
+  const m = L.stage.w * 0.05, sp = (L.stage.w - m * 2) / AGENTS.length;
+  L.agSp = sp;
+  L.shY = L.beamY + (tiny ? 30 : 42);
+  L.lblY = L.shY + (tiny ? 13 : 16);
+  L.lblH = tiny ? 30 : 44;
+  AGENTS.forEach((a, i) => { L.ag[a.id] = { x: L.stage.x + m + sp * (i + 0.5), y: L.shY }; });
+  const top = L.lblY + L.lblH + (tiny ? 16 : 30), bot = L.stage.h - (tiny ? 34 : 44);
+  let mw = Math.min(L.stage.w * 0.42, 560), mh = (mw * 9) / 16;
+  if (mh > bot - top) { mh = bot - top; mw = (mh * 16) / 9; }
+  if (!(mh >= 54) || !(mw >= 96)) { mh = 54; mw = 96; }
+  const cy = top + Math.max(0, bot - top - mh) * 0.45 + mh / 2;
+  L.mon = { x: L.stage.cx - mw / 2, y: cy - mh / 2, w: mw, h: mh, cx: L.stage.cx, cy };
+  L.dk = mw / 520;
+  L.dialR = Math.hypot(mw / 2, mh / 2) + 10 * L.dk;
+  /* 时间轴 */
+  L.tlHeadH = tiny ? 28 : 34;
+  L.tlLabelW = tiny ? 62 : compact ? 82 : 96;
+  L.rod = tiny ? 7 : 9;
+  L.tlc = { x: L.tl.x + L.tlLabelW + L.rod * 2 + 4, y: L.tl.y + L.tlHeadH + 7, w: L.tl.w - L.tlLabelW - L.rod * 4 - 10, h: L.tl.h - L.tlHeadH - 14 };
+  const fr = { ruler: 0.12, shot: 0.27, sub: 0.105, voice: 0.17, sfx: 0.13, bgm: 0.205 };
+  const keys = Object.keys(fr), gap = tiny ? 2 : 3, sum = keys.reduce((a, k) => a + fr[k], 0), avail = L.tlc.h - gap * (keys.length - 1);
+  let y = L.tlc.y;
+  keys.forEach((k) => { const h = (avail * fr[k]) / sum; L.rows[k] = { y, h, c: y + h / 2 }; y += h + gap; });
+}
+
+/* ══════════════ 5. DOM 构建（库房 / 工位 / 长卷标签 / 任务中心） ══════════════ */
+const ART_SCALE = 2;
+function artCanvas(w, h, art, extraCls) {
+  const c = mk('canvas', extraCls || '');
+  c.width = Math.max(1, Math.round(w * ART_SCALE)); c.height = Math.max(1, Math.round(h * ART_SCALE));
+  c.style.width = w + 'px'; c.style.height = h + 'px';
+  c.dataset.art = art;
+  const ctx = c.getContext('2d');
+  ctx.scale(ART_SCALE, ART_SCALE);
+  drawArt(ctx, w, h, art, 0);
+  return c;
+}
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
+const SHELVES = [
+  { kind: 'audio', cn: '丝轴 · 音频', en: 'SPOOLS', f: 'audio' },
+  { kind: 'video', cn: '卷册 · 影像笔记', en: 'SCROLLS', f: 'video' },
+  { kind: 'image', cn: '画芯 · 图片', en: 'PAINTINGS', f: 'image' },
+  { kind: 'cloud', cn: '云端待确认', en: 'CLOUD STAGING', f: 'cloud' },
+];
+const shelfOf = (a) => (a.staged ? 'cloud' : a.kind === 'image' ? 'image' : /^(music|voice|sfx)$/.test(a.kind) ? 'audio' : 'video');
+const VAULT = { sig: '', filter: 'all', touched: -99 };
+function vaultSig() { return JSON.stringify([STATE && STATE.project ? STATE.project.dir : '', ASSETS.map((a) => [a.key, a.name, a.thumb, a.used.length, a.staged ? 1 : 0, a.meta]), Math.round(L.leftW)]); }
+function buildVault(force) {
+  const sig = vaultSig();
+  if (!force && sig === VAULT.sig) return;
+  VAULT.sig = sig;
+  const list = $('#vList'), keepTop = list.scrollTop;
+  list.innerHTML = '';
+  ASSETS.forEach((a) => (a.el = null));
+  const hasProj = !!(STATE && STATE.project);
+  if (!ASSETS.length) {
+    list.appendChild(mk('div', 'v-empty', hasProj ? '<b>库房空空如也</b><span>拖入图片、视频、音乐或笔记，或点击右上角「导入」</span>' : '<b>尚未打开工程</b><span>新建或打开一个工程后，素材将陈列于此</span>'));
+  }
+  const iw = Math.max(80, L.leftW - 28);
+  SHELVES.forEach((sh) => {
+    const items = ASSETS.filter((a) => shelfOf(a) === sh.kind);
+    if (!items.length) return;
+    const s = mk('div', 'shelf'); s.dataset.kind = sh.kind;
+    s.innerHTML = `<div class="shelf-h"><b>${sh.cn}</b><em>${sh.en}</em><s></s><em>${items.length}</em></div>`;
+    list.appendChild(s);
+    if (sh.kind === 'image') { const pics = mk('div', 'pics'); s.appendChild(pics); items.forEach((a) => addPic(a, pics, iw)); }
+    else if (sh.kind === 'cloud') items.forEach((a) => addStageCard(a, s));
+    else items.forEach((a) => addRow(a, s));
+  });
+  applyVaultFilter();
+  updateVaultCount();
+  list.scrollTop = keepTop;
+  syncUsedBadges(true);
+}
+function thumbEl(a, w, h) {
+  if (a.thumb) { const im = mk('img', 'th'); im.alt = ''; im.decoding = 'async'; im.loading = 'lazy'; im.draggable = false; im.style.width = w + 'px'; im.style.height = h + 'px'; im.src = a.thumb; im.onerror = () => { im.replaceWith(artCanvas(w, h, a.art)); }; return im; }
+  return artCanvas(w, h, a.art);
+}
+function itemShell(a, cls) {
+  const it = mk('div', cls);
+  it.dataset.asset = a.key; it.title = a.name + (a.meta ? ' · ' + a.meta : '');
+  it.setAttribute('role', 'button'); it.tabIndex = 0; it.setAttribute('aria-label', `素材：${a.name}`);
+  return it;
+}
+function delBtn(a) { const b = mk('button', 'it-del', '<svg><use href="#i-x"/></svg>'); b.dataset.del = a.key; b.title = '删除素材'; b.setAttribute('aria-label', `删除素材 ${a.name}`); return b; }
+function addRow(a, shelf) {
+  const it = itemShell(a, 'item');
+  it.appendChild(thumbEl(a, a.kind === 'video' || a.kind === 'host_video' ? 52 : 40, a.kind === 'video' || a.kind === 'host_video' ? 30 : 40));
+  it.appendChild(mk('div', 'it-meta', `<b>${esc(a.name)}</b><em><span>${esc(a.meta)}</span><i class="used-b" hidden></i></em>`));
+  it.appendChild(delBtn(a));
+  shelf.appendChild(it); a.el = it;
+  return it;
+}
+function addPic(a, pics, iw) {
+  const it = itemShell(a, 'item pic');
+  const cw = Math.max(40, Math.floor((iw - 8) / 2) - 8);
+  const mount = mk('div', 'mount');
+  mount.appendChild(thumbEl(a, cw, Math.round((cw * 9) / 16)));
+  mount.appendChild(mk('i', 'used-b', ''));
+  it.appendChild(mount);
+  it.appendChild(mk('div', 'it-meta', `<b>${esc(a.name)}</b>`));
+  it.appendChild(delBtn(a));
+  pics.appendChild(it); a.el = it;
+  return it;
+}
+function addStageCard(a, shelf) {
+  const card = mk('div', 'stage-card');
+  card.dataset.asset = a.key; card.title = a.name + (a.prompt ? '\n提示词：' + a.prompt : '');
+  card.appendChild(thumbEl(a, 58, 33));
+  const isAud = a.kind === 'music';
+  card.appendChild(mk('div', 'sc-body', `<div class="sc-top"><b>${esc(a.name)}</b><span class="tag">待确认</span></div><em>${esc(a.meta)}</em><div class="sc-btns">${a.url ? `<button class="btn xs" data-prev aria-label="预览 ${esc(a.name)}">${isAud ? '试听' : '预览'}</button>` : ''}<button class="btn xs gold" data-ok aria-label="确认入库 ${esc(a.name)}">确认入库</button><button class="btn xs" data-discard aria-label="丢弃 ${esc(a.name)}">丢弃</button></div>`));
+  card.appendChild(mk('span', 'stamp', '入库'));
+  shelf.appendChild(card); a.el = card;
+}
+function applyVaultFilter() {
+  const f = VAULT.filter;
+  $$('#vTabs button').forEach((b) => b.classList.toggle('on', b.dataset.f === f));
+  $$('#vList .shelf').forEach((s) => s.classList.toggle('hide', f !== 'all' && s.dataset.kind !== f));
+}
+function updateVaultCount() {
+  const n = (k) => ASSETS.filter((a) => shelfOf(a) === k).length;
+  const set = (f, v) => { const e = $(`#vTabs button[data-f="${f}"] em`); if (e) e.textContent = v ? String(v) : ''; };
+  set('all', ASSETS.length); set('image', n('image')); set('video', n('video')); set('audio', n('audio')); set('cloud', n('cloud'));
+}
+function buildStations() {
+  const box = $('#stations');
+  box.innerHTML = '';
+  AGENTS.forEach((a) => {
+    const e = mk('div', 'station');
+    e.dataset.agent = a.id; e.dataset.st = 'idle';
+    e.setAttribute('role', 'button'); e.tabIndex = 0; e.setAttribute('aria-label', `${a.name}工位：点击聚焦镜头`);
+    e.style.setProperty('--ag', a.glaze);
+    e.innerHTML = `<div class="st-lbl"><div class="st-nm"><b>${a.name}</b><i>${a.en}</i></div><div class="st-st"><i></i><em>待命</em><span>· 待命</span></div><div class="st-bar"><i></i></div></div>`;
+    box.appendChild(e);
+    a.el = e; a.elSt = e.querySelector('.st-st em'); a.elTask = e.querySelector('.st-st span'); a.elBar = e.querySelector('.st-bar i');
+  });
+}
+const ROWDEF = [
+  { k: 'ruler', cn: '节拍', en: 'BEAT', c: 'var(--gold)' }, { k: 'shot', cn: '镜头', en: 'SHOTS', c: '#86B0A2' },
+  { k: 'sub', cn: '字幕', en: 'SUBS', c: 'var(--t2)' }, { k: 'voice', cn: '配音', en: 'VOICE', c: '#D27D8A' },
+  { k: 'sfx', cn: '音效', en: 'SFX', c: '#E0583A' }, { k: 'bgm', cn: '配乐', en: 'BGM', c: 'var(--gold)' },
+];
+function buildTlLabels() {
+  const box = $('#tlLabels');
+  box.innerHTML = '';
+  ROWDEF.forEach((r) => { const e = mk('div', 'tl-lab', `<b>${r.cn}</b><em>${r.en}</em><s style="--tc:${r.c}"></s>`); e.dataset.row = r.k; box.appendChild(e); });
+}
+const PHASES = [
+  { key: 'director', name: '策划导演', short: '策划', ch: '策' },
+  { key: 'editor', name: '素材剪辑', short: '剪辑', ch: '剪' },
+  { key: 'audio', name: '配音混音', short: '混音', ch: '音' },
+  { key: 'motion', name: '动效编程', short: '动效', ch: '码' },
+  { key: 'qa', name: '质检渲染', short: '质检', ch: '检' },
+];
+const PHASE_IX = { director: 0, editor: 1, audio: 2, motion: 3, qa: 4 };
+function buildTasksStatic() {
+  $('#tcPhases').innerHTML = PHASES.map((p, i) => `<div data-ph="${i}" title="${p.name}"><i></i><span>${p.ch} ${p.short}</span></div>`).join('');
+  const g = $('#ringPh'), C = 2 * Math.PI * 34;
+  g.innerHTML = PHASES.map((p, i) => { const seg = C / 5; return `<circle class="ph" cx="40" cy="40" r="34" stroke="${AG[p.key].glaze}" stroke-opacity=".28" stroke-dasharray="${seg - 2.2} ${C - seg + 2.2}" stroke-dashoffset="${-i * seg}"/>`; }).join('');
+}
+function applyLayout() {
+  const R = document.documentElement.style;
+  R.setProperty('--top-h', L.topH + 'px');
+  const hero = $('#hero'); hero.style.left = L.pad + 'px'; hero.style.width = L.leftW + 'px';
+  const hb = Math.ceil(hero.getBoundingClientRect().bottom - L.topH + (L.tiny ? 8 : 10));
+  if (hb > 30 && Math.abs(hb - L.heroH) > 1) { L.heroMeasured = hb; L.heroH = hb; L.vault.y = hb; L.vault.h = Math.max(140, L.ph - L.tlH - L.pad * 2 - hb); }
+  setRect($('#vault'), L.vault);
+  setRect($('#scroll'), L.tl);
+  const sw = $('#stageWin'); sw.style.left = L.stage.x + 'px'; sw.style.top = L.topH + L.stage.y + 'px'; sw.style.width = L.stage.w + 'px'; sw.style.height = L.stage.h + 'px';
+  const dof = $('#dof'); dof.style.left = L.stage.x + 'px'; dof.style.top = L.topH + L.stage.y + 'px'; dof.style.width = L.stage.w + 'px'; dof.style.height = L.stage.h + 'px';
+  PLANE.style.left = -L.stage.x + 'px'; PLANE.style.top = -L.stage.y + 'px'; PLANE.style.width = L.pw + 'px'; PLANE.style.height = L.ph + 'px';
+  $('#tlHead').style.height = L.tlHeadH + 'px';
+  const lab = $('#tlLabels');
+  lab.style.top = L.tlHeadH + 'px'; lab.style.width = L.tlLabelW + 'px';
+  $$('.tl-lab', lab).forEach((e) => { const r = L.rows[e.dataset.row]; e.style.top = r.y - L.tl.y - L.tlHeadH + 'px'; e.style.height = r.h + 'px'; });
+  setRect($('#tlHit'), { x: L.tlc.x - L.tl.x, y: L.rows.ruler.y - L.tl.y, w: L.tlc.w, h: L.tlc.h + L.tlc.y - L.rows.ruler.y });
+  AGENTS.forEach((a) => {
+    const p = L.ag[a.id];
+    setRect(a.el, { x: p.x - L.agSp / 2 + 3, y: L.beamY - 24, w: L.agSp - 6, h: L.lblY + L.lblH - L.beamY + 24 });
+  });
+  const mc = $('#monCtl');
+  mc.style.left = L.mon.x + 'px'; mc.style.top = L.mon.y + L.mon.h + (L.tiny ? 6 : 10) + 'px'; mc.style.width = L.mon.w + 'px';
+  const cmd = $('#cmd'); cmd.style.left = L.stage.cx + 'px'; cmd.style.top = L.topH + L.cmdY + 'px'; cmd.style.maxWidth = Math.max(200, L.stage.w - 16) + 'px';
+  const t = $('#tasks'); t.style.left = L.tasks.x + 'px'; t.style.top = L.tasks.y + 'px'; t.style.width = L.tasks.w + 'px'; t.style.height = L.tasks.h + 'px';
+  const mm = $('#minimap'), mmH = L.tiny ? 98 : 126; mm.style.left = L.stage.x + 8 + 'px'; mm.style.top = L.topH + L.stage.y + L.stage.h - mmH - 6 + 'px';
+  const ts = $('#toasts'); ts.style.left = L.stage.cx + 'px'; ts.style.bottom = Math.round(L.vh - (L.topH + L.tl.y) + 10) + 'px'; ts.style.maxWidth = Math.max(240, L.stage.w - 24) + 'px';
+  const ob = $('#onboard'); ob.style.left = L.stage.cx + 'px'; ob.style.top = L.topH + L.mon.cy + 'px'; ob.style.width = Math.round(Math.min(L.stage.w - 32, 560)) + 'px'; ob.style.maxHeight = Math.round(L.stage.h - L.lblY - L.lblH - 24) + 'px';
+}
+
+/* ══════════════ 6. 音频包络（BGM / 旁白；由节拍、突降与字幕长度合成，用于波形与监视器） ══════════════ */
+const ENV_SR = 40;
+let BGM_ENV = new Float32Array(8), VOICE_ENV = new Float32Array(8), VOICE_SEGS = [];
+function buildEnvelopes() {
+  const n = Math.ceil(DUR * ENV_SR) + 4;
+  BGM_ENV = new Float32Array(n); VOICE_ENV = new Float32Array(n); VOICE_SEGS = [];
+  const D = DROPS.length ? DROPS : [];
+  const sec = (t) => {
+    let lvl = 0.42 + 0.06 * Math.sin(t * 0.31);
+    if (D.length) { const first = D[0]; if (t < first) lvl = 0.24 + 0.24 * (t / Math.max(0.1, first)); for (const d of D) if (t >= d && t < d + 18) lvl = Math.max(lvl, 0.78 - (t - d) * 0.012); }
+    const tail = DUR - t; if (tail < 8) lvl *= Math.max(0.25, tail / 8);
+    return lvl;
+  };
+  for (let i = 0; i < n; i++) { const t = i / ENV_SR; BGM_ENV[i] = sec(t) * (0.6 + 0.16 * noise1(t * 6.3, 3) + 0.1 * noise1(t * 21, 5)); }
+  BEATS.forEach(([tb, st]) => { const i0 = Math.floor(tb * ENV_SR); for (let j = 0; j < 22; j++) { const i = i0 + j; if (i < 0 || i >= n) continue; const d = i / ENV_SR - tb; if (d < 0) continue; BGM_ENV[i] += (st ? 0.42 : 0.24) * Math.exp(-d * 9); } });
+  D.forEach((td) => { for (let i = Math.floor((td - 1.6) * ENV_SR); i < (td + 1.2) * ENV_SR; i++) { if (i < 0 || i >= n) continue; const d = i / ENV_SR - td; BGM_ENV[i] += d < 0 ? 0.25 * Math.pow(1 + d / 1.6, 3) : 0.45 * Math.exp(-d * 3.5); } });
+  for (let i = 0; i < n; i++) BGM_ENV[i] = clamp(BGM_ENV[i], 0.03, 1);
+  const mv = /subtitle-mv/.test(PROJECT.narration || '');
+  SCENES.forEach((s) => {
+    if (s.dur < 0.6 || mv || !(s.hasVoice || s.sub)) return;
+    const len = Math.max(1, Math.min(40, (s.sub || '').length || 6)), t0 = s.t0 + 0.1, t1 = Math.max(t0 + 0.2, Math.min(s.t1 - 0.08, t0 + 0.2 + len * 0.2));
+    VOICE_SEGS.push({ sc: s.i, t0, t1, n: len, real: !!s.hasVoice });
+    for (let k = 0; k < len; k++) {
+      const tc = t0 + ((k + 0.5) / len) * (t1 - t0), a = 0.55 + 0.45 * hash(s.n * 31 + k);
+      for (let i = Math.floor((tc - 0.12) * ENV_SR); i <= (tc + 0.12) * ENV_SR; i++) { if (i < 0 || i >= n) continue; const d = (i / ENV_SR - tc) / 0.085; VOICE_ENV[i] = Math.max(VOICE_ENV[i], a * Math.exp(-d * d)); }
+    }
+  });
+}
+const envAt = (arr, t) => { const f = t * ENV_SR, i = Math.floor(f); if (i < 0 || i >= arr.length - 1) return 0; return lerp(arr[i], arr[i + 1], f - i); };
+const envMax = (arr, ta, tb) => { let m = 0; const i0 = Math.max(0, Math.floor(ta * ENV_SR)), i1 = Math.min(arr.length - 1, Math.ceil(tb * ENV_SR)); for (let i = i0; i <= i1; i++) if (arr[i] > m) m = arr[i]; return m; };
+
+/* ══════════════ 7. 水墨影片渲染器（监视器内容，全部程序化） ══════════════ */
+@@@ END

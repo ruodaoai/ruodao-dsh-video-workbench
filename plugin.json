@@ -1,0 +1,45 @@
+{
+  "name": "dsh-video-workbench",
+  "displayName": "AI 视频全链路工作台",
+  "version": "0.6.2",
+  "description": "双引擎（Remotion + Three.js / HTML5 CDP）AI 视频全链路工作台：AI Agent 作战大屏（三套皮肤）、内置人物库与人物画风、AI 看图画面自检、Vibecoding 8 工具、影核广场 MOTION.md 模板、参考视频拆解复刻、BPM 节拍卡点、48kHz 音效母带、多引擎配音（Windows 原生 / Edge-TTS / 本地克隆）、BYOK 云端生图生视频（自动关联若道模型与本地生图号池）、41 个 MCP 工具供 Agent 直接调用。基于 Merziller/dsh-video-workbench (MIT)。",
+  "author": {
+    "name": "Merziller",
+    "email": "k26789228@gmail.com",
+    "url": "https://github.com/Merziller/dsh-video-workbench"
+  },
+  "category": "Media",
+  "tags": [
+    "AI视频",
+    "视频创作",
+    "Remotion",
+    "Three.js",
+    "节拍卡点",
+    "配音",
+    "生图",
+    "MCP",
+    "分镜",
+    "开源"
+  ],
+  "permissions": [
+    "storage",
+    "process",
+    "network",
+    "clipboard"
+  ],
+  "screenshots": [],
+  "capabilities": [
+    "storage",
+    "network",
+    "clipboard",
+    "local-service",
+    "mcp-tools",
+    "video-render",
+    "tts",
+    "beat-sync",
+    "cloud-media",
+    "reference-remake",
+    "motion-templates"
+  ],
+  "ui": "./ui.json"
+}

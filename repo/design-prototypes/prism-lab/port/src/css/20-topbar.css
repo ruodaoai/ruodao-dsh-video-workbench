@@ -1,0 +1,48 @@
+
+/* ---------- top bar ---------- */
+#topbar{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--rule2);min-width:0;position:relative;overflow:hidden}
+#topbar>*{flex-shrink:0}
+#topbar>.proj,#topbar>.busy-pill,#topbar>.spacer{flex-shrink:1}
+#topbar::after{content:"";position:absolute;left:0;bottom:0;width:180px;height:2px;background:var(--ink)}
+.brand{display:flex;align-items:center;gap:9px;flex:none;min-width:0}
+.brand-mark{width:34px;height:34px;flex:none}
+.brand-tx{display:flex;flex-direction:column;gap:3px;min-width:0}
+.brand-en{font-weight:800;font-size:21px;letter-spacing:-.025em;line-height:1;white-space:nowrap}
+.brand-en em{font-style:normal;color:var(--ultra)}
+.brand-cn{font-family:var(--cn);font-size:12px;letter-spacing:.28em;color:var(--ink2);white-space:nowrap;line-height:1.1}
+.back-btn{height:30px;padding:0 10px 0 7px;border:1px solid var(--rule2);border-radius:var(--rp);background:var(--glass2);display:flex;align-items:center;gap:4px;font-size:12px;white-space:nowrap;flex:none;transition:border-color var(--t2)}
+.back-btn:hover{border-color:var(--ink)}
+.proj{display:flex;align-items:center;gap:8px;height:30px;padding:0 9px;border:1px solid var(--rule);border-radius:var(--r2);background:var(--glass);min-width:120px;flex:0 1 300px;transition:border-color var(--t2)}
+.proj:hover,.proj.on{border-color:var(--ink)}
+.proj .pk{font-family:var(--mono);font-size:12px;color:var(--ink3);flex:none}
+.proj b{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1 1 auto;text-align:left}
+.proj.empty b{color:var(--ink3);font-weight:500}
+.tabs{display:flex;align-self:stretch;flex:none}
+.tab{position:relative;padding:0 9px;display:flex;align-items:center;gap:5px;font-size:13px;font-weight:500;color:var(--ink3);white-space:nowrap;transition:color var(--t2)}
+.tab i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--ink4)}
+.tab .cnt{font-family:var(--mono);font-size:12px;color:var(--ink3);margin-left:1px}
+.tab .cnt:empty{display:none}
+.tab:hover,.tab.on{color:var(--ink)}
+.tab.on::after{content:"";position:absolute;left:9px;right:9px;bottom:0;height:3px;background:var(--ink)}
+.busy-pill{display:flex;align-items:center;gap:7px;height:28px;padding:0 11px 0 9px;border-radius:var(--rp);background:var(--ink);color:var(--bg);font-size:12px;min-width:0;flex:0 1 auto;max-width:300px}
+.busy-pill span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.spin{width:12px;height:12px;border-radius:50%;border:2px solid rgba(127,127,127,.45);border-top-color:var(--lime);flex:none;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.status{display:flex;align-items:center;gap:4px;flex:none}
+.sl{display:flex;align-items:center;gap:6px;height:28px;padding:0 7px;border-radius:var(--r1);font-size:12px;white-space:nowrap;flex:none;transition:background var(--t1)}
+.sl:hover{background:rgba(127,127,127,.12)}
+.sl .lbl{color:var(--ink3);flex:none}
+.sl b{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.01em;max-width:128px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.seg.cam button{padding:0 8px}
+.skin-btn{height:32px;padding:0 6px 0 8px;border:1px solid var(--rule);border-radius:var(--r2);background:var(--glass);display:flex;align-items:center;gap:4px;flex:none;transition:border-color var(--t2)}
+.skin-btn:hover,.skin-btn.on{border-color:var(--ink)}
+.skin-btn b{font-weight:800;font-size:13px;width:12px;text-align:center}
+.skin-btn svg.chev{width:12px;height:12px}
+/* progressive collapse (fitTopbar adds c1…c6 until nothing overflows) */
+#topbar.c1 .tab i,#topbar.c1 .brand-cn{display:none}
+#topbar.c2 .sl b{display:none}#topbar.c2 .busy-pill{max-width:200px}
+#topbar.c3 .seg.cam .t,#topbar.c3 .back-btn .lbl,#topbar.c3 .sl .lbl{display:none}#topbar.c3 .sl{padding:0 5px}
+#topbar.c4 .brand-tx{display:none}#topbar.c4 .proj{min-width:100px}#topbar.c4 .busy-pill{max-width:150px}
+#topbar.c5 .tab{padding:0 6px}#topbar.c5 .tab.on::after{left:6px;right:6px}#topbar.c5 .tab .cnt{display:none}#topbar.c5{gap:7px}
+#topbar.c6 .tab{font-size:12px;padding:0 5px}#topbar.c6 .proj{min-width:84px}#topbar.c6 .busy-pill span{display:none}#topbar.c6 .status{gap:0}
+#topbar .busy-pill{min-width:160px}#topbar .proj{min-width:150px}#topbar.c4 .proj{min-width:120px}#topbar.c6 .busy-pill{min-width:0}#topbar.c6 .proj{min-width:96px}

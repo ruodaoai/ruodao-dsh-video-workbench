@@ -1,0 +1,98 @@
+{
+  "id": "science-visual-explainer",
+  "order": 4,
+  "name": "深度科普拆解 · 量子叠加与硬核原理可视化",
+  "category": "science-explainer",
+  "genre": "science-explainer",
+  "genreLabel": "深度科普动态原理拆解",
+  "style": "tech",
+  "engine": "html",
+  "narrationMode": "tts-beat-sync",
+  "pacingMode": "balanced",
+  "subtitleStyle": "cinematic",
+  "aspectRatio": "16:9",
+  "fps": 30,
+  "shotCount": 8,
+  "durationSec": 37.1,
+  "avgShotSec": 4.64,
+  "bpm": 108,
+  "description": "10 镜硬核科普拆解模板：3D 轨道粒子开场 + 架构分层流程图 + 雷达声呐/计数器音效与精准原理标注，一键套用物理、生物、AI 算法或工程原理解说。",
+  "tags": [
+    "硬核科普",
+    "原理动画",
+    "3D 轨道粒子",
+    "雷达计数音效",
+    "108 BPM"
+  ],
+  "colorPalette": {
+    "background": "#060D1F",
+    "primary": "#38BDF8",
+    "accent": "#A855F7",
+    "highlight": "#F8FAFC"
+  },
+  "vfxSignature": [
+    "3D 量子轨道球",
+    "矢量原理连线动画",
+    "激光扫描雷达脉冲",
+    "关键词霓虹高亮"
+  ],
+  "transitionSignature": [
+    "light-wipe",
+    "iris-circle",
+    "zoom-punch",
+    "slash-wipe",
+    "glitch-cut"
+  ],
+  "replicationPrompt": "采用深空蓝紫科学实验室美学与 3D 轨道球/矢量拆解图结合；按【悬念提问→核心原理可视化→结构分层拆解→量化对比→现实应用→金句总结】6 步推进，配雷达声呐与数字跳动音效，镜头保持 0.24 柔和节拍律动，保证原理文字清晰可读。",
+  "audioProfile": {
+    "genreKey": "science-explainer",
+    "profileName": "深度科普动态拆解声场",
+    "beatCutIntensity": "medium",
+    "blitzAllowed": false,
+    "minBeatMultiple": 1,
+    "cameraBeatIntensity": 0.24,
+    "targetLufs": -14.5,
+    "bgmDuckRatio": 3,
+    "sfxBoostVoice": 1.02,
+    "sfxBoostMv": 1.24,
+    "bgmVolVoice": 0.36,
+    "bgmVolMv": 0.74,
+    "sfxPalette": {
+      "opener": [
+        "shimmer_swell",
+        "radar"
+      ],
+      "drop": [
+        "sub_drop",
+        "sparkle"
+      ],
+      "action": [
+        "whoosh",
+        "radar"
+      ],
+      "data": [
+        "counter",
+        "tick"
+      ],
+      "neutral": [
+        "card",
+        "pop_soft"
+      ],
+      "internal": [
+        "radar",
+        "counter",
+        "sparkle"
+      ],
+      "preCut": [
+        "riser",
+        "swoosh"
+      ]
+    }
+  },
+  "author": "Merziller",
+  "plaza": "影核广场 · CinePulse Hub",
+  "coverFile": "cover.png",
+  "updatedAt": "2026-11-19T19:13:29.204Z",
+  "previewFile": "preview.mp4",
+  "previewDurationSec": 14.43
+}

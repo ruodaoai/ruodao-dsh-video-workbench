@@ -1,0 +1,74 @@
+@@@ INSERT_BEFORE
+const $ = (s, r = document) => r.querySelector(s);
+@@@ TEXT
+/* 画布防护：负半径 / 非有限数一律夹到合法范围；坏图、未就绪视频直接跳过 —— 单个坏帧绝不抛异常 */
+(() => {
+  const C2 = CanvasRenderingContext2D.prototype, fin = (v) => (Number.isFinite(v) ? v : 0), pos = (v) => (v > 0 && Number.isFinite(v) ? v : 0);
+  const rg = C2.createRadialGradient, lg = C2.createLinearGradient, arc = C2.arc, ell = C2.ellipse, arcTo = C2.arcTo, dI = C2.drawImage;
+  C2.createRadialGradient = function (x0, y0, r0, x1, y1, r1) { return rg.call(this, fin(x0), fin(y0), pos(r0), fin(x1), fin(y1), pos(r1)); };
+  C2.createLinearGradient = function (x0, y0, x1, y1) { return lg.call(this, fin(x0), fin(y0), fin(x1), fin(y1)); };
+  C2.arc = function (x, y, r, a0, a1, ccw) { return arc.call(this, fin(x), fin(y), pos(r), fin(a0), fin(a1), ccw); };
+  C2.ellipse = function (x, y, rx, ry, rot, a0, a1, ccw) { return ell.call(this, fin(x), fin(y), pos(rx), pos(ry), fin(rot), fin(a0), fin(a1), ccw); };
+  C2.arcTo = function (x1, y1, x2, y2, r) { return arcTo.call(this, fin(x1), fin(y1), fin(x2), fin(y2), pos(r)); };
+  const okSrc = (s) => { if (!s) return false; const t = s.tagName; if (t === 'VIDEO') return s.readyState >= 2 && s.videoWidth > 0; if (t === 'IMG') return s.complete && s.naturalWidth > 0; return s.width > 0 && s.height > 0; };
+  C2.drawImage = function (img) { if (!okSrc(img)) return; try { return dI.apply(this, arguments); } catch (e) { /* 坏图跳过 */ } };
+  const acs = CanvasGradient.prototype.addColorStop;
+  CanvasGradient.prototype.addColorStop = function (o, col) { try { acs.call(this, Math.min(1, Math.max(0, fin(o))), col); } catch (e) { /* 非法色值跳过 */ } };
+})();
+@@@ END
+@@@ REPLACE
+  const vw = innerWidth, vh = innerHeight;
+@@@ WITH
+  /* iframe 初始化时可能是 0×0 / 300×150：布局按不小于 960×560 计算，杜绝负尺寸 */
+  const vw = Math.max(innerWidth || 0, 960), vh = Math.max(innerHeight || 0, 560);
+@@@ END
+@@@ REPLACE
+  const cy = top + (bot - top - mh) * 0.45 + mh / 2;
+@@@ WITH
+  if (!(mh >= 54) || !(mw >= 96)) { mh = 54; mw = 96; }
+  const cy = top + Math.max(0, bot - top - mh) * 0.45 + mh / 2;
+@@@ END
+@@@ RANGE
+function frame(now) {
+@@@ TO
+  requestAnimationFrame(frame);
+}
+@@@ WITH
+let RAF = 0, FRAME_ERR = 0, LOWSPEC = false;
+function frame(now) {
+  RAF = 0;
+  if (document.hidden) return; /* 页面隐藏：停掉渲染循环，visibilitychange 时恢复 */
+  RAF = requestAnimationFrame(frame);
+  const cap = window.__cap != null ? window.__cap : LOWSPEC ? (FPS_CAP ? Math.min(FPS_CAP, 30) : 30) : FPS_CAP;
+  if (cap && now - LAST < 1000 / cap - 2) return;
+  try { frameBody(now, cap); } catch (e) { if (FRAME_ERR++ < 1) console.warn('[墨韵织机] 单帧渲染异常，已跳过：', e && e.message); }
+}
+function frameBody(now, cap) {
+  const rdt = Math.min(cap ? 0.15 : 0.05, Math.max(0, (now - LAST) / 1000)); LAST = now;
+  if (rdt > 0) FPS = lerp(FPS, 1 / rdt, 0.06);
+  window.__fps = Math.round(FPS);
+  const dt = SIM.frozen ? 0 : rdt;
+  SIM.t += dt; SIM.real += rdt;
+  Pipe.update(dt);
+  if (dt > 0) flightsUpdate();
+  filmUpdate(dt, rdt);
+  if (dt > 0) {
+    EDGES.forEach((e) => (e.heat = Math.max(0, e.heat - dt * 0.45)));
+    AGENTS.forEach((a) => (a.flash = Math.max(0, a.flash - dt * 1.4)));
+    BEAM.sweep = Math.max(0, BEAM.sweep - dt * 0.75);
+    TLS.pulse = Math.max(0, TLS.pulse - dt * 2.6);
+    DIAL.rot += dt * (Pipe.state === 'running' ? (Pipe.phase === 4 ? 0.42 : 0.07) : 0.012);
+  }
+  for (let n = Math.ceil(dt / 0.034), i = 0; i < n; i++) { shUpdate(dt / n, SIM.t - dt + (dt * (i + 1)) / n); partsStep(dt / n); }
+  if (FILM.user && !FILM.userAt) FILM.userAt = SIM.real; else if (!FILM.user) FILM.userAt = 0;
+  if (FILM.user && Pipe.state === 'running' && !FILM.playing && SIM.real - FILM.userAt > 8) FILM.user = false;
+  tlAim(); tlStep(rdt);
+  camAim(); for (let n = Math.ceil(rdt / 0.034), i = 0; i < n; i++) camStep(rdt / n);
+  const H = window.__halt || 0;
+  if (!(H & 1)) drawWorld(SIM.t);
+  if (!(H & 2)) drawFx(SIM.t);
+  drawMinimap(); uiTick();
+  if (MODAL.tick) MODAL.tick(dt, SIM.t);
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden && !RAF) { LAST = performance.now(); RAF = requestAnimationFrame(frame); } });
+@@@ END

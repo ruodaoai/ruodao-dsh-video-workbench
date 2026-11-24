@@ -1,0 +1,14 @@
+@@@ REPLACE
+<title>墨韵织机 · INK LOOM — DSH Video Workbench · AI Agent 作战大屏（方案 B 原型）</title>
+@@@ WITH
+<title>墨韵织机 · INK LOOM — DSH 视频工坊 · AI Agent 作战大屏（皮肤 B）</title>
+@@@ END
+@@@ REPLACE
+    const quiet = /^(openPanel|newProject|openScene|backToChat|setSkin)$/.test(action);
+    const timer = setTimeout(() => { if (!REQ.has(id)) return; REQ.delete(id); if (!quiet) toast(`${ACT_CN[action] || action}：宿主未响应`, '断', null, null, true); resolve({ ok: false, error: 'timeout' }); }, action === 'importFiles' ? 300000 : 20000);
+@@@ WITH
+    const quiet = /^(openPanel|newProject|openScene|backToChat|setSkin)$/.test(action);
+    /* 宿主可能在等大模型 / 上传 / 拷贝：长动作给足 10 分钟，避免误报"未响应" */
+    const long = /^(run|retry|resume|polishTopic|importFiles|confirmStaging|discardStaging|removeAsset|selectProject|setLowSpec)$/.test(action);
+    const timer = setTimeout(() => { if (!REQ.has(id)) return; REQ.delete(id); if (!quiet) toast(`${ACT_CN[action] || action}：宿主未响应`, '断', null, null, true); resolve({ ok: false, error: 'timeout' }); }, long ? 600000 : 45000);
+@@@ END

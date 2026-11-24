@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>AI 视频全链路工作台</title>
+  <link rel="icon" href="data:," />
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --card: #121826;
+      --line: #232c40;
+      --text: #e6ebf5;
+      --dim: #8b94a8;
+      --accent: #6c8cff;
+      --ok: #34d399;
+      --warn: #fbbf24;
+      --err: #f87171;
+      /* 模型选择器组件读取的变量，与深色主题对齐 */
+      --panel: #121826;
+      --surface: #121826;
+      --panel-2: #1a2234;
+      --surface-2: #1a2234;
+      --muted: #8b94a8;
+      --faint: #6b7488;
+      --ink: #e6ebf5;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* 作者样式里的 display 会覆盖 UA 的 [hidden]，导致 fallback 遮罩永久不消失 */
+    [hidden] { display: none !important; }
+    body {
+      font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      height: 100vh; display: flex; flex-direction: column; overflow: hidden;
+    }
+    header.topbar {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap; row-gap: 6px;
+      padding: 10px 16px; border-bottom: 1px solid var(--line);
+      background: var(--card); flex-shrink: 0;
+    }
+    /* 放不下时整块换行，避免按钮文字被压成竖排 */
+    header.topbar .brand, header.topbar .pill, header.topbar .adapter, header.topbar button.btn,
+    #model-picker-wrap { flex: none; white-space: nowrap; }
+    .head-actions { display: flex; align-items: center; gap: 8px; flex: none; margin-left: auto; }
+    .brand { display: flex; align-items: baseline; gap: 8px; }
+    .brand h1 { font-size: 15px; font-weight: 600; }
+    .brand .ver { font-size: 11px; color: var(--dim); }
+    .spacer { flex: 1; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; padding: 3px 10px; border-radius: 999px;
+      border: 1px solid var(--line); color: var(--dim); background: transparent;
+    }
+    .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--dim); }
+    .pill.ok { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 40%, transparent); }
+    .pill.ok .dot { background: var(--ok); }
+    .pill.err { color: var(--err); border-color: color-mix(in srgb, var(--err) 40%, transparent); }
+    .pill.err .dot { background: var(--err); }
+    .pill.warn { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 40%, transparent); }
+    .pill.warn .dot { background: var(--warn); }
+    button.btn {
+      font-size: 12px; padding: 5px 12px; border-radius: 8px; cursor: pointer;
+      border: 1px solid var(--line); background: transparent; color: var(--text);
+    }
+    button.btn:hover { border-color: var(--accent); color: var(--accent); }
+    button.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    button.btn.primary:hover { filter: brightness(1.1); color: #fff; }
+    select.btn { appearance: auto; }
+    .adapters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .adapter { font-size: 11px; color: var(--dim); display: inline-flex; align-items: center; gap: 6px; }
+    .adapter b { color: var(--text); font-weight: 500; }
+    .mp-slot { display: inline-flex; min-width: 0; max-width: 100%; }
+    .mp-slot .rd-mp-value { max-width: 220px; }
+    main.stage { flex: 1; position: relative; background: #000; }
+    main.stage iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+      display: none;
+    }
+    main.stage iframe.visible { display: block; }
+    .fallback {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px; padding: 24px; text-align: center;
+    }
+    .fallback h2 { font-size: 16px; font-weight: 600; }
+    .fallback p { font-size: 13px; color: var(--dim); max-width: 560px; line-height: 1.7; }
+    .fallback .err-detail {
+      font-size: 12px; color: var(--err); background: color-mix(in srgb, var(--err) 8%, transparent);
+      border: 1px solid color-mix(in srgb, var(--err) 30%, transparent);
+      padding: 10px 14px; border-radius: 10px; max-width: 640px; word-break: break-all;
+    }
+    .boot-log {
+      font-size: 11px; color: var(--dim); font-family: Consolas, monospace;
+      text-align: left; max-width: 640px; max-height: 180px; overflow: auto;
+      background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>🎬 AI 视频全链路工作台</h1>
+      <span class="ver">v0.6.2 · 双引擎</span>
+    </div>
+    <span class="pill" id="conn-pill"><i class="dot"></i><span id="conn-text">连接中</span></span>
+    <span class="pill" id="llm-pill" hidden><i class="dot"></i><span id="llm-text">模型</span></span>
+    <span class="pill" id="pool-pill" hidden><i class="dot"></i><span id="pool-text">号池</span></span>
+    <div class="spacer"></div>
+    <div class="adapters" id="adapters" hidden>
+      <span class="adapter">若道模型: <b id="adapter-model">—</b></span>
+      <span class="adapter">本地号池: <b id="adapter-pool">—</b></span>
+    </div>
+    <div class="head-actions">
+      <div class="adapter" id="model-picker-wrap" hidden>
+        <!-- 与任务栏同款的模型选择器；原生 select 只在旧客户端（未注入组件）时显示 -->
+        <div id="model-slot" class="mp-slot"></div>
+        <select id="model-select" class="btn" style="max-width: 260px;" hidden></select>
+      </div>
+      <button class="btn" id="btn-external" hidden>独立窗口打开</button>
+      <button class="btn" id="btn-retry" hidden>重试</button>
+      <button class="btn primary" id="btn-refresh" hidden>重新加载</button>
+    </div>
+  </header>
+  <main class="stage">
+    <iframe id="studio-frame" title="DSH Video Workbench Studio" sandbox="allow-scripts allow-forms allow-modals allow-same-origin allow-downloads allow-popups"></iframe>
+    <div class="fallback" id="fallback">
+      <h2 id="fallback-title">正在启动本地视频工作台…</h2>
+      <p id="fallback-desc">首次启动需要定位上游引擎、检查依赖并拉起本地服务（127.0.0.1:4399），通常 5~30 秒。</p>
+      <div class="boot-log" id="boot-log" hidden></div>
+      <div class="err-detail" id="err-detail" hidden></div>
+    </div>
+  </main>
+  <!-- 与任务栏同款的模型选择器：宿主注入的 /__ruodao/model-picker.js 优先，这里是同源副本兜底 -->
+  <script src="./model-picker.js"></script>
+  <script type="module">
+    const $ = (id) => document.getElementById(id)
+    const host = window.ruodao && window.ruodao.service ? window.ruodao : null
+    const frame = $('studio-frame')
+    const connPill = $('conn-pill'), connText = $('conn-text')
+    const llmPill = $('llm-pill'), llmText = $('llm-text')
+    const poolPill = $('pool-pill'), poolText = $('pool-text')
+    const adapters = $('adapters')
+    const fallback = $('fallback'), fallbackTitle = $('fallback-title'), fallbackDesc = $('fallback-desc')
+    const bootLog = $('boot-log'), errDetail = $('err-detail')
+    const modelSelect = $('model-select'), modelPickerWrap = $('model-picker-wrap'), modelSlot = $('model-slot')
+    let modelListing = []
+    let modelPicker = null
+    let savedBinding = null // {provider, model} | null = 跟随宿主当前模型
+    let booting = false
+
+    try { savedBinding = JSON.parse(localStorage.getItem('dsh-llm-binding') || 'null') } catch {}
+
+    const logLines = []
+    function log(msg) {
+      logLines.push(`[${new Date().toLocaleTimeString()}] ${msg}`)
+      if (logLines.length > 40) logLines.shift()
+      bootLog.textContent = logLines.join('\n')
+      bootLog.hidden = false
+    }
+
+    function setConn(state, text) {
+      connPill.className = `pill ${state}`
+      connText.textContent = text
+    }
+
+    function paintAdapters(rt) {
+      if (rt?.llm?.adapted) {
+        llmPill.hidden = false
+        llmPill.className = 'pill ok'
+        llmText.textContent = `模型 ${rt.llm.model}`
+        $('adapter-model').textContent = rt.llm.model
+      } else {
+        llmPill.hidden = false
+        llmPill.className = 'pill warn'
+        llmText.textContent = '未关联若道模型'
+        $('adapter-model').textContent = '—'
+      }
+      if (rt?.imagePool?.adapted) {
+        poolPill.hidden = false
+        poolPill.className = 'pill ok'
+        poolText.textContent = `号池 ${rt.imagePool.model}`
+        $('adapter-pool').textContent = `${rt.imagePool.model} @127.0.0.1:8100`
+      } else {
+        poolPill.hidden = false
+        poolPill.className = 'pill warn'
+        poolText.textContent = '号池未接入'
+        $('adapter-pool').textContent = '未检测到运行中的号池'
+      }
+      adapters.hidden = false
+    }
+
+    function showFallback(title, desc, error) {
+      fallbackTitle.textContent = title
+      fallbackDesc.textContent = desc
+      errDetail.hidden = !error
+      if (error) errDetail.textContent = error
+      $('btn-retry').hidden = false
+      frame.classList.remove('visible')
+    }
+
+    /** 宿主 provider/model 映射成模型选择器条目：value 统一用 `provider::model`。 */
+    function buildModelEntries() {
+      const entries = []
+      for (const p of modelListing) {
+        const declared = Array.isArray(p.models) ? p.models : []
+        let models = declared.filter((m) => m && m.id && (m.outputTypes || ['text']).includes('text'))
+        // 宿主只给了 provider.model、没给 models[] 时用它兜底；有 models[] 就不再放宽类别过滤。
+        if (!declared.length && p.model) models = [{ id: p.model }]
+        for (const m of models) {
+          const origin = p.modelOrigin === 'platform-cloud' ? 'platform-cloud' : 'user-managed'
+          entries.push({
+            id: `${p.provider}::${m.id}`,
+            model: String(m.id),
+            provider: String(p.provider || ''),
+            providerName: p.name || p.provider || '模型',
+            modelConfigId: String(p.modelConfigId || ''),
+            group: origin === 'platform-cloud' || p.modelGroup === '云端模型' ? '云端模型' : '自定义模型',
+            modelOrigin: origin,
+            billingMode: m.billingMode,
+            perCallQuota: m.perCallQuota,
+            modelRatio: m.modelRatio,
+            isRecommended: Boolean(m.isRecommended),
+            label: `${p.name || p.provider} · ${m.id}`,
+          })
+        }
+      }
+      return entries
+    }
+
+    async function loadModels() {
+      if (host && typeof host.models?.list === 'function') {
+        try {
+          const listing = await host.models.list()
+          modelListing = (listing && listing.providers) || []
+        } catch { modelListing = [] }
+      }
+      const entries = buildModelEntries()
+      const savedValue = savedBinding?.provider && savedBinding?.model
+        ? `${savedBinding.provider}::${savedBinding.model}`
+        : ''
+      // 已保存但宿主列表里没有的模型（下线 / 换配置）也要显示，否则界面写着「跟随」而实际仍在用它。
+      if (savedValue && !entries.some((entry) => entry.id === savedValue)) {
+        entries.push({
+          id: savedValue,
+          model: String(savedBinding.model),
+          provider: String(savedBinding.provider),
+          providerName: String(savedBinding.provider),
+          modelConfigId: '',
+          group: '自定义模型',
+          modelOrigin: 'user-managed',
+          label: `${savedBinding.provider} · ${savedBinding.model}`,
+          stale: true,
+        })
+      }
+
+      if (!window.RuodaoModelPicker || typeof window.RuodaoModelPicker.mount !== 'function') {
+        // 兼容路径：旧客户端不注入 /__ruodao/model-picker.js，只能退回原生 select。
+        modelPicker = null
+        modelSlot.hidden = true
+        modelSelect.hidden = false
+        const options = ['<option value="">跟随若道当前模型</option>']
+        for (const groupKey of ['云端模型', '自定义模型']) {
+          const items = entries.filter((entry) => entry.group === groupKey)
+          if (!items.length) continue
+          options.push(`<optgroup label="${groupKey}">`)
+          for (const item of items) options.push(`<option value="${item.id}">${item.label}${item.stale ? '（已保存）' : ''}</option>`)
+          options.push('</optgroup>')
+        }
+        modelSelect.innerHTML = options.join('')
+        modelSelect.value = entries.some((entry) => entry.id === savedValue) ? savedValue : ''
+        modelPickerWrap.hidden = false
+        return
+      }
+
+      modelSelect.hidden = true
+      modelSlot.hidden = false
+      const spec = {
+        models: entries,
+        value: savedValue,
+        activeId: savedValue,
+        leadingOptions: [{ id: '', title: '跟随若道当前模型', desc: '使用宿主当前配置的默认模型' }],
+        label: '文本模型',
+        placeholder: '跟随若道当前模型',
+        emptyText: '无可用文本模型',
+        emptyHint: '宿主没有返回文本模型，请先在若道「设置 → 模型管理」里配置。',
+        width: 300,
+        onChange: (id, entry) => applyModelBinding(entry
+          ? { provider: entry.provider, model: entry.model }
+          : null),
+      }
+      try {
+        if (modelPicker && modelPicker.root && modelPicker.root.isConnected) modelPicker.update(spec)
+        else modelPicker = window.RuodaoModelPicker.mount(modelSlot, spec)
+      } catch (error) {
+        console.warn('模型选择器挂载失败', error)
+        modelPicker = null
+      }
+      modelPickerWrap.hidden = false
+    }
+
+    function setModelControlDisabled(flag) {
+      modelSelect.disabled = flag
+      if (modelPicker) modelPicker.update({ disabled: flag })
+    }
+
+    async function applyModelBinding(binding) {
+      savedBinding = binding && binding.provider && binding.model ? binding : null
+      try { localStorage.setItem('dsh-llm-binding', JSON.stringify(savedBinding)) } catch {}
+      setModelControlDisabled(true)
+      setConn('', '切换模型中')
+      fallback.hidden = false
+      frame.classList.remove('visible')
+      await boot(binding ? { llm: { provider: binding.provider, model: binding.model } } : { llm: {} })
+      setModelControlDisabled(false)
+    }
+
+    // 兼容路径：旧客户端仍用原生 select 时才触发；新客户端由模型选择器直接回调 applyModelBinding。
+    modelSelect.addEventListener('change', async () => {
+      const raw = String(modelSelect.value || '')
+      const cut = raw.indexOf('::')
+      await applyModelBinding(cut > 0
+        ? { provider: raw.slice(0, cut), model: raw.slice(cut + 2) }
+        : null)
+    })
+
+    async function boot(bindingOverride) {
+      if (booting) return
+      booting = true
+      $('btn-retry').hidden = true
+      $('btn-refresh').hidden = true
+      $('btn-external').hidden = true
+      fallback.hidden = false
+      setConn('', '连接中')
+      if (!host) {
+        setConn('warn', '无宿主桥')
+        showFallback('请在若道桌面端打开', '本工作台依赖若道宿主桥（服务拉起 + 模型注入）。请从桌面端左侧栏的插件入口进入。')
+        booting = false
+        return
+      }
+      log('通过宿主桥启动常驻服务…')
+      try {
+        await host.ready
+        const binding = bindingOverride || (savedBinding?.provider && savedBinding?.model
+          ? { llm: { provider: savedBinding.provider, model: savedBinding.model } }
+          : { llm: {} })
+        // 强制重启：宿主对已运行服务默认复用实例（旧进程/旧环境），更新服务桥后必须 force 才能生效
+        await host.service.start('main', {
+          payload: {},
+          modelBinding: binding,
+          readyTimeoutMs: 120000,
+          force: true,
+        })
+        log('常驻服务已就绪，读取运行时信息…')
+        const rt = await host.service.call('main', 'runtime', {}, 30000)
+        paintAdapters(rt)
+        const health = await host.service.call('main', 'health', {}, 15000)
+        if (!health?.ok) throw new Error('本地 studio 服务健康检查未通过')
+        log(`studio 就绪: ${rt.studioUrl}，载入界面…`)
+        frame.src = rt.studioUrl + '/'
+        await new Promise((resolve, reject) => {
+          frame.onload = resolve
+          setTimeout(() => reject(new Error('studio 页面 20s 未加载完成')), 20000)
+        })
+        frame.classList.add('visible')
+        fallback.hidden = true
+        setConn('ok', '已连接')
+        $('btn-refresh').hidden = false
+        $('btn-external').hidden = false
+      } catch (error) {
+        log(`失败: ${error?.message ?? error}`)
+        setConn('err', '启动失败')
+        showFallback('视频工作台启动失败', '请检查上游引擎依赖（Node ≥ 20、pnpm）。重试会重新走一遍启动流程。', String(error?.message ?? error))
+      } finally {
+        booting = false
+      }
+    }
+
+    $('btn-retry').addEventListener('click', () => boot())
+    $('btn-refresh').addEventListener('click', () => { frame.src = frame.src })
+    $('btn-external').addEventListener('click', () => {
+      try { window.open('http://127.0.0.1:4399/', '_blank') } catch {}
+    })
+
+    loadModels()
+    boot()
+  </script>
+</body>
+</html>
